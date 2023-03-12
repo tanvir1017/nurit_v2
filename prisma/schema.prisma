@@ -10,38 +10,36 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-// prisma/schema.prisma
 
-// Define the User model with a unique id field and a profile object field
-model User {
-  id          String    @id @default(dbgenerated("(new ObjectId()).toString()"))
-  profile      Profile   @embedded
-  interestedIn String[] 
-  blogPosts   BlogPost[]
-  courses     Course[]
+
+ enum USER__ROLE {
+  ADMIN 
+  MEMBER
+  STUDENT
 }
 
-// Define the Profile object with all the properties you described
-model Profile {
+model User {
+  id          String    @id @default(auto()) @map("_id") @db.ObjectId
+  profile   ProfileInfo?
+  password  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt 
+  country   String
+  interestedIn String[]
+  role  USER__ROLE @default(MEMBER)
+}
+
+model ProfileInfo{
+  id    String    @id @default(auto()) @map("_id") @db.ObjectId
+  joinerId  User  @relation(fields: [authorId], references: [id])
+  authorId  String @db.ObjectId @unique
   firstName String
   lastName  String
+  userName  String? @unique
   photoURL  String
   phoneNum  String
+  email     String @unique
   age       Int
   gender    String
-  country   String
 }
 
-// Define the BlogPost object with a title and content field
-model BlogPost {
-  id      String @id @default(dbgenerated("(new ObjectId()).toString()"))
-  title   String
-  content String
-}
-
-// Define the Course object with a title and description field
-model Course {
-  id          String @id @default(dbgenerated("(new ObjectId()).toString()"))
-  title       String
-  description String
-}

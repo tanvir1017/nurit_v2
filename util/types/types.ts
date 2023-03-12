@@ -2,6 +2,9 @@ export type GetASingleUserFunctionType = (
   id: string | undefined
 ) => Promise<{} | null>;
 
+/////////////////////////////
+/////// ENUM SECTION ///////
+///////////////////////////
 export enum DB_OPERATION_METHOD {
   GET = "GET",
   POST = "POST",

@@ -1,4 +1,3 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import { getAUser, getAllUsers } from "@/lib/db/users";
 import { DB_OPERATION_METHOD } from "@/util/types/types";
 import type { NextApiRequest, NextApiResponse } from "next";
