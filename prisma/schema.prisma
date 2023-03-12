@@ -1,0 +1,47 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+// prisma/schema.prisma
+
+// Define the User model with a unique id field and a profile object field
+model User {
+  id          String    @id @default(dbgenerated("(new ObjectId()).toString()"))
+  profile      Profile   @embedded
+  interestedIn String[] 
+  blogPosts   BlogPost[]
+  courses     Course[]
+}
+
+// Define the Profile object with all the properties you described
+model Profile {
+  firstName String
+  lastName  String
+  photoURL  String
+  phoneNum  String
+  age       Int
+  gender    String
+  country   String
+}
+
+// Define the BlogPost object with a title and content field
+model BlogPost {
+  id      String @id @default(dbgenerated("(new ObjectId()).toString()"))
+  title   String
+  content String
+}
+
+// Define the Course object with a title and description field
+model Course {
+  id          String @id @default(dbgenerated("(new ObjectId()).toString()"))
+  title       String
+  description String
+}

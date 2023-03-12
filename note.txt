@@ -1,0 +1,14 @@
+user{
+    profile:{
+    first_name:
+    last_name:
+    phot_url:
+    phone_num:
+    age:
+    gender:
+    country:
+    }
+    interested_in:['web-design', 'web-development', 'graphic-design']
+    blog_post:[{id:}]
+    course_enrolled:[{id:}]
+}
