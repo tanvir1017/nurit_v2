@@ -1,12 +1,12 @@
 import {
-  aSingleUserFunctionType,
+  A__SingleModelFunctionType,
   GetAllUserFunctionType,
   registerAUserFunctionType,
   registerBodyDataType,
 } from "@/util/types/types";
 import prisma from "../../prisma/lib/db.connector";
 
-export const getASingleUser: aSingleUserFunctionType = async (id) => {
+export const getASingleUser: A__SingleModelFunctionType = async (id) => {
   const singleUser = await prisma.user.findUnique({
     where: { id },
   });
@@ -14,8 +14,9 @@ export const getASingleUser: aSingleUserFunctionType = async (id) => {
 };
 
 export const getAllUser: GetAllUserFunctionType = async () => {
+  const totalUser = await prisma.user.count();
   const users = await prisma.user.findMany({});
-  return users;
+  return { users, totalUser };
 };
 
 export const registerAUser: registerAUserFunctionType = async ({
@@ -41,7 +42,7 @@ export const registerAUser: registerAUserFunctionType = async ({
   return user;
 };
 
-export const deleteAUserFromDb: aSingleUserFunctionType = async (id) => {
+export const deleteAUserFromDb: A__SingleModelFunctionType = async (id) => {
   const user = await prisma.user.delete({
     where: {
       id,

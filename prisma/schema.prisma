@@ -27,6 +27,7 @@ model User{
   phone__numb Int?
   gender      String
   role        USER__ROLE @default(MEMBER)
+  postedBlogs Blog[]
 }
 
 model Course{
@@ -34,4 +35,17 @@ model Course{
   title   String
   slug    String @unique
   fee     Int
+}
+
+model Blog{
+  id            String @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  title         String
+  slug          String @unique
+  readTime      String 
+  html          String
+  views         Int
+  creator User  @relation(fields: [authorId], references: [id])
+  authorId      String  @db.ObjectId
 }

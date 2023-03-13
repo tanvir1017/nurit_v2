@@ -1,4 +1,19 @@
 /////////////////////////////
+/////// ENUM SECTION ///////
+///////////////////////////
+export enum DB_OPERATION_METHOD {
+  GET = "GET",
+  POST = "POST",
+  PUT = "PUT",
+  DELETE = "DELETE",
+}
+
+export enum USER__ROLE {
+  ADMIN = "admin",
+  MEMBER = "member",
+  STUDENT = "student",
+}
+/////////////////////////////
 /// KEY VALUE WISE TYPE ////
 ///////////////////////////
 export type registerBodyDataType = {
@@ -14,7 +29,7 @@ export type registerBodyDataType = {
 /////////////////////////////
 ////// FUNCTION TYPE ///////
 ///////////////////////////
-export type aSingleUserFunctionType = (
+export type A__SingleModelFunctionType = (
   id: string | undefined
 ) => Promise<{} | null>;
 
@@ -23,18 +38,6 @@ export type registerAUserFunctionType = (
   bodyData: registerBodyDataType
 ) => Promise<{} | null>;
 
-/////////////////////////////
-/////// ENUM SECTION ///////
-///////////////////////////
-export enum DB_OPERATION_METHOD {
-  GET = "GET",
-  POST = "POST",
-  PUT = "PUT",
-  DELETE = "DELETE",
-}
-
-export enum USER__ROLE {
-  ADMIN = "admin",
-  MEMBER = "member",
-  STUDENT = "student",
-}
+// COMMENT => blogs section function type
+export type GetAllBlogsFunctionType = () => Promise<{} | []>;
+export type GetASingleBlogFunctionType = (slug: string) => Promise<{} | null>;

@@ -3,12 +3,13 @@ import {
   getASingleUser,
   getAllUser,
   registerAUser,
-} from "@/lib/db/users";
+} from "@/lib/db/users.prisma";
 import type { NextApiRequest, NextApiResponse } from "next";
 
 type Data = {
   success: boolean;
   message: string;
+  dataCounted?: number;
   returnData?: {} | [] | null;
 };
 
