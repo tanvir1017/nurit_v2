@@ -12,34 +12,26 @@ datasource db {
 
 
 
- enum USER__ROLE {
+enum USER__ROLE {
   ADMIN 
   MEMBER
   STUDENT
 }
-
-model User {
-  id          String    @id @default(auto()) @map("_id") @db.ObjectId
-  profile   ProfileInfo?
-  password  String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt 
-  country   String
-  interestedIn String[]
-  role  USER__ROLE @default(MEMBER)
+model User{
+  id          String @id @default(auto()) @map("_id") @db.ObjectId
+  first__name String
+  last__name  String
+  email__id   String @unique
+  password    String
+  photo__URL  String
+  phone__numb Int?
+  gender      String
+  role        USER__ROLE @default(MEMBER)
 }
 
-model ProfileInfo{
-  id    String    @id @default(auto()) @map("_id") @db.ObjectId
-  joinerId  User  @relation(fields: [authorId], references: [id])
-  authorId  String @db.ObjectId @unique
-  firstName String
-  lastName  String
-  userName  String? @unique
-  photoURL  String
-  phoneNum  String
-  email     String @unique
-  age       Int
-  gender    String
+model Course{
+  id      String @id @default(auto()) @map("_id") @db.ObjectId
+  title   String
+  slug    String @unique
+  fee     Int
 }
-

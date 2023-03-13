@@ -1,34 +1,51 @@
-import { GetASingleUserFunctionType } from "@/util/types/types";
+import {
+  aSingleUserFunctionType,
+  GetAllUserFunctionType,
+  registerAUserFunctionType,
+  registerBodyDataType,
+} from "@/util/types/types";
 import prisma from "../../prisma/lib/db.connector";
 
-export const registerUser = async ({
-  name,
-  email,
-  birthYear,
-}: {
-  name: string;
-  email: string;
-  birthYear: number;
-}) => {
-  const userInfo = await prisma.user.create({
-    data: {
-      name,
-      email,
-      birthYear,
-    },
+export const getASingleUser: aSingleUserFunctionType = async (id) => {
+  const singleUser = await prisma.user.findUnique({
+    where: { id },
   });
-  return userInfo;
+  return singleUser;
 };
 
-export const getAllUsers = async () => {
-  const getUsers = await prisma.user.findMany({});
-  return getUsers;
+export const getAllUser: GetAllUserFunctionType = async () => {
+  const users = await prisma.user.findMany({});
+  return users;
 };
-export const getAUser: GetASingleUserFunctionType = async (id) => {
-  const getAUser = await prisma.user.findUnique({
+
+export const registerAUser: registerAUserFunctionType = async ({
+  first__name,
+  last__name,
+  email__id,
+  password,
+  photo__URL,
+  gender,
+  phone__numb,
+}: registerBodyDataType) => {
+  const user = await prisma.user.create({
+    data: {
+      first__name,
+      last__name,
+      email__id,
+      password,
+      photo__URL,
+      gender,
+      phone__numb,
+    },
+  });
+  return user;
+};
+
+export const deleteAUserFromDb: aSingleUserFunctionType = async (id) => {
+  const user = await prisma.user.delete({
     where: {
       id,
     },
   });
-  return getAUser;
+  return user;
 };
