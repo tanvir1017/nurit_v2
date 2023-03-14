@@ -12,8 +12,10 @@ type slugTypeData = string;
 const singleBlog = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
   try {
     if (req.query) {
-      const slug = req.query.slug;
-      const singleBlogBasedOnSlug = await getASingleBlogBasedOnSlug(slug);
+      const { slug } = req.query;
+      const singleBlogBasedOnSlug = await getASingleBlogBasedOnSlug(
+        slug as string | undefined
+      );
       if (!singleBlogBasedOnSlug) {
         return res.status(404).send({
           success: !true,

@@ -35,7 +35,9 @@ const BlogApiEndPoint = async (
       case DB_OPERATION_METHOD.DELETE: {
         if (req.query) {
           const { id } = req.query;
-          const deleteSingleBlog = await deleteASingleBlog(id);
+          const deleteSingleBlog = await deleteASingleBlog(
+            id as string | undefined
+          );
           if (!deleteSingleBlog) {
             return res.status(500).send({
               success: false,

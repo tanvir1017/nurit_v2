@@ -13,6 +13,7 @@ export enum USER__ROLE {
   MEMBER = "member",
   STUDENT = "student",
 }
+
 /////////////////////////////
 /// KEY VALUE WISE TYPE ////
 ///////////////////////////
@@ -30,7 +31,7 @@ export type registerBodyDataType = {
 ////// FUNCTION TYPE ///////
 ///////////////////////////
 export type A__SingleModelFunctionType = (
-  id?: string | string[] | undefined
+  id: string | undefined
 ) => Promise<{} | null>;
 
 export type GetAllUserFunctionType = () => Promise<{} | null>;
@@ -40,6 +41,7 @@ export type registerAUserFunctionType = (
 
 // COMMENT => blogs section function type
 export type GetAllBlogsFunctionType = () => Promise<{} | []>;
+
 export type GetASingleBlogFunctionType = (
-  slug?: string | string[] | undefined
+  slug: string | undefined
 ) => Promise<{} | null>;

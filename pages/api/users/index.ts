@@ -19,7 +19,7 @@ const userCrud = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
       case "GET": {
         if (req.query.id) {
           const { id } = req.query;
-          const getAUserInfo = await getASingleUser(id);
+          const getAUserInfo = await getASingleUser(id as string | undefined);
           if (!getAUserInfo) {
             return res.status(404).json({
               success: false,
@@ -93,7 +93,9 @@ const userCrud = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
         }
 
         const { id } = req.query;
-        const deleteSingleUser = await deleteAUserFromDb(id);
+        const deleteSingleUser = await deleteAUserFromDb(
+          id as string | undefined
+        );
         return res.status(200).json({
           success: true,
           message: `user delete successful with this id ${id}`,
