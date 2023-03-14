@@ -7,14 +7,13 @@ type Data = {
   returnBlogData?: {} | [];
 };
 
-type slugTypeData = string | string[] | undefined;
+type slugTypeData = string;
 
 const singleBlog = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
   try {
     if (req.query) {
-      const { slug } = req.query;
-      const slugType: slugTypeData = slug;
-      const singleBlogBasedOnSlug = await getASingleBlogBasedOnSlug(slugType);
+      const slug = req.query.slug;
+      const singleBlogBasedOnSlug = await getASingleBlogBasedOnSlug(slug);
       if (!singleBlogBasedOnSlug) {
         return res.status(404).send({
           success: !true,

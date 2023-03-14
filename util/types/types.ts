@@ -41,5 +41,5 @@ export type registerAUserFunctionType = (
 // COMMENT => blogs section function type
 export type GetAllBlogsFunctionType = () => Promise<{} | []>;
 export type GetASingleBlogFunctionType = (
-  slug: string | string[] | undefined
+  slug?: string | string[] | undefined
 ) => Promise<{} | null>;
