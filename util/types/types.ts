@@ -30,7 +30,7 @@ export type registerBodyDataType = {
 ////// FUNCTION TYPE ///////
 ///////////////////////////
 export type A__SingleModelFunctionType = (
-  id: string | string[] | undefined
+  id?: string | string[] | undefined
 ) => Promise<{} | null>;
 
 export type GetAllUserFunctionType = () => Promise<{} | null>;
