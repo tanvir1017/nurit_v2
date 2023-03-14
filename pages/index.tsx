@@ -1,8 +1,5 @@
-import styles from "@/styles/Home.module.css";
-import { Inter } from "next/font/google";
+import Homepage from "@/components/homePage/homepage";
 import Head from "next/head";
-
-const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
   return (
@@ -13,8 +10,8 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className={styles.main}>
-        <h2>Nur it institute</h2>
+      <main>
+        <Homepage />
       </main>
     </>
   );

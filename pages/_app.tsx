@@ -1,6 +1,15 @@
-import '@/styles/globals.css'
-import type { AppProps } from 'next/app'
+import Navigation from "@/components/shared/navbar/navigation";
+import "@/styles/globals.css";
+import { ThemeProvider } from "next-themes";
+import type { AppProps } from "next/app";
 
 export default function App({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />
+  return (
+    <>
+      <Navigation />
+      <ThemeProvider>
+        <Component {...pageProps} />
+      </ThemeProvider>
+    </>
+  );
 }
