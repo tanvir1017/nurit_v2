@@ -30,7 +30,7 @@ export type registerBodyDataType = {
 ////// FUNCTION TYPE ///////
 ///////////////////////////
 export type A__SingleModelFunctionType = (
-  id: string | undefined
+  id: string | string[] | undefined
 ) => Promise<{} | null>;
 
 export type GetAllUserFunctionType = () => Promise<{} | null>;
@@ -40,4 +40,6 @@ export type registerAUserFunctionType = (
 
 // COMMENT => blogs section function type
 export type GetAllBlogsFunctionType = () => Promise<{} | []>;
-export type GetASingleBlogFunctionType = (slug: string) => Promise<{} | null>;
+export type GetASingleBlogFunctionType = (
+  slug: string | string[] | undefined
+) => Promise<{} | null>;

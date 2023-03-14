@@ -1,4 +1,7 @@
-import { deleteASingleBlog, getAllBlogsExistOnDB } from "@/lib/db/blogs.prisma";
+import {
+  deleteASingleBlog,
+  getAllBlogsExistOnDB,
+} from "@/lib/dbOperatons/blogs.prisma";
 import { DB_OPERATION_METHOD } from "@/util/types/types";
 import type { NextApiRequest, NextApiResponse } from "next";
 

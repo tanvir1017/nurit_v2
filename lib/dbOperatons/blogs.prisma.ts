@@ -11,7 +11,7 @@ export const getAllBlogsExistOnDB: GetAllBlogsFunctionType = async () => {
   return { blogs, totalBlogs };
 };
 export const getASingleBlogBasedOnSlug: GetASingleBlogFunctionType = async (
-  slug
+  slug?
 ) => {
   const blog = await prisma.blog.findUnique({
     where: {

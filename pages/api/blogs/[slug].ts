@@ -1,4 +1,4 @@
-import { getASingleBlogBasedOnSlug } from "@/lib/db/blogs.prisma";
+import { getASingleBlogBasedOnSlug } from "@/lib/dbOperatons/blogs.prisma";
 import { NextApiRequest, NextApiResponse } from "next";
 
 type Data = {
@@ -7,21 +7,23 @@ type Data = {
   returnBlogData?: {} | [];
 };
 
+type slugTypeData = string | string[] | undefined;
+
 const singleBlog = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
   try {
     if (req.query) {
       const { slug } = req.query;
-
-      const singleBlogBasedOnSlug = await getASingleBlogBasedOnSlug(slug);
+      const slugType: slugTypeData = slug;
+      const singleBlogBasedOnSlug = await getASingleBlogBasedOnSlug(slugType);
       if (!singleBlogBasedOnSlug) {
         return res.status(404).send({
           success: !true,
-          message: `Data not found with this specific slug: ${slug} `,
+          message: `Data not found with this specific slug: ${req.query.slug} `,
         });
       } else {
         return res.status(200).send({
           success: true,
-          message: `Data found from blogs collection with this specific slug: ${slug}`,
+          message: `Data found from blogs collection with this specific slug: ${req.query.slug}`,
           returnBlogData: singleBlogBasedOnSlug,
         });
       }

@@ -3,7 +3,7 @@ import {
   getASingleUser,
   getAllUser,
   registerAUser,
-} from "@/lib/db/users.prisma";
+} from "@/lib/dbOperatons/users.prisma";
 import type { NextApiRequest, NextApiResponse } from "next";
 
 type Data = {
