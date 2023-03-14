@@ -9,9 +9,6 @@
   }
 }
 
-@layer utilities {
-}
-
 @font-face {
   font-family: "HindSiliguriBold";
   src: url("/fonts/HindSiliguri-Bold.ttf");

@@ -6,8 +6,8 @@ import type { AppProps } from "next/app";
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
-      <Navigation />
-      <ThemeProvider>
+      <ThemeProvider enableSystem={true} attribute="class">
+        <Navigation />
         <Component {...pageProps} />
       </ThemeProvider>
     </>
