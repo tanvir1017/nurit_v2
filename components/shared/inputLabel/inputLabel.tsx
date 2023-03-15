@@ -20,6 +20,13 @@ type PasswordInputLabelPropsType = {
   seePassword: boolean;
   onClickFunc: () => void;
 };
+type RadioButtonLabelPropsTYpe = {
+  id: string | undefined;
+  type: string;
+  value: string;
+  name: string;
+  labelTex: string;
+};
 export const TextInputLabel = ({
   labelTex,
   requiredType,
@@ -41,7 +48,11 @@ export const TextInputLabel = ({
         {labelTex}
       </span>
 
-      <span className="absolute inset-y-0 top-5 left-0 flex items-center pl-2">
+      <span
+        className={`absolute inset-y-0 ${
+          type === "email" ? "top-2" : "top-5"
+        }  left-0 flex items-center pl-2`}
+      >
         {iconComponent}
       </span>
       <input
@@ -58,7 +69,7 @@ export const TextInputLabel = ({
         name={nameText}
       />
       {type === "email" && (
-        <p className="invisible peer-invalid:visible absolute text-pink-600 text-sm">
+        <p className="absolute -bottom-[10px] invisible peer-invalid:visible peer-invalid:translate-y-1 duration-300  text-[var(--red-primary-brand-color)] text-sm ">
           দয়া করে একটি বৈধ ইমেইল ঠিকানা প্রদান করুন ।
         </p>
       )}
@@ -97,18 +108,46 @@ export const PasswordInputLabel = ({
         name={nameText}
         title={title}
       />
-      <button
-        type="button"
-        title="hide & show password"
-        className="absolute inset-y-0 top-5 right-2 flex items-center pl-2 cursor-pointer"
-        onClick={onClickFunc}
-      >
-        {seePassword ? (
-          <FiEyeOff className="text-gray-500" />
-        ) : (
-          <FiEye className="text-gray-500" />
-        )}
-      </button>
+      {title !== "re-type your password" && (
+        <button
+          type="button"
+          title="hide & show password"
+          className="absolute inset-y-0 top-5 right-2 flex items-center pl-2 cursor-pointer"
+          onClick={onClickFunc}
+        >
+          {seePassword ? (
+            <FiEyeOff className="text-gray-500" />
+          ) : (
+            <FiEye className="text-gray-500" />
+          )}
+        </button>
+      )}
     </label>
+  );
+};
+
+export const RadioButton = ({
+  id,
+  type,
+  value,
+  name,
+  labelTex,
+}: RadioButtonLabelPropsTYpe) => {
+  return (
+    <div className="flex items-center mr-4">
+      <input
+        id={id}
+        type={type}
+        value={value}
+        name={name}
+        className="w-4 h-4"
+      />
+      <label
+        htmlFor="red-radio"
+        className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+      >
+        {labelTex}
+      </label>
+    </div>
   );
 };
