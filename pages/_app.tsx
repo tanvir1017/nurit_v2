@@ -1,3 +1,4 @@
+import Footer from "@/components/shared/footer/footer";
 import Navigation from "@/components/shared/navbar/navigation";
 import "@/styles/globals.css";
 import { ThemeProvider } from "next-themes";
@@ -13,6 +14,7 @@ export default function App({ Component, pageProps, router }: AppProps) {
       <div style={{ opacity: 1 }}>
         {pathname !== "/login" && pathname !== "/signing" && <Navigation />}
         <Component {...pageProps} />
+        <Footer />
       </div>
     </ThemeProvider>
   );

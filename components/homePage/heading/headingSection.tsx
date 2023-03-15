@@ -1,21 +1,15 @@
 import Blur from "@/components/shared/blur";
 import Image from "next/image";
+import Link from "next/link";
 import { useState } from "react";
 import { BsSearch } from "react-icons/bs";
 
 const HeadingSection = () => {
-  const [buttonText, setButtonText] = useState(false);
-  const handleOnChangeForButtonText = () => {
-    if (buttonText) {
-      setButtonText(!buttonText);
-    } else {
-      setButtonText(false);
-    }
-  };
+  const [buttonText, setButtonText] = useState("");
   return (
-    <section className="font-HSRegular  border-general relative -mt-16 w-full overflow-hidden overflow-x-clip border-b bg-slate-50 bg-gradient-to-t from-slate-50 to-slate-100 dark:bg-[var(--black-primary-brand-color)] dark:bg-none lg:h-screen">
+    <section className="-mt-16 font-HSRegular border-general relative  w-full overflow-hidden overflow-x-clip border-b bg-slate-50 bg-gradient-to-t from-slate-50 to-slate-100 dark:bg-[var(--black-primary-brand-color)] dark:bg-none lg:h-screen ">
       <Blur />
-      <div className="w-full  py-10  lg:flex lg:h-full lg:items-center lg:py-0">
+      <div className="z-30 w-full py-10  lg:flex lg:h-full lg:items-center lg:py-0">
         <div className="container grid grid-cols-2 place-items-center h-screen">
           <div className="right__side title">
             <h1 className="text-6xl font-HSBold">
@@ -39,18 +33,23 @@ const HeadingSection = () => {
                   type="text"
                   title="search  your wanted course"
                   name="course"
-                  onChange={handleOnChangeForButtonText}
+                  onChange={(e) => setButtonText(e.target.value)}
                 />
               </label>
-              <button className="w-24 h-12 mt-2 border-transparent rounded-lg bg-[var(--red-primary-brand-color)] outline-transparent ">
-                {buttonText ? "সার্চ করুন" : "বিশ্লেষণ করুন"}
+              <button className="w-28 h-12 mt-2 border-transparent rounded-lg bg-[var(--red-primary-brand-color)] outline-transparent ">
+                {buttonText.length > 0 ? (
+                  <Link href="courses">সার্চ করুন</Link>
+                ) : (
+                  <Link href="courses">বিশ্লেষণ করুন</Link>
+                )}
               </button>
             </div>
           </div>
-          <div className="left__side">
+          <div className="left__side z-50">
             <Image
               width={500}
               height={100}
+              priority
               src="/images/content/userTable.png"
               alt="user setting on table "
             />
