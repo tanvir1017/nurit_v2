@@ -9,6 +9,17 @@
   }
 }
 
+@layer utilities {
+  .large_container {
+    margin: 6.9rem 6rem;
+    z-index: 1 !important;
+  }
+  .container {
+    padding: 2.9rem 1rem;
+    z-index: 1 !important;
+  }
+}
+
 @font-face {
   font-family: "HindSiliguriBold";
   src: url("/fonts/HindSiliguri-Bold.ttf");

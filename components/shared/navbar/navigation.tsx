@@ -45,7 +45,11 @@ const Navigation = () => {
               return (
                 <m.li
                   key={index}
-                  className="hover:bg-[var(--red-primary-brand-color)] p-2 rounded-md "
+                  className={`${
+                    index === 3
+                      ? "bg-[var(--red-primary-brand-color)]"
+                      : "hover:bg-[var(--red-primary-brand-color)]"
+                  } p-2 rounded-md`}
                   variants={childVariants}
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.9 }}
