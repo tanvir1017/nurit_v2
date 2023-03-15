@@ -5,4 +5,5 @@ export const largeNavigationData: largeNavigationDataType = [
   { routeName: "ব্লগ", path: "/blogs" },
   { routeName: "ড্যাশবোর্ড", path: "/dashboard" },
   { routeName: "সেমিনারস", path: "/seminars" },
+  { routeName: "লগইন/সাইন-আপ", path: "/login" },
 ];

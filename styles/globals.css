@@ -11,70 +11,30 @@
 
 @layer utilities {
   .large_container {
-    margin: 6.9rem 6rem;
-    z-index: 1 !important;
+    padding: 6.9rem 6rem;
   }
   .container {
-    padding: 2.9rem 1rem;
-    z-index: 1 !important;
+    margin-left: auto;
+    margin-right: auto;
+    width: 91.666667%;
   }
-  .spinner_wrapper {
-    height: 100vh;
-    width: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: fixed;
-    top: 0;
-    left: 0;
-    background-color: rgb(255, 255, 255);
-    z-index: 10;
+  @media (min-width: 1024px) .container {
+    max-width: 80rem;
   }
-  .spinner {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    height: 100px;
-    width: 100px;
-    margin: 0px auto;
-    -webkit-animation: rotation 0.5s infinite linear;
-    -moz-animation: rotation 0.5s infinite linear;
-    -o-animation: rotation 0.5s infinite linear;
-    animation: rotation 0.5s infinite linear;
-    border: 6px solid black;
+  @media (min-width: 1536px) .container {
+    max-width: 1536px;
   }
-
-  @-webkit-keyframes rotation {
-    from {
-      -webkit-transform: rotate(0deg);
-    }
-    to {
-      -webkit-transform: rotate(359deg);
-    }
+  @media (min-width: 1280px) .container {
+    max-width: 1280px;
   }
-  @-moz-keyframes rotation {
-    from {
-      -moz-transform: rotate(0deg);
-    }
-    to {
-      -moz-transform: rotate(359deg);
-    }
+  @media (min-width: 1024px) .container {
+    max-width: 1024px;
   }
-  @-o-keyframes rotation {
-    from {
-      -o-transform: rotate(0deg);
-    }
-    to {
-      -o-transform: rotate(359deg);
-    }
+  @media (min-width: 768px) .container {
+    max-width: 768px;
   }
-  @keyframes rotation {
-    from {
-      transform: rotate(0deg);
-    }
-    to {
-      transform: rotate(359deg);
-    }
+  @media (min-width: 640px) .container {
+    max-width: 640px;
   }
 }
 @font-face {

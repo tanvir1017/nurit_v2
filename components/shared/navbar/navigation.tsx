@@ -35,18 +35,18 @@ const Navigation = () => {
     setTheme(resolvedTheme === "dark" ? "light" : "dark");
   };
   return (
-    <>
-      <header className="bg-[#0a0a0a] font-HSRegular text-white">
-        <nav className="grid grid-cols-2 gap-4  mx-16 py-6 place-items-center">
-          <m.ul className="flex justify-start col-start-1  space-x-3 ">
-            <LightModeBrand />
+    <nav className="border-[#68696c00]/50 z-40 sticky top-0 border-b bg-slate-50/60 dark:text-white backdrop-blur-2xl transition-colors duration-500 dark:bg-[#68696c00]  font-HSRegular ">
+      <div className="container">
+        <div className="relative h-20  flex items-center justify-between">
+          <LightModeBrand />
+          <m.ul className="flex  space-x-4 ">
             {largeNavigationData.map((nav, index) => {
               const { path, routeName } = nav;
               return (
                 <m.li
                   key={index}
                   className={`${
-                    index === 3
+                    index === 4
                       ? "bg-[var(--red-primary-brand-color)]"
                       : "hover:bg-[var(--red-primary-brand-color)]"
                   } p-2 rounded-md`}
@@ -58,8 +58,6 @@ const Navigation = () => {
                 </m.li>
               );
             })}
-          </m.ul>
-          <m.ul className="flex justify-center  space-x-2 col-start-2 col-span-1 ">
             {mounted && (
               <m.li
                 className="cursor-pointer border rounded-full w-14 bg-gray-800 relative overflow-hidden mr-4 my-2"
@@ -82,18 +80,10 @@ const Navigation = () => {
                 />
               </m.li>
             )}
-            <m.li
-              className="hover:bg-[var(--red-primary-brand-color)] p-2 rounded-md "
-              variants={childVariants}
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-            >
-              <Link href="login">লগইন/সাইন-আপ</Link>
-            </m.li>
           </m.ul>
-        </nav>
-      </header>
-    </>
+        </div>
+      </div>
+    </nav>
   );
 };
 

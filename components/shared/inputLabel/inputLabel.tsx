@@ -1,31 +1,33 @@
 import { FiEye, FiEyeOff } from "react-icons/fi";
 
 type TextInputLabelPropsType = {
-  labelTex: string | number;
-  requiredType: boolean;
-  iconComponent: React.ReactNode;
-  placeholderText: string;
-  type: string;
-  title: string;
-  nameText: string;
+  labelTex?: string | number;
+  requiredType?: boolean;
+  iconComponent?: React.ReactNode;
+  placeholderText?: string;
+  type?: string;
+  title?: string;
+  nameText?: string;
+  top?: number;
+  eventFunc?: () => void;
 };
 
 type PasswordInputLabelPropsType = {
-  labelTex: string | number;
-  requiredType: boolean;
-  iconComponent: React.ReactNode;
-  placeholderText: string;
-  title: string;
-  nameText: string;
-  seePassword: boolean;
-  onClickFunc: () => void;
+  labelTex?: string | number;
+  requiredType?: boolean;
+  iconComponent?: React.ReactNode;
+  placeholderText?: string;
+  title?: string;
+  nameText?: string;
+  seePassword?: boolean;
+  onClickFunc?: () => void;
 };
 type RadioButtonLabelPropsTYpe = {
-  id: string | undefined;
-  type: string;
-  value: string;
-  name: string;
-  labelTex: string;
+  id?: string | undefined;
+  type?: string;
+  value?: string;
+  name?: string;
+  labelTex?: string;
 };
 export const TextInputLabel = ({
   labelTex,
@@ -35,6 +37,7 @@ export const TextInputLabel = ({
   type,
   title,
   nameText,
+  top = 5,
 }: TextInputLabelPropsType) => {
   return (
     <label
@@ -50,7 +53,7 @@ export const TextInputLabel = ({
 
       <span
         className={`absolute inset-y-0 ${
-          type === "email" ? "top-2" : "top-5"
+          type === "email" ? "top-2" : `top-${top}`
         }  left-0 flex items-center pl-2`}
       >
         {iconComponent}
