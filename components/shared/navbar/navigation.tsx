@@ -35,7 +35,7 @@ const Navigation = () => {
     setTheme(resolvedTheme === "dark" ? "light" : "dark");
   };
   return (
-    <nav className="border-[#68696c00]/50 z-40 sticky top-0 border-b bg-slate-50/60 dark:text-white backdrop-blur-2xl transition-colors duration-500 dark:bg-[#68696c00]  font-HSRegular ">
+    <nav className="border-[#68696c00]/50 z-50 sticky top-0 border-b bg-slate-50/60 dark:text-white backdrop-blur-2xl transition-colors duration-500 dark:bg-[#68696c00]  font-HSRegular ">
       <div className="container">
         <div className="relative h-20  flex items-center justify-between">
           <LightModeBrand />

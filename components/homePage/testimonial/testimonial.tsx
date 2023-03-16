@@ -1,6 +1,6 @@
 const Testimonial = () => {
   return (
-    <section className="container">
+    <section className="container my-20">
       <div id="heading_text">
         <p className="text-4xl text-center font-HSBold">
           কেন আমরা{" "}
@@ -12,6 +12,11 @@ const Testimonial = () => {
             অভিভাবকগণের{" "}
           </span>
           প্রথম পছন্দ ?
+        </p>
+      </div>
+      <div className="mt-16">
+        <p className="text-6xl text-center font-HSBold">
+          Working on progress.....
         </p>
       </div>
     </section>

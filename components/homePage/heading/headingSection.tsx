@@ -7,7 +7,7 @@ import { BsSearch } from "react-icons/bs";
 const HeadingSection = () => {
   const [buttonText, setButtonText] = useState("");
   return (
-    <section className="-mt-16 font-HSRegular border-general relative  w-full overflow-hidden overflow-x-clip border-b bg-slate-50 bg-gradient-to-t from-slate-50 to-slate-100 dark:bg-[var(--black-primary-brand-color)] dark:bg-none lg:h-screen ">
+    <section className="-mt-16 font-HSRegular border-general relative  w-full overflow-hidden overflow-x-clip  bg-slate-50 bg-gradient-to-t from-slate-50 to-slate-100 dark:bg-[var(--black-primary-brand-color)] dark:bg-none lg:h-screen ">
       <Blur />
       <div className="z-30 w-full py-10  lg:flex lg:h-full lg:items-center lg:py-0">
         <div className="container grid grid-cols-2 place-items-center h-screen">
@@ -45,7 +45,7 @@ const HeadingSection = () => {
               </button>
             </div>
           </div>
-          <div className="left__side z-50">
+          <div className="left__side z-30">
             <Image
               width={500}
               height={100}
