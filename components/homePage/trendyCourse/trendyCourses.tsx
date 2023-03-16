@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 const TrendyCourses = () => {
   return (
     <section className="container font-HSRegular  my-40">
@@ -38,7 +40,14 @@ const TrendyCourses = () => {
         </div>
 
         <div id="card" className="grid place-items-center mt-14">
-          <div className="w-48 border h-48">course card will goes here</div>
+          <div className="">
+            <Image
+              width={350}
+              height={100}
+              src="/images/content/course_not_found.png"
+              alt="course not found"
+            />
+          </div>
         </div>
       </div>
     </section>

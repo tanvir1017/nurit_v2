@@ -18,8 +18,8 @@ const Homepage = () => {
       <OurSpecialty />
       <ProcessOfStartCourse />
       <JoinWithUs />
-      <Testimonial />
       <ContactUs />
+      <Testimonial />
     </>
   );
 };
