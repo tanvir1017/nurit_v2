@@ -3,8 +3,8 @@ import Image from "next/image";
 
 const OurAchievement = () => {
   return (
-    <section className="font-HSRegular container">
-      <div id="heading_text" className="text-center mt-16">
+    <section className="font-HSRegular container  mt-[10rem]">
+      <div id="heading_text" className="text-center">
         <p className="text-4xl font-HSBold">
           এই পর্যন্ত আমাদের{" "}
           <span className="text-[var(--red-primary-brand-color)]">অর্জন</span>
@@ -17,7 +17,7 @@ const OurAchievement = () => {
               <div key={i} className="flex items-center justify-start w-60 m-5">
                 <Image
                   className="mr-5"
-                  width={70}
+                  width={80}
                   height={100}
                   src={el.icon}
                   alt={el.title}
@@ -31,7 +31,7 @@ const OurAchievement = () => {
           </div>
           <div>
             <Image
-              width={500}
+              width={550}
               height={100}
               priority
               src="/images/content/achievement.png"

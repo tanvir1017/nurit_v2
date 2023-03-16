@@ -3,7 +3,7 @@ import Image from "next/image";
 
 const SetYourSkill = () => {
   return (
-    <section className="font-HSRegular container">
+    <section className="font-HSRegular container mt-[10rem]">
       <div id="heading_text">
         <p className="text-4xl text-center font-HSBold">
           নিজের{" "}
