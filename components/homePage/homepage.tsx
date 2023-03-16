@@ -1,5 +1,6 @@
 import ContactUs from "./contactUs/contactUs";
 import HeadingSection from "./heading/headingSection";
+import JoinWithUs from "./joinwithus/joinWithUs";
 import OurAchievement from "./ourAchievement/ourAchievement";
 import OurSpecialty from "./ourSpecialty/ourSpecialty";
 import ProcessOfStartCourse from "./processOfStartCourse/processOfStartCourse";
@@ -16,6 +17,7 @@ const Homepage = () => {
       <OurAchievement />
       <OurSpecialty />
       <ProcessOfStartCourse />
+      <JoinWithUs />
       <Testimonial />
       <ContactUs />
     </>

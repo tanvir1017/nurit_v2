@@ -26,7 +26,7 @@ const TrendyCourses = () => {
             return (
               <button
                 key={i}
-                className="bg-[#ff0912]  px-5 py-3 rounded-lg mt-16 focus:transition-all duration-300 focus:translate-x-2"
+                className="bg-[var(--red-primary-brand-color)]  px-5 py-3 rounded-lg mt-16 focus:transition-all duration-300 focus:translate-x-2"
                 style={{
                   boxShadow: "0px 1px 12px 0 hsl(0deg 76.29% 46.18% / 98.6%)",
                 }}

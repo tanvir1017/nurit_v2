@@ -1,4 +1,4 @@
-import Blur from "@/components/shared/blur";
+import { Blur } from "@/components/shared/blur";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";

@@ -17,7 +17,7 @@ const SetYourSkill = () => {
             return (
               <div
                 key={i}
-                className=" bg-slate-50/60 dark:bg-[#2025328c]  overflow-y-auto  p-5 w-full h-60 rounded-2xl space-y-4"
+                className="  dark:bg-[#2025328c]  overflow-y-auto  p-5 w-full h-60 rounded-2xl space-y-4"
               >
                 <Image width={80} height={100} src={el.icon} alt={el.title} />
                 <p className="text-2xl font-HSBold">{el.title}</p>
