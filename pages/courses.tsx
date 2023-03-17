@@ -1,38 +1,48 @@
 import { GetStaticProps } from "next";
+import useSWR, { SWRConfig } from "swr";
 
-type CoursePageProps = {
-  data: {
-    success: boolean;
-    message: string;
-    returnData: {
-      totalUser: number;
-      users: {}[];
-    };
-  };
-};
+const fetcher = (url: string) => fetch(url).then((res) => res.json());
+const API = "https://nurit-v2.vercel.app/api/users";
 
-export const getStaticProps: GetStaticProps = async (): Promise<{
-  props: { data: CoursePageProps };
-}> => {
-  const res = await fetch("http://localhost:3000/api/users");
-  const data = await res.json();
+export const getStaticProps: GetStaticProps = async () => {
+  const data = await fetcher(API);
   return {
     props: {
-      data,
+      fallback: {
+        [API]: data,
+      },
     },
   };
 };
 
-const Courses = ({ data }: CoursePageProps) => {
-  return (
-    <main className="App">
+const CoursesFetcher = () => {
+  const { data, error } = useSWR(API);
+
+  // there should be no `undefined` state
+  console.log("Is data ready?", !!data);
+  let content = null;
+  if (error) {
+    content = "An error has occurred.";
+  }
+  if (!data) {
+    content = "Loading...";
+  }
+  if (!error && data)
+    content = (
       <section className="container">
         <div>
           <h1>Total registerd user: {data.returnData.totalUser}</h1>
         </div>
       </section>
-    </main>
-  );
+    );
+
+  return <main className="App">{content}</main>;
 };
 
-export default Courses;
+export default function Courses({ fallback }: { fallback: any }) {
+  return (
+    <SWRConfig value={{ fallback }}>
+      <CoursesFetcher />
+    </SWRConfig>
+  );
+}

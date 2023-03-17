@@ -1,20 +1,18 @@
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { BsStarFill } from "react-icons/bs";
+import useSWR from "swr";
+
+const fetcher = (url: RequestInfo | URL) =>
+  fetch(url).then((res) => res.json());
 
 const TrendyCourses = () => {
-  const [courses, setCourses] = useState([]);
   const [buttonFilterText, setButtonFilterText] = useState("msOffice");
-  useEffect(() => {
-    fetch("/course.json")
-      .then((res) => res.json())
-      .then((data) => {
-        const filterByButton = data.filter(
-          (item: { category: string }) => item.category === buttonFilterText
-        );
-        setCourses(filterByButton);
-      });
-  }, [buttonFilterText]);
+  const { data, error, isLoading } = useSWR("/course.json", fetcher);
+
+  if (error) return "An error has occurred.";
+  if (isLoading) return "Loading...";
+  console.log(data);
   return (
     <section className="container font-HSRegular  my-40">
       <div id="heading_text" className="text-center">
@@ -59,38 +57,44 @@ const TrendyCourses = () => {
           id="card"
           className="grid grid-cols-4 gap-5 place-items-center mt-14"
         >
-          {courses.map((el: any) => (
-            <div className="" key={el._id}>
-              <Image
-                src={el.courseCover}
-                width={500}
-                height={100}
-                alt={el.title}
-              />
-              <div
-                id="course_body"
-                className="dark:bg-[var(--black-primary-brand-color)]  px-5 py-8 space-y-4 dark:text-white card-shadow"
-              >
-                <p className="text-xl text-[var(--red-primary-brand-color)]">
-                  {el.subTitle}
-                </p>
-                <p className="text-2xl font-HSSemiBold">{el.title}</p>
-                <div className="flex justify-between items-center">
-                  <strong className="flex items-center">
-                    {[...Array(Math.ceil(el?.review)).keys()].map((el, i) => {
-                      return <BsStarFill key={i} className="text-amber-500" />;
-                    })}
-                  </strong>
-                  <div className="flex items-center space-x-8 text-lg">
-                    <p className="text-red-500 line-through italic font-HSSemiBold ">
-                      {el.discountFee} টাকা
-                    </p>
-                    <p>{el.fee} টাকা</p>
+          {data
+            .filter(
+              (el: { category: string }) => el.category === buttonFilterText
+            )
+            .map((el: any) => (
+              <div className="" key={el._id}>
+                <Image
+                  src={el.courseCover}
+                  width={500}
+                  height={100}
+                  alt={el.title}
+                />
+                <div
+                  id="course_body"
+                  className="dark:bg-[var(--black-primary-brand-color)]  px-5 py-8 space-y-4 dark:text-white card-shadow"
+                >
+                  <p className="text-xl text-[var(--red-primary-brand-color)]">
+                    {el.subTitle}
+                  </p>
+                  <p className="text-2xl font-HSSemiBold">{el.title}</p>
+                  <div className="flex justify-between items-center">
+                    <strong className="flex items-center">
+                      {[...Array(Math.ceil(el?.review)).keys()].map((el, i) => {
+                        return (
+                          <BsStarFill key={i} className="text-amber-500" />
+                        );
+                      })}
+                    </strong>
+                    <div className="flex items-center space-x-8 text-lg">
+                      <p className="text-red-500 line-through italic font-HSSemiBold ">
+                        {el.discountFee} টাকা
+                      </p>
+                      <p>{el.fee} টাকা</p>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
         </div>
       </div>
     </section>
