@@ -47,9 +47,9 @@ const Navigation = () => {
                   key={index}
                   className={`${
                     index === 4
-                      ? "bg-[var(--red-primary-brand-color)]"
-                      : "hover:bg-[var(--red-primary-brand-color)]"
-                  } p-2 rounded-md`}
+                      ? "bg-[var(--red-primary-brand-color)] text-white"
+                      : "hover:bg-[var(--red-primary-brand-color)] hover:text-white"
+                  } p-2 rounded-md `}
                   variants={childVariants}
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.9 }}

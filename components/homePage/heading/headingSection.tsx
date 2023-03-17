@@ -1,4 +1,5 @@
 import { Blur } from "@/components/shared/blur";
+import { motion as m } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
@@ -28,28 +29,31 @@ const HeadingSection = () => {
                   <BsSearch />
                 </span>
                 <input
-                  className={` placeholder:italic placeholder:text-slate-400 block dark:bg-[#232229] bg-slate-50  w-full border border-gray-500  rounded-md py-3 pl-9 pr-3 shadow-sm focus:outline-none focus:ring-1 sm:text-sm `}
+                  className={`placeholder:italic placeholder:text-slate-400 block dark:bg-[#232229] bg-slate-200  w-full border border-gray-500  rounded-md py-3 pl-9 pr-3 shadow-sm focus:outline-none focus:ring-1 sm:text-sm `}
                   placeholder="তোমার কাঙ্খিত কোর্সটি খোজ"
                   type="text"
-                  title="search  your wanted course"
+                  title="search your wanted course"
                   name="course"
                   onChange={(e) => setButtonText(e.target.value)}
                 />
               </label>
-              <button className="w-28 h-12 mt-2 border-transparent rounded-lg bg-[var(--red-primary-brand-color)] outline-transparent ">
+              <m.button
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+                className="w-28 h-12 mt-2 border-transparent rounded-lg text-white  bg-[var(--red-primary-brand-color)] outline-transparent "
+              >
                 {buttonText.length > 0 ? (
                   <Link href="courses">সার্চ করুন</Link>
                 ) : (
                   <Link href="courses">বিশ্লেষণ করুন</Link>
                 )}
-              </button>
+              </m.button>
             </div>
           </div>
           <div className="left__side z-30">
             <Image
               width={500}
               height={100}
-              priority
               src="/images/content/userTable.png"
               alt="user setting on table "
             />

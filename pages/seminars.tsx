@@ -1,5 +1,13 @@
 function Seminars() {
-  return <div>seminars</div>;
+  return (
+    <main className="App">
+      <section className="container">
+        <div>
+          <h1>Seminars</h1>
+        </div>
+      </section>
+    </main>
+  );
 }
 
 export default Seminars;

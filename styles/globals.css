@@ -10,6 +10,11 @@
 }
 
 @layer utilities {
+  .App {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
   .large_container {
     padding: 6.9rem 6rem;
   }
@@ -35,6 +40,12 @@
   }
   @media (min-width: 640px) .container {
     max-width: 640px;
+  }
+  .button-shadow {
+    box-shadow: 0 4px 12px 0 hsla(0, 70%, 65%, 0.986);
+  }
+  .card-shadow {
+    box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175);
   }
 }
 @font-face {

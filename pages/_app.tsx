@@ -14,7 +14,7 @@ export default function App({ Component, pageProps, router }: AppProps) {
       <div style={{ opacity: 1 }}>
         {pathname !== "/login" && pathname !== "/signing" && <Navigation />}
         <Component {...pageProps} />
-        <Footer />
+        {pathname !== "/login" && pathname !== "/signing" && <Footer />}
       </div>
     </ThemeProvider>
   );
