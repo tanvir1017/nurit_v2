@@ -1,3 +1,4 @@
+import Skeleton from "@/components/shared/skeleton";
 import { trendyCoursesFilterButton } from "@/util/localDb";
 import { useState } from "react";
 import useSWR from "swr";
@@ -47,12 +48,18 @@ const TrendyCourses = () => {
           id="card"
           className="grid grid-cols-4 gap-5 place-items-center mt-14"
         >
-          {data &&
+          {!isLoading &&
+            !error &&
+            data &&
             data
-              .filter(
+              ?.filter(
                 (el: { category: string }) => el.category === buttonFilterText
               )
-              .map((el: any) => <Course key={el._id} el={el} />)}
+              ?.map((el: any) => <Course key={el._id} el={el} />)}
+          {!data &&
+            !error &&
+            isLoading &&
+            [...Array(4).keys()].map((_, i) => <Skeleton key={i} />)}
         </div>
       </div>
     </section>

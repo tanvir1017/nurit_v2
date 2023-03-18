@@ -7,7 +7,7 @@ const Course = ({ el }: any) => {
       <Image src={el.courseCover} width={500} height={100} alt={el.title} />
       <div
         id="course_body"
-        className="dark:bg-[var(--black-primary-brand-color)]  px-5 py-8 space-y-4 dark:text-white"
+        className="dark:bg-[var(--black-primary-brand-color)]  px-5 py-8 space-y-4 dark:text-white overflow-auto"
       >
         <p className="text-xl text-[var(--red-primary-brand-color)]">
           {el.subTitle}

@@ -1,48 +1,31 @@
-import { GetStaticProps } from "next";
-import useSWR, { SWRConfig } from "swr";
+import Course from "@/components/homePage/trendyCourse/course";
+import Skeleton from "@/components/shared/skeleton";
+import useSWR from "swr";
 
-const fetcher = (url: string) => fetch(url).then((res) => res.json());
-const API = "https://nurit-v2.vercel.app/api/users";
+const fetcher = (url: RequestInfo | URL) =>
+  fetch(url).then((res) => res.json());
 
-export const getStaticProps: GetStaticProps = async () => {
-  const data = await fetcher(API);
-  return {
-    props: {
-      fallback: {
-        [API]: data,
-      },
-    },
-  };
-};
-
-const CoursesFetcher = () => {
-  const { data, error } = useSWR(API);
-
-  // there should be no `undefined` state
-  console.log("Is data ready?", !!data);
-  let content = null;
-  if (error) {
-    content = "An error has occurred.";
-  }
-  if (!data) {
-    content = "Loading...";
-  }
-  if (!error && data)
-    content = (
-      <section className="container">
-        <div>
-          <h1>Total registerd user: {data.returnData.totalUser}</h1>
+const Courses = () => {
+  const { data, error, isLoading } = useSWR("/course.json", fetcher);
+  return (
+    <main className="App m-14 font-HSRegular">
+      <section>
+        <div
+          id="card"
+          className="grid grid-cols-4 gap-5 place-items-center mt-14"
+        >
+          {!isLoading &&
+            !error &&
+            data &&
+            data?.map((el: any) => <Course key={el._id} el={el} />)}
+          {!data &&
+            !error &&
+            isLoading &&
+            [...Array(20).keys()].map((_, i) => <Skeleton key={i} />)}
         </div>
       </section>
-    );
-
-  return <main className="App">{content}</main>;
+    </main>
+  );
 };
 
-export default function Courses({ fallback }: { fallback: any }) {
-  return (
-    <SWRConfig value={{ fallback }}>
-      <CoursesFetcher />
-    </SWRConfig>
-  );
-}
+export default Courses;
