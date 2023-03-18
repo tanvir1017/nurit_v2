@@ -5,27 +5,27 @@ import { useEffect, useRef, useState } from "react";
 
 const ExploreCourses = () => {
   const [width, setWidth] = useState<number>(0);
-  const carouselRef = useRef<any>();
+  const carouselRef = useRef<number | any>();
 
   useEffect(() => {
-    setWidth(carouselRef.current.scrollWidth - carouselRef.current.offsetWidth);
+    setWidth(
+      carouselRef?.current?.scrollWidth - carouselRef?.current?.offsetWidth
+    );
   }, []);
 
   return (
     <section className=" ">
-      <m.div className="flex justify-between">
-        <div className="">
-          <p className="text-6xl  p-3 font-HSSemiBold leading-tight">
-            নতুন কিছু
-            <br />{" "}
-            <span className="text-[var(--red-primary-brand-color)]">
-              এক্সপ্লোর করুন
-            </span>
-          </p>
-        </div>
-        <m.div ref={carouselRef} className="carousel ml-[15rem] overflow-clip ">
+      <m.div className="grid grid-flow-col place-items-start">
+        <p className="text-6xl p-3 font-HSSemiBold leading-tight">
+          নতুন কিছু
+          <br />{" "}
+          <span className="text-[var(--red-primary-brand-color)]">
+            এক্সপ্লোর করুন
+          </span>
+        </p>
+        <m.div ref={carouselRef} className="w-[50rem] overflow-hidden">
           <m.div
-            className="inner-carousel flex justify-center space-x-5"
+            className="inner-carousel flex space-x-5"
             drag="x"
             dragConstraints={{
               right: 0,
@@ -34,7 +34,7 @@ const ExploreCourses = () => {
           >
             {exploreCoursesFilterData.map((el, i) => (
               <div
-                className={`item border hover:border-[var(--red-primary-brand-color)] duration-300 cursor-pointer  p-5 w-44 h-40 text-center`}
+                className={`item border hover:border-[var(--red-primary-brand-color)] duration-300 min-w-[11rem] cursor-pointer p-5 h-40 text-center`}
                 key={i}
               >
                 <Image

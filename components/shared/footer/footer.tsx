@@ -11,7 +11,7 @@ import {
 import LightModeBrand from "../brand";
 const Footer = () => {
   return (
-    <footer className="bg-[var(--black-primary-brand-color)]  font-HSRegular">
+    <footer className="bg-[var(--black-primary-brand-color)]  font-HSRegular text-white">
       <div className="container px-16 py-28 ">
         <div className="grid grid-cols-5 gap-5 space-x-4">
           <div className="col-span-2 pr-5 space-y-4">
@@ -58,7 +58,7 @@ const Footer = () => {
               ].map((el, i) => (
                 <li key={i}>
                   <Link
-                    className="hover:translate-x-1 duration-300 transition-all cursor-pointer block hover:text-[var(--red-primary-brand-color)]"
+                    className="hover:translate-x-1 duration-300 transition-all cursor-pointer inline-block hover:text-[var(--red-primary-brand-color)]"
                     href="."
                   >
                     {el}
@@ -80,7 +80,7 @@ const Footer = () => {
               ].map((el, i) => (
                 <li key={i}>
                   <Link
-                    className="hover:translate-x-1 duration-300 transition-all cursor-pointer block hover:text-[var(--red-primary-brand-color)]"
+                    className="hover:translate-x-1 duration-300 transition-all  cursor-pointer inline-block hover:text-[var(--red-primary-brand-color)]"
                     href="."
                   >
                     {el}
@@ -100,7 +100,7 @@ const Footer = () => {
               ].map((el, i) => (
                 <li key={i}>
                   <Link
-                    className="hover:translate-x-1 duration-300 transition-all cursor-pointer block hover:text-[var(--red-primary-brand-color)]"
+                    className="hover:translate-x-1 duration-300 transition-all cursor-pointer inline-block hover:text-[var(--red-primary-brand-color)]"
                     href="."
                   >
                     {el}

@@ -27,7 +27,7 @@ const JoinWithUs = () => {
             style={{
               boxShadow: "0px 4px 12px 0px hsl(0deg 76.29% 46.18% / 98.6%)",
             }}
-            className="bg-[var(--red-primary-brand-color)] px-5 py-3 rounded-lg mt-5"
+            className="bg-[var(--red-primary-brand-color)] px-5 py-3 rounded-lg mt-5 text-white"
           >
             আজই জয়েন করুন
           </m.button>

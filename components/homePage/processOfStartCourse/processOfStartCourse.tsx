@@ -18,7 +18,7 @@ const ProcessOfStartCourse = () => {
           {processOfStartCourse.map((el, i) => (
             <div
               key={i}
-              className="p-5 rounded-lg  space-y-5 backdrop-blur-lg filter bg-[#342d504d]"
+              className="p-5 rounded-lg  space-y-5 backdrop-blur-lg filter dark:bg-[#342d504d]   bg-slate-50 shadow-md"
             >
               <Image
                 width={80}
