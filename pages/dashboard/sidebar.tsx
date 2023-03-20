@@ -4,7 +4,7 @@ import classNames from "classnames";
 import { motion as m } from "framer-motion";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useMemo, useReducer, useState } from "react";
+import { useMemo, useReducer } from "react";
 import { IoMdArrowDroprightCircle } from "react-icons/io";
 
 const reducer = (state: any, action: { type: string }) => {
@@ -14,6 +14,14 @@ const reducer = (state: any, action: { type: string }) => {
 
     case "!TOGGLE":
       return { ...state, toggleCollapse: false };
+    case "COLLAPSE":
+      return { ...state, isCollapsible: false };
+    case "!COLLAPSE":
+      return { ...state, isCollapsible: true };
+    case "RENDER":
+      return { ...state, re_render: true };
+    case "!RENDER":
+      return { ...state, re_render: false };
 
     default:
       throw Error("Unknown action.");
@@ -21,9 +29,10 @@ const reducer = (state: any, action: { type: string }) => {
 };
 
 const Sidebar = () => {
-  const [isCollapsible, setIsCollapsible] = useState(false);
   const [state, dispatch] = useReducer(reducer, {
     toggleCollapse: false,
+    isCollapsible: false,
+    re_render: false,
   });
 
   const router = useRouter();
@@ -39,16 +48,9 @@ const Sidebar = () => {
     }
   );
 
-  const onMouseOver = () => {
-    setIsCollapsible(false);
-  };
-  const onMouseLeave = () => {
-    setIsCollapsible(true);
-  };
-
   const getNavClass = (menu: { id: number; label: string; link: string }) => {
     return classNames(
-      "flex items-center space-x-4  cursor-pointer hover:text-white shadow hover:bg-[var(--red-primary-brand-color)] rounded w-full overflow-hidden bg-gray-100 px-4 mt-3 py-2",
+      "flex items-center space-x-4 cursor-pointer hover:text-white shadow hover:bg-[var(--red-primary-brand-color)] rounded w-full overflow-hidden bg-gray-100 px-4 mt-3 py-2 transition-all duration-3000",
       {
         ["bg-red text-white"]: activeNavClass?.id === menu.id,
       }
@@ -61,8 +63,12 @@ const Sidebar = () => {
         transition: "width 300ms cubic-bezier(0.2, 0, 0, 1) 0s",
       }}
       className={wrapperClasses}
-      onMouseEnter={onMouseOver}
-      onMouseLeave={onMouseLeave}
+      onMouseEnter={() => {
+        dispatch({ type: "COLLAPSE" });
+      }}
+      onMouseLeave={() => {
+        dispatch({ type: "!COLLAPSE" });
+      }}
     >
       <div className="flex flex-col justify-between px-8">
         <div className="flex justify-between">
@@ -71,17 +77,21 @@ const Sidebar = () => {
               hidden: state.toggleCollapse,
             })}
           >
-            <LightModeBrand />
+            {!state.toggleCollapse && (
+              <div>
+                <LightModeBrand />
+              </div>
+            )}
           </span>
 
-          {!isCollapsible && (
+          {!state.isCollapsible && (
             <m.button
               onClick={() =>
                 state.toggleCollapse
                   ? dispatch({ type: "!TOGGLE" })
                   : dispatch({ type: "TOGGLE" })
               }
-              className={`border-transparent text-white absolute  px-4 py-2 bg-red shadow  rounded-md outline-transparent ${
+              className={`border-transparent text-white absolute  px-3 py-2 bg-red shadow  rounded-md outline-transparent ${
                 state.toggleCollapse ? "left-3" : "right-10"
               }`}
             >
@@ -93,7 +103,7 @@ const Sidebar = () => {
             </m.button>
           )}
         </div>
-        <div className="pt-8">
+        <m.div className={`pt-8`}>
           {dashboardMenuItems.map(({ ...menu }) => {
             const classes = getNavClass(menu);
             return (
@@ -106,9 +116,13 @@ const Sidebar = () => {
                   className={`${
                     !state.toggleCollapse
                       ? classes
-                      : classNames("bg-gray-100 mt-2 -ml-5 p-4", {
-                          ["bg-red text-white"]: activeNavClass?.id === menu.id,
-                        })
+                      : classNames(
+                          "bg-gray-100 mt-2 -ml-5 p-3  transition-all duration-3000",
+                          {
+                            ["bg-red text-white"]:
+                              activeNavClass?.id === menu.id,
+                          }
+                        )
                   }`}
                 >
                   <span>{menu.icon}</span>
@@ -117,7 +131,7 @@ const Sidebar = () => {
               </Link>
             );
           })}
-        </div>
+        </m.div>
       </div>
     </section>
   );

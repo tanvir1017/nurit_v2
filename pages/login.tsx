@@ -55,9 +55,9 @@ const Login = () => {
           <div className="flex justify-around items-center mt-12">
             <div className="login_image">
               <Image
-                width={650}
+                width={450}
                 height={100}
-                src="/images/registation.png"
+                src="/images/_Login.png"
                 alt="Login preview image"
               />
             </div>
