@@ -14,7 +14,7 @@ const ExploreCourses = () => {
   }, []);
 
   return (
-    <section className=" ">
+    <section className="my-24">
       <m.div className="grid grid-flow-col place-items-start">
         <p className="text-6xl p-3 font-HSSemiBold leading-tight">
           নতুন কিছু

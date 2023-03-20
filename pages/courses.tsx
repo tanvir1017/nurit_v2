@@ -3,7 +3,7 @@ import ExploreCourses from "@/components/courses/courses/exploreCourses";
 
 const CoursesPage = () => {
   return (
-    <main className="App m-14 font-HSRegular">
+    <main className="App container font-HSRegular">
       <ExploreCourses />
       <Courses />
     </main>

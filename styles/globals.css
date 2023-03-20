@@ -23,6 +23,12 @@
     margin-right: auto;
     width: 91.666667%;
   }
+  .bg-red {
+    background-color: #ff2c45;
+  }
+  .bg-brand {
+    background-color: #0a0a0a;
+  }
   @media (min-width: 1024px) .container {
     max-width: 80rem;
   }
@@ -84,26 +90,3 @@ body {
     color-scheme: dark;
   }
 }
-
-/* .item {
-  min-height: 20rem;
-  min-width: 20rem;
-  padding: 40px;
-}
-.item img {
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-}
-.inner-carousel {
-  display: flex;
-  background-color: #ff2c45;
-}
-.carousel {
-  cursor: grab;
-  overflow: hidden;
-  background: white;
-}
-.body {
-  margin: 10% 20%;
-} */

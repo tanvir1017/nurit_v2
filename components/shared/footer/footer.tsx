@@ -58,7 +58,7 @@ const Footer = () => {
               ].map((el, i) => (
                 <li key={i}>
                   <Link
-                    className="hover:translate-x-1 duration-300 transition-all cursor-pointer inline-block hover:text-[var(--red-primary-brand-color)]"
+                    className="hover:translate-x-1 duration-300 transition-all cursor-pointer inline-block border-b hover:border-b-[var(--red-primary-brand-color)]"
                     href="."
                   >
                     {el}
@@ -80,7 +80,7 @@ const Footer = () => {
               ].map((el, i) => (
                 <li key={i}>
                   <Link
-                    className="hover:translate-x-1 duration-300 transition-all  cursor-pointer inline-block hover:text-[var(--red-primary-brand-color)]"
+                    className="hover:translate-x-1 duration-300 border-b hover:border-b-[var(--red-primary-brand-color)]  cursor-pointer inline-block "
                     href="."
                   >
                     {el}
@@ -91,16 +91,16 @@ const Footer = () => {
           </div>{" "}
           <div>
             <p className="font-HSMedium text-xl">লিগ্যাল</p>
-            <ul className="ml-5 space-y-3 mt-3 text-sm">
+            <ul className="ml-5 space-y-3 mt-3 text-sm ">
               {[
                 "ব্যবহার বিধি",
                 "FAQ",
                 "প্রাইভেসি পলিসি",
                 "আমাদের সম্পর্কে",
               ].map((el, i) => (
-                <li key={i}>
+                <li key={i} className="relative">
                   <Link
-                    className="hover:translate-x-1 duration-300 transition-all cursor-pointer inline-block hover:text-[var(--red-primary-brand-color)]"
+                    className="hover:translate-x-1 border-b hover:border-b-[var(--red-primary-brand-color)]  duration-300 cursor-pointer inline-block"
                     href="."
                   >
                     {el}

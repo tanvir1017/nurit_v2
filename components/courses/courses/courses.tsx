@@ -20,7 +20,7 @@ const Courses = () => {
         {!data &&
           !error &&
           isLoading &&
-          [...Array(20).keys()].map((_, i) => <Skeleton key={i} />)}
+          [...Array(8).keys()].map((_, i) => <Skeleton key={i} />)}
       </div>
     </section>
   );
