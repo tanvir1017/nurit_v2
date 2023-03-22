@@ -26,6 +26,7 @@ model User{
   photo__URL  String
   phone__numb Int?
   gender      String
+  // token       String[]
   role        USER__ROLE @default(MEMBER)
   postedBlogs Blog[]
 }

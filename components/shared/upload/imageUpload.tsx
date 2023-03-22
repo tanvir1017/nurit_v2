@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { useState } from "react";
 import { AiOutlineCloudUpload } from "react-icons/ai";
-import { toast, ToastContainer, Zoom } from "react-toastify";
+import { Bounce, ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const ImageUpload = ({ pictureURL, setPictureURL }: any) => {
@@ -28,6 +28,8 @@ const ImageUpload = ({ pictureURL, setPictureURL }: any) => {
         (async () => {
           toast.success("Picture upload successful ⚒", {
             theme: "colored",
+
+            position: toast.POSITION.TOP_CENTER,
           });
         })();
       } else {
@@ -36,16 +38,17 @@ const ImageUpload = ({ pictureURL, setPictureURL }: any) => {
           toast.error("Something went wrong", {
             theme: "colored",
             icon: "👎",
+            position: toast.POSITION.TOP_CENTER,
           });
         })();
       }
     } catch (error) {
-      console.log(error);
       if (error) {
         (async () => {
           toast.error("Internal server error while uploading picture", {
             theme: "colored",
             icon: "⭕",
+            position: toast.POSITION.TOP_CENTER,
           });
         })();
         setLoading(false);
@@ -54,7 +57,7 @@ const ImageUpload = ({ pictureURL, setPictureURL }: any) => {
   };
   return (
     <>
-      <ToastContainer transition={Zoom} />
+      <ToastContainer transition={Bounce} />
       <div className="w-[145px] h-[144px] border-2 rounded-full m-auto relative overflow-hidden">
         {loading ? (
           <Image

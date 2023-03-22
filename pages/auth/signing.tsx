@@ -9,7 +9,7 @@ import SubmitButton from "@/util/buttons/submitButton";
 import { motion as m, useReducedMotion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import {
   BsEnvelopeCheckFill,
   BsFillInfoCircleFill,
@@ -17,16 +17,28 @@ import {
 } from "react-icons/bs";
 import { CgRename } from "react-icons/cg";
 import { MdOutlinePassword } from "react-icons/md";
+import { Bounce, ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const SignIn = () => {
   const [seePassword, shoPassword] = useState(false);
-  const [pictureURL, setPictureURL] = useState("/images/user.png");
+  const [loading, setLoading] = useState(false);
+  const [pictureURL, setPictureURL] = useState<string>("/images/user.png");
+  const [gender, setGender] = useState<string>("");
+
+  const first__nameRef = useRef<HTMLInputElement>(null);
+  const last__nameRef = useRef<HTMLInputElement>(null);
+  const email__Ref = useRef<HTMLInputElement>(null);
+  const password__Ref = useRef<HTMLInputElement>(null);
+  const c_Password__Ref = useRef<HTMLInputElement>(null);
+  const phone__Ref = useRef<HTMLInputElement>(null);
 
   const shouldReduceMotion = useReducedMotion();
   const childVariants = {
     initial: { opacity: 0, y: shouldReduceMotion ? 0 : 25 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.8 } },
   };
+
   const handlePassWordEncrypt = () => {
     if (seePassword) {
       shoPassword(!seePassword);
@@ -35,12 +47,98 @@ const SignIn = () => {
     }
   };
 
-  const handlePreventLoading = (e: any) => {
+  const handlePreventLoading = async (e: any) => {
     e.preventDefault();
+    setLoading(true);
+    const first__name = first__nameRef?.current?.value;
+    const last__name = last__nameRef?.current?.value;
+    const email = email__Ref?.current?.value;
+    const password = password__Ref?.current?.value;
+    const c_password = c_Password__Ref?.current?.value;
+    const phone__number = phone__Ref?.current?.value;
+    if (password !== c_password) {
+      (async () => {
+        toast.success("Picture upload successful ⚒", {
+          theme: "colored",
+
+          position: toast.POSITION.TOP_CENTER,
+        });
+      })();
+    }
+    if (
+      !first__name ||
+      !email ||
+      !password ||
+      !phone__number ||
+      gender.length <= 3
+    ) {
+      setLoading(false);
+      return (async () => {
+        toast.error(
+          "Required field can't be empty, please full fill all required information",
+          {
+            // theme: "colored",
+            position: toast.POSITION.TOP_CENTER,
+          }
+        );
+      })();
+    } else {
+      try {
+        const postData = await fetch("/api/auth", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            first__name: first__name,
+            last__name: last__name,
+            email__id: email,
+            password: password,
+            photo__URL: pictureURL,
+            gender: gender,
+            phone__numb: Number(phone__number),
+          }),
+        }).then((res) => {
+          if (res.status === 406) {
+            setLoading(false);
+            (async () => {
+              toast.error(
+                "Email id already registered or something went wrong",
+                {
+                  position: toast.POSITION.TOP_CENTER,
+                }
+              );
+            })();
+          } else if (res.status === 201) {
+            setLoading(false);
+            (async () => {
+              toast.success("Registration successful", {
+                position: toast.POSITION.TOP_CENTER,
+              });
+            })();
+          } else {
+            setLoading(false);
+            (async () => {
+              toast.error("Something went wrong 👎", {
+                position: toast.POSITION.TOP_CENTER,
+              });
+            })();
+          }
+        });
+      } catch (error) {
+        if (error) {
+          setLoading(false);
+          toast.error("Something went wrong", {
+            position: toast.POSITION.TOP_CENTER,
+          });
+        }
+      }
+    }
   };
 
   return (
     <>
+      <ToastContainer transition={Bounce} />
       <div className="font-HSRegular large_container">
         <div className="px-12">
           <div className="flex justify-between items-center">
@@ -49,15 +147,17 @@ const SignIn = () => {
               <span className="font-HSSemiBold">
                 ইতিমধ্যে একটি এ্যকাউন্ট আছে ?
               </span>{" "}
-              <m.button
-                variants={childVariants}
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-                type="button"
-                className="ml-5 bg-transparent border-[var(--red-primary-brand-color)] border  rounded-3xl text-[var(--red-primary-brand-color)] px-4 py-1"
-              >
-                <Link href="/login"> লগইন </Link>
-              </m.button>
+              <Link href="/auth/login">
+                <m.button
+                  variants={childVariants}
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                  type="button"
+                  className="ml-5 bg-transparent border-[var(--red-primary-brand-color)] border  rounded-3xl text-[var(--red-primary-brand-color)] px-4 py-1"
+                >
+                  লগইন
+                </m.button>
+              </Link>
             </div>
           </div>
 
@@ -84,6 +184,7 @@ const SignIn = () => {
               />
               <form onSubmit={handlePreventLoading} className="space-y-4">
                 <TextInputLabel
+                  field_ref={first__nameRef}
                   labelTex="ফার্স্ট নেম"
                   nameText="first__name"
                   placeholderText="নামের প্রথমাংশ দিন"
@@ -95,6 +196,7 @@ const SignIn = () => {
                   }
                 />
                 <TextInputLabel
+                  field_ref={last__nameRef}
                   labelTex="লাষ্ট নেম"
                   nameText="last__name"
                   placeholderText="নামের শেষাংশ দিন"
@@ -106,6 +208,7 @@ const SignIn = () => {
                   }
                 />
                 <TextInputLabel
+                  field_ref={email__Ref}
                   labelTex="ইমেইল আইডি"
                   nameText="email"
                   placeholderText="অ্যাক্টিভ ইমেইল আইডি দিন"
@@ -120,6 +223,7 @@ const SignIn = () => {
                 />
 
                 <PasswordInputLabel
+                  field_ref={password__Ref}
                   labelTex="পাসওয়ার্ড"
                   nameText="password"
                   onClickFunc={handlePassWordEncrypt}
@@ -134,6 +238,7 @@ const SignIn = () => {
                   }
                 />
                 <PasswordInputLabel
+                  field_ref={c_Password__Ref}
                   labelTex="রি-টাইপ পাসওয়ার্ড"
                   nameText="password"
                   onClickFunc={handlePassWordEncrypt}
@@ -148,6 +253,7 @@ const SignIn = () => {
                   }
                 />
                 <TextInputLabel
+                  field_ref={phone__Ref}
                   labelTex="ফোন নাম্বার দিন"
                   nameText="email"
                   placeholderText="ব্যবহারিত সচল ফোন নাম্বারটি দিন"
@@ -162,6 +268,7 @@ const SignIn = () => {
                 />
                 <div className="flex flex-wrap">
                   <RadioButton
+                    handleSetGender={() => setGender("male")}
                     id="gender-radio"
                     labelTex="Male"
                     name="gender-radio"
@@ -169,6 +276,7 @@ const SignIn = () => {
                     value="Male"
                   />
                   <RadioButton
+                    handleSetGender={() => setGender("female")}
                     id="gender-radio"
                     labelTex="Female"
                     name="gender-radio"
@@ -176,6 +284,7 @@ const SignIn = () => {
                     value="Female"
                   />
                   <RadioButton
+                    handleSetGender={() => setGender("others")}
                     id="gender-radio"
                     labelTex="Others"
                     name="gender-radio"
@@ -184,7 +293,7 @@ const SignIn = () => {
                   />
                 </div>
                 <div className="flex justify-between items-center relative">
-                  <SubmitButton buttonText="সাইন-ইন" />
+                  <SubmitButton loading={loading} buttonText="সাইন-ইন" />
                 </div>
               </form>
 

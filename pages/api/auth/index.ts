@@ -4,6 +4,7 @@ import {
   getAllUser,
   registerAUser,
 } from "@/lib/dbOperatons/users.prisma";
+import jwt from "jsonwebtoken";
 import type { NextApiRequest, NextApiResponse } from "next";
 
 type Data = {
@@ -60,11 +61,16 @@ const userCrud = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
             gender,
             phone__numb,
           } = req.body;
+          const hashedPass = jwt.sign(
+            password,
+            process.env.ACCESS_TOKEN as string
+          );
+
           const registerUserToDB = await registerAUser({
             first__name,
             last__name,
             email__id,
-            password,
+            password: hashedPass,
             photo__URL,
             gender,
             phone__numb,
@@ -107,7 +113,11 @@ const userCrud = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
         break;
     }
   } catch (error) {
-    console.log(error);
+    return res.status(406).json({
+      success: false,
+      message: `error found ${error}`,
+      returnData: null,
+    });
   }
 };
 

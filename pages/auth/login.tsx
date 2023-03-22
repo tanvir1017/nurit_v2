@@ -40,15 +40,17 @@ const Login = () => {
             <LightModeBrand />
             <div>
               <span className="font-HSSemiBold">আমার কোন অ্যাকাউন্ট নাই !</span>{" "}
-              <m.button
-                variants={childVariants}
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-                type="button"
-                className="ml-5 bg-transparent border-[var(--red-primary-brand-color)] border  rounded-3xl text-[var(--red-primary-brand-color)] px-4 py-1"
-              >
-                <Link href="/signing"> এ্যকাউন্ট খুলন </Link>
-              </m.button>
+              <Link href="/auth/verify-your-email">
+                <m.button
+                  variants={childVariants}
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                  type="button"
+                  className="ml-5 bg-transparent border-[var(--red-primary-brand-color)] border  rounded-3xl text-[var(--red-primary-brand-color)] px-4 py-1"
+                >
+                  এ্যকাউন্ট খুলন
+                </m.button>
+              </Link>
             </div>
           </div>
 

@@ -1,0 +1,17 @@
+<input type="text" id="myInputField" />
+
+<button onclick="getValue()">Get Value</button>
+
+<script>
+  function getValue(par1, par2) {
+    // Get the input element by its ID
+    var inputField = document.getElementById(par1).value;
+    var inputField2 = document.getElementById(par2).value;
+
+    // Get the value of the input field
+    var inputValue = inputField.value;
+
+    // Do something with the input value (e.g. log it to the console)
+    console.log("Input value is: " + inputField);
+  }
+</script>

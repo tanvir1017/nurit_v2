@@ -1,6 +1,8 @@
+import { LegacyRef } from "react";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 
 type TextInputLabelPropsType = {
+  field_ref?: LegacyRef<HTMLInputElement> | undefined;
   labelTex?: string | number;
   requiredType?: boolean;
   iconComponent?: React.ReactNode;
@@ -13,6 +15,7 @@ type TextInputLabelPropsType = {
 };
 
 type PasswordInputLabelPropsType = {
+  field_ref?: LegacyRef<HTMLInputElement> | undefined;
   labelTex?: string | number;
   requiredType?: boolean;
   iconComponent?: React.ReactNode;
@@ -23,6 +26,7 @@ type PasswordInputLabelPropsType = {
   onClickFunc?: () => void;
 };
 type RadioButtonLabelPropsTYpe = {
+  handleSetGender?: () => void;
   id?: string | undefined;
   type?: string;
   value?: string;
@@ -30,6 +34,7 @@ type RadioButtonLabelPropsTYpe = {
   labelTex?: string;
 };
 export const TextInputLabel = ({
+  field_ref,
   labelTex,
   requiredType,
   iconComponent,
@@ -59,6 +64,7 @@ export const TextInputLabel = ({
         {iconComponent}
       </span>
       <input
+        ref={field_ref}
         className={` placeholder:italic placeholder:text-slate-400 block dark:bg-[#232229] bg-slate-50  w-full border border-gray-500  rounded-md py-3 pl-9 pr-3 shadow-sm focus:outline-none ${
           type !== "email" &&
           "focus:border-[var(--red-primary-brand-color)]  focus:ring-[var(--red-primary-brand-color)]"
@@ -73,7 +79,7 @@ export const TextInputLabel = ({
       />
       {type === "email" && (
         <p className="absolute -bottom-[10px] invisible peer-invalid:visible peer-invalid:translate-y-1 duration-300  text-[var(--red-primary-brand-color)] text-sm ">
-          দয়া করে একটি বৈধ ইমেইল ঠিকানা প্রদান করুন ।
+          দয়া করে একটি বৈধ ইমেইল ঠিকানা প্রদান কর ।
         </p>
       )}
     </label>
@@ -81,6 +87,7 @@ export const TextInputLabel = ({
 };
 
 export const PasswordInputLabel = ({
+  field_ref,
   labelTex,
   requiredType,
   iconComponent,
@@ -105,6 +112,7 @@ export const PasswordInputLabel = ({
         {iconComponent}
       </span>
       <input
+        ref={field_ref}
         className="placeholder:italic placeholder:text-slate-400 block dark:bg-[#232229] bg-slate-50  w-full border border-gray-500  rounded-md py-3 pl-9 pr-3 shadow-sm focus:outline-none focus:border-[var(--red-primary-brand-color)]  focus:ring-[var(--red-primary-brand-color)] focus:ring-1 sm:text-sm"
         placeholder={placeholderText}
         type={seePassword ? "text" : "password"}
@@ -135,10 +143,12 @@ export const RadioButton = ({
   value,
   name,
   labelTex,
+  handleSetGender,
 }: RadioButtonLabelPropsTYpe) => {
   return (
     <div className="flex items-center mr-4">
       <input
+        onClick={handleSetGender}
         id={id}
         type={type}
         value={value}
