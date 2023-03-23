@@ -6,9 +6,12 @@ import {
 } from "@/components/shared/inputLabel/inputLabel";
 import ImageUpload from "@/components/shared/upload/imageUpload";
 import SubmitButton from "@/util/buttons/submitButton";
+import { getCookie, hasCookie } from "cookies-next";
 import { motion as m, useReducedMotion } from "framer-motion";
+import { GetServerSidePropsContext, PreviewData } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { ParsedUrlQuery } from "querystring";
 import { useRef, useState } from "react";
 import {
   BsEnvelopeCheckFill,
@@ -20,7 +23,7 @@ import { MdOutlinePassword } from "react-icons/md";
 import { Bounce, ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const SignIn = () => {
+const SignIn = ({ cookie }: any) => {
   const [seePassword, shoPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [pictureURL, setPictureURL] = useState<string>("/images/user.png");
@@ -310,4 +313,17 @@ const SignIn = () => {
   );
 };
 
+export const getServerSideProps = ({
+  req,
+  res,
+}: GetServerSidePropsContext<ParsedUrlQuery, PreviewData>) => {
+  const getCookieFromServer = getCookie("u-auth", { req, res });
+  const hasCook = hasCookie("u-auth", { req, res });
+  const cookie = hasCook ? getCookieFromServer : null;
+  return {
+    props: {
+      cookie: cookie,
+    },
+  };
+};
 export default SignIn;

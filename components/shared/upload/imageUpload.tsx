@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image from "next/legacy/image";
 import { useState } from "react";
 import { AiOutlineCloudUpload } from "react-icons/ai";
 import { Bounce, ToastContainer, toast } from "react-toastify";

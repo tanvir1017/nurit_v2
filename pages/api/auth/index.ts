@@ -4,6 +4,7 @@ import {
   getAllUser,
   registerAUser,
 } from "@/lib/dbOperatons/users.prisma";
+import { setCookie } from "cookies-next";
 import jwt from "jsonwebtoken";
 import type { NextApiRequest, NextApiResponse } from "next";
 
@@ -82,7 +83,19 @@ const userCrud = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
               returnData: {},
             });
           }
-
+          const setUserToCookieByJWT = jwt.sign(
+            registerUserToDB,
+            process.env.ACCESS_TOKEN as string
+          );
+          setCookie("u-auth", setUserToCookieByJWT, {
+            req,
+            res,
+            maxAge: 25200,
+            secure: process.env.NODE_ENV !== "development",
+            httpOnly: true,
+            sameSite: true,
+            path: "/",
+          });
           return res.status(201).json({
             success: true,
             message: `User registered success`,
