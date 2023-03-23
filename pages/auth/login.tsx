@@ -7,16 +7,35 @@ import SubmitButton from "@/util/buttons/submitButton";
 import { motion as m, useReducedMotion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useRouter } from "next/router";
+import { useEffect, useRef, useState } from "react";
 import { BiUserCircle } from "react-icons/bi";
 import { BsFillInfoCircleFill } from "react-icons/bs";
 import { FaFacebook, FaTwitter } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import { MdOutlinePassword } from "react-icons/md";
+import { TbAlertTriangleFilled } from "react-icons/tb";
+import { TiInfoOutline } from "react-icons/ti";
+import { Bounce, ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Login = () => {
+  const [routerPath, setRouterPath] = useState("");
   const [seePassword, shoPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [response, setResponse] = useState<string>("ইমেইল আইডি অথবা ইউজার নেম");
   const shouldReduceMotion = useReducedMotion();
+
+  const email__Ref = useRef<HTMLInputElement>(null);
+  const password__Ref = useRef<HTMLInputElement>(null);
+
+  const router = useRouter();
+  useEffect(() => {
+    const storage = globalThis?.sessionStorage;
+    const prevPath = storage.getItem("prevPath");
+    setRouterPath(prevPath as string);
+  }, [router.pathname]);
+
   const childVariants = {
     initial: { opacity: 0, y: shouldReduceMotion ? 0 : 25 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.8 } },
@@ -29,11 +48,59 @@ const Login = () => {
     }
   };
 
-  const handlePreventLoading = (e: any) => {
+  const handlePreventLoading = async (e: any) => {
     e.preventDefault();
+    setLoading(true);
+    const email = email__Ref.current?.value;
+    const password = password__Ref.current?.value;
+    if (!email || !password) {
+      toast.error("Required filed can't be empty", {
+        icon: (
+          <TiInfoOutline className="text-[var(--red-primary-brand-color)]" />
+        ),
+        position: toast.POSITION.TOP_CENTER,
+      });
+      setLoading(false);
+    } else {
+      const res = await window.fetch("/api/auth", {
+        method: "GET",
+        headers: {
+          "content-type": "application/json",
+          email: `${email}`,
+          password: `${password}`,
+        },
+      });
+      const data = await res.json();
+      if (!data.success) {
+        setLoading(false);
+        (async () => {
+          toast.error("Wrong credential", {
+            icon: (
+              <TiInfoOutline className="text-[var(--red-primary-brand-color)]" />
+            ),
+            position: toast.POSITION.TOP_CENTER,
+          });
+        })();
+        setResponse("Wrong credential");
+      } else {
+        setLoading(false);
+        (async () => {
+          toast.success("Login successful", {
+            icon: <TbAlertTriangleFilled className="text-green-400" />,
+            position: toast.POSITION.TOP_CENTER,
+          });
+        })();
+        setResponse(response);
+        (async () => {
+          router.push(routerPath);
+        })();
+      }
+    }
   };
+
   return (
     <>
+      <ToastContainer transition={Bounce} hideProgressBar />
       <div className="font-HSRegular large_container">
         <div className="px-12">
           <div className="flex justify-between items-center">
@@ -75,10 +142,11 @@ const Login = () => {
               </div>
               <form onSubmit={handlePreventLoading} className="space-y-4">
                 <TextInputLabel
-                  labelTex="ইমেইল আইডি অথবা ইউজার নেম"
+                  field_ref={email__Ref}
+                  labelTex={response}
                   nameText="email"
                   placeholderText="ইমেইল আইডি অথবা ইউজার নেম"
-                  requiredType
+                  requiredType={true}
                   title="login email"
                   type="email"
                   iconComponent={
@@ -89,11 +157,12 @@ const Login = () => {
                 />
 
                 <PasswordInputLabel
-                  labelTex="পাসওয়ার্ড"
+                  field_ref={password__Ref}
+                  labelTex={!response ? "পাসওয়ার্ড" : response}
                   nameText="password"
                   onClickFunc={handlePassWordEncrypt}
                   placeholderText="পাসওয়ার্ড"
-                  requiredType
+                  requiredType={true}
                   seePassword={seePassword}
                   title="type your password"
                   iconComponent={
@@ -104,7 +173,7 @@ const Login = () => {
                 />
 
                 <div className="flex justify-between items-center relative">
-                  <SubmitButton buttonText="লগইন" />
+                  <SubmitButton loading={loading} buttonText="লগইন" />
 
                   <Link
                     href="404"

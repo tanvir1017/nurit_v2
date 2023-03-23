@@ -1,6 +1,8 @@
 import Image from "next/legacy/image";
 import { useState } from "react";
 import { AiOutlineCloudUpload } from "react-icons/ai";
+import { TbAlertTriangleFilled } from "react-icons/tb";
+import { TiInfoOutline } from "react-icons/ti";
 import { Bounce, ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -26,9 +28,8 @@ const ImageUpload = ({ pictureURL, setPictureURL }: any) => {
         setPictureURL(result.url);
         setLoading(false);
         (async () => {
-          toast.success("Picture upload successful ⚒", {
-            theme: "colored",
-
+          toast.success("Picture upload successful", {
+            icon: <TbAlertTriangleFilled className="text-green-400" />,
             position: toast.POSITION.TOP_CENTER,
           });
         })();
@@ -36,8 +37,9 @@ const ImageUpload = ({ pictureURL, setPictureURL }: any) => {
         setLoading(false);
         (async () => {
           toast.error("Something went wrong", {
-            theme: "colored",
-            icon: "👎",
+            icon: (
+              <TiInfoOutline className="text-[var(--red-primary-brand-color)]" />
+            ),
             position: toast.POSITION.TOP_CENTER,
           });
         })();
@@ -46,8 +48,9 @@ const ImageUpload = ({ pictureURL, setPictureURL }: any) => {
       if (error) {
         (async () => {
           toast.error("Internal server error while uploading picture", {
-            theme: "colored",
-            icon: "⭕",
+            icon: (
+              <TiInfoOutline className="text-[var(--red-primary-brand-color)]" />
+            ),
             position: toast.POSITION.TOP_CENTER,
           });
         })();
@@ -57,7 +60,7 @@ const ImageUpload = ({ pictureURL, setPictureURL }: any) => {
   };
   return (
     <>
-      <ToastContainer transition={Bounce} />
+      <ToastContainer transition={Bounce} hideProgressBar />
       <div className="w-[145px] h-[144px] border-2 rounded-full m-auto relative overflow-hidden">
         {loading ? (
           <Image

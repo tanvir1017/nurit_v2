@@ -18,6 +18,7 @@ export enum USER__ROLE {
 /// KEY VALUE WISE TYPE ////
 ///////////////////////////
 export type registerBodyDataType = {
+  id?: string;
   first__name: string;
   last__name: string;
   email__id: string;
@@ -25,13 +26,17 @@ export type registerBodyDataType = {
   photo__URL: string;
   gender: string;
   phone__numb: number;
+  role?: string;
 };
 
 /////////////////////////////
 ////// FUNCTION TYPE ///////
 ///////////////////////////
 export type A__SingleModelFunctionType = (
-  id: string | undefined
+  id?: string | undefined
+) => Promise<{} | null>;
+export type LoginUserModelFunctionType = (
+  email__id?: string | undefined
 ) => Promise<{} | null>;
 
 export type GetAllUserFunctionType = () => Promise<{} | null>;

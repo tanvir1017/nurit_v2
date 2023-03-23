@@ -62,9 +62,9 @@ const VerifyYourEmail = () => {
               </div>
               <form onSubmit={handlePreventLoading} className="space-y-4">
                 <TextInputLabel
-                  labelTex="ইমেইল আইডি অথবা ইউজার নেম"
+                  labelTex="ইমেইল আইডি"
                   nameText="email"
-                  placeholderText="ইমেইল আইডি অথবা ইউজার নেম"
+                  placeholderText="ইমেইল আইডি"
                   requiredType
                   title="login email"
                   type="email"

@@ -11,6 +11,7 @@ import { motion as m, useReducedMotion } from "framer-motion";
 import { GetServerSidePropsContext, PreviewData } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { ParsedUrlQuery } from "querystring";
 import { useRef, useState } from "react";
 import {
@@ -20,6 +21,8 @@ import {
 } from "react-icons/bs";
 import { CgRename } from "react-icons/cg";
 import { MdOutlinePassword } from "react-icons/md";
+import { TbAlertTriangleFilled } from "react-icons/tb";
+import { TiInfoOutline } from "react-icons/ti";
 import { Bounce, ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -28,6 +31,7 @@ const SignIn = ({ cookie }: any) => {
   const [loading, setLoading] = useState(false);
   const [pictureURL, setPictureURL] = useState<string>("/images/user.png");
   const [gender, setGender] = useState<string>("");
+  const [routerPath, setRouterPath] = useState<string>("");
 
   const first__nameRef = useRef<HTMLInputElement>(null);
   const last__nameRef = useRef<HTMLInputElement>(null);
@@ -36,6 +40,7 @@ const SignIn = ({ cookie }: any) => {
   const c_Password__Ref = useRef<HTMLInputElement>(null);
   const phone__Ref = useRef<HTMLInputElement>(null);
 
+  const router = useRouter();
   const shouldReduceMotion = useReducedMotion();
   const childVariants = {
     initial: { opacity: 0, y: shouldReduceMotion ? 0 : 25 },
@@ -60,15 +65,15 @@ const SignIn = ({ cookie }: any) => {
     const c_password = c_Password__Ref?.current?.value;
     const phone__number = phone__Ref?.current?.value;
     if (password !== c_password) {
-      (async () => {
-        toast.success("Picture upload successful ⚒", {
-          theme: "colored",
-
+      return (async () => {
+        toast.error("Password mismatch", {
+          icon: (
+            <TiInfoOutline className="text-[var(--red-primary-brand-color)]" />
+          ),
           position: toast.POSITION.TOP_CENTER,
         });
       })();
-    }
-    if (
+    } else if (
       !first__name ||
       !email ||
       !password ||
@@ -80,7 +85,6 @@ const SignIn = ({ cookie }: any) => {
         toast.error(
           "Required field can't be empty, please full fill all required information",
           {
-            // theme: "colored",
             position: toast.POSITION.TOP_CENTER,
           }
         );
@@ -108,6 +112,9 @@ const SignIn = ({ cookie }: any) => {
               toast.error(
                 "Email id already registered or something went wrong",
                 {
+                  icon: (
+                    <TiInfoOutline className="text-[var(--red-primary-brand-color)]" />
+                  ),
                   position: toast.POSITION.TOP_CENTER,
                 }
               );
@@ -116,13 +123,20 @@ const SignIn = ({ cookie }: any) => {
             setLoading(false);
             (async () => {
               toast.success("Registration successful", {
+                icon: <TbAlertTriangleFilled className="text-green-400" />,
                 position: toast.POSITION.TOP_CENTER,
               });
+            })();
+            (async () => {
+              router.push("/");
             })();
           } else {
             setLoading(false);
             (async () => {
               toast.error("Something went wrong 👎", {
+                icon: (
+                  <TiInfoOutline className="text-[var(--red-primary-brand-color)]" />
+                ),
                 position: toast.POSITION.TOP_CENTER,
               });
             })();
@@ -132,6 +146,9 @@ const SignIn = ({ cookie }: any) => {
         if (error) {
           setLoading(false);
           toast.error("Something went wrong", {
+            icon: (
+              <TiInfoOutline className="text-[var(--red-primary-brand-color)]" />
+            ),
             position: toast.POSITION.TOP_CENTER,
           });
         }
@@ -141,7 +158,7 @@ const SignIn = ({ cookie }: any) => {
 
   return (
     <>
-      <ToastContainer transition={Bounce} />
+      <ToastContainer transition={Bounce} hideProgressBar />
       <div className="font-HSRegular large_container">
         <div className="px-12">
           <div className="flex justify-between items-center">

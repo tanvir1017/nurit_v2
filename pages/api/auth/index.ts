@@ -2,6 +2,7 @@ import {
   deleteAUserFromDb,
   getASingleUser,
   getAllUser,
+  loginRegisterUser,
   registerAUser,
 } from "@/lib/dbOperatons/users.prisma";
 import { setCookie } from "cookies-next";
@@ -15,26 +16,22 @@ type Data = {
   returnData?: {} | [] | null;
 };
 
+type LoggedDataSettingToCookie = {
+  id: string;
+  first__name: string;
+  last__name: string;
+  email__id: string | string[] | undefined;
+  photo__URL: string;
+  phone__numb: number;
+  gender: string;
+  role: string;
+};
+
 const userCrud = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
   try {
     switch (req.method) {
       case "GET": {
-        if (req.query.id) {
-          const { id } = req.query;
-          const getAUserInfo = await getASingleUser(id as string | undefined);
-          if (!getAUserInfo) {
-            return res.status(404).json({
-              success: false,
-              message: `Data not  found according to this id ${id}`,
-              returnData: {},
-            });
-          }
-          return res.status(200).json({
-            success: true,
-            message: `Data found according to this id ${id}`,
-            returnData: getAUserInfo,
-          });
-        } else {
+        if (!req.query.id && !req.headers.email) {
           const getEveryUserExistOnTheDB = await getAllUser();
           if (!getEveryUserExistOnTheDB) {
             return res.status(404).json({
@@ -47,6 +44,64 @@ const userCrud = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
             success: true,
             message: `Data found successfully`,
             returnData: getEveryUserExistOnTheDB,
+          });
+        } else if (req.query.id) {
+          const { id } = req.query;
+          const getAUserInfo = await getASingleUser(id as string);
+          if (!getAUserInfo) {
+            return res.status(404).json({
+              success: false,
+              message: `Data not  found according to this id ${id}`,
+              returnData: {},
+            });
+          }
+          return res.status(200).json({
+            success: true,
+            message: `Data found according to this id ${id}`,
+            returnData: getAUserInfo,
+          });
+        } else if (req.headers) {
+          const { email: email__id, password: clientPass } = req.headers;
+          const loginWithExistingEmail = await loginRegisterUser(
+            email__id as string
+          );
+          if (!loginWithExistingEmail) {
+            return res.status(404).json({
+              success: false,
+              message: `No user found at this email ${email__id}, Please sign-up first`,
+              returnData: {},
+            });
+          }
+          const { password, ...rest } = loginWithExistingEmail || {};
+          const verifyPassword = jwt.verify(
+            password as string,
+            process.env.ACCESS_TOKEN as string
+          );
+          if (clientPass !== verifyPassword) {
+            return res.status(404).json({
+              success: false,
+              message: `Wrong credential`,
+              returnData: {},
+            });
+          } else {
+            const setUserToCookieByJWT = jwt.sign(
+              rest,
+              process.env.ACCESS_TOKEN as string
+            );
+            setCookie("u-auth", setUserToCookieByJWT, {
+              req,
+              res,
+              maxAge: 25200,
+              secure: process.env.NODE_ENV !== "development",
+              httpOnly: true,
+              sameSite: true,
+              path: "/",
+            });
+          }
+          return res.status(200).json({
+            success: true,
+            message: `User login successfully`,
+            returnData: loginWithExistingEmail,
           });
         }
       }
@@ -84,7 +139,15 @@ const userCrud = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
             });
           }
           const setUserToCookieByJWT = jwt.sign(
-            registerUserToDB,
+            {
+              first__name,
+              last__name,
+              email__id,
+              photo__URL,
+              gender,
+              phone__numb,
+              role: "MEMBER",
+            },
             process.env.ACCESS_TOKEN as string
           );
           setCookie("u-auth", setUserToCookieByJWT, {

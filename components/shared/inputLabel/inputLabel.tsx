@@ -46,10 +46,14 @@ export const TextInputLabel = ({
 }: TextInputLabelPropsType) => {
   return (
     <label
-      className={`relative block space-y-2 ${type === "email" && " pb-3"}`}
+      className={`relative block space-y-2 ${type === "email" && " pb-3"} `}
     >
       <span
         className={`${
+          labelTex === "Wrong credential" &&
+          "text-[var(--red-primary-brand-color)] italic"
+        }
+      ${labelTex === "User login successfully" && "text-green-400 "} ${
           requiredType && " after:content-['*'] after:ml-0.5 after:text-red-500"
         }  block text-sm font-HSLight`}
       >
@@ -98,9 +102,20 @@ export const PasswordInputLabel = ({
   onClickFunc,
 }: PasswordInputLabelPropsType) => {
   return (
-    <label className="relative block space-y-2">
+    <label
+      className={`relative block space-y-2 ${
+        labelTex === "Wrong credential" &&
+        "text-[var(--red-primary-brand-color)] italic"
+      }`}
+    >
       <span
-        className={`${
+        className={`
+        ${
+          labelTex === "Wrong credential" &&
+          "text-[var(--red-primary-brand-color)] italic"
+        }
+      ${labelTex === "User login successfully" && "text-green-400 "}
+        ${
           requiredType &&
           "after:content-['*'] after:ml-0.5 after:text-[var(--red-primary-brand-color)]"
         }  block text-sm font-HSLight `}

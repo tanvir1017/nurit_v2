@@ -1,6 +1,7 @@
 import {
   A__SingleModelFunctionType,
   GetAllUserFunctionType,
+  LoginUserModelFunctionType,
   registerAUserFunctionType,
   registerBodyDataType,
 } from "@/util/types/types";
@@ -9,6 +10,14 @@ import prisma from "../../prisma/lib/db.connector";
 export const getASingleUser: A__SingleModelFunctionType = async (id) => {
   const singleUser = await prisma.user.findUnique({
     where: { id },
+  });
+  return singleUser;
+};
+export const loginRegisterUser: LoginUserModelFunctionType = async (
+  email__id
+) => {
+  const singleUser = await prisma.user.findUnique({
+    where: { email__id },
   });
   return singleUser;
 };

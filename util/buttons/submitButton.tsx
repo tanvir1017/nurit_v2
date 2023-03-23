@@ -1,5 +1,4 @@
 import { motion as m, useReducedMotion } from "framer-motion";
-import Image from "next/image";
 
 const SubmitButton = ({
   buttonText,
@@ -16,25 +15,13 @@ const SubmitButton = ({
   return (
     <m.button
       variants={childVariants}
+      disabled={loading}
       whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 0.9 }}
       type="submit"
-      className=" bg-[var(--red-primary-brand-color)] border-none rounded-md  text-white px-8 p-2 "
+      className=" bg-[var(--red-primary-brand-color)] border-none rounded-md  text-white px-8 py-2 flex justify-between items-center"
     >
-      {loading ? (
-        <span>
-          {" "}
-          <Image
-            className="inline-flex"
-            src="/icons/loading.svg"
-            width={25}
-            height={100}
-            alt="loading"
-          />{" "}
-        </span>
-      ) : (
-        <span className="ml-4">{buttonText}</span>
-      )}{" "}
+      <span>{buttonText}</span>
     </m.button>
   );
 };
