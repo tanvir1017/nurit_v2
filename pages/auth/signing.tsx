@@ -26,12 +26,12 @@ import { TiInfoOutline } from "react-icons/ti";
 import { Bounce, ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const SignIn = ({ cookie }: any) => {
+const SignIn = ({ cookie }: { cookie: string }) => {
+  console.log(cookie);
   const [seePassword, shoPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [pictureURL, setPictureURL] = useState<string>("/images/user.png");
   const [gender, setGender] = useState<string>("");
-  const [routerPath, setRouterPath] = useState<string>("");
 
   const first__nameRef = useRef<HTMLInputElement>(null);
   const last__nameRef = useRef<HTMLInputElement>(null);

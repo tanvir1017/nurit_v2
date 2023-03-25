@@ -5,6 +5,7 @@ import {
   loginRegisterUser,
   registerAUser,
 } from "@/lib/dbOperatons/users.prisma";
+import { LoginWithExistingEmailType } from "@/util/types/types";
 import { setCookie } from "cookies-next";
 import jwt from "jsonwebtoken";
 import type { NextApiRequest, NextApiResponse } from "next";
@@ -62,9 +63,8 @@ const userCrud = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
           });
         } else if (req.headers) {
           const { email: email__id, password: clientPass } = req.headers;
-          const loginWithExistingEmail = await loginRegisterUser(
-            email__id as string
-          );
+          const loginWithExistingEmail: LoginWithExistingEmailType =
+            await loginRegisterUser(email__id as string);
           if (!loginWithExistingEmail) {
             return res.status(404).json({
               success: false,
@@ -72,7 +72,8 @@ const userCrud = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
               returnData: {},
             });
           }
-          const { password, ...rest } = loginWithExistingEmail || {};
+
+          const { password, ...rest } = loginWithExistingEmail;
           const verifyPassword = jwt.verify(
             password as string,
             process.env.ACCESS_TOKEN as string
@@ -91,7 +92,7 @@ const userCrud = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
             setCookie("u-auth", setUserToCookieByJWT, {
               req,
               res,
-              maxAge: 25200,
+              maxAge: 604800,
               secure: process.env.NODE_ENV !== "development",
               httpOnly: true,
               sameSite: true,
@@ -153,7 +154,7 @@ const userCrud = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
           setCookie("u-auth", setUserToCookieByJWT, {
             req,
             res,
-            maxAge: 25200,
+            maxAge: 604800,
             secure: process.env.NODE_ENV !== "development",
             httpOnly: true,
             sameSite: true,

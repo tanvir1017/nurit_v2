@@ -1,15 +1,29 @@
+import useShare from "@/lib/context/useShare";
 import { largeNavigationData } from "@/util/localDb/navLink";
 import { motion as m, useReducedMotion } from "framer-motion";
 import { useTheme } from "next-themes";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useLayoutEffect, useState } from "react";
 import LightModeBrand from "../brand";
+import { Dropdown } from "../headLessUi";
+
+type ValueOfContext = {
+  allContext: {
+    data: any;
+    error: string;
+    isLoading: boolean;
+  };
+};
 
 const Navigation = () => {
   const [mounted, setMounted] = useState(false);
   const [toggle, setToggle] = useState(true);
+  const [tokenData, setTokenData] = useState(null);
+
   const { resolvedTheme, setTheme } = useTheme();
+  const { allContext }: ValueOfContext | null = useShare() ?? null;
+  const { data, error, isLoading } = allContext;
 
   const shouldReduceMotion = useReducedMotion();
   const childVariants = {
@@ -18,9 +32,14 @@ const Navigation = () => {
   };
 
   // useEffect only runs on the client, so now we can safely show the UI
-  useEffect(() => {
+  useLayoutEffect(() => {
     setMounted(true);
-  }, []);
+    if (!isLoading && !error) {
+      setTokenData(data.verifiedToken);
+    } else {
+      setTokenData(null);
+    }
+  }, [data, isLoading, error]);
 
   if (!mounted) {
     return null;
@@ -39,28 +58,44 @@ const Navigation = () => {
       <div className="container">
         <div className="relative h-20  flex items-center justify-between">
           <LightModeBrand />
-          <m.ul className="flex  space-x-4 ">
+          <m.ul className="flex items-center  space-x-4 ">
             {largeNavigationData.map((nav, index) => {
               const { path, routeName } = nav;
               return (
-                <m.li
-                  key={index}
-                  className={`${
-                    index === 4
-                      ? "bg-[var(--red-primary-brand-color)] text-white"
-                      : "hover:bg-[var(--red-primary-brand-color)] hover:text-white"
-                  } p-2 rounded-md `}
-                  variants={childVariants}
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.9 }}
-                >
-                  <Link href={path as string}>{routeName}</Link>
-                </m.li>
+                <Link href={path as string} key={index}>
+                  <m.li
+                    className={`${
+                      index === 4
+                        ? "bg-[var(--red-primary-brand-color)] text-white"
+                        : "hover:bg-[var(--red-primary-brand-color)] hover:text-white"
+                    } p-2 rounded-md `}
+                    variants={childVariants}
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
+                  >
+                    {routeName}
+                  </m.li>
+                </Link>
               );
             })}
+            {!tokenData && (
+              <m.li
+                className={`bg-[var(--red-primary-brand-color)] text-white p-2 rounded-md `}
+                variants={childVariants}
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+              >
+                <Link href="/auth/login">লগইন/সাইন-আপ</Link>
+              </m.li>
+            )}
+
+            {tokenData && mounted && (
+              <Dropdown tokenData={tokenData}></Dropdown>
+            )}
+
             {mounted && (
               <m.li
-                className="cursor-pointer border rounded-full w-14 bg-gray-800 relative overflow-hidden mr-4 my-2"
+                className="cursor-pointer border rounded-full w-14 h-6  bg-gray-800 relative overflow-hidden mr-4 my-2"
                 onClick={handleThemeControl}
               >
                 <Image

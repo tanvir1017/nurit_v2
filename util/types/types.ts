@@ -29,6 +29,18 @@ export type registerBodyDataType = {
   role?: string;
 };
 
+export interface LoginWithExistingEmailType {
+  id: string;
+  first__name: string;
+  last__name: string;
+  email__id: string;
+  password: string;
+  photo__URL: string;
+  phone__numb: number;
+  gender: string;
+  role: string;
+}
+
 /////////////////////////////
 ////// FUNCTION TYPE ///////
 ///////////////////////////
@@ -37,7 +49,7 @@ export type A__SingleModelFunctionType = (
 ) => Promise<{} | null>;
 export type LoginUserModelFunctionType = (
   email__id?: string | undefined
-) => Promise<{} | null>;
+) => any;
 
 export type GetAllUserFunctionType = () => Promise<{} | null>;
 export type registerAUserFunctionType = (
