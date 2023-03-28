@@ -62,18 +62,19 @@ const userCrud = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
             returnData: getAUserInfo,
           });
         } else if (req.headers) {
-          const { email: email__id, password: clientPass } = req.headers;
+          const { email: email_address, password: clientPass } = req.headers;
           const loginWithExistingEmail: LoginWithExistingEmailType =
-            await loginRegisterUser(email__id as string);
+            await loginRegisterUser(email_address as string);
           if (!loginWithExistingEmail) {
             return res.status(404).json({
               success: false,
-              message: `No user found at this email ${email__id}, Please sign-up first`,
+              message: `No user found at this email ${email_address}, Please sign-up first`,
               returnData: {},
             });
           }
 
-          const { password, ...rest } = loginWithExistingEmail;
+          const { password, phone__numb, email__id, gender, ...rest } =
+            loginWithExistingEmail;
           const verifyPassword = jwt.verify(
             password as string,
             process.env.ACCESS_TOKEN as string

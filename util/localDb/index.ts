@@ -1,6 +1,6 @@
 export const trendyCoursesFilterButton: { btnText: string; filter: string }[] =
   [
-    { btnText: "DigitalMarketing", filter: "digitalMarketing" },
+    { btnText: "Digital Marketing", filter: "msOffice" },
     { btnText: "Upwork ", filter: "programming" },
     { btnText: "Fiverr", filter: "digitalSkills" },
   ];

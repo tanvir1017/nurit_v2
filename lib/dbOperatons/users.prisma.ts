@@ -14,10 +14,10 @@ export const getASingleUser: A__SingleModelFunctionType = async (id) => {
   return singleUser;
 };
 export const loginRegisterUser: LoginUserModelFunctionType = async (
-  email__id
+  email_address
 ) => {
   const singleUser = await prisma.user.findUnique({
-    where: { email__id },
+    where: { email__id: email_address },
   });
   return singleUser;
 };
