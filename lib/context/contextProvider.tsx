@@ -1,4 +1,4 @@
-import { ReactNode, createContext } from "react";
+import { createContext, ReactNode } from "react";
 import useSharedContext from "./useSharedContext";
 
 export interface ShareContextType {
@@ -13,6 +13,7 @@ export const ShareContext = createContext<ShareContextType | null>(null);
 
 const ContextProvider = ({ children }: { children: ReactNode }) => {
   const allContext = useSharedContext();
+  console.log(allContext);
   return (
     <ShareContext.Provider value={{ allContext }}>
       {children}

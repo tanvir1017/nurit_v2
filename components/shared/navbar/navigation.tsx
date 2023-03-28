@@ -9,23 +9,24 @@ import { useEffect, useState } from "react";
 import LightModeBrand from "../brand";
 import { Dropdown } from "../headLessUi";
 
-type ValueOfContext = {
+export interface ShareContextType {
   allContext: {
-    data: object;
+    data: {
+      verifiedToken: string;
+    };
     error: string;
     isLoading: boolean;
-    refreshCookie: number;
   };
-};
+}
 
 const Navigation = () => {
   const [mounted, setMounted] = useState(false);
   const [toggle, setToggle] = useState(true);
-  const [tokenData, setTokenData] = useState(null);
+  const [tokenData, setTokenData] = useState<any | null>(null);
   const router = useRouter();
 
   const { resolvedTheme, setTheme } = useTheme();
-  const { allContext } = useShare();
+  const { allContext } = useShare() as ShareContextType;
   const { data, error, isLoading } = allContext;
 
   const shouldReduceMotion = useReducedMotion();
@@ -38,7 +39,7 @@ const Navigation = () => {
   useEffect(() => {
     setMounted(true);
     if (!isLoading && !error) {
-      setTokenData(data.verifiedToken);
+      setTokenData(data.verifiedToken as any);
     } else {
       setTokenData(null);
     }
