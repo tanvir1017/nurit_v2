@@ -2,7 +2,6 @@ import { Menu, Transition } from "@headlessui/react";
 import { motion as m } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/router";
 import { Dispatch, Fragment } from "react";
 import { CiSettings } from "react-icons/ci";
 import { IoIosLogOut } from "react-icons/io";
@@ -25,18 +24,14 @@ interface TokenDataType {
 
 export function Dropdown(props: TokenDataType) {
   const { tokenData, setTokenData, mutate } = props;
-  const router = useRouter();
   const Logout = async () => {
     await fetch("/api/auth/logout", { method: "DELETE" })
       .then((res) => res.json())
       .then((_) => {
         setTokenData(null);
         mutate(null);
-        router.push("/auth/login");
       });
-    setTokenData(null);
   };
-  console.log(tokenData);
   return (
     <Menu as="div" className="relative inline-block text-left">
       <m.div animate className="transition-all duration-300">

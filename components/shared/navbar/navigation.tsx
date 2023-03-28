@@ -84,14 +84,16 @@ const Navigation = () => {
               );
             })}
             {!tokenData && (
-              <m.li
-                className={`bg-[var(--red-primary-brand-color)] text-white p-2 rounded-md `}
-                variants={childVariants}
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-              >
-                <Link href="/auth/login">লগইন/সাইন-আপ</Link>
-              </m.li>
+              <Link href="/auth/login">
+                <m.li
+                  className={`bg-[var(--red-primary-brand-color)] text-white p-2 rounded-md `}
+                  variants={childVariants}
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                >
+                  লগইন/সাইন-আপ
+                </m.li>
+              </Link>
             )}
 
             {tokenData && (
