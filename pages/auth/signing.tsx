@@ -23,11 +23,10 @@ import { CgRename } from "react-icons/cg";
 import { MdOutlinePassword } from "react-icons/md";
 import { TbAlertTriangleFilled } from "react-icons/tb";
 import { TiInfoOutline } from "react-icons/ti";
-import { Bounce, ToastContainer, toast } from "react-toastify";
+import { Bounce, toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const SignIn = ({ cookie }: { cookie: string }) => {
-  console.log(cookie);
   const [seePassword, shoPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [pictureURL, setPictureURL] = useState<string>("/images/user.png");

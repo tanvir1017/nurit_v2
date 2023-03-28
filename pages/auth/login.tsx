@@ -3,6 +3,7 @@ import {
   PasswordInputLabel,
   TextInputLabel,
 } from "@/components/shared/inputLabel/inputLabel";
+import useShare from "@/lib/context/useShare";
 import SubmitButton from "@/util/buttons/submitButton";
 import { motion as m, useReducedMotion } from "framer-motion";
 import Image from "next/image";
@@ -16,8 +17,19 @@ import { FcGoogle } from "react-icons/fc";
 import { MdOutlinePassword } from "react-icons/md";
 import { TbAlertTriangleFilled } from "react-icons/tb";
 import { TiInfoOutline } from "react-icons/ti";
-import { Bounce, ToastContainer, toast } from "react-toastify";
+import { Bounce, toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+
+export interface ShareContextType {
+  allContext: {
+    data: {
+      verifiedToken: string;
+    };
+    error: string;
+    isLoading: boolean;
+    mutate: () => {};
+  };
+}
 
 const Login = () => {
   const [routerPath, setRouterPath] = useState("");
@@ -25,6 +37,9 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
   const [response, setResponse] = useState<string>("ইমেইল আইডি অথবা ইউজার নেম");
   const shouldReduceMotion = useReducedMotion();
+
+  const { allContext } = useShare() as ShareContextType;
+  const { mutate } = allContext;
 
   const email__Ref = useRef<HTMLInputElement>(null);
   const password__Ref = useRef<HTMLInputElement>(null);
@@ -89,6 +104,7 @@ const Login = () => {
             icon: <TbAlertTriangleFilled className="text-green-400" />,
             position: toast.POSITION.TOP_CENTER,
           });
+          mutate();
         })();
         setResponse(response);
         (async () => {

@@ -14,14 +14,11 @@ const login = async (req: NextApiRequest, res: NextApiResponse) => {
         process.env.ACCESS_TOKEN as string
       );
 
-      console.log(verifiedToken);
-
       res.status(200).json({ verifiedToken });
     } else {
       res.status(200).json({ token: "NOT FOUND" });
     }
   } catch (err) {
-    console.log(err);
     res.status(500).json(err);
   }
 };

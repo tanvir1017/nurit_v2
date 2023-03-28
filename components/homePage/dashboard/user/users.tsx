@@ -17,8 +17,6 @@ export const getStaticProps: GetStaticProps = async () => {
 
 const UsersFetcher = () => {
   const { data, error } = useSWR(API);
-
-  console.log("Is data ready?", !!data);
   let content = null;
   if (error) {
     content = "An error has occurred.";

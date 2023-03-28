@@ -17,6 +17,7 @@ export interface ShareContextType {
     };
     error: string;
     isLoading: boolean;
+    mutate: () => {};
   };
 }
 
@@ -28,7 +29,7 @@ const Navigation = () => {
 
   const { resolvedTheme, setTheme } = useTheme();
   const { allContext } = useShare() as ShareContextType;
-  const { data, error, isLoading } = allContext;
+  const { data, error, isLoading, mutate } = allContext;
 
   const shouldReduceMotion = useReducedMotion();
   const childVariants = {
@@ -40,11 +41,11 @@ const Navigation = () => {
   useEffect(() => {
     setMounted(true);
     if (!isLoading && !error) {
-      setTokenData(data.verifiedToken as any);
+      setTokenData(data?.verifiedToken as any);
     } else {
       setTokenData(null);
     }
-  }, [data, isLoading, error]);
+  }, [data?.verifiedToken, error, isLoading]);
 
   if (!mounted) {
     return null;
@@ -93,7 +94,13 @@ const Navigation = () => {
               </m.li>
             )}
 
-            {tokenData && <Dropdown tokenData={tokenData} />}
+            {tokenData && (
+              <Dropdown
+                tokenData={tokenData}
+                setTokenData={setTokenData}
+                mutate={mutate}
+              />
+            )}
 
             {mounted && (
               <m.li

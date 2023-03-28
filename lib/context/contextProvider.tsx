@@ -8,6 +8,7 @@ export interface ShareContextType {
     };
     error: string;
     isLoading: boolean;
+    mutate: () => {};
   };
 }
 

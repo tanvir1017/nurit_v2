@@ -3,7 +3,7 @@ import { motion as m } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { Fragment } from "react";
+import { Dispatch, Fragment } from "react";
 import { CiSettings } from "react-icons/ci";
 import { IoIosLogOut } from "react-icons/io";
 
@@ -19,16 +19,24 @@ interface TokenDataType {
     gender: string;
     role: string;
   };
+  setTokenData: Dispatch<any>;
+  mutate: (value: null) => {};
 }
 
 export function Dropdown(props: TokenDataType) {
-  const { tokenData } = props;
+  const { tokenData, setTokenData, mutate } = props;
   const router = useRouter();
   const Logout = async () => {
-    fetch("/api/auth/logout", { method: "DELETE" })
+    await fetch("/api/auth/logout", { method: "DELETE" })
       .then((res) => res.json())
-      .then((_) => router.replace("/auth/login"));
+      .then((_) => {
+        setTokenData(null);
+        mutate(null);
+        router.push("/auth/login");
+      });
+    setTokenData(null);
   };
+  console.log(tokenData);
   return (
     <Menu as="div" className="relative inline-block text-left">
       <m.div animate className="transition-all duration-300">
