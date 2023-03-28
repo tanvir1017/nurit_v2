@@ -1,5 +1,6 @@
 import LightModeBrand from "@/components/shared/brand";
 import { TextInputLabel } from "@/components/shared/inputLabel/inputLabel";
+import Metadata from "@/util/SEO/metadata";
 import SubmitButton from "@/util/buttons/submitButton";
 
 import { motion as m, useReducedMotion } from "framer-motion";
@@ -22,6 +23,12 @@ const VerifyYourEmail = () => {
   };
   return (
     <>
+      <Metadata
+        title="Verify email address"
+        name="Verify email address"
+        content="This page will verify your email address"
+        key="skill course, course, ms office, office 364"
+      />
       <div className="font-HSRegular large_container">
         <div className="px-12">
           <div className="flex justify-between items-center">

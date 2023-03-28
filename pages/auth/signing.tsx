@@ -5,6 +5,7 @@ import {
   TextInputLabel,
 } from "@/components/shared/inputLabel/inputLabel";
 import ImageUpload from "@/components/shared/upload/imageUpload";
+import Metadata from "@/util/SEO/metadata";
 import SubmitButton from "@/util/buttons/submitButton";
 import { getCookie, hasCookie } from "cookies-next";
 import { motion as m, useReducedMotion } from "framer-motion";
@@ -23,7 +24,7 @@ import { CgRename } from "react-icons/cg";
 import { MdOutlinePassword } from "react-icons/md";
 import { TbAlertTriangleFilled } from "react-icons/tb";
 import { TiInfoOutline } from "react-icons/ti";
-import { Bounce, toast, ToastContainer } from "react-toastify";
+import { Bounce, ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const SignIn = ({ cookie }: { cookie: string }) => {
@@ -157,6 +158,12 @@ const SignIn = ({ cookie }: { cookie: string }) => {
 
   return (
     <>
+      <Metadata
+        title="NurIT | Signing"
+        name="Login page"
+        content="all course page. You can find every course in this page that we are providing"
+        key="skill course, course, ms office, office 364"
+      />
       <ToastContainer transition={Bounce} hideProgressBar />
       <div className="font-HSRegular large_container">
         <div className="px-12">

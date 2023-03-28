@@ -4,6 +4,7 @@ import {
   TextInputLabel,
 } from "@/components/shared/inputLabel/inputLabel";
 import useShare from "@/lib/context/useShare";
+import Metadata from "@/util/SEO/metadata";
 import SubmitButton from "@/util/buttons/submitButton";
 import { motion as m, useReducedMotion } from "framer-motion";
 import Image from "next/image";
@@ -17,7 +18,7 @@ import { FcGoogle } from "react-icons/fc";
 import { MdOutlinePassword } from "react-icons/md";
 import { TbAlertTriangleFilled } from "react-icons/tb";
 import { TiInfoOutline } from "react-icons/ti";
-import { Bounce, toast, ToastContainer } from "react-toastify";
+import { Bounce, ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 export interface ShareContextType {
@@ -116,6 +117,12 @@ const Login = () => {
 
   return (
     <>
+      <Metadata
+        title="NurIT | Login"
+        name="Login page"
+        content="all course page. You can find every course in this page that we are providing"
+        key="skill course, course, ms office, office 364"
+      />
       <ToastContainer transition={Bounce} hideProgressBar />
       <div className="font-HSRegular large_container">
         <div className="px-12">
