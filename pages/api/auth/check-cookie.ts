@@ -11,7 +11,7 @@ const login = async (req: NextApiRequest, res: NextApiResponse) => {
       });
       const verifiedToken = jwt.verify(
         getCookieFromBrowser as string,
-        process.env.ACCESS_token as string
+        process.env.ACCESS_TOKEN as string
       );
 
       console.log(verifiedToken);
