@@ -9,7 +9,6 @@ import { useEffect } from "react";
 
 export default function App({ Component, pageProps, router }: AppProps) {
   const { pathname } = router;
-  useEffect(() => storePathValues, [router.asPath]);
   function storePathValues() {
     const storage = globalThis?.sessionStorage;
     if (!storage) return;
@@ -17,6 +16,8 @@ export default function App({ Component, pageProps, router }: AppProps) {
     storage.setItem("prevPath", prevPath as string);
     storage.setItem("currentPath", globalThis.location.pathname);
   }
+  useEffect(() => storePathValues, [router.asPath]);
+
   return (
     <ContextProvider>
       <ThemeProvider enableSystem={true} attribute="class">

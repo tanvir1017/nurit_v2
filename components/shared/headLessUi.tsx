@@ -2,6 +2,7 @@ import { Menu, Transition } from "@headlessui/react";
 import { motion as m } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { Fragment } from "react";
 import { CiSettings } from "react-icons/ci";
 import { IoIosLogOut } from "react-icons/io";
@@ -22,6 +23,12 @@ interface TokenDataType {
 
 export function Dropdown(props: TokenDataType) {
   const { tokenData } = props;
+  const router = useRouter();
+  const Logout = async () => {
+    fetch("/api/auth/logout", { method: "DELETE" })
+      .then((res) => res.json())
+      .then((_) => router.replace("/auth/login"));
+  };
   return (
     <Menu as="div" className="relative inline-block text-left">
       <m.div animate className="transition-all duration-300">
@@ -92,16 +99,13 @@ export function Dropdown(props: TokenDataType) {
               )}
             </Menu.Item>
           </div>
-          <div className="py-1 ">
+          <div className="py-1 cursor-pointer" onClick={() => Logout()}>
             <Menu.Item>
               {() => (
-                <Link
-                  href="/blog/create"
-                  className="py-3 px-4 w-full flex items-center space-x-2 hover:scale-105 transition duration-75"
-                >
+                <span className=" py-3 px-4 w-full flex items-center space-x-2 hover:scale-105 transition duration-75">
                   <IoIosLogOut className="text-[20px]" />
                   <span className="text-sm">Logout</span>
-                </Link>
+                </span>
               )}
             </Menu.Item>
           </div>

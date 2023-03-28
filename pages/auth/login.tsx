@@ -92,7 +92,7 @@ const Login = () => {
         })();
         setResponse(response);
         (async () => {
-          router.push(routerPath);
+          router.replace(routerPath);
         })();
       }
     }

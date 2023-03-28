@@ -1,9 +1,9 @@
 import { ReactNode, createContext } from "react";
 import useSharedContext from "./useSharedContext";
 
-interface ShareContextType {
+export interface ShareContextType {
   allContext: {
-    data: object;
+    data: object; //{}
     error: string;
     isLoading: boolean;
   };

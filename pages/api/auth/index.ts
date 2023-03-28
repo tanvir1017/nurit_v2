@@ -102,7 +102,6 @@ const userCrud = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
           return res.status(200).json({
             success: true,
             message: `User login successfully`,
-            returnData: loginWithExistingEmail,
           });
         }
       }

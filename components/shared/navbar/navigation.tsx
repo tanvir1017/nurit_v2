@@ -4,15 +4,17 @@ import { motion as m, useReducedMotion } from "framer-motion";
 import { useTheme } from "next-themes";
 import Image from "next/image";
 import Link from "next/link";
-import { useLayoutEffect, useState } from "react";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 import LightModeBrand from "../brand";
 import { Dropdown } from "../headLessUi";
 
 type ValueOfContext = {
   allContext: {
-    data: any;
+    data: object;
     error: string;
     isLoading: boolean;
+    refreshCookie: number;
   };
 };
 
@@ -20,9 +22,10 @@ const Navigation = () => {
   const [mounted, setMounted] = useState(false);
   const [toggle, setToggle] = useState(true);
   const [tokenData, setTokenData] = useState(null);
+  const router = useRouter();
 
   const { resolvedTheme, setTheme } = useTheme();
-  const { allContext }: ValueOfContext | null = useShare() ?? null;
+  const { allContext } = useShare();
   const { data, error, isLoading } = allContext;
 
   const shouldReduceMotion = useReducedMotion();
@@ -32,7 +35,7 @@ const Navigation = () => {
   };
 
   // useEffect only runs on the client, so now we can safely show the UI
-  useLayoutEffect(() => {
+  useEffect(() => {
     setMounted(true);
     if (!isLoading && !error) {
       setTokenData(data.verifiedToken);
@@ -44,7 +47,6 @@ const Navigation = () => {
   if (!mounted) {
     return null;
   }
-
   const handleThemeControl = () => {
     if (toggle) {
       setToggle(!toggle);
@@ -89,9 +91,7 @@ const Navigation = () => {
               </m.li>
             )}
 
-            {tokenData && mounted && (
-              <Dropdown tokenData={tokenData}></Dropdown>
-            )}
+            {tokenData && <Dropdown tokenData={tokenData} />}
 
             {mounted && (
               <m.li
