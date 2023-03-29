@@ -149,7 +149,7 @@ const Login = () => {
               <Image
                 width={450}
                 height={100}
-                src="/images/_Login.png"
+                src="/images/login.png"
                 alt="Login preview image"
               />
             </div>

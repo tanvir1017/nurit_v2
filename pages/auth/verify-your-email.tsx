@@ -87,7 +87,7 @@ const VerifyYourEmail = () => {
               <Image
                 width={450}
                 height={100}
-                src="/images/_Login.png"
+                src="/images/verify-email.webp"
                 alt="Login preview image"
               />
             </div>
@@ -146,5 +146,7 @@ const VerifyYourEmail = () => {
     </>
   );
 };
+
+VerifyYourEmail.theme = "light";
 
 export default VerifyYourEmail;

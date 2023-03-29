@@ -91,7 +91,7 @@ const SignIn = ({ cookie }: { cookie: string }) => {
       })();
     } else {
       try {
-        const postData = await fetch("/api/auth", {
+        await fetch("/api/auth", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -190,7 +190,7 @@ const SignIn = ({ cookie }: { cookie: string }) => {
               <Image
                 width={550}
                 height={100}
-                src="/images/_Login.png"
+                src="/images/login.png"
                 alt="Login preview image"
               />
             </div>
