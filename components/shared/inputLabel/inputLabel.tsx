@@ -2,6 +2,8 @@ import { LegacyRef } from "react";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 
 type TextInputLabelPropsType = {
+  value?: string;
+  disabled?: boolean;
   field_ref?: LegacyRef<HTMLInputElement> | undefined;
   labelTex?: string | number;
   requiredType?: boolean;
@@ -34,6 +36,7 @@ type RadioButtonLabelPropsTYpe = {
   labelTex?: string;
 };
 export const TextInputLabel = ({
+  disabled,
   field_ref,
   labelTex,
   requiredType,
@@ -42,6 +45,7 @@ export const TextInputLabel = ({
   type,
   title,
   nameText,
+  value,
   top = 5,
 }: TextInputLabelPropsType) => {
   return (
@@ -68,11 +72,13 @@ export const TextInputLabel = ({
         {iconComponent}
       </span>
       <input
+        disabled={disabled}
+        defaultValue={value}
         ref={field_ref}
         className={` placeholder:italic placeholder:text-slate-400 block dark:bg-[#232229] bg-slate-50  w-full border border-gray-500  rounded-md py-3 pl-9 pr-3 shadow-sm focus:outline-none ${
           type !== "email" &&
           "focus:border-[var(--red-primary-brand-color)]  focus:ring-[var(--red-primary-brand-color)]"
-        } focus:ring-1 sm:text-sm ${
+        } focus:ring-1 sm:text-sm ${disabled && "cursor-no-drop"}  ${
           type === "email" &&
           " peer focus:border-green-500 focus:ring-green-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500"
         }`}

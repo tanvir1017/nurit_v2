@@ -35,12 +35,14 @@ const SignIn = ({ cookie }: { cookie: string }) => {
 
   const first__nameRef = useRef<HTMLInputElement>(null);
   const last__nameRef = useRef<HTMLInputElement>(null);
-  const email__Ref = useRef<HTMLInputElement>(null);
   const password__Ref = useRef<HTMLInputElement>(null);
   const c_Password__Ref = useRef<HTMLInputElement>(null);
   const phone__Ref = useRef<HTMLInputElement>(null);
 
   const router = useRouter();
+  const {
+    query: { email },
+  } = router;
   const shouldReduceMotion = useReducedMotion();
   const childVariants = {
     initial: { opacity: 0, y: shouldReduceMotion ? 0 : 25 },
@@ -60,7 +62,6 @@ const SignIn = ({ cookie }: { cookie: string }) => {
     setLoading(true);
     const first__name = first__nameRef?.current?.value;
     const last__name = last__nameRef?.current?.value;
-    const email = email__Ref?.current?.value;
     const password = password__Ref?.current?.value;
     const c_password = c_Password__Ref?.current?.value;
     const phone__number = phone__Ref?.current?.value;
@@ -75,7 +76,6 @@ const SignIn = ({ cookie }: { cookie: string }) => {
       })();
     } else if (
       !first__name ||
-      !email ||
       !password ||
       !phone__number ||
       gender.length <= 3
@@ -126,8 +126,6 @@ const SignIn = ({ cookie }: { cookie: string }) => {
                 icon: <TbAlertTriangleFilled className="text-green-400" />,
                 position: toast.POSITION.TOP_CENTER,
               });
-            })();
-            (async () => {
               router.push("/");
             })();
           } else {
@@ -234,7 +232,8 @@ const SignIn = ({ cookie }: { cookie: string }) => {
                   }
                 />
                 <TextInputLabel
-                  field_ref={email__Ref}
+                  disabled
+                  value={email as string}
                   labelTex="ইমেইল আইডি"
                   nameText="email"
                   placeholderText="অ্যাক্টিভ ইমেইল আইডি দিন"
