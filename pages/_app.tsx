@@ -23,7 +23,7 @@ export default function App({ Component, pageProps, router }: AppProps) {
       <ThemeProvider
         enableSystem={true}
         attribute="class"
-        // forcedTheme={Component.theme || null}
+        // forcedTheme={(Component?.theme as string) || null}
       >
         <NextNProgress color="#ff2c45" />
         <div style={{ opacity: 1 }}>

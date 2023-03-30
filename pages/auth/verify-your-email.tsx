@@ -4,9 +4,11 @@ import SubmitButton from "@/util/buttons/submitButton";
 import { Bounce, ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+import Modal from "@/components/shared/headlessui/dialog";
 import { motion as m, useReducedMotion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { useState } from "react";
 import { BiUserCircle } from "react-icons/bi";
 import { BsFillInfoCircleFill } from "react-icons/bs";
@@ -15,11 +17,22 @@ import { TiInfoOutline } from "react-icons/ti";
 
 const VerifyYourEmail = () => {
   const [verifyEmail, setVerifyEmail] = useState("");
+  const [isOpen, setIsOpen] = useState(false);
+
   const shouldReduceMotion = useReducedMotion();
   const childVariants = {
     initial: { opacity: 0, y: shouldReduceMotion ? 0 : 25 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.8 } },
   };
+  const router = useRouter();
+
+  function closeModal() {
+    setIsOpen(false);
+  }
+
+  function openModal() {
+    setIsOpen(true);
+  }
 
   const handlePreventLoading = async (e: any) => {
     e.preventDefault();
@@ -30,7 +43,9 @@ const VerifyYourEmail = () => {
       },
       body: JSON.stringify({ email: verifyEmail }),
     });
-    if (!res.ok) {
+    if (res.status === 409) {
+      openModal();
+    } else if (res.status !== 409 && !res.ok) {
       (async () => {
         toast.error("Something went wrong!", {
           icon: (
@@ -38,11 +53,8 @@ const VerifyYourEmail = () => {
           ),
           position: toast.POSITION.TOP_CENTER,
         });
-
-        setVerifyEmail("");
       })();
-    }
-    if (res.status === 200) {
+    } else if (res.status === 200) {
       (async () => {
         toast.success("We've send a mail to your mail", {
           icon: <TbAlertTriangleFilled className="text-green-400" />,
@@ -58,9 +70,10 @@ const VerifyYourEmail = () => {
         title="Verify email address"
         name="Verify email address"
         content="This page will verify your email address"
-        key="skill course, course, ms office, office 364"
+        // key="skill course, course, ms office, office 364"
       />
       <ToastContainer transition={Bounce} hideProgressBar />
+      <Modal isOpen={isOpen} closeModal={closeModal} />
       <div className="font-HSRegular large_container">
         <div className="px-12">
           <div className="flex justify-between items-center">

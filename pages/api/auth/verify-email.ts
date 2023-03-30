@@ -1,5 +1,6 @@
+import { loginRegisterUser } from "@/lib/dbOperatons/users.prisma";
+import jwt from "jsonwebtoken";
 import { NextApiRequest, NextApiResponse } from "next";
-
 import nodemailer from "nodemailer";
 
 let EMAIL_ADDRESS = process.env.EMAIL;
@@ -12,10 +13,18 @@ export default async function verifyEmail(
   if (req.method === "POST") {
     try {
       const { email } = req.body;
-      sendEmail(email);
-      return res.status(200).json({ email });
+      const isExistUser = await loginRegisterUser(email as string);
+      if (isExistUser) {
+        return res
+          .status(409)
+          .json({ message: `User already exist with this email: ${email}` });
+      }
+
+      const jwtEmail = jwt.sign(email, process.env.ACCESS_TOKEN as string);
+      sendEmail(email, jwtEmail);
+      return res.status(200).json({ jwtEmail });
     } catch (error) {
-      console.log(error);
+      return res.status(404).json({ error: "something went wrong" });
     }
   }
   return res.status(404).json({ message: "Not acceptable" });
@@ -31,11 +40,11 @@ function randomString() {
   return randomStr;
 }
 
-function sendEmail(email: string) {
+function sendEmail(email: string, jwtEmail: string) {
   var Transport = nodemailer.createTransport({
     service: "Gmail",
     auth: {
-      user: EMAIL_ADDRESS, // put nurit email
+      user: EMAIL_ADDRESS, // put NurIT email
       pass: PASSWORD_, // put email pass
     },
   });
@@ -46,7 +55,7 @@ function sendEmail(email: string) {
     from: sender,
     to: email,
     subject: "Verifying your email",
-    html: `Press <a href=http://localhost:3000/auth/signing?email=${email}> here </a> to verify your email. Thanks`,
+    html: `Press <a href=http://localhost:3000/auth/signing?token=${email}> here </a> to verify your email. Thanks`,
   };
 
   Transport.sendMail(mailOptions, function (error, response) {

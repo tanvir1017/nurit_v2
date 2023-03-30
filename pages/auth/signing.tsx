@@ -7,13 +7,10 @@ import {
 import ImageUpload from "@/components/shared/upload/imageUpload";
 import Metadata from "@/util/SEO/metadata";
 import SubmitButton from "@/util/buttons/submitButton";
-import { getCookie, hasCookie } from "cookies-next";
 import { motion as m, useReducedMotion } from "framer-motion";
-import { GetServerSidePropsContext, PreviewData } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { ParsedUrlQuery } from "querystring";
 import { useRef, useState } from "react";
 import {
   BsEnvelopeCheckFill,
@@ -27,11 +24,12 @@ import { TiInfoOutline } from "react-icons/ti";
 import { Bounce, ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const SignIn = ({ cookie }: { cookie: string }) => {
+const SignIn = () => {
   const [seePassword, shoPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [pictureURL, setPictureURL] = useState<string>("/images/user.png");
   const [gender, setGender] = useState<string>("");
+  const [em, setEm] = useState<string>("");
 
   const first__nameRef = useRef<HTMLInputElement>(null);
   const last__nameRef = useRef<HTMLInputElement>(null);
@@ -41,8 +39,13 @@ const SignIn = ({ cookie }: { cookie: string }) => {
 
   const router = useRouter();
   const {
-    query: { email },
+    query: { token },
   } = router;
+  
+  const paramsToken = token;
+  const encodeKey = process.env.BASE_URL;
+  console.log(token);
+
   const shouldReduceMotion = useReducedMotion();
   const childVariants = {
     initial: { opacity: 0, y: shouldReduceMotion ? 0 : 25 },
@@ -99,7 +102,7 @@ const SignIn = ({ cookie }: { cookie: string }) => {
           body: JSON.stringify({
             first__name: first__name,
             last__name: last__name,
-            email__id: email,
+            email__id: token,
             password: password,
             photo__URL: pictureURL,
             gender: gender,
@@ -233,7 +236,7 @@ const SignIn = ({ cookie }: { cookie: string }) => {
                 />
                 <TextInputLabel
                   disabled
-                  value={email as string}
+                  value={token as string}
                   labelTex="ইমেইল আইডি"
                   nameText="email"
                   placeholderText="অ্যাক্টিভ ইমেইল আইডি দিন"
@@ -335,17 +338,4 @@ const SignIn = ({ cookie }: { cookie: string }) => {
   );
 };
 
-export const getServerSideProps = ({
-  req,
-  res,
-}: GetServerSidePropsContext<ParsedUrlQuery, PreviewData>) => {
-  const getCookieFromServer = getCookie("u-auth", { req, res });
-  const hasCook = hasCookie("u-auth", { req, res });
-  const cookie = hasCook ? getCookieFromServer : null;
-  return {
-    props: {
-      cookie: cookie,
-    },
-  };
-};
 export default SignIn;

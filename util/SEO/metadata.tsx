@@ -4,7 +4,7 @@ type MetaProps = {
   title: string;
   name: string;
   content: string;
-  key: string;
+  key?: string;
 };
 
 const Metadata = ({ title, name, content, key }: MetaProps) => {
