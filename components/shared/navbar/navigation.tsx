@@ -6,19 +6,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
+import { ShareContextType } from "@/util/types/types";
 import LightModeBrand from "../brand";
 import { Dropdown } from "../headlessui/headLessUi";
-
-export interface ShareContextType {
-  allContext: {
-    data: {
-      verifiedToken: string;
-    };
-    error: string;
-    isLoading: boolean;
-    mutate: () => {};
-  };
-}
 
 const Navigation = () => {
   const [mounted, setMounted] = useState(false);

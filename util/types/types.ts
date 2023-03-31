@@ -50,6 +50,17 @@ export interface responseType {
   buttonLink?: string;
 }
 
+export interface ShareContextType {
+  allContext: {
+    data: {
+      verifiedToken: string;
+    };
+    error: string;
+    isLoading: boolean;
+    mutate: () => {};
+  };
+}
+
 /////////////////////////////
 ////// FUNCTION TYPE ///////
 ///////////////////////////
