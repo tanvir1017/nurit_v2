@@ -20,11 +20,10 @@ export interface ShareContextType {
   };
 }
 
-const Navigation = async () => {
+const Navigation = () => {
   const [mounted, setMounted] = useState(false);
   const [toggle, setToggle] = useState(true);
   const [tokenData, setTokenData] = useState<any | null>(null);
-  const [seeBtn, setSeeBtn] = useState<boolean>(false);
 
   const { resolvedTheme, setTheme } = useTheme();
   const { allContext } = useShare() as ShareContextType;
@@ -39,9 +38,6 @@ const Navigation = async () => {
   // useEffect only runs on the client, so now we can safely show the UI
   useEffect(() => {
     setMounted(true);
-    setTimeout(() => {
-      setSeeBtn(true);
-    }, 3000);
     if (!isLoading && !error) {
       setTokenData(data?.verifiedToken as any);
     } else {
