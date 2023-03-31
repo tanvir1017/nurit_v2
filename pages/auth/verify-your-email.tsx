@@ -3,6 +3,7 @@ import Metadata from "@/util/SEO/metadata";
 import SubmitButton from "@/util/buttons/submitButton";
 
 import Modal from "@/components/shared/headlessui/dialog";
+import { responseType } from "@/util/types/types";
 import { motion as m, useReducedMotion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
@@ -10,13 +11,18 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import { BiUserCircle } from "react-icons/bi";
 import { BsFillInfoCircleFill } from "react-icons/bs";
-import { TbAlertTriangleFilled } from "react-icons/tb";
-import { TiInfoOutline } from "react-icons/ti";
-import { toast } from "react-toastify";
 
 const VerifyYourEmail = () => {
   const [verifyEmail, setVerifyEmail] = useState("");
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [response, setResponse] = useState<responseType>({
+    title: "",
+    description: "",
+    image: "",
+    isShowButton: null,
+    buttonText: "",
+    buttonLink: "",
+  });
 
   const shouldReduceMotion = useReducedMotion();
   const childVariants = {
@@ -25,12 +31,9 @@ const VerifyYourEmail = () => {
   };
   const router = useRouter();
 
-  function closeModal() {
-    setIsOpen(false);
-  }
-
-  function openModal() {
+  function openModal(responseData: responseType) {
     setIsOpen(true);
+    setResponse(responseData);
   }
 
   const handlePreventLoading = async (e: any) => {
@@ -43,19 +46,29 @@ const VerifyYourEmail = () => {
       body: JSON.stringify({ email: verifyEmail }),
     });
     if (res.status === 409) {
-      openModal();
-    } else if (res.status !== 409 && !res.ok) {
-      toast.error("Something went wrong!", {
-        icon: (
-          <TiInfoOutline className="text-[var(--red-primary-brand-color)]" />
-        ),
-        position: toast.POSITION.TOP_CENTER,
+      openModal({
+        title: "Email already exist!",
+        description: "Login with your existing email account",
+        image: "/images/exist-email.png",
+        isShowButton: true,
+        buttonText: "Got it, Redirect me to the login page",
+        buttonLink: "/auth/login",
       });
-      // openModal("Something went wrong");
+    } else if (res.status !== 409 && !res.ok) {
+      openModal({
+        title: "Something went wrong",
+        description: "Try again later !",
+        image: "/images/something-went-wrong.png",
+        isShowButton: true,
+        buttonText: "Got it, Thanks!",
+      });
     } else if (res.status === 200) {
-      toast.success("We've send a mail to your mail", {
-        icon: <TbAlertTriangleFilled className="text-green-400" />,
-        position: toast.POSITION.TOP_CENTER,
+      openModal({
+        title: "We've send a mail to your e-mail address",
+        description: "Check your inbox and finished the registration.",
+        image: "/images/send-mail.webp",
+        isShowButton: true,
+        buttonText: "Got it, Thanks!",
       });
       setVerifyEmail("");
     }
@@ -67,7 +80,7 @@ const VerifyYourEmail = () => {
         name="Verify email address"
         content="This page will verify your email address"
       />
-      <Modal isOpen={isOpen} setIsOpen={setIsOpen} />
+      <Modal isOpen={isOpen} setIsOpen={setIsOpen} response={response} />
       <div className="font-HSRegular large_container">
         <div className="px-12">
           <div className="flex justify-between items-center">

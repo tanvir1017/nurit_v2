@@ -5,6 +5,7 @@ import {
   TextInputLabel,
 } from "@/components/shared/inputLabel/inputLabel";
 import ImageUpload from "@/components/shared/upload/imageUpload";
+import useShare from "@/lib/context/useShare";
 import Metadata from "@/util/SEO/metadata";
 import SubmitButton from "@/util/buttons/submitButton";
 import { motion as m, useReducedMotion } from "framer-motion";
@@ -23,13 +24,16 @@ import { TbAlertTriangleFilled } from "react-icons/tb";
 import { TiInfoOutline } from "react-icons/ti";
 import { Bounce, ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { ShareContextType } from "./login";
 
 const SignIn = () => {
   const [seePassword, shoPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [pictureURL, setPictureURL] = useState<string>("/images/user.png");
   const [gender, setGender] = useState<string>("");
-  const [em, setEm] = useState<string>("");
+  // const [em, setEm] = useState<string>("");
+  const { allContext } = useShare() as ShareContextType;
+  const { mutate } = allContext;
 
   const first__nameRef = useRef<HTMLInputElement>(null);
   const last__nameRef = useRef<HTMLInputElement>(null);
@@ -41,10 +45,10 @@ const SignIn = () => {
   const {
     query: { token },
   } = router;
-  
-  const paramsToken = token;
-  const encodeKey = process.env.BASE_URL;
-  console.log(token);
+
+  // const paramsToken = token;
+  // const encodeKey = process.env.BASE_URL;
+  // console.log(token);
 
   const shouldReduceMotion = useReducedMotion();
   const childVariants = {
@@ -111,36 +115,28 @@ const SignIn = () => {
         }).then((res) => {
           if (res.status === 406) {
             setLoading(false);
-            (async () => {
-              toast.error(
-                "Email id already registered or something went wrong",
-                {
-                  icon: (
-                    <TiInfoOutline className="text-[var(--red-primary-brand-color)]" />
-                  ),
-                  position: toast.POSITION.TOP_CENTER,
-                }
-              );
-            })();
+            toast.error("Email id already registered or something went wrong", {
+              icon: (
+                <TiInfoOutline className="text-[var(--red-primary-brand-color)]" />
+              ),
+              position: toast.POSITION.TOP_CENTER,
+            });
           } else if (res.status === 201) {
             setLoading(false);
-            (async () => {
-              toast.success("Registration successful", {
-                icon: <TbAlertTriangleFilled className="text-green-400" />,
-                position: toast.POSITION.TOP_CENTER,
-              });
-              router.push("/");
-            })();
+            toast.success("Registration successful", {
+              icon: <TbAlertTriangleFilled className="text-green-400" />,
+              position: toast.POSITION.TOP_CENTER,
+            });
+            mutate();
+            router.push("/");
           } else {
             setLoading(false);
-            (async () => {
-              toast.error("Something went wrong 👎", {
-                icon: (
-                  <TiInfoOutline className="text-[var(--red-primary-brand-color)]" />
-                ),
-                position: toast.POSITION.TOP_CENTER,
-              });
-            })();
+            toast.error("Something went wrong 👎", {
+              icon: (
+                <TiInfoOutline className="text-[var(--red-primary-brand-color)]" />
+              ),
+              position: toast.POSITION.TOP_CENTER,
+            });
           }
         });
       } catch (error) {

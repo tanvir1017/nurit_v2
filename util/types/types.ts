@@ -41,13 +41,14 @@ export interface LoginWithExistingEmailType {
   role: string;
 }
 
-export type responseType = {
+export interface responseType {
   title: string;
   description: string;
   image: string;
   isShowButton: boolean | null;
   buttonText: string;
-};
+  buttonLink?: string;
+}
 
 /////////////////////////////
 ////// FUNCTION TYPE ///////

@@ -29,14 +29,14 @@ export default function App({ Component, pageProps, router }: AppProps) {
       >
         <NextNProgress color="#ff2c45" />
         <div style={{ opacity: 1 }}>
-          {!pathname.includes("/auth") && !pathname.includes("/dashboard") && (
-            <Navigation />
-          )}
+          {!pathname.includes("/auth") &&
+            !pathname.includes("/dashboard") &&
+            !pathname.includes("/404") && <Navigation />}
           <ToastContainer transition={Bounce} hideProgressBar />
           <Component {...pageProps} />
-          {!pathname.includes("/auth") && !pathname.includes("/dashboard") && (
-            <Footer />
-          )}
+          {!pathname.includes("/auth") &&
+            !pathname.includes("/dashboard") &&
+            !pathname.includes("/404") && <Footer />}
         </div>
       </ThemeProvider>
     </ContextProvider>

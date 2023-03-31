@@ -1,21 +1,23 @@
+import { responseType } from "@/util/types/types";
 import { Dialog, Transition } from "@headlessui/react";
+import { useTheme } from "next-themes";
 import Image from "next/image";
+import Link from "next/link";
 import { Fragment } from "react";
 
 export default function MyModal({
   isOpen,
   setIsOpen,
+  response,
 }: {
   isOpen: boolean;
   setIsOpen: any;
+  response: responseType;
 }) {
   function closeModal() {
     setIsOpen(false);
   }
-
-  function openModal() {
-    setIsOpen(true);
-  }
+  const { theme } = useTheme();
 
   return (
     <>
@@ -34,6 +36,12 @@ export default function MyModal({
           </Transition.Child>
 
           <div className="fixed inset-0 overflow-y-auto">
+            <div
+              className={`fixed inset-0 backdrop-blur-md ${
+                theme === "dark" ? "bg-[#3c33334d]" : "bg-white/30"
+              }`}
+              aria-hidden="true"
+            />
             <div className="flex min-h-full items-center justify-center p-4 text-center">
               <Transition.Child
                 as={Fragment}
@@ -49,28 +57,40 @@ export default function MyModal({
                     as="h3"
                     className="text-2xl font-HSBold text-center  leading-6 text-blue-600"
                   >
-                    Email already exist !
+                    {response.title}
                     <p className="text-sm text-gray-500">
-                      Login with your existing email account
+                      {response.description}
                     </p>
                   </Dialog.Title>
                   <div className="mt-2">
                     <Image
                       width={500}
                       height={100}
-                      src="/images/exist-email.png"
+                      src={response.image}
                       alt="email already exist"
                     />
                   </div>
 
                   <div className="mt-4">
-                    <button
-                      type="button"
-                      className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-                      onClick={closeModal}
-                    >
-                      Got it, thanks!
-                    </button>
+                    {response.buttonLink ? (
+                      <Link href={response.buttonLink}>
+                        <button
+                          type="button"
+                          className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                          onClick={closeModal}
+                        >
+                          {response.buttonText}
+                        </button>
+                      </Link>
+                    ) : (
+                      <button
+                        type="button"
+                        className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                        onClick={closeModal}
+                      >
+                        {response.buttonText}
+                      </button>
+                    )}
                   </div>
                 </Dialog.Panel>
               </Transition.Child>

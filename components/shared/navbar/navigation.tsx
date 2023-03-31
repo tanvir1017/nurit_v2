@@ -4,7 +4,6 @@ import { motion as m, useReducedMotion } from "framer-motion";
 import { useTheme } from "next-themes";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
 import LightModeBrand from "../brand";
@@ -21,11 +20,11 @@ export interface ShareContextType {
   };
 }
 
-const Navigation = () => {
+const Navigation = async () => {
   const [mounted, setMounted] = useState(false);
   const [toggle, setToggle] = useState(true);
   const [tokenData, setTokenData] = useState<any | null>(null);
-  const router = useRouter();
+  const [seeBtn, setSeeBtn] = useState<boolean>(false);
 
   const { resolvedTheme, setTheme } = useTheme();
   const { allContext } = useShare() as ShareContextType;
@@ -40,6 +39,9 @@ const Navigation = () => {
   // useEffect only runs on the client, so now we can safely show the UI
   useEffect(() => {
     setMounted(true);
+    setTimeout(() => {
+      setSeeBtn(true);
+    }, 3000);
     if (!isLoading && !error) {
       setTokenData(data?.verifiedToken as any);
     } else {
@@ -58,6 +60,7 @@ const Navigation = () => {
     }
     setTheme(resolvedTheme === "dark" ? "light" : "dark");
   };
+
   return (
     <nav className="border-[#68696c00]/50 z-50 sticky top-0 border-b bg-slate-50/60 dark:text-white backdrop-blur-2xl transition-colors duration-500 dark:bg-[#68696c00]  font-HSRegular ">
       <div className="container">
@@ -73,7 +76,7 @@ const Navigation = () => {
                       index === 4
                         ? "bg-[var(--red-primary-brand-color)] text-white"
                         : "hover:bg-[var(--red-primary-brand-color)] hover:text-white"
-                    } p-2 rounded-md `}
+                    } p-2 rounded-md`}
                     variants={childVariants}
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.9 }}

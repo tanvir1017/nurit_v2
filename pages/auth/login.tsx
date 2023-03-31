@@ -36,7 +36,6 @@ const Login = () => {
   const [routerPath, setRouterPath] = useState("");
   const [seePassword, shoPassword] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [response, setResponse] = useState<string>("ইমেইল আইডি অথবা ইউজার নেম");
   const shouldReduceMotion = useReducedMotion();
 
   const { allContext } = useShare() as ShareContextType;
@@ -49,7 +48,8 @@ const Login = () => {
   useEffect(() => {
     const storage = globalThis?.sessionStorage;
     const prevPath = storage.getItem("prevPath");
-    setRouterPath(prevPath as string);
+    if (prevPath?.includes("/auth")) setRouterPath("/");
+    else setRouterPath(prevPath as string);
   }, [router.pathname]);
 
   const childVariants = {
@@ -89,28 +89,20 @@ const Login = () => {
       const data = await res.json();
       if (!data.success) {
         setLoading(false);
-        (async () => {
-          toast.error("Wrong credential", {
-            icon: (
-              <TiInfoOutline className="text-[var(--red-primary-brand-color)]" />
-            ),
-            position: toast.POSITION.TOP_CENTER,
-          });
-        })();
-        setResponse("Wrong credential");
+        toast.error("Wrong credential", {
+          icon: (
+            <TiInfoOutline className="text-[var(--red-primary-brand-color)]" />
+          ),
+          position: toast.POSITION.TOP_CENTER,
+        });
       } else {
         setLoading(false);
-        (async () => {
-          toast.success("Login successful", {
-            icon: <TbAlertTriangleFilled className="text-green-400" />,
-            position: toast.POSITION.TOP_CENTER,
-          });
-          mutate();
-        })();
-        setResponse(response);
-        (async () => {
-          router.replace(routerPath);
-        })();
+        toast.success("Login successful", {
+          icon: <TbAlertTriangleFilled className="text-green-400 text-3xl" />,
+          position: toast.POSITION.TOP_CENTER,
+        });
+        mutate();
+        router.replace(routerPath);
       }
     }
   };
@@ -166,7 +158,7 @@ const Login = () => {
               <form onSubmit={handlePreventLoading} className="space-y-4">
                 <TextInputLabel
                   field_ref={email__Ref}
-                  labelTex={response}
+                  labelTex="ইমেইল আইডি অথবা ইউজার নেম"
                   nameText="email"
                   placeholderText="ইমেইল আইডি অথবা ইউজার নেম"
                   requiredType={true}
@@ -181,7 +173,7 @@ const Login = () => {
 
                 <PasswordInputLabel
                   field_ref={password__Ref}
-                  labelTex={!response ? "পাসওয়ার্ড" : response}
+                  labelTex="পাসওয়ার্ড"
                   nameText="password"
                   onClickFunc={handlePassWordEncrypt}
                   placeholderText="পাসওয়ার্ড"
