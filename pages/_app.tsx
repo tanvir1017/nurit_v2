@@ -6,6 +6,8 @@ import { ThemeProvider } from "next-themes";
 import type { AppProps } from "next/app";
 import NextNProgress from "nextjs-progressbar";
 import { useEffect } from "react";
+import { Bounce, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function App({ Component, pageProps, router }: AppProps) {
   const { pathname } = router;
@@ -30,6 +32,7 @@ export default function App({ Component, pageProps, router }: AppProps) {
           {!pathname.includes("/auth") && !pathname.includes("/dashboard") && (
             <Navigation />
           )}
+          <ToastContainer transition={Bounce} hideProgressBar />
           <Component {...pageProps} />
           {!pathname.includes("/auth") && !pathname.includes("/dashboard") && (
             <Footer />

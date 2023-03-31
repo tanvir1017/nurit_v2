@@ -1,8 +1,6 @@
 import LightModeBrand from "@/components/shared/brand";
 import Metadata from "@/util/SEO/metadata";
 import SubmitButton from "@/util/buttons/submitButton";
-import { Bounce, ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 import Modal from "@/components/shared/headlessui/dialog";
 import { motion as m, useReducedMotion } from "framer-motion";
@@ -14,10 +12,11 @@ import { BiUserCircle } from "react-icons/bi";
 import { BsFillInfoCircleFill } from "react-icons/bs";
 import { TbAlertTriangleFilled } from "react-icons/tb";
 import { TiInfoOutline } from "react-icons/ti";
+import { toast } from "react-toastify";
 
 const VerifyYourEmail = () => {
   const [verifyEmail, setVerifyEmail] = useState("");
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const shouldReduceMotion = useReducedMotion();
   const childVariants = {
@@ -46,22 +45,19 @@ const VerifyYourEmail = () => {
     if (res.status === 409) {
       openModal();
     } else if (res.status !== 409 && !res.ok) {
-      (async () => {
-        toast.error("Something went wrong!", {
-          icon: (
-            <TiInfoOutline className="text-[var(--red-primary-brand-color)]" />
-          ),
-          position: toast.POSITION.TOP_CENTER,
-        });
-      })();
+      toast.error("Something went wrong!", {
+        icon: (
+          <TiInfoOutline className="text-[var(--red-primary-brand-color)]" />
+        ),
+        position: toast.POSITION.TOP_CENTER,
+      });
+      // openModal("Something went wrong");
     } else if (res.status === 200) {
-      (async () => {
-        toast.success("We've send a mail to your mail", {
-          icon: <TbAlertTriangleFilled className="text-green-400" />,
-          position: toast.POSITION.TOP_CENTER,
-        });
-        setVerifyEmail("");
-      })();
+      toast.success("We've send a mail to your mail", {
+        icon: <TbAlertTriangleFilled className="text-green-400" />,
+        position: toast.POSITION.TOP_CENTER,
+      });
+      setVerifyEmail("");
     }
   };
   return (
@@ -70,10 +66,8 @@ const VerifyYourEmail = () => {
         title="Verify email address"
         name="Verify email address"
         content="This page will verify your email address"
-        // key="skill course, course, ms office, office 364"
       />
-      <ToastContainer transition={Bounce} hideProgressBar />
-      <Modal isOpen={isOpen} closeModal={closeModal} />
+      <Modal isOpen={isOpen} setIsOpen={setIsOpen} />
       <div className="font-HSRegular large_container">
         <div className="px-12">
           <div className="flex justify-between items-center">
@@ -160,6 +154,6 @@ const VerifyYourEmail = () => {
   );
 };
 
-VerifyYourEmail.theme = "light";
+// VerifyYourEmail.theme = "light";
 
 export default VerifyYourEmail;
