@@ -48,8 +48,12 @@ const Login = () => {
   useEffect(() => {
     const storage = globalThis?.sessionStorage;
     const prevPath = storage.getItem("prevPath");
-    if (prevPath?.includes("/auth")) setRouterPath("/");
-    else setRouterPath(prevPath as string);
+    const currPath = storage.getItem("currentPath");
+    if (prevPath === currPath) {
+      setRouterPath("/");
+    } else {
+      setRouterPath(prevPath as string);
+    }
   }, [router.pathname]);
 
   const childVariants = {

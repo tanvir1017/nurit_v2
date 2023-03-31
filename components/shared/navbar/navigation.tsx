@@ -14,6 +14,7 @@ const Navigation = () => {
   const [mounted, setMounted] = useState(false);
   const [toggle, setToggle] = useState(true);
   const [tokenData, setTokenData] = useState<any | null>(null);
+  const [delay, setDelay] = useState<boolean>(false);
 
   const { resolvedTheme, setTheme } = useTheme();
   const { allContext } = useShare() as ShareContextType;
@@ -24,10 +25,14 @@ const Navigation = () => {
     initial: { opacity: 0, y: shouldReduceMotion ? 0 : 25 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.8 } },
   };
+  const closedX = shouldReduceMotion ? 0 : "-100%";
 
   // useEffect only runs on the client, so now we can safely show the UI
   useEffect(() => {
     setMounted(true);
+    setTimeout(() => {
+      setDelay(true);
+    }, 3000);
     if (!isLoading && !error) {
       setTokenData(data?.verifiedToken as any);
     } else {
@@ -72,27 +77,41 @@ const Navigation = () => {
                 </Link>
               );
             })}
-            {!tokenData && (
-              <Link href="/auth/login">
-                <m.li
-                  className={`bg-[var(--red-primary-brand-color)] text-white p-2 rounded-md `}
-                  variants={childVariants}
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.9 }}
-                >
-                  লগইন/সাইন-আপ
-                </m.li>
-              </Link>
+            {!tokenData && delay && (
+              <m.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{
+                  duration: 2,
+                }}
+              >
+                <Link href="/auth/login">
+                  <m.li
+                    className={`bg-[var(--red-primary-brand-color)] text-white p-2 rounded-md `}
+                    variants={childVariants}
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
+                  >
+                    লগইন/সাইন-আপ
+                  </m.li>
+                </Link>
+              </m.div>
             )}
 
-            {tokenData && (
-              <Dropdown
-                tokenData={tokenData}
-                setTokenData={setTokenData}
-                mutate={mutate}
-              />
-            )}
-
+            <m.div
+              animate={{
+                opacity: delay ? 1 : 0,
+                y: delay ? 0 : closedX,
+              }}
+            >
+              {tokenData && (
+                <Dropdown
+                  tokenData={tokenData}
+                  setTokenData={setTokenData}
+                  mutate={mutate}
+                />
+              )}
+            </m.div>
             {mounted && (
               <m.li
                 className="cursor-pointer border rounded-full w-14 h-6  bg-gray-800 relative overflow-hidden mr-4 my-2"

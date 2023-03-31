@@ -63,8 +63,10 @@ const userCrud = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
           });
         } else if (req.headers) {
           const { email: email_address, password: clientPass } = req.headers;
+
           const loginWithExistingEmail: LoginWithExistingEmailType =
             await loginRegisterUser(email_address as string);
+
           if (!loginWithExistingEmail) {
             return res.status(404).json({
               success: false,
@@ -75,10 +77,12 @@ const userCrud = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
 
           const { password, phone__numb, email__id, gender, ...rest } =
             loginWithExistingEmail;
+
           const verifyPassword = jwt.verify(
             password as string,
             process.env.ACCESS_TOKEN as string
           );
+
           if (clientPass !== verifyPassword) {
             return res.status(404).json({
               success: false,
@@ -100,7 +104,7 @@ const userCrud = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
               path: "/",
             });
           }
-          return res.status(200).json({
+          res.status(200).json({
             success: true,
             message: `User login successfully`,
           });
