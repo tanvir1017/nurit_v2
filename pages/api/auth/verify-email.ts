@@ -11,41 +11,48 @@ const send_emailDestination =
     ? "http://localhost:3000"
     : "https://nuritinstitute.vercel.app";
 
+type ResData = {
+  success: boolean;
+  message: string;
+  returnData?: string | {} | [] | null;
+};
+
 export default async function verifyEmail(
   req: NextApiRequest,
-  res: NextApiResponse
+  res: NextApiResponse<ResData>
 ) {
   if (req.method === "POST") {
     try {
       const { email } = req.body;
       const isExistUser = await loginRegisterUser(email as string);
       if (isExistUser) {
-        return res
-          .status(409)
-          .json({ message: `User already exist with this email: ${email}` });
+        return res.status(409).json({
+          success: false,
+          message: `User already exist with this email: ${email}`,
+        });
       }
 
       const jwtEmail = jwt.sign(email, process.env.ACCESS_TOKEN as string);
-      sendEmail(email, jwtEmail);
-      return res.status(200).json({ jwtEmail });
+      sendEmail(email, jwtEmail, res);
+      return res.status(200).json({
+        success: true,
+        message: `We've send a mail to this email: ${email}`,
+        returnData: jwtEmail,
+      });
     } catch (error) {
-      return res.status(404).json({ error: "something went wrong" });
+      return res
+        .status(404)
+        .json({ success: false, message: "something went wrong" });
     }
   }
-  return res.status(404).json({ message: "Not acceptable" });
+  return res.status(404).json({
+    success: false,
+    message: "Not acceptable",
+    returnData: "Un authorized",
+  });
 }
 
-function randomString() {
-  const len = 10;
-  let randomStr = "";
-  for (let i = 0; i < len; i++) {
-    const ch = Math.floor(Math.random() * 10);
-    randomStr += ch;
-  }
-  return randomStr;
-}
-
-function sendEmail(email: string, jwtEmail: string) {
+function sendEmail(email: string, jwtEmail: string, res: any) {
   var Transport = nodemailer.createTransport({
     service: "Gmail",
     auth: {
@@ -54,10 +61,9 @@ function sendEmail(email: string, jwtEmail: string) {
     },
   });
 
-  var mailOptions;
-  let sender = "NurIT-Institute";
+  let mailOptions;
   mailOptions = {
-    from: sender,
+    from: EMAIL_ADDRESS,
     to: email,
     subject: "Verifying your email",
     html: `
@@ -197,9 +203,10 @@ function sendEmail(email: string, jwtEmail: string) {
 
   Transport.sendMail(mailOptions, function (error, response) {
     if (error) {
-      console.log(error);
+      return error;
     } else {
       console.log("Message sent");
+      return "message sent";
     }
   });
 }

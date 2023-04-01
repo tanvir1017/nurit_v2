@@ -11,8 +11,10 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import { BiUserCircle } from "react-icons/bi";
 import { BsFillInfoCircleFill } from "react-icons/bs";
+import useSWR from "swr";
 
 const VerifyYourEmail = () => {
+  const { mutate } = useSWR("/api/auth/login");
   const [verifyEmail, setVerifyEmail] = useState("");
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [response, setResponse] = useState<responseType>({
@@ -38,40 +40,44 @@ const VerifyYourEmail = () => {
 
   const handlePreventLoading = async (e: any) => {
     e.preventDefault();
-    const res = await fetch("/api/auth/verify-email", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify({ email: verifyEmail }),
+    await mutate(async () => {
+      const res = await fetch("/api/auth/verify-email", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify({ email: verifyEmail }),
+      });
+      const data = await res.json();
+      if (!data.success && res.status === 409) {
+        openModal({
+          title: "Email Not Sent!",
+          description: data.message,
+          image: "/images/exist-email.png",
+          isShowButton: true,
+          buttonText: "Got it, Redirect me to the login page",
+          buttonLink: "/auth/login",
+        });
+      } else if (res.status !== 409 && !res.ok) {
+        openModal({
+          title: "Something went wrong",
+          description: "Try again later !",
+          image: "/images/something-went-wrong.png",
+          isShowButton: true,
+          buttonText: "Got it, Thanks!",
+        });
+      } else if (res.status === 200) {
+        openModal({
+          title: "Email sent",
+          description: data.message,
+          image: "/images/send-mail.webp",
+          isShowButton: true,
+          buttonText: "Got it, Thanks!",
+        });
+        setVerifyEmail("");
+        mutate("/api/auth/verify-email");
+      }
     });
-    if (res.status === 409) {
-      openModal({
-        title: "Email already exist!",
-        description: "Login with your existing email account",
-        image: "/images/exist-email.png",
-        isShowButton: true,
-        buttonText: "Got it, Redirect me to the login page",
-        buttonLink: "/auth/login",
-      });
-    } else if (res.status !== 409 && !res.ok) {
-      openModal({
-        title: "Something went wrong",
-        description: "Try again later !",
-        image: "/images/something-went-wrong.png",
-        isShowButton: true,
-        buttonText: "Got it, Thanks!",
-      });
-    } else if (res.status === 200) {
-      openModal({
-        title: "We've send a mail to your e-mail address",
-        description: "Check your inbox and finished the registration.",
-        image: "/images/send-mail.webp",
-        isShowButton: true,
-        buttonText: "Got it, Thanks!",
-      });
-      setVerifyEmail("");
-    }
   };
   return (
     <>
