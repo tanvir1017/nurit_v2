@@ -61,6 +61,13 @@ export interface ShareContextType {
   };
 }
 
+export interface Data {
+  success: boolean;
+  message: string;
+  dataCounted?: number;
+  returnData?: {} | [] | null;
+}
+
 /////////////////////////////
 ////// FUNCTION TYPE ///////
 ///////////////////////////

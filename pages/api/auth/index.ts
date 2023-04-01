@@ -2,20 +2,12 @@ import {
   deleteAUserFromDb,
   getASingleUser,
   getAllUser,
-  loginRegisterUser,
   registerAUser,
 } from "@/lib/dbOperatons/users.prisma";
-import { LoginWithExistingEmailType } from "@/util/types/types";
+import { Data } from "@/util/types/types";
 import { setCookie } from "cookies-next";
 import jwt from "jsonwebtoken";
 import type { NextApiRequest, NextApiResponse } from "next";
-
-type Data = {
-  success: boolean;
-  message: string;
-  dataCounted?: number;
-  returnData?: {} | [] | null;
-};
 
 type LoggedDataSettingToCookie = {
   id: string;
@@ -32,21 +24,7 @@ const userCrud = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
   try {
     switch (req.method) {
       case "GET": {
-        if (!req.query.id && !req.headers.email) {
-          const getEveryUserExistOnTheDB = await getAllUser();
-          if (!getEveryUserExistOnTheDB) {
-            return res.status(404).json({
-              success: false,
-              message: `Data not  found`,
-              returnData: [],
-            });
-          }
-          return res.status(200).json({
-            success: true,
-            message: `Data found successfully`,
-            returnData: getEveryUserExistOnTheDB,
-          });
-        } else if (req.query.id) {
+        if (req.query.id) {
           const { id } = req.query;
           const getAUserInfo = await getASingleUser(id as string);
           if (!getAUserInfo) {
@@ -61,52 +39,19 @@ const userCrud = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
             message: `Data found according to this id ${id}`,
             returnData: getAUserInfo,
           });
-        } else if (req.headers) {
-          const { email: email_address, password: clientPass } = req.headers;
-
-          const loginWithExistingEmail: LoginWithExistingEmailType =
-            await loginRegisterUser(email_address as string);
-
-          if (!loginWithExistingEmail) {
+        } else {
+          const getEveryUserExistOnTheDB = await getAllUser();
+          if (!getEveryUserExistOnTheDB) {
             return res.status(404).json({
               success: false,
-              message: `No user found at this email ${email_address}, Please sign-up first`,
-              returnData: {},
+              message: `Data not  found`,
+              returnData: [],
             });
           }
-
-          const { password, phone__numb, email__id, gender, ...rest } =
-            loginWithExistingEmail;
-
-          const verifyPassword = jwt.verify(
-            password as string,
-            process.env.ACCESS_TOKEN as string
-          );
-
-          if (clientPass !== verifyPassword) {
-            return res.status(404).json({
-              success: false,
-              message: `Wrong credential`,
-              returnData: {},
-            });
-          } else {
-            const setUserToCookieByJWT = jwt.sign(
-              rest,
-              process.env.ACCESS_TOKEN as string
-            );
-            setCookie("u-auth", setUserToCookieByJWT, {
-              req,
-              res,
-              maxAge: 604800,
-              secure: process.env.NODE_ENV !== "development",
-              httpOnly: true,
-              sameSite: true,
-              path: "/",
-            });
-          }
-          res.status(200).json({
+          return res.status(200).json({
             success: true,
-            message: `User login successfully`,
+            message: `Data found successfully`,
+            returnData: getEveryUserExistOnTheDB,
           });
         }
       }
@@ -191,7 +136,11 @@ const userCrud = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
       }
 
       default:
-        break;
+        return res.status(500).json({
+          success: false,
+          message: `internal server error`,
+          returnData: {},
+        });
     }
   } catch (error) {
     return res.status(406).json({

@@ -21,7 +21,7 @@ const SubmitButton = ({
       type="submit"
       className=" bg-[var(--red-primary-brand-color)] border-none rounded-md  text-white px-8 py-2 flex justify-between items-center"
     >
-      <span>{buttonText}</span>
+      {loading ? "loading..." : buttonText}
     </m.button>
   );
 };

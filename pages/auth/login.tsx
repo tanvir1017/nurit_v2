@@ -1,4 +1,5 @@
 import LightModeBrand from "@/components/shared/brand";
+import Modal from "@/components/shared/headlessui/dialog";
 import {
   PasswordInputLabel,
   TextInputLabel,
@@ -6,6 +7,7 @@ import {
 import useShare from "@/lib/context/useShare";
 import Metadata from "@/util/SEO/metadata";
 import SubmitButton from "@/util/buttons/submitButton";
+import { responseType } from "@/util/types/types";
 import { motion as m, useReducedMotion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
@@ -20,7 +22,7 @@ import { TbAlertTriangleFilled } from "react-icons/tb";
 import { TiInfoOutline } from "react-icons/ti";
 import { Bounce, ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+import useSWR from "swr";
 export interface ShareContextType {
   allContext: {
     data: {
@@ -36,15 +38,26 @@ const Login = () => {
   const [routerPath, setRouterPath] = useState("");
   const [seePassword, shoPassword] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const shouldReduceMotion = useReducedMotion();
+  const [response, setResponse] = useState<responseType>({
+    title: "",
+    description: "",
+    image: "",
+    isShowButton: null,
+    buttonText: "",
+    buttonLink: "",
+  });
+  const { mutate } = useSWR("/api/auth/login");
 
   const { allContext } = useShare() as ShareContextType;
-  const { mutate } = allContext;
+  const { mutate: revalidate } = allContext;
 
   const email__Ref = useRef<HTMLInputElement>(null);
   const password__Ref = useRef<HTMLInputElement>(null);
 
   const router = useRouter();
+  // COMMENT => Set the route where user comes from. For better experience
   useEffect(() => {
     const storage = globalThis?.sessionStorage;
     const prevPath = storage.getItem("prevPath");
@@ -56,10 +69,13 @@ const Login = () => {
     }
   }, [router.pathname]);
 
+  // COMMENT => Animation for framer-motion using useReducerMotion() hooks
   const childVariants = {
     initial: { opacity: 0, y: shouldReduceMotion ? 0 : 25 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.8 } },
   };
+
+  // COMMENT => Toggle to show or hide password by clicking see password icon
   const handlePassWordEncrypt = () => {
     if (seePassword) {
       shoPassword(!seePassword);
@@ -68,11 +84,19 @@ const Login = () => {
     }
   };
 
+  // COMMENT => Modal open by the call of openModal() func
+  function openModal(responseData: responseType) {
+    setIsOpen(true);
+    setResponse(responseData);
+  }
+
+  // COMMENT => Api request to logged a user and form prevent handling
   const handlePreventLoading = async (e: any) => {
     e.preventDefault();
     setLoading(true);
     const email = email__Ref.current?.value;
     const password = password__Ref.current?.value;
+
     if (!email || !password) {
       toast.error("Required filed can't be empty", {
         icon: (
@@ -82,32 +106,37 @@ const Login = () => {
       });
       setLoading(false);
     } else {
-      const res = await window.fetch("/api/auth", {
-        method: "GET",
-        headers: {
-          "content-type": "application/json",
-          email: `${email}`,
-          password: `${password}`,
-        },
+      await mutate(async () => {
+        setLoading(true);
+        const response = await fetch("/api/auth/login", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email, password }),
+        });
+        const data = await response.json();
+        if (!data.success) {
+          setLoading(false);
+          openModal({
+            title: "Wrong credential",
+            description: data.message,
+            image: "/images/wrong.png",
+            isShowButton: true,
+            buttonText: "Got it,",
+          });
+        } else {
+          setLoading(false);
+
+          toast.success(data.message, {
+            icon: <TbAlertTriangleFilled className="text-green-400 text-3xl" />,
+            position: toast.POSITION.TOP_CENTER,
+          });
+          revalidate();
+          router.replace(routerPath);
+        }
+        return data;
       });
-      const data = await res.json();
-      if (!data.success) {
-        setLoading(false);
-        toast.error("Wrong credential", {
-          icon: (
-            <TiInfoOutline className="text-[var(--red-primary-brand-color)]" />
-          ),
-          position: toast.POSITION.TOP_CENTER,
-        });
-      } else {
-        setLoading(false);
-        toast.success("Login successful", {
-          icon: <TbAlertTriangleFilled className="text-green-400 text-3xl" />,
-          position: toast.POSITION.TOP_CENTER,
-        });
-        mutate();
-        router.replace(routerPath);
-      }
     }
   };
 
@@ -120,6 +149,7 @@ const Login = () => {
         // key="skill course, course, ms office, office 364"
       />
       <ToastContainer transition={Bounce} hideProgressBar />
+      <Modal isOpen={isOpen} setIsOpen={setIsOpen} response={response} />
       <div className="font-HSRegular large_container">
         <div className="px-12">
           <div className="flex justify-between items-center">

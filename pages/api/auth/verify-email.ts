@@ -6,6 +6,11 @@ import nodemailer from "nodemailer";
 let EMAIL_ADDRESS = process.env.EMAIL;
 let PASSWORD_ = process.env.PASS;
 
+const send_emailDestination =
+  process.env.NODE_ENV !== "production"
+    ? "http://localhost:3000"
+    : "https://nuritinstitute.vercel.app";
+
 export default async function verifyEmail(
   req: NextApiRequest,
   res: NextApiResponse
@@ -55,13 +60,8 @@ function sendEmail(email: string, jwtEmail: string) {
     from: sender,
     to: email,
     subject: "Verifying your email",
-    html: `<!DOCTYPE html>
-      <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Email Verification</title>
+    html: `
+      <head>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;700&display=swap');
       body {
@@ -179,7 +179,7 @@ function sendEmail(email: string, jwtEmail: string) {
           </p>
           
             <button class="verify-btn">
-              <a style="text-decoration: none; color: white;"  href=http://localhost:3000/auth/signing?token=${email}> verify email
+              <a style="text-decoration: none; color: white;"  href=${send_emailDestination}/auth/signing?token=${email}> verify email
               </a>
               </button>
         </div>
@@ -192,8 +192,7 @@ function sendEmail(email: string, jwtEmail: string) {
         </div>
       </div>
     </div>
-  </body>
-</html>`,
+  </body>`,
   };
 
   Transport.sendMail(mailOptions, function (error, response) {
