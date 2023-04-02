@@ -41,7 +41,7 @@ const Sidebar = () => {
   }, [router.pathname]);
 
   const wrapperClasses = classNames(
-    "h-screen pt-8 bg-slate-50 text-black relative",
+    "h-screen pt-8 bg-slate-50 text-black relative font-HSRegular",
     {
       ["w-80"]: !state.toggleCollapse,
       ["w-20"]: state.toggleCollapse,

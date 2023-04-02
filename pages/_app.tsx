@@ -6,6 +6,7 @@ import { ThemeProvider } from "next-themes";
 import type { AppProps } from "next/app";
 import NextNProgress from "nextjs-progressbar";
 import { useEffect } from "react";
+import "react-quill/dist/quill.snow.css";
 import { Bounce, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 

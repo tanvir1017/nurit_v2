@@ -33,6 +33,8 @@ export default async function verifyEmail(
       }
 
       const jwtEmail = jwt.sign(email, process.env.ACCESS_TOKEN as string);
+      const mail = sendEmail(email, jwtEmail, res);
+      console.log(mail);
       sendEmail(email, jwtEmail, res);
       return res.status(200).json({
         success: true,
@@ -53,7 +55,7 @@ export default async function verifyEmail(
 }
 
 function sendEmail(email: string, jwtEmail: string, res: any) {
-  var Transport = nodemailer.createTransport({
+  let Transport = nodemailer.createTransport({
     service: "Gmail",
     auth: {
       user: EMAIL_ADDRESS, // put NurIT email
@@ -201,7 +203,7 @@ function sendEmail(email: string, jwtEmail: string, res: any) {
   </body>`,
   };
 
-  Transport.sendMail(mailOptions, function (error, response) {
+  return Transport.sendMail(mailOptions, function (error, response) {
     if (error) {
       return error;
     } else {

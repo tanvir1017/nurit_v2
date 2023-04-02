@@ -9,7 +9,7 @@ const Course = ({ el }: any) => {
         title="NurIT-Courses"
         name="course page"
         content="all course page. You can find every course in this page that we are providing"
-        key="skill course, course, ms office, office 364"
+        // key="skill course, course, ms office, office 364"
       />
       <div className="h-[28rem] overflow-hidden card-shadow">
         <Image src={el.courseCover} width={500} height={100} alt={el.title} />

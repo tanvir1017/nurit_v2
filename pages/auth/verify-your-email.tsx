@@ -75,7 +75,7 @@ const VerifyYourEmail = () => {
           buttonText: "Got it, Thanks!",
         });
         setVerifyEmail("");
-        mutate("/api/auth/verify-email");
+        // mutate("/api/auth/verify-email");
       }
     });
   };

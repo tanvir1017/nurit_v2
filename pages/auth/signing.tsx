@@ -159,7 +159,7 @@ const SignIn = () => {
         title="NurIT | Signing"
         name="Login page"
         content="all course page. You can find every course in this page that we are providing"
-        key="skill course, course, ms office, office 364"
+        // key="skill course, course, ms office, office 364"
       />
       <ToastContainer transition={Bounce} hideProgressBar />
       <div className="font-HSRegular large_container">
