@@ -1,4 +1,13 @@
 {
   "css.validate": false,
-  "cSpell.words": ["Fiverr", "headlessui", "Upwork", "লগইন", "সাইন"]
+  "cSpell.words": [
+    "Fiverr",
+    "headlessui",
+    "nextjs",
+    "progressbar",
+    "toastify",
+    "Upwork",
+    "লগইন",
+    "সাইন"
+  ]
 }

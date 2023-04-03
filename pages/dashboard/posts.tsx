@@ -3,27 +3,60 @@ import QuillNoSSRWrapper, {
   modules,
 } from "@/components/homePage/editor/quillEditor";
 import { TextInputLabel } from "@/components/shared/inputLabel/inputLabel";
+import ReactSelect from "@/components/shared/react-select";
 import PostCoverUpload from "@/components/shared/upload/postCoverUpload";
 import PostImageUpload from "@/components/shared/upload/postImageUpload";
 import Metadata from "@/util/SEO/metadata";
 import SubmitButton from "@/util/buttons/submitButton";
+import { TagValueOption } from "@/util/types/types";
 import * as React from "react";
 import { useState } from "react";
 import { BsFillPostcardFill, BsInfoCircle } from "react-icons/bs";
+import useSwr from "swr";
 import Layout from "./layout";
 
 const Posts = () => {
+  const { mutate } = useSwr("/api/blogs");
+  const [inputValue, setInputValue] = React.useState("");
+  const [value, setValue] = React.useState<readonly TagValueOption[]>([]);
+  const titleRef = React.useRef<HTMLInputElement>(null);
+  const subTitleRef = React.useRef<HTMLInputElement>(null);
+
   const [thumbnail, setThumbnail] = useState<string>(
     "/images/post-imgUpload.png"
   );
   const [coverPicture, setCoverPicture] = useState<string>("/images/cover.png");
-  const [html, setHtml] = React.useState<string>();
-  const handleSubmit = (e: any) => {
-    e.preventDefault();
 
-    if (html?.trim().length === 11) {
-      window.alert("Empty");
-    }
+  const [html, setHtml] = React.useState<string>();
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
+    const blog_Title = titleRef.current?.value.trim();
+    const blog_Slug = blog_Title?.trim().replaceAll(" ", "-");
+    const blog_SubTitle = subTitleRef.current?.value;
+    const full_blog_Html = html;
+    const data = {
+      slug: blog_Slug,
+      title: blog_Title,
+      sub_title: blog_SubTitle,
+      cover: coverPicture,
+      thumbnail,
+      html: full_blog_Html,
+      tags: value,
+    };
+
+    await mutate(async () => {
+      const res = await fetch("/api/blogs", {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+
+      const serverResponse = await res.json();
+      console.log(serverResponse);
+      mutate("/api/blogs");
+    });
   };
 
   return (
@@ -39,6 +72,7 @@ const Posts = () => {
           <div className="space-y-5 mb-5">
             <div className="BLOG-TITLE">
               <TextInputLabel
+                field_ref={titleRef}
                 labelTex="ব্লগের টাইটেল দিন"
                 nameText="blog_title"
                 placeholderText="ব্লগ টাইটেল"
@@ -54,6 +88,7 @@ const Posts = () => {
             </div>
             <div className="BLOG-SUBTITLE">
               <TextInputLabel
+                field_ref={subTitleRef}
                 labelTex="ব্লগের সাব-টাইটেল দিন"
                 nameText="blog_sub_title"
                 placeholderText="ব্লগ  সাব-টাইটেল"
@@ -73,6 +108,15 @@ const Posts = () => {
                   দেখানো হবে।
                 </span>
               </p>
+            </div>
+
+            <div className="REACT-SELECT-TAG">
+              <ReactSelect
+                inputValue={inputValue}
+                setInputValue={setInputValue}
+                value={value}
+                setValue={setValue}
+              />
             </div>
 
             <div className="BLOG-COVER-&-THUMBNAIL grid grid-flow-col place-content-center grid-cols-3 gap-4">

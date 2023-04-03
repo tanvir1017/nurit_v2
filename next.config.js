@@ -12,6 +12,10 @@ const nextConfig = {
         source: "/auth",
         destination: environmentDestination,
       },
+      {
+        source: "/blogs",
+        destination: environmentDestination,
+      },
     ];
   },
   images: {

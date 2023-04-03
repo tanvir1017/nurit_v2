@@ -7,7 +7,7 @@ const Blogs = () => {
         title="NurIT-Blogs"
         name="blog page"
         content="NurIT blogs"
-        key="skill course, course, ms office, office 364"
+        // key="skill course, course, ms office, office 364"
       />
       <main className="App">
         <section className="container">

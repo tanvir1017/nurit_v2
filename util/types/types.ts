@@ -68,6 +68,20 @@ export interface Data {
   returnData?: {} | [] | null;
 }
 
+// COMMENT: => Blogs section type start from here
+export interface TagValueOption {
+  readonly label: string;
+  readonly value: string;
+}
+
+export type BlogBodyDataType = {
+  blog_Title: string;
+  blog_Slug: string;
+  blog_SubTitle: string;
+  full_blog_Html: string;
+  value: { label: string; value: string }[];
+};
+
 /////////////////////////////
 ////// FUNCTION TYPE ///////
 ///////////////////////////
@@ -88,4 +102,8 @@ export type GetAllBlogsFunctionType = () => Promise<{} | []>;
 
 export type GetASingleBlogFunctionType = (
   slug: string | undefined
+) => Promise<{} | null>;
+
+export type PostABlogToDB = (
+  blogBodyDataType: BlogBodyDataType
 ) => Promise<{} | null>;

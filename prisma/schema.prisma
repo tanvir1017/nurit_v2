@@ -26,7 +26,6 @@ model User{
   photo__URL  String
   phone__numb Int?
   gender      String
-  // token       String[]
   role        USER__ROLE @default(MEMBER)
   postedBlogs Blog[]
 }
@@ -44,9 +43,13 @@ model Blog{
   updatedAt     DateTime @updatedAt
   title         String
   slug          String @unique
+  sub_title     String
   readTime      String 
+  tags          String[]
   html          String
-  views         Int
+  cover         String
+  thumbnail     String
+  views         Int @default(0)
   creator User  @relation(fields: [authorId], references: [id])
   authorId      String  @db.ObjectId
 }

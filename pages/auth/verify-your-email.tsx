@@ -7,7 +7,6 @@ import { responseType } from "@/util/types/types";
 import { motion as m, useReducedMotion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/router";
 import { useState } from "react";
 import { BiUserCircle } from "react-icons/bi";
 import { BsFillInfoCircleFill } from "react-icons/bs";
@@ -31,7 +30,6 @@ const VerifyYourEmail = () => {
     initial: { opacity: 0, y: shouldReduceMotion ? 0 : 25 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.8 } },
   };
-  const router = useRouter();
 
   function openModal(responseData: responseType) {
     setIsOpen(true);

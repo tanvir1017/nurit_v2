@@ -4,26 +4,15 @@ import {
   getAllUser,
   registerAUser,
 } from "@/lib/dbOperatons/users.prisma";
-import { Data } from "@/util/types/types";
+import { DB_OPERATION_METHOD, Data } from "@/util/types/types";
 import { setCookie } from "cookies-next";
 import jwt from "jsonwebtoken";
 import type { NextApiRequest, NextApiResponse } from "next";
 
-type LoggedDataSettingToCookie = {
-  id: string;
-  first__name: string;
-  last__name: string;
-  email__id: string | string[] | undefined;
-  photo__URL: string;
-  phone__numb: number;
-  gender: string;
-  role: string;
-};
-
 const userCrud = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
   try {
     switch (req.method) {
-      case "GET": {
+      case DB_OPERATION_METHOD.GET: {
         if (req.query.id) {
           const { id } = req.query;
           const getAUserInfo = await getASingleUser(id as string);
@@ -56,7 +45,7 @@ const userCrud = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
         }
       }
 
-      case "POST": {
+      case DB_OPERATION_METHOD.POST: {
         if (req.body) {
           const {
             first__name,
@@ -116,7 +105,7 @@ const userCrud = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
           });
         }
       }
-      case "DELETE": {
+      case DB_OPERATION_METHOD.DELETE: {
         if (!req.query.id) {
           return res.status(400).json({
             success: false,

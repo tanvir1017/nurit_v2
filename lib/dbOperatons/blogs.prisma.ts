@@ -3,11 +3,16 @@ import {
   A__SingleModelFunctionType,
   GetASingleBlogFunctionType,
   GetAllBlogsFunctionType,
+  PostABlogToDB,
 } from "@/util/types/types";
+
+export const postABlogToDb: PostABlogToDB = async () => {
+  return null;
+};
 
 export const getAllBlogsExistOnDB: GetAllBlogsFunctionType = async () => {
   const totalBlogs = await prisma.blog.count();
-  const blogs = await prisma.blog.findMany({});
+  const blogs = await prisma.blog.findMany();
   return { blogs, totalBlogs };
 };
 export const getASingleBlogBasedOnSlug: GetASingleBlogFunctionType = async (
