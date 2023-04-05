@@ -5,7 +5,6 @@ export type largeNavigationDataType = {
 }[];
 
 export interface DashboardMenuItem {
-  id: number;
   label: string;
   link: string;
   icon: ReactElement;

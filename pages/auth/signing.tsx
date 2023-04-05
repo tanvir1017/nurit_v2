@@ -46,10 +46,6 @@ const SignIn = () => {
     query: { token },
   } = router;
 
-  // const paramsToken = token;
-  // const encodeKey = process.env.BASE_URL;
-  // console.log(token);
-
   const shouldReduceMotion = useReducedMotion();
   const childVariants = {
     initial: { opacity: 0, y: shouldReduceMotion ? 0 : 25 },

@@ -1,16 +1,6 @@
+import { ShareContextType } from "@/util/types/types";
 import { createContext, ReactNode } from "react";
 import useSharedContext from "./useSharedContext";
-
-export interface ShareContextType {
-  allContext: {
-    data: {
-      verifiedToken: string;
-    };
-    error: string;
-    isLoading: boolean;
-    mutate: () => {};
-  };
-}
 
 export const ShareContext = createContext<ShareContextType | null>(null);
 

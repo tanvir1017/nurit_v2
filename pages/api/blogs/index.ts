@@ -2,11 +2,12 @@ import {
   deleteASingleBlog,
   getASingleBlogBasedOnSlug,
   getAllBlogsExistOnDB,
+  postABlogToDb,
 } from "@/lib/dbOperatons/blogs.prisma";
 import { DB_OPERATION_METHOD } from "@/util/types/types";
-import { getCookie, hasCookie } from "cookies-next";
-import jwt from "jsonwebtoken";
+import { hasCookie } from "cookies-next";
 import type { NextApiRequest, NextApiResponse } from "next";
+const readingTime = require("reading-time");
 
 type Data = {
   success: boolean;
@@ -73,15 +74,46 @@ const BlogApiEndPoint = async (
           if (!checkHasCookie) {
             res.redirect("/auth/login");
           } else {
-            const getAuthCookie = getCookie("u-auth", { req, res });
-            const decodeUserInfo = jwt.verify(
-              getAuthCookie as string,
-              process.env.ACCESS_TOKEN as string
-            );
-            const { slug, title, sub_title, html, tags, cover, thumbnail } =
-              req.body;
+            const {
+              slug,
+              title,
+              sub_title,
+              html,
+              tags,
+              cover,
+              thumbnail,
+              authorId,
+            } = req.body;
 
-            console.log(req.body);
+            const states = readingTime(html);
+            const readTime = states.text;
+
+            const tag = tags.map((item: any) => item.label);
+
+            const sendDataToTheDb = await postABlogToDb({
+              slug,
+              title,
+              sub_title,
+              cover,
+              thumbnail,
+              html,
+              tag,
+              authorId,
+              readTime,
+            });
+            if (!sendDataToTheDb) {
+              return res.status(500).json({
+                success: false,
+                message: "Something went wrong",
+                returnBlogData: {},
+              });
+            } else {
+              return res.status(201).json({
+                success: true,
+                message: "Blog posted",
+                returnBlogData: sendDataToTheDb,
+              });
+            }
           }
         }
       }

@@ -48,11 +48,11 @@ const Sidebar = () => {
     }
   );
 
-  const getNavClass = (menu: { id: number; label: string; link: string }) => {
+  const getNavClass = (menu: { label: string; icon: string; link: string }) => {
     return classNames(
       "flex items-center space-x-4 cursor-pointer hover:text-white shadow hover:bg-[var(--red-primary-brand-color)] rounded w-full overflow-hidden bg-gray-100 px-4 mt-3 py-2 transition-all duration-3000",
       {
-        ["bg-red text-white"]: activeNavClass?.id === menu.id,
+        ["bg-red text-white"]: activeNavClass?.link === menu.link,
       }
     );
   };
@@ -104,7 +104,7 @@ const Sidebar = () => {
           )}
         </div>
         <m.div className={`pt-8`}>
-          {dashboardMenuItems.map(({ ...menu }) => {
+          {dashboardMenuItems.map((menu: any) => {
             const classes = getNavClass(menu);
             return (
               <Link
@@ -120,7 +120,7 @@ const Sidebar = () => {
                           "bg-gray-100 mt-2 -ml-5 p-3  transition-all duration-3000",
                           {
                             ["bg-red text-white"]:
-                              activeNavClass?.id === menu.id,
+                              activeNavClass?.link === menu.link,
                           }
                         )
                   }`}

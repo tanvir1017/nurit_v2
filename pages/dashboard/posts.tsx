@@ -6,22 +6,30 @@ import { TextInputLabel } from "@/components/shared/inputLabel/inputLabel";
 import ReactSelect from "@/components/shared/react-select";
 import PostCoverUpload from "@/components/shared/upload/postCoverUpload";
 import PostImageUpload from "@/components/shared/upload/postImageUpload";
+import useShare from "@/lib/context/useShare";
 import Metadata from "@/util/SEO/metadata";
 import SubmitButton from "@/util/buttons/submitButton";
-import { TagValueOption } from "@/util/types/types";
+import { ShareContextType, TagValueOption } from "@/util/types/types";
+import { useRouter } from "next/router";
 import * as React from "react";
 import { useState } from "react";
 import { BsFillPostcardFill, BsInfoCircle } from "react-icons/bs";
+import { TbAlertTriangleFilled } from "react-icons/tb";
+import { TiInfoOutline } from "react-icons/ti";
+import { toast } from "react-toastify";
 import useSwr from "swr";
 import Layout from "./layout";
 
 const Posts = () => {
-  const { mutate } = useSwr("/api/blogs");
+  const { mutate } = useSwr("http://localhost:3000/api/blogs");
   const [inputValue, setInputValue] = React.useState("");
+  const [loading, setLoading] = React.useState(false);
   const [value, setValue] = React.useState<readonly TagValueOption[]>([]);
   const titleRef = React.useRef<HTMLInputElement>(null);
   const subTitleRef = React.useRef<HTMLInputElement>(null);
-
+  const { allContext } = useShare() as ShareContextType;
+  const { data } = allContext;
+  const Router = useRouter();
   const [thumbnail, setThumbnail] = useState<string>(
     "/images/post-imgUpload.png"
   );
@@ -30,11 +38,12 @@ const Posts = () => {
   const [html, setHtml] = React.useState<string>();
   const handleSubmit = async (e: any) => {
     e.preventDefault();
+    setLoading(true);
     const blog_Title = titleRef.current?.value.trim();
     const blog_Slug = blog_Title?.trim().replaceAll(" ", "-");
     const blog_SubTitle = subTitleRef.current?.value;
     const full_blog_Html = html;
-    const data = {
+    const jsonData = {
       slug: blog_Slug,
       title: blog_Title,
       sub_title: blog_SubTitle,
@@ -42,21 +51,46 @@ const Posts = () => {
       thumbnail,
       html: full_blog_Html,
       tags: value,
+      authorId: data?.verifiedToken?.id as string,
     };
+    try {
+      await mutate(async () => {
+        const res = await fetch("/api/blogs", {
+          method: "POST",
+          headers: {
+            "Content-type": "application/json",
+          },
+          body: JSON.stringify(jsonData),
+        });
 
-    await mutate(async () => {
-      const res = await fetch("/api/blogs", {
-        method: "POST",
-        headers: {
-          "Content-type": "application/json",
-        },
-        body: JSON.stringify(data),
+        const response = await res.json();
+        if (!response.success) {
+          setLoading(false);
+          toast.error(response.message, {
+            icon: (
+              <TiInfoOutline className="text-[var(--red-primary-brand-color)]" />
+            ),
+            position: toast.POSITION.TOP_CENTER,
+          });
+        } else {
+          setLoading(false);
+          toast.success(response.message, {
+            icon: <TbAlertTriangleFilled className="text-green-400 text-3xl" />,
+            position: toast.POSITION.TOP_CENTER,
+          });
+        }
+        mutate("/api/blogs");
+        Router.push("/blogs");
       });
-
-      const serverResponse = await res.json();
-      console.log(serverResponse);
-      mutate("/api/blogs");
-    });
+    } catch (error) {
+      setLoading(false);
+      toast.success("Something went wrong!, try again later", {
+        icon: (
+          <TiInfoOutline className="text-[var(--red-primary-brand-color)]" />
+        ),
+        position: toast.POSITION.TOP_CENTER,
+      });
+    }
   };
 
   return (
@@ -148,7 +182,7 @@ const Posts = () => {
             />
           </div>
           <div className="mt-5">
-            <SubmitButton buttonText="Post" />
+            <SubmitButton loading={loading} buttonText="Post" />
           </div>
         </form>
       </Layout>

@@ -50,8 +50,9 @@ const Login = () => {
   });
   const { mutate } = useSWR("/api/auth/login");
 
-  const { allContext } = useShare() as ShareContextType;
+  const { allContext } = useShare() as unknown as ShareContextType;
   const { mutate: revalidate } = allContext;
+  console.log(allContext);
 
   const email__Ref = useRef<HTMLInputElement>(null);
   const password__Ref = useRef<HTMLInputElement>(null);

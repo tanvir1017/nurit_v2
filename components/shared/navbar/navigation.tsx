@@ -52,6 +52,7 @@ const Navigation = () => {
     setTheme(resolvedTheme === "dark" ? "light" : "dark");
   };
 
+  console.log(tokenData?.role);
   return (
     <nav className="border-[#68696c00]/50 z-50 sticky top-0 border-b bg-slate-50/60 dark:text-white backdrop-blur-2xl transition-colors duration-500 dark:bg-[#68696c00]  font-HSRegular ">
       <div className="container">
@@ -60,14 +61,11 @@ const Navigation = () => {
           <m.ul className="flex items-center  space-x-4 ">
             {largeNavigationData.map((nav, index) => {
               const { path, routeName } = nav;
+
               return (
                 <Link href={path as string} key={index}>
                   <m.li
-                    className={`${
-                      index === 4
-                        ? "bg-[var(--red-primary-brand-color)] text-white"
-                        : "hover:bg-[var(--red-primary-brand-color)] hover:text-white"
-                    } p-2 rounded-md`}
+                    className={`hover:bg-[var(--red-primary-brand-color)] hover:text-white p-2 rounded-md`}
                     variants={childVariants}
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.9 }}
@@ -77,6 +75,34 @@ const Navigation = () => {
                 </Link>
               );
             })}
+            {mounted && tokenData && delay && tokenData?.role !== "MEMBER" && (
+              <m.div>
+                <Link href="/dashboard">
+                  <m.li
+                    className={`hover:bg-[var(--red-primary-brand-color)] hover:text-white p-2 rounded-md`}
+                    variants={childVariants}
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
+                  >
+                    ড্যাশবোর্ড
+                  </m.li>
+                </Link>
+              </m.div>
+            )}
+            {mounted && tokenData && delay && tokenData?.role !== "ADMIN" && (
+              <m.div>
+                <Link href="/my-class">
+                  <m.li
+                    className={`hover:bg-[var(--red-primary-brand-color)] hover:text-white p-2 rounded-md`}
+                    variants={childVariants}
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
+                  >
+                    মাই ক্লাস
+                  </m.li>
+                </Link>
+              </m.div>
+            )}
             {!tokenData && delay && (
               <m.div
                 initial={{ opacity: 0 }}

@@ -11,10 +11,9 @@ const Dashboard = () => {
         // key="skill course, course, ms office, office 364"
       />
       <main className="font-HSRegular">
-        <Layout>Hom</Layout>
+        <Layout>Home</Layout>
       </main>
     </>
   );
 };
-
 export default Dashboard;

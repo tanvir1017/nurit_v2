@@ -16,7 +16,7 @@ const login = async (req: NextApiRequest, res: NextApiResponse) => {
 
       res.status(200).json({ verifiedToken });
     } else {
-      res.status(200).json({ token: "NOT FOUND" });
+      res.status(200).json(null);
     }
   } catch (err) {
     res.status(500).json(err);

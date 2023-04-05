@@ -50,10 +50,18 @@ export interface responseType {
   buttonLink?: string;
 }
 
+type CookieData = {
+  id: string | null;
+  first__name: string | null;
+  last__name: string | null;
+  photo__URL: string | null;
+  role: string | null;
+  iat: number | null;
+};
 export interface ShareContextType {
   allContext: {
     data: {
-      verifiedToken: string;
+      verifiedToken: string | CookieData | any;
     };
     error: string;
     isLoading: boolean;
@@ -75,12 +83,25 @@ export interface TagValueOption {
 }
 
 export type BlogBodyDataType = {
-  blog_Title: string;
-  blog_Slug: string;
-  blog_SubTitle: string;
-  full_blog_Html: string;
-  value: { label: string; value: string }[];
+  slug: string;
+  title: string;
+  sub_title: string;
+  cover: string;
+  thumbnail: string;
+  html: string;
+  tag: string[];
+  authorId: string;
+  readTime: string;
 };
+
+export interface CookieType {
+  id: string;
+  first__name: string;
+  last__name: string;
+  photo__URL: string;
+  role: string;
+  iat: number;
+}
 
 /////////////////////////////
 ////// FUNCTION TYPE ///////

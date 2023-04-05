@@ -13,7 +13,7 @@ const nextConfig = {
         destination: environmentDestination,
       },
       {
-        source: "/blogs",
+        source: "/dashboard",
         destination: environmentDestination,
       },
     ];
