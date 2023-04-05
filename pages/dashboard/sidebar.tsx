@@ -109,7 +109,7 @@ const Sidebar = () => {
             return (
               <Link
                 className="flex justify-between"
-                key={menu.id}
+                key={menu.link}
                 href={menu.link}
               >
                 <div

@@ -89,7 +89,7 @@ export type BlogBodyDataType = {
   cover: string;
   thumbnail: string;
   html: string;
-  tag: string[];
+  tag: string[] | any;
   authorId: string;
   readTime: string;
 };
