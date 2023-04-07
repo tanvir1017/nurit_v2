@@ -5,6 +5,25 @@ import swr from "swr";
 const fetcher = (url: RequestInfo | URL) =>
   fetch(url).then((res) => res.json());
 
+interface BlogDataType {
+  returnBlogData: {
+    blogs: {
+      id: string;
+      createdAt: string;
+      updatedAt: string;
+      title: string;
+      slug: string;
+      sub_title: string;
+      readTime: string;
+      tagshtml: string;
+      cover: string;
+      thumbnail: string;
+      views: number;
+      authorId: string;
+    };
+  };
+}
+
 const Blogs = () => {
   const { data, isLoading, error } = swr("/api/blogs", fetcher);
   let content = null;

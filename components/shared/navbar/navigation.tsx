@@ -76,8 +76,8 @@ const Navigation = () => {
               );
             })}
             {mounted && tokenData && delay && tokenData?.role !== "MEMBER" && (
-              <m.div>
-                <Link href="/dashboard">
+              <Link href="/dashboard">
+                <m.div>
                   <m.li
                     className={`hover:bg-[var(--red-primary-brand-color)] hover:text-white p-2 rounded-md`}
                     variants={childVariants}
@@ -86,12 +86,12 @@ const Navigation = () => {
                   >
                     ড্যাশবোর্ড
                   </m.li>
-                </Link>
-              </m.div>
+                </m.div>
+              </Link>
             )}
             {mounted && tokenData && delay && tokenData?.role !== "ADMIN" && (
-              <m.div>
-                <Link href="/my-class">
+              <Link href="/my-class">
+                <m.div>
                   <m.li
                     className={`hover:bg-[var(--red-primary-brand-color)] hover:text-white p-2 rounded-md`}
                     variants={childVariants}
@@ -100,8 +100,8 @@ const Navigation = () => {
                   >
                     মাই ক্লাস
                   </m.li>
-                </Link>
-              </m.div>
+                </m.div>
+              </Link>
             )}
             {!tokenData && delay && (
               <m.div

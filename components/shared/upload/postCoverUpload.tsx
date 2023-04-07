@@ -13,14 +13,8 @@ const PostCoverUpload = ({ pictureURL, setPictureURL }: any) => {
     setLoading(true);
     const formData = new FormData();
     formData.append("file", e.target.files[0]);
-    formData.append(
-      "upload_preset",
-      process.env.NEXT_PUBLIC_NURIT_BLOGS_IMG_UPLOAD_PRESET as string
-    );
-    formData.append(
-      "cloud_name",
-      process.env.NEXT_PUBLIC_NURIT_AUTH_IMG_UPLOAD_CLOUD as string
-    );
+    formData.append("upload_preset", "bt6wp3fo");
+    formData.append("cloud_name", "djbcnjkin");
     try {
       const res = await window.fetch(
         `https://api.cloudinary.com/v1_1/djbcnjkin/image/upload`,

@@ -71,13 +71,13 @@ const Posts = () => {
             icon: (
               <TiInfoOutline className="text-[var(--red-primary-brand-color)]" />
             ),
-            position: toast.POSITION.TOP_CENTER,
+            position: toast.POSITION.BOTTOM_CENTER,
           });
         } else {
           setLoading(false);
           toast.success(response.message, {
             icon: <TbAlertTriangleFilled className="text-green-400 text-3xl" />,
-            position: toast.POSITION.TOP_CENTER,
+            position: toast.POSITION.BOTTOM_CENTER,
           });
           mutate("/api/blogs");
           Router.push("/blogs");
@@ -89,7 +89,7 @@ const Posts = () => {
         icon: (
           <TiInfoOutline className="text-[var(--red-primary-brand-color)]" />
         ),
-        position: toast.POSITION.TOP_CENTER,
+        position: toast.POSITION.BOTTOM_CENTER,
       });
     }
   };
