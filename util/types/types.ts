@@ -78,8 +78,8 @@ export interface Data {
 
 // COMMENT: => Blogs section type start from here
 export interface TagValueOption {
-  readonly label: string;
-  readonly value: string;
+  label: string;
+  value: string;
 }
 
 export type BlogBodyDataType = {
@@ -89,7 +89,7 @@ export type BlogBodyDataType = {
   cover: string;
   thumbnail: string;
   html: string;
-  tag: string[] | any;
+  tags: string[];
   authorId: string;
   readTime: string;
 };

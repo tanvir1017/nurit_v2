@@ -45,7 +45,7 @@ model Blog{
   slug          String @unique
   sub_title     String
   readTime      String 
-  tag           String[]
+  tags          String[]
   html          String
   cover         String
   thumbnail     String

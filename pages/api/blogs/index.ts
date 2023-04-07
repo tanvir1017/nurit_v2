@@ -88,8 +88,6 @@ const BlogApiEndPoint = async (
             const states = readingTime(html);
             const readTime = states.text;
 
-            const tag = tags.map((item: any) => item.label);
-
             const sendDataToTheDb = await postABlogToDb({
               slug,
               title,
@@ -97,7 +95,7 @@ const BlogApiEndPoint = async (
               cover,
               thumbnail,
               html,
-              tag,
+              tags,
               authorId,
               readTime,
             });

@@ -9,7 +9,7 @@ import PostImageUpload from "@/components/shared/upload/postImageUpload";
 import useShare from "@/lib/context/useShare";
 import Metadata from "@/util/SEO/metadata";
 import SubmitButton from "@/util/buttons/submitButton";
-import { ShareContextType, TagValueOption } from "@/util/types/types";
+import { ShareContextType } from "@/util/types/types";
 import { useRouter } from "next/router";
 import * as React from "react";
 import { useState } from "react";
@@ -21,10 +21,10 @@ import useSwr from "swr";
 import Layout from "./layout";
 
 const Posts = () => {
-  const { mutate } = useSwr("http://localhost:3000/api/blogs");
+  const { mutate } = useSwr("/api/blogs");
   const [inputValue, setInputValue] = React.useState("");
   const [loading, setLoading] = React.useState(false);
-  const [value, setValue] = React.useState<readonly TagValueOption[]>([]);
+  const [value, setValue] = React.useState([]);
   const titleRef = React.useRef<HTMLInputElement>(null);
   const subTitleRef = React.useRef<HTMLInputElement>(null);
   const { allContext } = useShare() as ShareContextType;
@@ -43,14 +43,15 @@ const Posts = () => {
     const blog_Slug = blog_Title?.trim().replaceAll(" ", "-");
     const blog_SubTitle = subTitleRef.current?.value;
     const full_blog_Html = html;
-    const jsonData = {
+    const tags = value.map(({ _, value }) => value);
+    const blogData = {
       slug: blog_Slug,
       title: blog_Title,
       sub_title: blog_SubTitle,
       cover: coverPicture,
       thumbnail,
       html: full_blog_Html,
-      tags: value,
+      tags,
       authorId: data?.verifiedToken?.id as string,
     };
     try {
@@ -60,7 +61,7 @@ const Posts = () => {
           headers: {
             "Content-type": "application/json",
           },
-          body: JSON.stringify(jsonData),
+          body: JSON.stringify(blogData),
         });
 
         const response = await res.json();
@@ -78,9 +79,9 @@ const Posts = () => {
             icon: <TbAlertTriangleFilled className="text-green-400 text-3xl" />,
             position: toast.POSITION.TOP_CENTER,
           });
+          mutate("/api/blogs");
+          Router.push("/blogs");
         }
-        mutate("/api/blogs");
-        Router.push("/blogs");
       });
     } catch (error) {
       setLoading(false);

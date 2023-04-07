@@ -14,7 +14,7 @@ export const postABlogToDb: PostABlogToDB = async ({
   cover,
   thumbnail,
   html,
-  tag,
+  tags,
   authorId,
   readTime,
 }: BlogBodyDataType) => {
@@ -26,7 +26,7 @@ export const postABlogToDb: PostABlogToDB = async ({
       cover,
       thumbnail,
       html,
-      tag,
+      tags,
       authorId,
       readTime,
     },
