@@ -6,7 +6,7 @@ import {
   GetAllBlogsFunctionType,
   PostABlogToDB,
 } from "@/util/types/types";
-
+// COMMENT: => check file if ti's has the type error problem
 export const postABlogToDb: PostABlogToDB = async ({
   slug,
   title,
