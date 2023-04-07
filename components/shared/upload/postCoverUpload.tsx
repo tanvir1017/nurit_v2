@@ -6,7 +6,6 @@ import { TiInfoOutline } from "react-icons/ti";
 import { Bounce, ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-console.log(process.env.NEXT_PUBLIC_NURIT_BLOGS_IMG_UPLOAD_PRESET);
 const PostCoverUpload = ({ pictureURL, setPictureURL }: any) => {
   const [loading, setLoading] = useState(false);
   const uploadImage = async (e: any) => {

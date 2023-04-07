@@ -32,7 +32,7 @@ const Navigation = () => {
     setMounted(true);
     setTimeout(() => {
       setDelay(true);
-    }, 3000);
+    }, 2000);
     if (!isLoading && !error) {
       setTokenData(data?.verifiedToken as any);
     } else {
@@ -52,7 +52,6 @@ const Navigation = () => {
     setTheme(resolvedTheme === "dark" ? "light" : "dark");
   };
 
-  console.log(tokenData?.role);
   return (
     <nav className="border-[#68696c00]/50 z-50 sticky top-0 border-b bg-slate-50/60 dark:text-white backdrop-blur-2xl transition-colors duration-500 dark:bg-[#68696c00]  font-HSRegular ">
       <div className="container">
@@ -75,9 +74,15 @@ const Navigation = () => {
                 </Link>
               );
             })}
-            {mounted && tokenData && delay && tokenData?.role !== "MEMBER" && (
+            {tokenData && delay && tokenData?.role !== "MEMBER" && (
               <Link href="/dashboard">
-                <m.div>
+                <m.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{
+                    duration: 1,
+                  }}
+                >
                   <m.li
                     className={`hover:bg-[var(--red-primary-brand-color)] hover:text-white p-2 rounded-md`}
                     variants={childVariants}
@@ -89,9 +94,16 @@ const Navigation = () => {
                 </m.div>
               </Link>
             )}
-            {mounted && tokenData && delay && tokenData?.role !== "ADMIN" && (
+
+            {tokenData && delay && tokenData?.role !== "ADMIN" && (
               <Link href="/my-class">
-                <m.div>
+                <m.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{
+                    duration: 1,
+                  }}
+                >
                   <m.li
                     className={`hover:bg-[var(--red-primary-brand-color)] hover:text-white p-2 rounded-md`}
                     variants={childVariants}
@@ -104,14 +116,14 @@ const Navigation = () => {
               </Link>
             )}
             {!tokenData && delay && (
-              <m.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{
-                  duration: 2,
-                }}
-              >
-                <Link href="/auth/login">
+              <Link href="/auth/login">
+                <m.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{
+                    duration: 1,
+                  }}
+                >
                   <m.li
                     className={`bg-[var(--red-primary-brand-color)] text-white p-2 rounded-md `}
                     variants={childVariants}
@@ -120,14 +132,15 @@ const Navigation = () => {
                   >
                     লগইন/সাইন-আপ
                   </m.li>
-                </Link>
-              </m.div>
+                </m.div>
+              </Link>
             )}
 
             <m.div
-              animate={{
-                opacity: delay ? 1 : 0,
-                y: delay ? 0 : closedX,
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{
+                duration: 1,
               }}
             >
               {tokenData && (

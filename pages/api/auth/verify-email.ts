@@ -33,8 +33,7 @@ export default async function verifyEmail(
       }
 
       const jwtEmail = jwt.sign(email, process.env.ACCESS_TOKEN as string);
-      const mail = sendEmail(email, jwtEmail, res);
-      console.log(mail);
+
       sendEmail(email, jwtEmail, res);
       return res.status(200).json({
         success: true,
