@@ -6,15 +6,21 @@ import { TiInfoOutline } from "react-icons/ti";
 import { Bounce, ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+console.log(process.env.NEXT_PUBLIC_NURIT_BLOGS_IMG_UPLOAD_PRESET);
 const PostCoverUpload = ({ pictureURL, setPictureURL }: any) => {
   const [loading, setLoading] = useState(false);
-
   const uploadImage = async (e: any) => {
     setLoading(true);
     const formData = new FormData();
     formData.append("file", e.target.files[0]);
-    formData.append("upload_preset", "lxphac3w");
-    formData.append("cloud_name", "djbcnjkin");
+    formData.append(
+      "upload_preset",
+      process.env.NEXT_PUBLIC_NURIT_BLOGS_IMG_UPLOAD_PRESET as string
+    );
+    formData.append(
+      "cloud_name",
+      process.env.NEXT_PUBLIC_NURIT_AUTH_IMG_UPLOAD_CLOUD as string
+    );
     try {
       const res = await window.fetch(
         `https://api.cloudinary.com/v1_1/djbcnjkin/image/upload`,
