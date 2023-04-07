@@ -4,7 +4,6 @@ import { AiOutlineCloudUpload } from "react-icons/ai";
 import { TbAlertTriangleFilled } from "react-icons/tb";
 import { TiInfoOutline } from "react-icons/ti";
 import { Bounce, ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 const PostImageUpload = ({ pictureURL, setPictureURL }: any) => {
   const [loading, setLoading] = useState(false);
