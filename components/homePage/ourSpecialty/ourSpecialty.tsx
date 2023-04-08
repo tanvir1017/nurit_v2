@@ -1,5 +1,5 @@
 import { specialtyDB } from "@/util/localDb/skillDb";
-import Image from "next/image";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 const OurSpecialty = () => {
   return (
@@ -22,13 +22,14 @@ const OurSpecialty = () => {
                   key={i}
                   className="text-center   dark:bg-[#2025328c] bg-slate-50 shadow-md overflow-y-auto  p-5 w-full h-60 rounded-2xl space-y-4 "
                 >
-                  <Image
-                    className="mx-auto"
-                    width={100}
-                    height={100}
-                    src={el.icon}
-                    alt="specialty representor"
-                  />
+                  <div className="w-[100px] mx-auto">
+                    <LazyLoadImage
+                      src={el.icon}
+                      alt="specialty representor"
+                      effect="blur"
+                    />
+                  </div>
+
                   <p>{el.shortDesc}</p>
                 </div>
               );
@@ -43,15 +44,16 @@ const OurSpecialty = () => {
                   key={i}
                   className="text-left   dark:bg-[#2025328c] bg-slate-50 shadow-md  overflow-y-hidden  p-5 w-full h-60 rounded-2xl space-x-4 flex justify-start items-center"
                 >
-                  <Image
-                    className={`rounded-full mr-4 outline  ${
-                      i === 0 ? "outline-[#6F71E6]  " : "outline-[#F8580B]"
-                    }  outline-offset-4`}
-                    width={100}
-                    height={100}
-                    src={el.icon}
-                    alt="specialty representor"
-                  />
+                  <div className="w-[200px] h-auto">
+                    <LazyLoadImage
+                      src={el.icon}
+                      alt="specialty representor"
+                      effect="blur"
+                      className={`rounded-full mr-4 outline  ${
+                        i === 0 ? "outline-[#6F71E6]  " : "outline-[#F8580B]"
+                      }  outline-offset-4`}
+                    />
+                  </div>
                   <div>
                     <p
                       className={`${

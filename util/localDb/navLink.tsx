@@ -1,3 +1,4 @@
+import { BsPersonVideo3 } from "react-icons/bs";
 import { FiUsers } from "react-icons/fi";
 import { MdSpaceDashboard } from "react-icons/md";
 import { VscPreview } from "react-icons/vsc";
@@ -19,7 +20,7 @@ export const dashboardMenuItems: DashboardMenuItem[] = [
     icon: <MdSpaceDashboard />,
   },
   {
-    label: "Blogs",
+    label: "Blog Post",
     link: "/dashboard/posts",
     icon: <VscPreview />,
   },
@@ -27,5 +28,10 @@ export const dashboardMenuItems: DashboardMenuItem[] = [
     label: "Manage Users",
     link: "/dashboard/users",
     icon: <FiUsers />,
+  },
+  {
+    label: "Manage Courses",
+    link: "/dashboard/courses",
+    icon: <BsPersonVideo3 />,
   },
 ];

@@ -1,9 +1,9 @@
 import { Blur } from "@/components/shared/blur";
 import { motion as m } from "framer-motion";
-import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { BsSearch } from "react-icons/bs";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 const HeadingSection = () => {
   const [buttonText, setButtonText] = useState("");
@@ -50,14 +50,13 @@ const HeadingSection = () => {
               </m.button>
             </div>
           </div>
-          <div className="left__side z-30">
-            <Image
-              width={500}
-              height={100}
+          <m.div className="left__side z-30 w-[500px] h-auto transition duration-100">
+            <LazyLoadImage
               src="/images/content/userTable.png"
               alt="user setting on table "
+              effect="blur"
             />
-          </div>
+          </m.div>
         </div>
       </div>
     </section>

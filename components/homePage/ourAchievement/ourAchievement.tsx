@@ -1,5 +1,5 @@
 import { achievementDB } from "@/util/localDb/skillDb";
-import Image from "next/image";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 const OurAchievement = () => {
   return (
@@ -15,13 +15,10 @@ const OurAchievement = () => {
           <div className="grid grid-cols-2">
             {achievementDB.map((el, i) => (
               <div key={i} className="flex items-center justify-start w-60 m-5">
-                <Image
-                  className="mr-5"
-                  width={80}
-                  height={100}
-                  src={el.icon}
-                  alt={el.title}
-                />
+                <div className="w-[80px] h-auto mr-5 transition">
+                  <LazyLoadImage src={el.icon} alt={el.title} effect="blur" />
+                </div>
+
                 <div>
                   <p className="font-HSBold text-2xl">{el.title}</p>
                   <p className="">{el.subTitle}</p>
@@ -30,13 +27,13 @@ const OurAchievement = () => {
             ))}
           </div>
           <div>
-            <Image
-              width={550}
-              height={100}
-              priority
-              src="/images/content/achievement.png"
-              alt="our achievement representor"
-            />
+            <div className="w-[550px] h-auto transition-all duration-75">
+              <LazyLoadImage
+                src="/images/content/achievement.png"
+                alt="our achievement representor"
+                effect="blur"
+              />
+            </div>
           </div>
         </div>
       </div>
