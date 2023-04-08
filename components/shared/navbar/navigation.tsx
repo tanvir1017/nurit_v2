@@ -74,7 +74,7 @@ const Navigation = () => {
                 </Link>
               );
             })}
-            {tokenData && delay && tokenData?.role !== "MEMBER" && (
+            {tokenData && delay && tokenData?.role !== "STUDENT" && (
               <Link href="/dashboard">
                 <m.div
                   initial={{ opacity: 0 }}
@@ -143,7 +143,7 @@ const Navigation = () => {
                 duration: 1,
               }}
             >
-              {tokenData && (
+              {tokenData && delay && (
                 <Dropdown
                   tokenData={tokenData}
                   setTokenData={setTokenData}

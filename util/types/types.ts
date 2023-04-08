@@ -104,6 +104,17 @@ export interface CookieType {
   iat: number;
 }
 
+export interface DashBoardAuthorTableType {
+  id: string;
+  createdAt: string;
+  first__name: string;
+  last__name: string;
+  email__id: string;
+  photo__URL: string;
+  phone__numb: number;
+  gender: string;
+  role: string;
+}
 /////////////////////////////
 ////// FUNCTION TYPE ///////
 ///////////////////////////

@@ -85,7 +85,7 @@ const userCrud = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
               photo__URL,
               gender,
               phone__numb,
-              role: "MEMBER",
+              role: "STUDENT",
             },
             process.env.ACCESS_TOKEN as string
           );
