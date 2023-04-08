@@ -12,7 +12,7 @@ import { motion as m, useReducedMotion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { BiUserCircle } from "react-icons/bi";
 import { BsFillInfoCircleFill } from "react-icons/bs";
 import { FaFacebook, FaTwitter } from "react-icons/fa";
@@ -31,11 +31,11 @@ export interface ShareContextType {
     error: string;
     isLoading: boolean;
     mutate: () => {};
+    routerPath: string;
   };
 }
 
 const Login = () => {
-  const [routerPath, setRouterPath] = useState("");
   const [seePassword, shoPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
@@ -51,23 +51,12 @@ const Login = () => {
   const { mutate } = useSWR("/api/auth/login");
 
   const { allContext } = useShare() as unknown as ShareContextType;
-  const { mutate: revalidate } = allContext;
+  const { mutate: revalidate, routerPath } = allContext;
 
   const email__Ref = useRef<HTMLInputElement>(null);
   const password__Ref = useRef<HTMLInputElement>(null);
 
   const router = useRouter();
-  // COMMENT => Set the route where user comes from. For better experience
-  useEffect(() => {
-    const storage = globalThis?.sessionStorage;
-    const prevPath = storage.getItem("prevPath");
-    const currPath = storage.getItem("currentPath");
-    if (prevPath === currPath) {
-      setRouterPath("/");
-    } else {
-      setRouterPath(prevPath as string);
-    }
-  }, [router.pathname]);
 
   // COMMENT => Animation for framer-motion using useReducerMotion() hooks
   const childVariants = {

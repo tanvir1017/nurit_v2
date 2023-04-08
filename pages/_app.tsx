@@ -16,8 +16,14 @@ export default function App({ Component, pageProps, router }: AppProps) {
     const storage = globalThis?.sessionStorage;
     if (!storage) return;
     const prevPath = storage.getItem("currentPath");
-    storage.setItem("prevPath", prevPath as string);
-    storage.setItem("currentPath", globalThis.location.pathname);
+    const currentPath = globalThis.location.pathname;
+    if (prevPath !== currentPath) {
+      storage.setItem("prevPath", prevPath as string);
+      storage.setItem("currentPath", globalThis.location.pathname);
+    } else {
+      storage.setItem("prevPath", "/");
+      storage.setItem("currentPath", globalThis.location.pathname);
+    }
   }
   useEffect(() => storePathValues, [router.asPath]);
 
