@@ -32,7 +32,7 @@ const AuthorTable = (user: { user: DashBoardAuthorTableType }) => {
         </div>
       </div>
 
-      <p className="flex items-center">
+      <div className="flex items-center">
         {user?.user?.role === "ADMIN" && (
           <MdAdminPanelSettings className="text-2xl text-green-500 mr-2" />
         )}
@@ -43,26 +43,26 @@ const AuthorTable = (user: { user: DashBoardAuthorTableType }) => {
           <BiUserPin className="text-2xl text-purple-500 mr-2" />
         )}
         {user?.user?.role}
-      </p>
-      <p className="flex items-center">
+      </div>
+      <div className="flex items-center">
         {user?.user?.gender === "female" ? (
           <SlUserFemale className="text-2xl text-pink-500 mr-2" />
         ) : (
           <IoIosPerson className="text-2xl text-indigo-500 mr-2" />
         )}
         {user?.user?.gender?.toUpperCase()}
-      </p>
-      <p className="flex items-center">
+      </div>
+      <div className="flex items-center">
         <BsTelephoneFill className="mr-2" /> {user?.user?.phone__numb}
-      </p>
-      <p className="flex items-center">
+      </div>
+      <div className="flex items-center">
         <SlCalender className="mr-2" />
 
         {createdAtDateFormatter(user?.user?.createdAt)}
-      </p>
-      <p className="flex items-center text-green-400">
+      </div>
+      <div className="flex items-center text-green-400">
         <VscVerifiedFilled /> Verified
-      </p>
+      </div>
     </div>
   );
 };

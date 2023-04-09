@@ -1,15 +1,16 @@
 import { motion as m } from "framer-motion";
-import { LazyLoadImage } from "react-lazy-load-image-component";
+import Image from "next/image";
 
 const JoinWithUs = () => {
   return (
     <section className="container font-HSRegular my-[10rem]">
       <div className="flex justify-center items-center">
-        <div className="w-[650px] h-auto">
-          <LazyLoadImage
+        <div className="">
+          <Image
+            width={650}
+            height={100}
             src="/images/content/joinwitUs.png"
             alt="join with us"
-            effect="blur"
           />
         </div>
         <div>

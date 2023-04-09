@@ -1,7 +1,7 @@
 import { exploreCoursesFilterData } from "@/util/localDb";
 import { motion as m } from "framer-motion";
+import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
-import { LazyLoadImage } from "react-lazy-load-image-component";
 
 const ExploreCourses = () => {
   const [width, setWidth] = useState<number>(0);
@@ -51,12 +51,12 @@ const ExploreCourses = () => {
                 className={`item border hover:border-[var(--red-primary-brand-color)] duration-300 min-w-[11rem] cursor-pointer p-5 h-40 text-center`}
                 key={i}
               >
-                <div className="mx-auto mb-6 w-10 transition ">
-                  <LazyLoadImage
+                <div className="mx-auto mb-6  transition ">
+                  <Image
                     src={el.iconSource}
                     alt="Filter"
-                    effect="blur"
-                    useIntersectionObserver
+                    width={40}
+                    height={100}
                   />
                 </div>
 

@@ -75,7 +75,7 @@ const Navigation = () => {
               );
             })}
             {tokenData && delay && tokenData?.role !== "STUDENT" && (
-              <Link href="/dashboard">
+              <Link href="/dashboard/home">
                 <m.div
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}

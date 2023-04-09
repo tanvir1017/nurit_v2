@@ -1,6 +1,6 @@
 import Metadata from "@/util/SEO/metadata";
+import Image from "next/image";
 import { BsStarFill } from "react-icons/bs";
-import { LazyLoadImage } from "react-lazy-load-image-component";
 
 const Course = ({ el }: any) => {
   return (
@@ -12,13 +12,7 @@ const Course = ({ el }: any) => {
         // key="skill course, course, ms office, office 364"
       />
       <div className="h-[28rem] overflow-hidden card-shadow transition">
-        <LazyLoadImage
-          alt={el.title}
-          src={el.courseCover} // use normal <img> attributes as props
-          effect="blur"
-        />
-
-        {/* <Image src={el.courseCover} width={500} height={100} alt={el.title} /> */}
+        <Image src={el.courseCover} width={500} height={100} alt={el.title} />
         <div
           id="course_body"
           className="dark:bg-[var(--black-primary-brand-color)]  px-5 py-8 space-y-4 dark:text-white overflow-auto"
