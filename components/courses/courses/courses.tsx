@@ -17,6 +17,11 @@ const Courses = () => {
           !error &&
           data &&
           data?.map((el: any) => <Course key={el._id} el={el} />)}
+        {!isLoading && !data && error && (
+          <p className="flex justify-items-center items-center text-red-500 font-HSBold text-3xl">
+            Opps! Something went wrong
+          </p>
+        )}
         {!data &&
           !error &&
           isLoading &&

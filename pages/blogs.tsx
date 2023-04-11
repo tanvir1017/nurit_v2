@@ -1,28 +1,49 @@
 import Skeleton from "@/components/shared/skeleton";
 import Metadata from "@/util/SEO/metadata";
-import swr from "swr";
+import { apiUrl } from "@/util/api";
+import { GetStaticProps } from "next";
+import useSWR, { SWRConfig } from "swr";
 
 const fetcher = (url: RequestInfo | URL) =>
   fetch(url).then((res) => res.json());
+const API = `${apiUrl}/api/blogs`;
 
-const Blogs = () => {
-  const { data, isLoading, error } = swr("/api/blogs", fetcher);
-  let content = null;
+export const getStaticProps: GetStaticProps = async () => {
+  const data = await fetcher(API);
+  return {
+    props: {
+      fallback: {
+        [API]: data,
+      },
+    },
+  };
+};
+const BlogsFetcherSwrConfig = () => {
+  const { data, isLoading, error } = useSWR(API);
+  let content = <main className="App"> </main>;
   if (!error && !data && isLoading) {
     content = (
-      <div
-        id="card"
-        className="grid grid-cols-4 gap-5 place-items-center mt-14"
-      >
-        {[...Array(8).keys()].map((_, i) => (
-          <Skeleton key={i} />
-        ))}
-      </div>
+      <main className="App">
+        <div
+          id="card"
+          className="grid grid-cols-4 gap-5 place-items-center mt-14"
+        >
+          {[...Array(8).keys()].map((_, i) => (
+            <Skeleton key={i} />
+          ))}
+        </div>
+      </main>
     );
   }
 
   if (!data && !isLoading && error) {
-    content = <p>Something went wrong!</p>;
+    content = (
+      <main className="App">
+        <p className="text-[var(--red-primary-brand-color)] font-HSSemiBold text-2xl">
+          Something went wrong! Try again after some time
+        </p>
+      </main>
+    );
   }
   if (!isLoading && !error && data) {
     const {
@@ -60,4 +81,10 @@ const Blogs = () => {
   return content;
 };
 
-export default Blogs;
+export default function Blogs({ fallback }: { fallback: any }) {
+  return (
+    <SWRConfig value={{ fallback }}>
+      <BlogsFetcherSwrConfig />
+    </SWRConfig>
+  );
+}

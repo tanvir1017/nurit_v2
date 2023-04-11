@@ -1,4 +1,5 @@
 import Footer from "@/components/shared/footer/footer";
+import MobileNav from "@/components/shared/navbar/mobileNav";
 import Navigation from "@/components/shared/navbar/navigation";
 import ContextProvider from "@/lib/context/contextProvider";
 import "@/styles/globals.css";
@@ -40,7 +41,13 @@ export default function App({ Component, pageProps, router }: AppProps) {
           {!pathname.includes("/auth") &&
             !pathname.includes("/dashboard") &&
             !pathname.includes("/404") &&
-            !pathname.includes("/401") && <Navigation />}
+            !pathname.includes("/401") && (
+              <>
+                <Navigation />
+                <MobileNav />
+              </>
+            )}
+
           <Component {...pageProps} />
           {!pathname.includes("/auth") &&
             !pathname.includes("/dashboard") &&

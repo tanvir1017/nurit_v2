@@ -25,7 +25,6 @@ const Navigation = () => {
     initial: { opacity: 0, y: shouldReduceMotion ? 0 : 25 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.8 } },
   };
-  const closedX = shouldReduceMotion ? 0 : "-100%";
 
   // useEffect only runs on the client, so now we can safely show the UI
   useEffect(() => {
@@ -53,7 +52,7 @@ const Navigation = () => {
   };
 
   return (
-    <nav className="border-[#68696c00]/50 z-50 sticky top-0 border-b bg-slate-50/60 dark:text-white backdrop-blur-2xl transition-colors duration-500 dark:bg-[#68696c00]  font-HSRegular ">
+    <nav className="border-[#68696c00]/50 z-50 sticky top-0 border-b bg-slate-50/60 dark:text-white backdrop-blur-2xl transition-colors duration-500 dark:bg-[#68696c00]  font-HSRegular hidden lg:block">
       <div className="container">
         <div className="relative h-20  flex items-center justify-between">
           <LightModeBrand />

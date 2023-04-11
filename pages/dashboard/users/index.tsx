@@ -5,20 +5,9 @@ import useSWR, { SWRConfig } from "swr";
 import Layout from "../layout";
 import AuthorTable from "./authorTable";
 
-const fetcher = (url: string) => fetch(url).then((res) => res.json());
+const fetcher = (url: RequestInfo | URL) =>
+  fetch(url).then((res) => res.json());
 const API = "/api/auth";
-
-interface UserDataType {
-  id: string;
-  createdAt: string;
-  first__name: string;
-  last__name: string;
-  email__id: string;
-  photo__URL: string;
-  phone__numb: number;
-  gender: string;
-  role: string;
-}
 
 export const getStaticProps: GetStaticProps = async () => {
   const data = await fetcher(`${apiUrl}/api/auth`);
