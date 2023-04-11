@@ -36,7 +36,7 @@ export function Dropdown(props: TokenDataType) {
     <Menu as="div" className="relative inline-block text-left">
       <m.div animate className="transition-all duration-300">
         <Menu.Button
-          className={`cursor-pointer bg-gradient-to-r from-indigo-500 to-red-500  p-0.5 rounded-full relative   w-14 h-14 m-auto overflow-hidden`}
+          className={`cursor-pointer bg-gradient-to-r from-indigo-500 to-red-500  p-0.5 rounded-full  m-auto overflow-hidden relative  md:w-14 md:h-14 w-12 h-12`}
         >
           <Image
             className={`absolute -top-2 rounded-full p-0.5`}

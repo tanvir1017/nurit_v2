@@ -11,9 +11,9 @@ const HeadingSection = () => {
     <section className="-mt-16 font-HSRegular border-general relative  w-full overflow-hidden overflow-x-clip  bg-slate-50 bg-gradient-to-t from-slate-50 to-slate-100 dark:bg-[var(--black-primary-brand-color)] dark:bg-none lg:h-screen ">
       <Blur />
       <div className="z-30 w-full py-10  lg:flex lg:h-full lg:items-center lg:py-0">
-        <div className="container grid grid-cols-2 place-items-center h-screen">
-          <div className="right__side title">
-            <h1 className="text-6xl font-HSBold">
+        <div className="container grid grid-cols-1 lg:grid-cols-2  place-items-center h-screen">
+          <div className="right__side title lg:mt-0 mt-10">
+            <h1 className="lg:text-6xl text-4xl font-HSBold">
               আপনার পছন্দের{" "}
               <span className="text-[var(--red-primary-brand-color)]">
                 কোর্স
@@ -21,8 +21,8 @@ const HeadingSection = () => {
               পেতে সার্চ করুন
             </h1>
 
-            <div className="grid grid-flow-col gap-5 mt-5">
-              <label className={`relative block space-y-2 `}>
+            <div className="grid sm:grid-flow-col grid-flow-row gap-5 mt-5">
+              <label className={`relative block space-y-2`}>
                 <span
                   className={`absolute inset-y-0 left-0 top-2  flex items-center pl-2`}
                 >

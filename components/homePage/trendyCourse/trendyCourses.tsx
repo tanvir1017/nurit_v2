@@ -14,7 +14,7 @@ const TrendyCourses = () => {
   return (
     <section className="container font-HSRegular  my-40">
       <div id="heading_text" className="text-center">
-        <p className="text-4xl font-HSBold">
+        <p className="md:text-4xl text-3xl font-HSBold">
           ট্রেন্ডি হাই{" "}
           <span className="text-[var(--red-primary-brand-color)]">
             ডিমান্ডেবল
@@ -22,7 +22,8 @@ const TrendyCourses = () => {
           কোর্স
         </p>
         <p className="text-base">
-          যেকোনো বিষয়ের যেকোনো টপিকে পড়ালেখা করতে চলে যাও তোমার পছন্দের সেকশনে
+          যেকোনো বিষয়ের যেকোনো টপিকে পড়ালেখা করতে চলে যাও{" "}
+          <br className="md:hidden block" /> তোমার পছন্দের সেকশনে
         </p>
       </div>
       <div id="trendy_courses">
@@ -34,8 +35,8 @@ const TrendyCourses = () => {
                 className={`${
                   el?.filter === buttonFilterText
                     ? "bg-[#ff0912] text-white dark:shadow  button-shadow"
-                    : " shadow-lg filter bg-slate-200  dark:bg-[#342d504d]"
-                }  px-5 py-3 rounded-lg mt-16 duration-500 focus:translate-x-2 `}
+                    : " shadow-lg bg-slate-200  dark:bg-[#342d504d]"
+                }  md:px-5 md:py-3 px-4 py-2 rounded-lg mt-16 duration-500 focus:translate-x-2 `}
                 onClick={() => setButtonFilterText(el.filter)}
               >
                 {el.btnText}
@@ -46,7 +47,7 @@ const TrendyCourses = () => {
 
         <div
           id="card"
-          className="grid grid-cols-4 gap-5 place-items-center mt-14"
+          className="grid lg:grid-cols-4 md:grid-cols-2  gap-5 place-items-center mt-14"
         >
           {!isLoading &&
             !error &&

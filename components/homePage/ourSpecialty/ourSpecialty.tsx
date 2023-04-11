@@ -5,7 +5,7 @@ const OurSpecialty = () => {
   return (
     <section className="font-HSRegular container my-[10rem]">
       <div id="heading_text">
-        <p className="text-4xl text-center font-HSBold">
+        <p className="md:text-4xl text-2xl text-center font-HSBold">
           আমাদের{" "}
           <span className="text-[var(--red-primary-brand-color)]">
             বিশেষত্ব
@@ -13,7 +13,7 @@ const OurSpecialty = () => {
         </p>
       </div>
       <div id="specialty_card" className="pt-16 space-y-4">
-        <div className="grid grid-cols-3 gap-4">
+        <div className="grid md:grid-cols-3 grid-cols-2 gap-4">
           {specialtyDB
             .filter((el) => el.tag === "TOP")
             .map((el, i) => {
@@ -22,21 +22,22 @@ const OurSpecialty = () => {
                   key={i}
                   className="text-center   dark:bg-[#2025328c] bg-slate-50 shadow-md overflow-y-auto  p-5 w-full h-60 rounded-2xl space-y-4 "
                 >
-                  <div className="w-[100px] mx-auto">
+                  <div className="md:w-24 md:h-24 w-20 h-20 mx-auto relative overflow-hidden">
                     <Image
-                      width={100}
-                      height={100}
+                      className="absolute top-0"
+                      layout="fill"
+                      objectFit="cover"
                       src={el.icon}
                       alt="specialty representor"
                     />
                   </div>
 
-                  <p>{el.shortDesc}</p>
+                  <p className={`text-[14px] md:text-base`}>{el.shortDesc}</p>
                 </div>
               );
             })}
         </div>
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid md:grid-cols-2 grid-flow-row gap-4">
           {specialtyDB
             .filter((el) => el.tag === "BOTTOM")
             .map((el, i) => {

@@ -5,14 +5,14 @@ const SetYourSkill = () => {
   return (
     <section className="font-HSRegular container mt-[10rem]">
       <div id="heading_text">
-        <p className="text-4xl text-center font-HSBold">
+        <p className="md:text-4xl text-2xl text-center font-HSBold">
           নিজের{" "}
           <span className="text-[var(--red-primary-brand-color)]">দক্ষতা</span>{" "}
           নিজেই গুছিয়ে নেয়ার যাত্রা শুরু হোক
         </p>
       </div>
       <div id="process__of__learning__card" className="mt-16">
-        <div className="grid grid-cols-3 gap-4 ">
+        <div className="grid md:grid-cols-3 grid-cols-1 gap-4 ">
           {skillDb.map((el, i) => {
             return (
               <div

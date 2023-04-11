@@ -152,7 +152,7 @@ const Navigation = () => {
             </m.div>
             {mounted && (
               <m.li
-                className="cursor-pointer border rounded-full w-14 h-6  bg-gray-800 relative overflow-hidden mr-4 my-2"
+                className="cursor-pointer border rounded-full  bg-gray-800 relative overflow-hidden mr-4 my-2 w-14 h-6"
                 onClick={handleThemeControl}
               >
                 <Image
