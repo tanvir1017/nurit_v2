@@ -8,10 +8,16 @@ export default async function middleware(req: NextRequest) {
   const jwtValue = jwt?.value;
   const { pathname } = req.nextUrl;
 
+  // Comment: => ignore to load the public folder path
   const PUBLIC_FILE = /\.(.*)$/;
   if (PUBLIC_FILE.test(pathname)) return NextResponse.next();
 
-  if (pathname.startsWith("/dashboard")) {
+  if (pathname.startsWith("/auth")) {
+    if (jwt) {
+      req.nextUrl.pathname = "/";
+      return NextResponse.redirect(req.nextUrl);
+    }
+  } else if (pathname.startsWith("/dashboard")) {
     if (jwt === undefined) {
       req.nextUrl.pathname = "/auth/login";
       return NextResponse.redirect(req.nextUrl);
@@ -20,7 +26,7 @@ export default async function middleware(req: NextRequest) {
     try {
       const decode = await verify(jwtValue as string, secret);
       if (decode?.role !== "ADMIN") {
-        req.nextUrl.pathname = "/404";
+        req.nextUrl.pathname = "/401";
         return NextResponse.redirect(req.nextUrl);
       }
       return NextResponse.next();

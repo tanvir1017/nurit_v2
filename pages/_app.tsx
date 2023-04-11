@@ -39,11 +39,13 @@ export default function App({ Component, pageProps, router }: AppProps) {
         <div style={{ opacity: 1 }}>
           {!pathname.includes("/auth") &&
             !pathname.includes("/dashboard") &&
-            !pathname.includes("/404") && <Navigation />}
+            !pathname.includes("/404") &&
+            !pathname.includes("/401") && <Navigation />}
           <Component {...pageProps} />
           {!pathname.includes("/auth") &&
             !pathname.includes("/dashboard") &&
-            !pathname.includes("/404") && <Footer />}
+            !pathname.includes("/404") &&
+            !pathname.includes("/401") && <Footer />}
         </div>
       </ThemeProvider>
     </ContextProvider>
