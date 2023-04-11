@@ -4,7 +4,7 @@ import Image from "next/image";
 const JoinWithUs = () => {
   return (
     <section className="container font-HSRegular my-[10rem]">
-      <div className="flex justify-center items-center">
+      <div className="flex-col md:flex md:flex-row justify-center items-center">
         <div className="">
           <Image
             width={650}
@@ -13,10 +13,10 @@ const JoinWithUs = () => {
             alt="join with us"
           />
         </div>
-        <div>
-          <p className="text-5xl font-HSBold leading-[5rem]">
+        <div className="md:mt-0 mt-4">
+          <p className="md:text-5xl text-3xl font-HSBold md:leading-[5rem]">
             আজই জয়েন করুন আমাদের
-            <br />
+            <br className="md:block hidden" />
             ওয়েব সাইটের মাধ্যমে
           </p>
           <small className="font-HSMedium block text-xl">

@@ -158,11 +158,11 @@ const SignIn = () => {
         // key="skill course, course, ms office, office 364"
       />
       <ToastContainer transition={Bounce} hideProgressBar />
-      <div className="font-HSRegular large_container">
-        <div className="px-12">
+      <div className="font-HSRegular md:large_container  px-7 py-5">
+        <div className="md:px-12">
           <div className="flex justify-between items-center">
             <LightModeBrand />
-            <div>
+            <div className="md:block hidden">
               <span className="font-HSSemiBold">
                 ইতিমধ্যে একটি এ্যকাউন্ট আছে ?
               </span>{" "}
@@ -180,8 +180,8 @@ const SignIn = () => {
             </div>
           </div>
 
-          <div className="flex justify-around items-center mt-12">
-            <div className="login_image">
+          <div className="md:flex justify-around items-center mt-12">
+            <div className="login_image md:block hidden">
               <Image
                 width={550}
                 height={100}
@@ -314,6 +314,22 @@ const SignIn = () => {
                 </div>
                 <div className="flex justify-between items-center relative">
                   <SubmitButton loading={loading} buttonText="সাইন-ইন" />
+                </div>
+                <div className="md:hidden block">
+                  <span className="font-HSSemiBold">
+                    ইতিমধ্যে একটি এ্যকাউন্ট আছে ?
+                  </span>{" "}
+                  <Link href="/auth/login">
+                    <m.button
+                      variants={childVariants}
+                      whileHover={{ scale: 1.1 }}
+                      whileTap={{ scale: 0.9 }}
+                      type="button"
+                      className="ml-5 bg-transparent border-[var(--red-primary-brand-color)] border  rounded-3xl text-[var(--red-primary-brand-color)] px-4 py-1"
+                    >
+                      লগইন
+                    </m.button>
+                  </Link>
                 </div>
               </form>
 

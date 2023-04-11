@@ -126,6 +126,7 @@ const MobileNav = () => {
                 const { path, routeName } = nav;
                 return (
                   <Link
+                    onClick={handleToggleNav}
                     href={path as string}
                     key={index}
                     className="p-3 dark:hover:bg-[#212a4057] hover:bg-[#fff]  backdrop:blur-md rounded-lg w-full dark:text-white text-[#0a1020] font-HSMedium text-[18px]"

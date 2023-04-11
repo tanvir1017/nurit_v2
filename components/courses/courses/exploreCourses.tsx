@@ -7,16 +7,6 @@ const ExploreCourses = () => {
   const [width, setWidth] = useState<number>(0);
   const carouselRef = useRef<number | any>();
 
-  let [isOpen, setIsOpen] = useState(true);
-
-  function closeModal() {
-    setIsOpen(false);
-  }
-
-  function openModal() {
-    setIsOpen(true);
-  }
-
   useEffect(() => {
     setWidth(
       carouselRef?.current?.scrollWidth - carouselRef?.current?.offsetWidth
@@ -25,18 +15,14 @@ const ExploreCourses = () => {
 
   return (
     <section className="my-24">
-      <m.div className="grid grid-flow-col place-items-start">
-        <p
-          className="text-6xl p-3 font-HSSemiBold leading-tight"
-          // onClick={() => <Modal isOpen={} />}
-        >
+      <m.div className="grid sm:grid-flow-col  place-items-start">
+        <p className="sm:text-6xl text-4xl p-3 font-HSSemiBold leading-tight">
           নতুন কিছু
           <br />{" "}
           <span className="text-[var(--red-primary-brand-color)]">
             এক্সপ্লোর করুন
           </span>
         </p>
-        {/* <Modal isOpen={isOpen} openModal={openModal} closeModal={closeModal} /> */}
         <m.div ref={carouselRef} className="w-[50rem] overflow-hidden">
           <m.div
             className="inner-carousel flex space-x-5"

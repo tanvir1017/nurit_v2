@@ -1,3 +1,4 @@
+import Metadata from "@/util/SEO/metadata";
 import ContactUs from "./contactUs/contactUs";
 import HeadingSection from "./heading/headingSection";
 import JoinWithUs from "./joinwithus/joinWithUs";
@@ -11,6 +12,7 @@ import TrendyCourses from "./trendyCourse/trendyCourses";
 const Homepage = () => {
   return (
     <>
+      <Metadata title="NurIT | Home" content="" name="" />
       <HeadingSection />
       <TrendyCourses />
       <SetYourSkill />

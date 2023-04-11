@@ -82,7 +82,7 @@ export function Dropdown(props: TokenDataType) {
               </div>
               <p className="text-lg font-medium mt-2">Tanvir</p>
               <Link
-                href="/user"
+                href="/not-finished-yet"
                 className="px-4 py-2 bg-[var(--red-primary-brand-color)] shadow-red-500/30 shadow-xl text-white inline-block text-sm rounded-full mt-2 mb-4"
               >
                 View Profile
@@ -93,7 +93,7 @@ export function Dropdown(props: TokenDataType) {
             <Menu.Item>
               {() => (
                 <Link
-                  href="/blog/create"
+                  href="/not-finished-yet"
                   className="py-3 px-4  w-full flex items-center space-x-2 hover:scale-105 transition duration-75"
                 >
                   <CiSettings className="text-[20px]" />

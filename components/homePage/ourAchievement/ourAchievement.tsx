@@ -11,7 +11,7 @@ const OurAchievement = () => {
         </p>
       </div>
       <div>
-        <div className="flex-col justify-center items-center mt-16 md:flex">
+        <div className="flex-col justify-center items-center mt-16 md:flex md:flex-row">
           <div className="grid grid-cols-2">
             {achievementDB.map((el, i) => (
               <div

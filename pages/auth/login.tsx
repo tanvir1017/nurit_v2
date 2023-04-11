@@ -139,11 +139,11 @@ const Login = () => {
       />
       <ToastContainer transition={Bounce} hideProgressBar />
       <Modal isOpen={isOpen} setIsOpen={setIsOpen} response={response} />
-      <div className="font-HSRegular large_container">
-        <div className="px-12">
-          <div className="flex justify-between items-center">
+      <div className="font-HSRegular md:large_container px-7 py-5">
+        <div className="md:px-12">
+          <div className="flex justify-between md:items-center">
             <LightModeBrand />
-            <div>
+            <div className="md:block hidden">
               <span className="font-HSSemiBold">আমার কোন অ্যাকাউন্ট নাই !</span>{" "}
               <Link href="/auth/verify-your-email">
                 <m.button
@@ -159,7 +159,7 @@ const Login = () => {
             </div>
           </div>
 
-          <div className="flex justify-around items-center mt-12">
+          <div className="md:flex justify-around items-center mt-12">
             <div className="login_image">
               <Image
                 width={450}
@@ -218,6 +218,23 @@ const Login = () => {
                     className="text-sm text-[var(--red-primary-brand-color)] underline decoration-1 italic "
                   >
                     পাসওয়ার্ড ভুলে গিয়েছি
+                  </Link>
+                </div>
+
+                <div className="md:hidden block">
+                  <span className="font-HSSemiBold">
+                    আমার কোন অ্যাকাউন্ট নাই !
+                  </span>{" "}
+                  <Link href="/auth/verify-your-email">
+                    <m.button
+                      variants={childVariants}
+                      whileHover={{ scale: 1.1 }}
+                      whileTap={{ scale: 0.9 }}
+                      type="button"
+                      className="ml-5 bg-transparent border-[var(--red-primary-brand-color)] border  rounded-3xl text-[var(--red-primary-brand-color)] px-4 py-1"
+                    >
+                      এ্যকাউন্ট খুলন
+                    </m.button>
                   </Link>
                 </div>
               </form>

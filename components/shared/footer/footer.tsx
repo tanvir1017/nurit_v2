@@ -12,8 +12,8 @@ import LightModeBrand from "../brand";
 const Footer = () => {
   return (
     <footer className="bg-[var(--black-primary-brand-color)]  font-HSRegular text-white">
-      <div className="container px-16 py-28 ">
-        <div className="grid grid-cols-5 gap-5 space-x-4">
+      <div className="container md:px-16 px-5 py-28 ">
+        <div className="grid md:grid-cols-5 gap-5 space-x-4">
           <div className="col-span-2 pr-5 space-y-4">
             <LightModeBrand />
             <p className="pt-8">
@@ -28,7 +28,7 @@ const Footer = () => {
                 Copyright © 2022 Nur IT Institute. All rights reserved
               </small>
 
-              <div className="flex items-center pt-20">
+              <div className="flex items-center md:pt-20 pt-5">
                 <p className="flex items-center justify-between mr-5">
                   In touch <BsArrowBarRight className="ml-1" />{" "}
                 </p>
@@ -43,9 +43,9 @@ const Footer = () => {
               </div>
             </div>
           </div>
-          <div>
+          <div className="md:mt-0 mt-5">
             <p className="font-HSMedium text-xl">কোর্স ক্যাটেগরি</p>
-            <ul className="ml-5 space-y-3 mt-3 text-sm">
+            <ul className="md:ml-5 ml-2 space-y-3 mt-3 text-sm">
               {[
                 "3D ভিজুয়ালাইজেশন ",
                 "গ্রাফিক্স ডিজাইন",
@@ -67,9 +67,9 @@ const Footer = () => {
               ))}
             </ul>
           </div>{" "}
-          <div>
+          <div className="md:mt-0 mt-5">
             <p className="font-HSMedium text-xl">প্রয়োজনীয় লিঙ্ক</p>
-            <ul className="ml-5 space-y-3 mt-3 text-sm">
+            <ul className="md:ml-5 ml-2 space-y-3 mt-3 text-sm">
               {[
                 "সার্টিফিকেট খুঁজুন",
                 "ব্লগ",
@@ -89,9 +89,9 @@ const Footer = () => {
               ))}
             </ul>
           </div>{" "}
-          <div>
+          <div className="md:mt-0 mt-5">
             <p className="font-HSMedium text-xl">লিগ্যাল</p>
-            <ul className="ml-5 space-y-3 mt-3 text-sm ">
+            <ul className="md:ml-5 ml-2 space-y-3 mt-3 text-sm ">
               {[
                 "ব্যবহার বিধি",
                 "FAQ",

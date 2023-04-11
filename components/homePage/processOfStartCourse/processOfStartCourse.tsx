@@ -14,7 +14,7 @@ const ProcessOfStartCourse = () => {
       </div>
 
       <div id="process_of_start_course" className="my-12">
-        <div className="grid grid-cols-4 gap-4">
+        <div className="grid md:grid-cols-4 grid-cols-1 gap-4">
           {processOfStartCourse.map((el, i) => (
             <div
               key={i}

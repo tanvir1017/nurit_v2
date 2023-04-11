@@ -1,3 +1,4 @@
+import Metadata from "@/util/SEO/metadata";
 import { apiUrl } from "@/util/api";
 import { DashBoardAuthorTableType } from "@/util/types/types";
 import { GetStaticProps } from "next";
@@ -56,6 +57,12 @@ export const UsersFetcher = () => {
 
   return (
     <Layout>
+      <Metadata
+        title="Dashboard | Manage users"
+        name="Dashboard panel for admin and specific Member"
+        content="all course page. You can find every course in this page that we are providing"
+        // key="skill course, course, ms office, office 364"
+      />
       <main className="App">{content}</main>
     </Layout>
   );

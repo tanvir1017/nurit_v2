@@ -13,17 +13,17 @@ const ContactUs = () => {
         </p>
       </div>
       <div id="contact_card" className="p-16">
-        <div className="grid grid-cols-3 gap-4">
-          <div className="h-48  p-6 rounded-2xl bg-[#F0F8FF] text-black text-center border-t-2 border-t-[#3698EC]">
-            <FiPhoneCall className="text-[#3698EC] text-6xl mb-8 mx-auto" />
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 grid-cols-1  gap-4 relative ">
+          <div className=" sm:h-48  p-6 rounded-2xl bg-[#F0F8FF] text-black text-center border-t-2 border-t-[#3698EC]">
+            <FiPhoneCall className="text-[#3698EC] md:text-6xl text-3xl mb-8 mx-auto" />
             <p>যেকোনো প্রকার সাহয্যের জন্য কল করুন।</p>
-            <div className="flex justify-center items-center text-[#3698EC] space-x-5 ">
+            <div className="md:flex justify-center items-center text-[#3698EC] md:space-x-5 ">
               <p>+880 162 4666000 </p>
               <p>+880 162 4888444</p>
             </div>
           </div>
           <div className=" p-6 rounded-2xl bg-[#F0FFF1] text-black text-center border-t-2 border-t-[#26E07F]">
-            <BsEnvelopePaperHeartFill className="text-[#07ba6c] text-6xl mb-8 mx-auto" />
+            <BsEnvelopePaperHeartFill className="text-[#07ba6c] md:text-6xl text-3xl mb-8 mx-auto" />
             <p>
               আমাদের সম্পর্কে কোন জানা বা জিজ্ঞাসা করার থাকলে নিম্মের ইমেইল
               গুলোতে পাঠাতে পারেন।
@@ -40,7 +40,7 @@ const ContactUs = () => {
             </div>
           </div>
           <div className="h-48 p-6 rounded-2xl bg-[#FFF0F0] text-black text-center border-t-2 border-t-[#FA314A]">
-            <BiChat className="text-[#FA314A] text-6xl mb-8 mx-auto" />
+            <BiChat className="text-[#FA314A] md:text-6xl text-3xl mb-8 mx-auto" />
             <p>
               আমাদের কাষ্টমার কেয়ার এর সাথে সরাসরি চ্যাট এর মাধ্যমে সাপ্তাহে{" "}
               <strong className="text-[#FA314A]">০৭ দিন, ২৪ ঘন্টা</strong>{" "}

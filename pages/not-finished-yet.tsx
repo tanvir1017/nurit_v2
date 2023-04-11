@@ -3,13 +3,13 @@ import { motion as m } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 
-function Seminars() {
+function notFinishedYet() {
   return (
     <>
       <Metadata
-        title="NurIT | Seminars"
-        name="Seminar page"
-        content="all course page. You can find every course in this page that we are providing"
+        title="NurIT | Not finished yet"
+        name="Not finished yet"
+        content="Not finished yet"
         // key="skill course, course, ms office, office 364"
       />
       <main className="App">
@@ -44,4 +44,4 @@ function Seminars() {
   );
 }
 
-export default Seminars;
+export default notFinishedYet;
