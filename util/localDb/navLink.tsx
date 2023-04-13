@@ -11,7 +11,6 @@ export const largeNavigationData: largeNavigationDataType = [
   { routeName: "সবগুলো কোর্স দেখ", path: "/courses" },
   { routeName: "ব্লগ", path: "/blogs" },
   { routeName: "সেমিনারস", path: "/not-finished-yet" },
-  { routeName: "গ্যালারি", path: "/blurImage" },
 ];
 
 export const dashboardMenuItems: DashboardMenuItem[] = [
