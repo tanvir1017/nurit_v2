@@ -1,6 +1,6 @@
 import { Blur } from "@/components/shared/blur";
+import { BlurImage } from "@/lib/blurImage";
 import { motion as m } from "framer-motion";
-import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { BsSearch } from "react-icons/bs";
@@ -50,12 +50,14 @@ const HeadingSection = () => {
               </m.button>
             </div>
           </div>
-          <m.div className="left__side z-30  transition duration-100">
-            <Image
-              src="/images/content/userTable.png"
-              alt="user setting on table "
+          <m.div className="left__side z-30  transition duration-100 ">
+            <BlurImage
+              imageSrc="/images/content/userTable.png"
+              alt="user setting on table"
               width={500}
               height={100}
+              customHeight="29rem"
+              bg="bg-white/15"
             />
           </m.div>
         </div>

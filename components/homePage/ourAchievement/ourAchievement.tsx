@@ -1,5 +1,5 @@
+import { BlurImage, MinimalBlurImage } from "@/lib/blurImage";
 import { achievementDB } from "@/util/localDb/skillDb";
-import Image from "next/image";
 
 const OurAchievement = () => {
   return (
@@ -19,7 +19,14 @@ const OurAchievement = () => {
                 className="flex items-center justify-start w-60 md:m-5 mt-5 "
               >
                 <div className="mr-5 transition">
-                  <Image width={80} height={100} src={el.icon} alt={el.title} />
+                  <MinimalBlurImage
+                    width={80}
+                    height={100}
+                    imageSrc={el.icon}
+                    alt={el.title}
+                    customHeight="5rem"
+                    bg="bg-white/60"
+                  />
                 </div>
 
                 <div>
@@ -31,11 +38,13 @@ const OurAchievement = () => {
           </div>
           <div>
             <div className="transition-all md:mt-0 mt-8 ">
-              <Image
-                src="/images/content/achievement.png"
+              <BlurImage
+                imageSrc="/images/content/achievement.png"
                 alt="our achievement representor"
                 width={550}
                 height={100}
+                customHeight="29rem"
+                bg="bg-white/15"
               />
             </div>
           </div>

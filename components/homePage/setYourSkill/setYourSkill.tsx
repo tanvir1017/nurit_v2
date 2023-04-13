@@ -1,5 +1,5 @@
+import { MinimalBlurImage } from "@/lib/blurImage";
 import { skillDb } from "@/util/localDb/skillDb";
-import Image from "next/image";
 
 const SetYourSkill = () => {
   return (
@@ -19,7 +19,15 @@ const SetYourSkill = () => {
                 key={i}
                 className=" dark:bg-[#2025328c] bg-slate-50 shadow-md  overflow-y-auto  p-5 w-full h-60 rounded-2xl space-y-4"
               >
-                <Image width={80} height={100} src={el.icon} alt={el.title} />
+                <MinimalBlurImage
+                  width={80}
+                  height={100}
+                  imageSrc={el.icon}
+                  alt={el.title}
+                  customHeight="5rem"
+                  bg="bg-white/15"
+                />
+                {/* <Image width={80} height={100} src={el.icon} alt={el.title} /> */}
 
                 <p className="text-2xl font-HSBold">{el.title}</p>
                 <p className="font-HSSemiBold">{el.subTitle}</p>

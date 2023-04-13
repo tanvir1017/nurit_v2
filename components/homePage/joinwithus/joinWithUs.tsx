@@ -1,16 +1,18 @@
+import { BlurImage } from "@/lib/blurImage";
 import { motion as m } from "framer-motion";
-import Image from "next/image";
 
 const JoinWithUs = () => {
   return (
     <section className="container font-HSRegular my-[10rem]">
       <div className="flex-col md:flex md:flex-row justify-center items-center">
         <div className="">
-          <Image
+          <BlurImage
+            imageSrc="/images/content/joinwitUs.png"
+            alt="join with us"
             width={650}
             height={100}
-            src="/images/content/joinwitUs.png"
-            alt="join with us"
+            customHeight="29rem"
+            bg="bg-white/15"
           />
         </div>
         <div className="md:mt-0 mt-4">

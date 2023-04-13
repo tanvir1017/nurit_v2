@@ -1,5 +1,5 @@
+import { MinimalBlurImage } from "@/lib/blurImage";
 import { specialtyDB } from "@/util/localDb/skillDb";
-import Image from "next/image";
 
 const OurSpecialty = () => {
   return (
@@ -22,14 +22,22 @@ const OurSpecialty = () => {
                   key={i}
                   className="text-center   dark:bg-[#2025328c] bg-slate-50 shadow-md overflow-y-auto  p-5 w-full h-60 rounded-2xl space-y-4 "
                 >
-                  <div className="md:w-24 md:h-24 w-20 h-20 mx-auto relative overflow-hidden">
-                    <Image
+                  <div className="flex justify-center">
+                    <MinimalBlurImage
+                      width={100}
+                      height={100}
+                      imageSrc={el.icon}
+                      alt={el.shortDesc}
+                      customHeight="5rem"
+                      bg="bg-white/15"
+                    />
+                    {/* <Image
                       className="absolute top-0"
                       layout="fill"
                       objectFit="cover"
                       src={el.icon}
                       alt="specialty representor"
-                    />
+                    /> */}
                   </div>
 
                   <p className={`text-[14px] md:text-base`}>{el.shortDesc}</p>
@@ -46,7 +54,7 @@ const OurSpecialty = () => {
                   key={i}
                   className="text-left   dark:bg-[#2025328c] bg-slate-50 shadow-md  overflow-y-hidden  p-5 w-full h-60 rounded-2xl space-x-4 flex justify-start items-center"
                 >
-                  <Image
+                  {/* <Image
                     src={el.icon}
                     alt="specialty representor"
                     width={200}
@@ -54,7 +62,21 @@ const OurSpecialty = () => {
                     className={`rounded-full mr-4 outline  ${
                       i === 0 ? "outline-[#6F71E6]  " : "outline-[#F8580B]"
                     }  outline-offset-4`}
-                  />
+                  /> */}
+                  <div
+                    className={`rounded-full mr-4 outline  ${
+                      i === 0 ? "outline-[#6F71E6]  " : "outline-[#F8580B]"
+                    }  outline-offset-4`}
+                  >
+                    <MinimalBlurImage
+                      imageSrc={el.icon}
+                      alt="specialty representor"
+                      width={200}
+                      height={100}
+                      customHeight="5rem"
+                      bg="bg-white/15"
+                    />
+                  </div>
 
                   <div>
                     <p
