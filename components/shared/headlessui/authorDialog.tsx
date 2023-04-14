@@ -4,9 +4,7 @@ import { DashBoardAuthorTableType } from "@/util/types/types";
 import { Dialog, Transition } from "@headlessui/react";
 import { useTheme } from "next-themes";
 import { Fragment, useState } from "react";
-import { TbAlertTriangleFilled } from "react-icons/tb";
-import { TiInfoOutline } from "react-icons/ti";
-import { toast } from "react-toastify";
+import toast from "react-hot-toast";
 import useSwr from "swr";
 export default function AuthorDialog({
   isOpen,
@@ -30,7 +28,7 @@ export default function AuthorDialog({
     setIsOpen(false);
   }
   const { theme } = useTheme();
-  const createdUser = createdAtDateFormatter(user?.createdAt);
+  const createdUser = createdAtDateFormatter(user?.updatedAt);
   const handleOnUserInfoUpdate = async (e: any) => {
     e.preventDefault();
     const id = user?.id;
@@ -59,27 +57,20 @@ export default function AuthorDialog({
         if (!response.success) {
           setLoading(false);
           toast.error(response.message, {
-            icon: (
-              <TiInfoOutline className="text-[var(--red-primary-brand-color)]" />
-            ),
-            position: toast.POSITION.BOTTOM_CENTER,
+            duration: 5000,
           });
         } else {
           setLoading(false);
           toast.success(response.message, {
-            icon: <TbAlertTriangleFilled className="text-green-400 text-3xl" />,
-            position: toast.POSITION.BOTTOM_CENTER,
+            duration: 2000,
           });
-          mutate("/api/auth");
+          closeModal();
         }
       });
-    } catch (error) {
+    } catch (err) {
       setLoading(false);
-      toast.success("Something went wrong!, try again later", {
-        icon: (
-          <TiInfoOutline className="text-[var(--red-primary-brand-color)]" />
-        ),
-        position: toast.POSITION.BOTTOM_CENTER,
+      toast.error("something went wrong", {
+        duration: 5000,
       });
     }
   };
@@ -165,15 +156,12 @@ export default function AuthorDialog({
                         id="gender"
                       >
                         <option value={gender}>{gender}</option>
-                        {user?.gender !== "male" && (
-                          <option value="male">male</option>
-                        )}{" "}
-                        {user?.gender !== "female" && (
-                          <option value="female">female</option>
-                        )}{" "}
-                        {user?.gender !== "others" && (
-                          <option value="others">others</option>
-                        )}
+
+                        <option value="male">male</option>
+
+                        <option value="female">female</option>
+
+                        <option value="others">others</option>
                       </select>
                       <select
                         onChange={(e) => setRole(e.target.value)}
@@ -181,15 +169,12 @@ export default function AuthorDialog({
                         id="role"
                       >
                         <option value={role}>{role}</option>
-                        {user?.role !== "STUDENT" && (
-                          <option value="STUDENT">STUDENT</option>
-                        )}{" "}
-                        {user?.role !== "MEMBER" && (
-                          <option value="MEMBER">MEMBER</option>
-                        )}{" "}
-                        {user?.role !== "ADMIN" && (
-                          <option value="ADMIN">ADMIN</option>
-                        )}
+
+                        <option value="STUDENT">STUDENT</option>
+
+                        <option value="MEMBER">MEMBER</option>
+
+                        <option value="ADMIN">ADMIN</option>
                       </select>
                       <input
                         defaultValue={createdUser}

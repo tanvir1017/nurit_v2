@@ -1,6 +1,9 @@
 import Metadata from "@/util/SEO/metadata";
+import { apiUrl } from "@/util/api";
 import { DashBoardAuthorTableType } from "@/util/types/types";
-import useSWR from "swr";
+
+import { GetServerSideProps } from "next";
+import useSWR, { SWRConfig } from "swr";
 import Layout from "../layout";
 import AuthorTable from "./authorTable";
 
@@ -8,17 +11,29 @@ const fetcher = (url: RequestInfo | URL) =>
   fetch(url).then((res) => res.json());
 const API = "/api/auth";
 
-const UsersFetcher = () => {
-  const { data, error, isLoading } = useSWR(API, fetcher);
+export const getServerSideProps: GetServerSideProps = async () => {
+  const data = await fetcher(`${apiUrl}/api/auth`);
+  return {
+    props: {
+      fallback: {
+        [API]: data,
+      },
+    },
+  };
+};
+
+export const UsersFetcher = () => {
+  const { data, error, isLoading, isValidating } = useSWR(API);
+  console.log(data);
   let content = null;
-  if (!data && !isLoading && error) {
+  if (!data && !isLoading && !isValidating && error) {
     content = "An error has occurred.";
   }
 
-  if (!error && !data && isLoading) {
+  if (!error && !data && !isValidating && isLoading) {
     content = "Loading...";
   }
-  if (!error && !isLoading && data) {
+  if (!error && !isLoading && !isValidating && data) {
     content = (
       <section className="container">
         <div>
@@ -55,9 +70,15 @@ const UsersFetcher = () => {
         content="all course page. You can find every course in this page that we are providing"
         // key="skill course, course, ms office, office 364"
       />
-      <main className="App">{content} </main>
+      <main className="App">{content}</main>
     </Layout>
   );
 };
 
-export default UsersFetcher;
+export default function Users({ fallback }: { fallback: any }) {
+  return (
+    <SWRConfig value={{ fallback }}>
+      <UsersFetcher />
+    </SWRConfig>
+  );
+}

@@ -7,6 +7,7 @@ import { ThemeProvider } from "next-themes";
 import type { AppProps } from "next/app";
 import NextNProgress from "nextjs-progressbar";
 import { useEffect } from "react";
+import { Toaster } from "react-hot-toast";
 import "react-quill/dist/quill.snow.css";
 import { Bounce, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -47,7 +48,7 @@ export default function App({ Component, pageProps, router }: AppProps) {
                 <MobileNav />
               </>
             )}
-
+          <Toaster position="bottom-center" reverseOrder={true} />
           <Component {...pageProps} />
           {!pathname.includes("/auth") &&
             !pathname.includes("/dashboard") &&

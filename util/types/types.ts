@@ -107,6 +107,7 @@ export interface CookieType {
 export interface DashBoardAuthorTableType {
   id: string;
   createdAt: string;
+  updatedAt: string;
   first__name: string;
   last__name: string;
   email__id: string;
