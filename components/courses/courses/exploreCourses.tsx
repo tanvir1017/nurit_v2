@@ -1,6 +1,6 @@
+import { MinimalBlurImage } from "@/lib/blurImage";
 import { exploreCoursesFilterData } from "@/util/localDb";
 import { motion as m } from "framer-motion";
-import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 
 const ExploreCourses = () => {
@@ -37,12 +37,14 @@ const ExploreCourses = () => {
                 className={`item border hover:border-[var(--red-primary-brand-color)] duration-300 min-w-[11rem] cursor-pointer p-5 h-40 text-center`}
                 key={i}
               >
-                <div className="mx-auto mb-6  transition ">
-                  <Image
-                    src={el.iconSource}
+                <div className="grid place-content-center  mb-6 ">
+                  <MinimalBlurImage
+                    imageSrc={el.iconSource}
                     alt="Filter"
                     width={40}
                     height={100}
+                    customStyle="bg-white/60 w-[4rem]"
+                    customHeight="4rem"
                   />
                 </div>
 

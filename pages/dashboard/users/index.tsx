@@ -1,7 +1,8 @@
 import Metadata from "@/util/SEO/metadata";
 import { apiUrl } from "@/util/api";
 import { DashBoardAuthorTableType } from "@/util/types/types";
-import { GetStaticProps } from "next";
+
+import { GetServerSideProps } from "next";
 import useSWR, { SWRConfig } from "swr";
 import Layout from "../layout";
 import AuthorTable from "./authorTable";
@@ -10,7 +11,7 @@ const fetcher = (url: RequestInfo | URL) =>
   fetch(url).then((res) => res.json());
 const API = "/api/auth";
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getServerSideProps: GetServerSideProps = async () => {
   const data = await fetcher(`${apiUrl}/api/auth`);
   return {
     props: {
@@ -22,15 +23,17 @@ export const getStaticProps: GetStaticProps = async () => {
 };
 
 export const UsersFetcher = () => {
-  const { data, error } = useSWR(API);
+  const { data, error, isLoading, isValidating } = useSWR(API);
+  console.log(data);
   let content = null;
-  if (error) {
+  if (!data && !isLoading && !isValidating && error) {
     content = "An error has occurred.";
   }
-  if (!data) {
+
+  if (!error && !data && !isValidating && isLoading) {
     content = "Loading...";
   }
-  if (!error && data)
+  if (!error && !isLoading && !isValidating && data) {
     content = (
       <section className="container">
         <div>
@@ -45,15 +48,19 @@ export const UsersFetcher = () => {
               <p>REGISTERED</p>
               <p>STATUS</p>
             </div>
-            {data.returnData.users.map(
-              (user: DashBoardAuthorTableType, i: number) => (
-                <AuthorTable key={i} user={user} />
-              )
-            )}
+
+            <div>
+              {data.returnData.users.map(
+                (user: DashBoardAuthorTableType, i: number) => (
+                  <AuthorTable key={i} user={user} />
+                )
+              )}
+            </div>
           </div>
         </div>
       </section>
     );
+  }
 
   return (
     <Layout>

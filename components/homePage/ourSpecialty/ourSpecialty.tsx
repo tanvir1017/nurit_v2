@@ -29,7 +29,7 @@ const OurSpecialty = () => {
                       imageSrc={el.icon}
                       alt={el.shortDesc}
                       customHeight="5rem"
-                      bg="bg-white/15"
+                      customStyle="bg-white/15 rounded-full"
                     />
                     {/* <Image
                       className="absolute top-0"
@@ -74,7 +74,7 @@ const OurSpecialty = () => {
                       width={200}
                       height={100}
                       customHeight="5rem"
-                      bg="bg-white/15"
+                      customStyle="bg-white/15 rounded-full"
                     />
                   </div>
 

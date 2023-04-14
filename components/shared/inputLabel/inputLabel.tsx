@@ -77,7 +77,7 @@ export const TextInputLabel = ({
         ref={field_ref}
         className={`${
           nameText === "Add tags" && "hidden"
-        } placeholder:italic placeholder:text-slate-400 block dark:bg-[#232229] bg-slate-50  w-full border border-gray-500  rounded-md py-3 pl-9 pr-3 shadow-sm focus:outline-none ${
+        } placeholder:italic placeholder:text-slate-400 block dark:bg-[#232229]   bg-slate-50  w-full border border-gray-500  rounded-md py-3 pl-9 pr-3 shadow-sm focus:outline-none ${
           type !== "email" &&
           "focus:border-[var(--red-primary-brand-color)]  focus:ring-[var(--red-primary-brand-color)]"
         } focus:ring-1 sm:text-sm ${disabled && "cursor-no-drop"}  ${

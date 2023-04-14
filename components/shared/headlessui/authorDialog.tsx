@@ -1,8 +1,13 @@
+import SubmitButton from "@/util/buttons/submitButton";
+import { createdAtDateFormatter } from "@/util/dateFormatter";
 import { DashBoardAuthorTableType } from "@/util/types/types";
 import { Dialog, Transition } from "@headlessui/react";
 import { useTheme } from "next-themes";
-import { Fragment } from "react";
-
+import { Fragment, useState } from "react";
+import { TbAlertTriangleFilled } from "react-icons/tb";
+import { TiInfoOutline } from "react-icons/ti";
+import { toast } from "react-toastify";
+import useSwr from "swr";
 export default function AuthorDialog({
   isOpen,
   setIsOpen,
@@ -12,11 +17,72 @@ export default function AuthorDialog({
   isOpen: any;
   user: DashBoardAuthorTableType;
 }) {
+  const { mutate } = useSwr("/api/auth");
+  const [loading, setLoading] = useState<boolean>(false);
+  const [first__name, setFirstName] = useState<string>(user?.first__name);
+  const [last__name, setLastName] = useState<string>(user?.last__name);
+  const [phone__numb, setPhone] = useState<any>(user?.phone__numb);
+  const [email, setEmail] = useState<string>(user?.email__id);
+  const [photo__URL, setPhoto] = useState<string>(user?.photo__URL);
+  const [gender, setGender] = useState<string>(user?.gender);
+  const [role, setRole] = useState<string>(user?.role);
   function closeModal() {
     setIsOpen(false);
   }
   const { theme } = useTheme();
-  console.log(user);
+  const createdUser = createdAtDateFormatter(user?.createdAt);
+  const handleOnUserInfoUpdate = async (e: any) => {
+    e.preventDefault();
+    const id = user?.id;
+    setLoading(true);
+
+    try {
+      await mutate(async () => {
+        const res = await fetch("/api/auth", {
+          method: "PUT",
+          headers: {
+            "Content-type": "application/json",
+          },
+          body: JSON.stringify({
+            id,
+            first__name,
+            last__name,
+            phone__numb,
+            email__id: email,
+            photo__URL,
+            gender,
+            role,
+          }),
+        });
+
+        const response = await res.json();
+        if (!response.success) {
+          setLoading(false);
+          toast.error(response.message, {
+            icon: (
+              <TiInfoOutline className="text-[var(--red-primary-brand-color)]" />
+            ),
+            position: toast.POSITION.BOTTOM_CENTER,
+          });
+        } else {
+          setLoading(false);
+          toast.success(response.message, {
+            icon: <TbAlertTriangleFilled className="text-green-400 text-3xl" />,
+            position: toast.POSITION.BOTTOM_CENTER,
+          });
+          mutate("/api/auth");
+        }
+      });
+    } catch (error) {
+      setLoading(false);
+      toast.success("Something went wrong!, try again later", {
+        icon: (
+          <TiInfoOutline className="text-[var(--red-primary-brand-color)]" />
+        ),
+        position: toast.POSITION.BOTTOM_CENTER,
+      });
+    }
+  };
   return (
     <>
       <Transition appear show={isOpen} as={Fragment}>
@@ -50,15 +116,92 @@ export default function AuthorDialog({
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
-                <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-[#E2EEF7] p-6 text-left align-middle shadow-xl transition-all">
+                <Dialog.Panel className="w-full sm:max-w-md lg:max-w-4xl transform overflow-hidden rounded-2xl dark:bg-gray-800 bg-slate-200 p-6 text-left align-middle shadow-xl transition-all">
                   <Dialog.Title
                     as="h3"
-                    className="text-2xl font-HSBold text-center  leading-6 text-blue-600"
+                    className="text-2xl font-HSBold text-center  leading-6 text-gray-600 mb-5"
                   >
-                    {user?.first__name}
+                    UPDATE USER INFO
                   </Dialog.Title>
-
-                  <div className="mt-4 text-black"> {user?.email__id}</div>
+                  <form onSubmit={handleOnUserInfoUpdate}>
+                    <div className="grid grid-cols-3 space-x-2 ">
+                      <input
+                        defaultValue={first__name}
+                        className={`py-3 px-2 rounded-md dark:bg-gray-700`}
+                        type="text"
+                        onChange={(e) => setFirstName(e.target.value)}
+                      />
+                      <input
+                        defaultValue={last__name}
+                        className={`py-3 px-2 rounded-md dark:bg-gray-700`}
+                        type="text"
+                        onChange={(e) => setLastName(e.target.value)}
+                      />{" "}
+                      <input
+                        defaultValue={phone__numb}
+                        className={`py-3 px-2 rounded-md dark:bg-gray-700`}
+                        type="text"
+                        onChange={(e) => setPhone(e.target.value)}
+                      />
+                    </div>{" "}
+                    <div className="grid grid-cols-2 space-x-2  mt-3">
+                      <input
+                        defaultValue={email}
+                        className={`py-3 px-2 rounded-md dark:bg-gray-700`}
+                        type="email"
+                        onChange={(e) => setEmail(e.target.value)}
+                      />
+                      <input
+                        defaultValue={photo__URL}
+                        className={`py-3 px-2 rounded-md dark:bg-gray-700`}
+                        type="text"
+                        onChange={(e) => setPhoto(e.target.value)}
+                      />{" "}
+                    </div>
+                    <div className="grid grid-cols-3 space-x-2  mt-3">
+                      <select
+                        onChange={(e) => setGender(e.target.value)}
+                        name="GENDER-SELECT"
+                        id="gender"
+                      >
+                        <option value={gender}>{gender}</option>
+                        {user?.gender !== "male" && (
+                          <option value="male">male</option>
+                        )}{" "}
+                        {user?.gender !== "female" && (
+                          <option value="female">female</option>
+                        )}{" "}
+                        {user?.gender !== "others" && (
+                          <option value="others">others</option>
+                        )}
+                      </select>
+                      <select
+                        onChange={(e) => setRole(e.target.value)}
+                        name="ROLE-SELECT"
+                        id="role"
+                      >
+                        <option value={role}>{role}</option>
+                        {user?.role !== "STUDENT" && (
+                          <option value="STUDENT">STUDENT</option>
+                        )}{" "}
+                        {user?.role !== "MEMBER" && (
+                          <option value="MEMBER">MEMBER</option>
+                        )}{" "}
+                        {user?.role !== "ADMIN" && (
+                          <option value="ADMIN">ADMIN</option>
+                        )}
+                      </select>
+                      <input
+                        defaultValue={createdUser}
+                        disabled
+                        className={`py-3 px-2 rounded-md dark:bg-gray-700 disabled:bg-slate-300`}
+                        type="text"
+                      />{" "}
+                    </div>
+                    <div className="mt-5">
+                      <SubmitButton buttonText="Update" loading={loading} />
+                    </div>
+                  </form>
                 </Dialog.Panel>
               </Transition.Child>
             </div>

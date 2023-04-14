@@ -25,7 +25,7 @@ const SetYourSkill = () => {
                   imageSrc={el.icon}
                   alt={el.title}
                   customHeight="5rem"
-                  bg="bg-white/15"
+                  customStyle="bg-white/15 rounded-full"
                 />
                 {/* <Image width={80} height={100} src={el.icon} alt={el.title} /> */}
 

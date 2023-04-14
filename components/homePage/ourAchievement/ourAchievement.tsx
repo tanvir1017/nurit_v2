@@ -25,7 +25,7 @@ const OurAchievement = () => {
                     imageSrc={el.icon}
                     alt={el.title}
                     customHeight="5rem"
-                    bg="bg-white/60"
+                    customStyle="bg-white/60 rounded-full"
                   />
                 </div>
 

@@ -51,6 +51,16 @@ export const registerAUser: registerAUserFunctionType = async ({
   return user;
 };
 
+export const updateUserFromDb = async (id: string, updatedData: any) => {
+  const user = await prisma.user.update({
+    where: {
+      id: id,
+    },
+    data: { ...updatedData },
+  });
+  return user;
+};
+
 export const deleteAUserFromDb: A__SingleModelFunctionType = async (id) => {
   const user = await prisma.user.delete({
     where: {

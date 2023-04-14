@@ -51,23 +51,23 @@ export function MinimalBlurImage({
   height,
   width,
   customHeight,
+  customStyle,
   alt,
-  bg,
 }: {
   imageSrc: string;
   height: number;
   width: number;
   customHeight: string;
+  customStyle: string;
   alt: string;
-  bg: string;
 }) {
   const [isLoading, setLoading] = useState(true);
 
   return (
     <div
-      className={`${
-        isLoading && `w-20 rounded-full ${bg} `
-      }  overflow-hidden rounded-full`}
+      className={`group ${isLoading && `${customStyle} `}  overflow-hidden ${
+        alt !== "Filter" && "rounded-full"
+      }`}
       style={{ height: isLoading ? customHeight : "" }}
     >
       <Image

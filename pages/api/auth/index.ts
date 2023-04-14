@@ -3,6 +3,7 @@ import {
   getASingleUser,
   getAllUser,
   registerAUser,
+  updateUserFromDb,
 } from "@/lib/dbOperatons/users.prisma";
 import { DB_OPERATION_METHOD, Data } from "@/util/types/types";
 import { setCookie } from "cookies-next";
@@ -102,6 +103,30 @@ const userCrud = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
             success: true,
             message: `User registered success`,
             returnData: registerUserToDB,
+          });
+        }
+      }
+      case DB_OPERATION_METHOD.PUT: {
+        if (!req.body.id) {
+          return res.status(400).json({
+            success: false,
+            message: "Bad request",
+          });
+        }
+
+        const { id, ...rest } = req.body;
+        const updateUser = await updateUserFromDb(id as string, rest);
+        if (!updateUser) {
+          return res.status(500).json({
+            success: false,
+            message: `Something went wrong when try to update user info `,
+            returnData: {},
+          });
+        } else {
+          return res.status(200).json({
+            success: true,
+            message: `user updated successful with this user id ${id}`,
+            returnData: updateUser,
           });
         }
       }
