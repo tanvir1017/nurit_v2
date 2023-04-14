@@ -1,3 +1,7 @@
+import {
+  AuthorTableSkeleton,
+  UserSkeleton,
+} from "@/components/shared/skeleton";
 import Metadata from "@/util/SEO/metadata";
 import { DashBoardAuthorTableType } from "@/util/types/types";
 import useSWR from "swr";
@@ -12,11 +16,22 @@ const UsersFetcher = () => {
   const { data, error, isLoading } = useSWR(API, fetcher);
   let content = null;
   if (!data && !isLoading && error) {
-    content = "An error has occurred.";
+    content = (
+      <p className="h-screen grid place-content-center place-items-center text-[var(--red-primary-brand-color)] text-3xl font-HSSemiBold">
+        সাময়িক অসুবিধার কারনে আমরা দু:খিত!
+      </p>
+    );
   }
-
-  if (!error && !data && isLoading) {
-    content = "Loading...";
+  if (!error && data && isLoading) {
+    content = (
+      <section className="container">
+        <AuthorTableSkeleton>
+          {[...Array(10).keys()].map((_, i) => (
+            <UserSkeleton key={i} />
+          ))}
+        </AuthorTableSkeleton>
+      </section>
+    );
   }
   if (!error && !isLoading && data) {
     content = (

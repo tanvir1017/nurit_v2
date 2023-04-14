@@ -177,7 +177,7 @@ export default function AuthorDialog({
                         <option value="ADMIN">ADMIN</option>
                       </select>
                       <input
-                        defaultValue={createdUser}
+                        defaultValue={`Last update was : ${createdUser}`}
                         disabled
                         className={`py-3 px-2 rounded-md dark:bg-gray-700 disabled:bg-slate-300`}
                         type="text"
