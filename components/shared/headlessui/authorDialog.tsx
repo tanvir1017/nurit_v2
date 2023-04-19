@@ -1,5 +1,5 @@
 import SubmitButton from "@/util/buttons/submitButton";
-import { createdAtDateFormatter } from "@/util/dateFormatter";
+import { updatedAtDateFormatter } from "@/util/dateFormatter";
 import { DashBoardAuthorTableType } from "@/util/types/types";
 import { Dialog, Transition } from "@headlessui/react";
 import { useTheme } from "next-themes";
@@ -28,7 +28,7 @@ export default function AuthorDialog({
     setIsOpen(false);
   }
   const { theme } = useTheme();
-  const createdUser = createdAtDateFormatter(user?.updatedAt);
+  const createdUser = updatedAtDateFormatter(user?.updatedAt);
   const handleOnUserInfoUpdate = async (e: any) => {
     e.preventDefault();
     const id = user?.id;
@@ -149,7 +149,7 @@ export default function AuthorDialog({
                         onChange={(e) => setPhoto(e.target.value)}
                       />{" "}
                     </div>
-                    <div className="grid grid-cols-3 space-x-2  mt-3">
+                    <div className="grid grid-cols-4 space-x-2  mt-3">
                       <select
                         onChange={(e) => setGender(e.target.value)}
                         name="GENDER-SELECT"
@@ -177,9 +177,9 @@ export default function AuthorDialog({
                         <option value="ADMIN">ADMIN</option>
                       </select>
                       <input
-                        defaultValue={`Last update was : ${createdUser}`}
+                        defaultValue={`Updated was : ${createdUser}`}
                         disabled
-                        className={`py-3 px-2 rounded-md dark:bg-gray-700 disabled:bg-slate-300`}
+                        className={`py-3 px-2 rounded-md dark:bg-gray-700 disabled:bg-slate-300 col-span-2`}
                         type="text"
                       />{" "}
                     </div>

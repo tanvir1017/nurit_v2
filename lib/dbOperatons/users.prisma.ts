@@ -5,7 +5,7 @@ import {
   registerAUserFunctionType,
   registerBodyDataType,
 } from "@/util/types/types";
-import prisma from "../../prisma/lib/db.connector";
+import prisma from "../../prisma/prisma/db.connector";
 
 export const getASingleUser: A__SingleModelFunctionType = async (id) => {
   const singleUser = await prisma.user.findUnique({

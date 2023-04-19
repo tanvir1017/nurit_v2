@@ -134,10 +134,12 @@ export type registerAUserFunctionType = (
 // COMMENT => blogs section function type
 export type GetAllBlogsFunctionType = () => Promise<{} | []>;
 
-export type GetASingleBlogFunctionType = (
-  slug: string | undefined
-) => Promise<{} | null>;
-
 export type PostABlogToDB = (
   blogBodyDataType: BlogBodyDataType
+) => Promise<{} | null>;
+
+// COMMENT => Global function type
+
+export type GetASingleDataFunctionType = (
+  slug: string | undefined
 ) => Promise<{} | null>;

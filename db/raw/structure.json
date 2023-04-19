@@ -1,0 +1,39 @@
+[
+  {
+    "instructor": {
+      "name": "John Doe",
+      "username": "John101",
+      "instructorlevel": "",
+      "instructorEducationStatus": [
+        "MSc (English), University of Oxford (UK)",
+        "BA, MA (English), University of Dhaka",
+        "IELTS: 8.5"
+      ],
+      "isVerified": false,
+      "email": "john.doe@example.com",
+      "phone": "+1 (123) 456-7890",
+      "instructorphotoURL": "https://panel.brightskills.com/media/instructor/profile/Syed%20Noor%20/Syed-Noor-E-Alam.jpg",
+      "instructorspecialty": "3D Digital Product Modeling Specialist",
+      "instructorintroduction": "হ্যালো, আমি নাঈম আদনান। একজন ডিজিটাল মার্কেটিং কনসালটেন্ট। বর্তমানে ক্রিয়েটিভ আইটি ইনস্টিটিউটের ডিজিটাল মার্কেটিং বিভাগে Faculty হিসেবে কর্মরত আছি। আমি Amazon.com-এর একজন অ্যাফিলিয়েট মার্কেটার, Google-এ AdSense Publisher, Fiverr এবং Upwork-এর SEO এবং SMM Expert। আমি গত ৪ বছর ধরে ডিজিটাল মার্কেটিং ব্যবহার করে ব্যবসায়ী এবং উদ্যোক্তাদের ব্যবসা বাড়াতে সাহায্য করেছি। আমি SEO, SMM, SEM, Paid Media , Content Marketing, Email এবং অন্যান্য Digital Marketing টেকনিক ব্যবহার করে প্রফিট এবং রেভিনিও জেনারেট করে থাকি। আমি 100+ প্রজেক্টে কাজ করেছি। ব্যবসার সেলস বাড়ানোর জন্য আমি বিশ্বের নামকরা ব্র্যান্ডের জন্য কাজ করেছি এবং Consultancy এর কাজ করেছি। আমার ক্লায়েন্টদের জন্য অনলাইনে ব্যবসায়িক সাফল্য নিশ্চিত করাই আমার লক্ষ্য। আশাকরি আমার দক্ষতা ও ডিজিটাল মার্কেটিং বিষয়ক ধারণা আপনাদের সাথে যথাযথভাবে এই কোর্সের মাধ্যমে শেয়ার করতে পারব।"
+    },
+    "course": {
+      "title": "3D Design Product Modeling Presentation",
+      "subTitle": "3ডি প্রোডাক্ট মডেলিং প্রেজেন্টেশেন ডিজাইন",
+      "courseCover": "https://i.ibb.co/2n154zT/course-image.jpg",
+      "desc": "অনেকেই হয়ত KeyShot (সফটওয়্যার) নামটির সাথে পরিচিত না। 3D Rendering, Animations এবং Interactive Visuals কাজে KeyShot সফটওয়্যারটি ব্যবহার করা হয়। বিশ্বের ৫০০ এর অধিক সংখ্যক নামকরা Creative Studio এবং Design Agency এই সফটওয়্যারটি ব্যবহার করে। এছাড়াও বিভিন্ন ধরনের 3D Modelling, Interior & Exterior Design, 3D Product Design, Furniture & Home Decor কাজে এই সফটওয়্যারটি ব্যবহার করা যায়। আবার গেমিং এর ক্ষেত্রে প্রয়োজনীয় অ্যানিমেশনগুলোও KeyShot ব্যবহার করেই তৈরি করা হয়। ডিজাইন সেক্টরে এটা খুবই প্রয়োজনীয় একটি সফটওয়্যার। স্কিল অর্জন করলে লোকাল মার্কেটে Industrial Designer, Product Designer, Product Rendering Expert, 3D Designer হিসেবে কাজ করতে পারবেন। এছাড়া গ্লোবাল মার্কেটে কাজের প্রচুর সুযোগ আছে। স্কিল এবং ক্রিয়েটিভিটি থাকলে অনলাইনে ফ্রিল্যান্সিং করে ঘরে বসে ইনকাম করা সম্ভব।",
+      "review": 0,
+      "topic": 16,
+      "lession": 65,
+      "video": 63,
+      "quize": [],
+      "fee": 4000,
+      "discountFee": 878
+    },
+    "videos": "62ed613058381fb28dfe5cc0",
+    "modules": "62ed613058381fb28dfe5cc0",
+    "assesment": "62ed613058381fb28dfe5cc0",
+    "tags": ["MS OFFICE", "MS WORD", "OFFICE 365"],
+    "category": "msOffice",
+    "slug": "3D-Design-Product-Modeling-Presentation"
+  }
+]

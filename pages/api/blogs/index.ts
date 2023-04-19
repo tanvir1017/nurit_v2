@@ -15,15 +15,6 @@ type Data = {
   returnBlogData?: {} | [] | null;
 };
 
-interface jwtData {
-  id: string;
-  first__name: string;
-  last__name: string;
-  photo__URL: string;
-  role: string;
-  iat: string;
-}
-
 const BlogApiEndPoint = async (
   req: NextApiRequest,
   res: NextApiResponse<Data>

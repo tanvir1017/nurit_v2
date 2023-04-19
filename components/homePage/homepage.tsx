@@ -21,7 +21,7 @@ const Homepage = () => {
       <ProcessOfStartCourse />
       <JoinWithUs />
       <ContactUs />
-      <Testimonial />
+      {/* <Testimonial /> */}
     </>
   );
 };

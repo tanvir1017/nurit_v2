@@ -1,6 +1,5 @@
 [
   {
-    "_id": "62ed613058381fb28dfe5cc0",
     "instructorSpecialty": "3D Digital Product Modeling Specialist",
     "instructor": "https://panel.brightskills.com/media/instructor/profile/Syed%20Noor%20/Syed-Noor-E-Alam.jpg",
     "instructorRole": "Sr. Faculty,  Digital Product Modeling Specialist Training Creative IT Institute",
@@ -9,6 +8,7 @@
     "category": "msOffice",
     "tag": "3D Product Design Modeling Presentation",
     "title": "3D Design Product Modeling Presentation",
+    "slug": "3-Design-Product-Modeling-Presentation8",
     "subTitle": "3ডি প্রোডাক্ট মডেলিং প্রেজেন্টেশেন ডিজাইন",
     "courseCover": "https://i.ibb.co/2n154zT/course-image.jpg",
     "desc": "অনেকেই হয়ত KeyShot (সফটওয়্যার) নামটির সাথে পরিচিত না। 3D Rendering, Animations এবং Interactive Visuals কাজে KeyShot সফটওয়্যারটি ব্যবহার করা হয়। বিশ্বের ৫০০ এর অধিক সংখ্যক নামকরা Creative Studio এবং Design Agency এই সফটওয়্যারটি ব্যবহার করে। এছাড়াও বিভিন্ন ধরনের 3D Modelling, Interior & Exterior Design, 3D Product Design, Furniture & Home Decor কাজে এই সফটওয়্যারটি ব্যবহার করা যায়। আবার গেমিং এর ক্ষেত্রে প্রয়োজনীয় অ্যানিমেশনগুলোও KeyShot ব্যবহার করেই তৈরি করা হয়। ডিজাইন সেক্টরে এটা খুবই প্রয়োজনীয় একটি সফটওয়্যার। স্কিল অর্জন করলে লোকাল মার্কেটে Industrial Designer, Product Designer, Product Rendering Expert, 3D Designer হিসেবে কাজ করতে পারবেন। এছাড়া গ্লোবাল মার্কেটে কাজের প্রচুর সুযোগ আছে। স্কিল এবং ক্রিয়েটিভিটি থাকলে অনলাইনে ফ্রিল্যান্সিং করে ঘরে বসে ইনকাম করা সম্ভব।",
@@ -47,7 +47,6 @@
     "discountFee": "4000"
   },
   {
-    "_id": "62ed613058381fb28dfe5cc2",
     "instructorSpecialty": "Digital Marketing Specialist",
     "instructor": "https://panel.brightskills.com/media/instructor/profile/Syed%20Noor%20/Syed-Noor-E-Alam.jpg",
     "instructorRole": "Sr. Faculty, Digital Marketing Training Creative IT Institute",
@@ -56,6 +55,7 @@
     "category": "msOffice",
     "tag": "3D Design Product Modeling Presentation",
     "title": "3D Design Product Modeling Presentation",
+    "slug": "3D-Design-Product-Modeling-Presentation7",
     "subTitle": "এনিমেশন ভিজুয়ালাইজেশন",
     "courseCover": "https://panel.brightskills.com/media/course/MS%20Excel%20Beginner%20to%20Advanced/558-X-364_Course-Banner_ii-of-MS-Excel-Beginner-to-Advanced.jpg",
     "desc": "অনেকেই হয়ত KeyShot (সফটওয়্যার) নামটির সাথে পরিচিত না। 3D Rendering, Animations এবং Interactive Visuals কাজে KeyShot সফটওয়্যারটি ব্যবহার করা হয়। বিশ্বের ৫০০ এর অধিক সংখ্যক নামকরা Creative Studio এবং Design Agency এই সফটওয়্যারটি ব্যবহার করে। এছাড়াও বিভিন্ন ধরনের 3D Modelling, Interior & Exterior Design, 3D Product Design, Furniture & Home Decor কাজে এই সফটওয়্যারটি ব্যবহার করা যায়। আবার গেমিং এর ক্ষেত্রে প্রয়োজনীয় অ্যানিমেশনগুলোও KeyShot ব্যবহার করেই তৈরি করা হয়। ডিজাইন সেক্টরে এটা খুবই প্রয়োজনীয় একটি সফটওয়্যার। স্কিল অর্জন করলে লোকাল মার্কেটে Industrial Designer, Product Designer, Product Rendering Expert, 3D Designer হিসেবে কাজ করতে পারবেন। এছাড়া গ্লোবাল মার্কেটে কাজের প্রচুর সুযোগ আছে। স্কিল এবং ক্রিয়েটিভিটি থাকলে অনলাইনে ফ্রিল্যান্সিং করে ঘরে বসে ইনকাম করা সম্ভব।",
@@ -90,11 +90,10 @@
     "lession": 65,
     "video": 63,
     "quize": 2,
-    "fee": "৫৯৯",
-    "discountFee": "২৫০০"
+    "fee": 599,
+    "discountFee": 2500
   },
   {
-    "_id": "62ed613058381fb28dfe5cbf",
     "instructorSpecialty": "মাইক্রোসফ্ট অফিস পোগ্রাম",
     "instructor": "https://panel.brightskills.com/media/instructor/profile/Syed%20Noor%20/Syed-Noor-E-Alam.jpg",
     "instructorRole": "Sr. Faculty, Digital Marketing Training Creative IT Institute",
@@ -102,7 +101,8 @@
     "instructorName": "সোহাগ হোসাঈন",
     "category": "webDesign",
     "tag": "Ms word Office Basic To Advanced For Professional work word msOffice microsoft micro",
-    "title": "Ms Office Basic To Advanced For Professional ",
+    "title": "Ms Office Basic To Advanced For Professional",
+    "slug": "Ms Office-Basic-To-Advanced-For-Professional6",
     "subTitle": "এনিমেশন ভিজুয়ালাইজেশন",
     "courseCover": "https://panel.brightskills.com/media/course/MS%20Excel%20Beginner%20to%20Advanced/558-X-364_Course-Banner_ii-of-MS-Excel-Beginner-to-Advanced.jpg",
     "desc": "অনেকেই হয়ত KeyShot (সফটওয়্যার) নামটির সাথে পরিচিত না। 3D Rendering, Animations এবং Interactive Visuals কাজে KeyShot সফটওয়্যারটি ব্যবহার করা হয়। বিশ্বের ৫০০ এর অধিক সংখ্যক নামকরা Creative Studio এবং Design Agency এই সফটওয়্যারটি ব্যবহার করে। এছাড়াও বিভিন্ন ধরনের 3D Modelling, Interior & Exterior Design, 3D Product Design, Furniture & Home Decor কাজে এই সফটওয়্যারটি ব্যবহার করা যায়। আবার গেমিং এর ক্ষেত্রে প্রয়োজনীয় অ্যানিমেশনগুলোও KeyShot ব্যবহার করেই তৈরি করা হয়। ডিজাইন সেক্টরে এটা খুবই প্রয়োজনীয় একটি সফটওয়্যার। স্কিল অর্জন করলে লোকাল মার্কেটে Industrial Designer, Product Designer, Product Rendering Expert, 3D Designer হিসেবে কাজ করতে পারবেন। এছাড়া গ্লোবাল মার্কেটে কাজের প্রচুর সুযোগ আছে। স্কিল এবং ক্রিয়েটিভিটি থাকলে অনলাইনে ফ্রিল্যান্সিং করে ঘরে বসে ইনকাম করা সম্ভব।",
@@ -133,15 +133,14 @@
     "whoCanBuyTitle": "ডিজাইন সেক্টরে ক্যারিয়ার ডেভেলপ করতে ইচ্ছুক যেকেউ আমাদের এই কোর্সটি করতে পারবে। একাডেমিক পড়াশুনা খুব বেশি না জানলেও সমস্যা নেই। Freelancer হিসেবে ক্যারিয়ার ডেভেলপমেন্টের ক্ষেত্রেও কোর্সটি হেল্পফুল হবে। নিজের স্কিল ডেভেলপমেন্টের অংশ হিসেবেও কোর্সটি করতে পারেন।",
     "requirementDesc": "এই কোর্সটি করতে কম্পিউটার সম্পর্কে বেসিক ধারণা থাকতে হবে, নিজস্ব PC/Laptop থাকতে হবে, টেকনিক্যাল Background প্রযোজ্য নয়। তবে, যারা গ্রাফিক্স ডিজাইন অথবা প্রোডাক্ট মোকআপ নিয়ে কাজ করছেন তাদের জন্য কোর্সটি খুবই প্রয়োজনীয় হবে।",
     "review": 3.5,
-    "topic": "16",
-    "lession": "65",
-    "video": "63",
-    "quize": "2",
-    "fee": "599",
-    "discountFee": "2500"
+    "topic": 16,
+    "lession": 65,
+    "video": 63,
+    "quize": 2,
+    "fee": 599,
+    "discountFee": 2500
   },
   {
-    "_id": "62ed613058381fb28dfe5cc1",
     "instructorSpecialty": "Digital Marketing Specialist",
     "instructor": "https://panel.brightskills.com/media/instructor/profile/Syed%20Noor%20/Syed-Noor-E-Alam.jpg",
     "instructorRole": "Sr. Faculty, Digital Marketing Training Creative IT Institute",
@@ -150,6 +149,7 @@
     "category": "programming",
     "tag": "Ms Office Basic To Advanced For Processional",
     "title": "Ms Office Basic To Advanced For Processional",
+    "slug": "Ms Office-Basic-To-Advanced-For-Professional5",
     "subTitle": "এনিমেশন ভিজুয়ালাইজেশন",
     "courseCover": "https://panel.brightskills.com/media/course/MS%20Excel%20Beginner%20to%20Advanced/558-X-364_Course-Banner_ii-of-MS-Excel-Beginner-to-Advanced.jpg",
     "desc": "অনেকেই হয়ত KeyShot (সফটওয়্যার) নামটির সাথে পরিচিত না। 3D Rendering, Animations এবং Interactive Visuals কাজে KeyShot সফটওয়্যারটি ব্যবহার করা হয়। বিশ্বের ৫০০ এর অধিক সংখ্যক নামকরা Creative Studio এবং Design Agency এই সফটওয়্যারটি ব্যবহার করে। এছাড়াও বিভিন্ন ধরনের 3D Modelling, Interior & Exterior Design, 3D Product Design, Furniture & Home Decor কাজে এই সফটওয়্যারটি ব্যবহার করা যায়। আবার গেমিং এর ক্ষেত্রে প্রয়োজনীয় অ্যানিমেশনগুলোও KeyShot ব্যবহার করেই তৈরি করা হয়। ডিজাইন সেক্টরে এটা খুবই প্রয়োজনীয় একটি সফটওয়্যার। স্কিল অর্জন করলে লোকাল মার্কেটে Industrial Designer, Product Designer, Product Rendering Expert, 3D Designer হিসেবে কাজ করতে পারবেন। এছাড়া গ্লোবাল মার্কেটে কাজের প্রচুর সুযোগ আছে। স্কিল এবং ক্রিয়েটিভিটি থাকলে অনলাইনে ফ্রিল্যান্সিং করে ঘরে বসে ইনকাম করা সম্ভব।",
@@ -184,11 +184,10 @@
     "lession": 65,
     "video": 63,
     "quize": 2,
-    "fee": "৫৯৯",
-    "discountFee": "২৫০০"
+    "fee": 599,
+    "discountFee": 2500
   },
   {
-    "_id": "62ed642c58381fb28d060674",
     "instructorSpecialty": "মাইক্রোসফ্ট অফিস পোগ্রাম",
     "instructor": "https://panel.brightskills.com/media/instructor/profile/Syed%20Noor%20/Syed-Noor-E-Alam.jpg",
     "instructorRole": "Sr. Faculty, Digital Marketing Training Creative IT Institute",
@@ -197,6 +196,7 @@
     "category": "webDesign",
     "tag": "Ms word Office Basic To Advanced For Professional work word msOffice microsoft micro",
     "title": "Ms Office Basic To Advanced For Professional ",
+    "slug": "Ms Office-Basic-To-Advanced-For-Professional4",
     "subTitle": "এনিমেশন ভিজুয়ালাইজেশন",
     "courseCover": "https://i.ibb.co/YPZXgx2/web-design.png",
     "desc": "অনেকেই হয়ত KeyShot (সফটওয়্যার) নামটির সাথে পরিচিত না। 3D Rendering, Animations এবং Interactive Visuals কাজে KeyShot সফটওয়্যারটি ব্যবহার করা হয়। বিশ্বের ৫০০ এর অধিক সংখ্যক নামকরা Creative Studio এবং Design Agency এই সফটওয়্যারটি ব্যবহার করে। এছাড়াও বিভিন্ন ধরনের 3D Modelling, Interior & Exterior Design, 3D Product Design, Furniture & Home Decor কাজে এই সফটওয়্যারটি ব্যবহার করা যায়। আবার গেমিং এর ক্ষেত্রে প্রয়োজনীয় অ্যানিমেশনগুলোও KeyShot ব্যবহার করেই তৈরি করা হয়। ডিজাইন সেক্টরে এটা খুবই প্রয়োজনীয় একটি সফটওয়্যার। স্কিল অর্জন করলে লোকাল মার্কেটে Industrial Designer, Product Designer, Product Rendering Expert, 3D Designer হিসেবে কাজ করতে পারবেন। এছাড়া গ্লোবাল মার্কেটে কাজের প্রচুর সুযোগ আছে। স্কিল এবং ক্রিয়েটিভিটি থাকলে অনলাইনে ফ্রিল্যান্সিং করে ঘরে বসে ইনকাম করা সম্ভব।",
@@ -227,15 +227,14 @@
     "whoCanBuyTitle": "ডিজাইন সেক্টরে ক্যারিয়ার ডেভেলপ করতে ইচ্ছুক যেকেউ আমাদের এই কোর্সটি করতে পারবে। একাডেমিক পড়াশুনা খুব বেশি না জানলেও সমস্যা নেই। Freelancer হিসেবে ক্যারিয়ার ডেভেলপমেন্টের ক্ষেত্রেও কোর্সটি হেল্পফুল হবে। নিজের স্কিল ডেভেলপমেন্টের অংশ হিসেবেও কোর্সটি করতে পারেন।",
     "requirementDesc": "এই কোর্সটি করতে কম্পিউটার সম্পর্কে বেসিক ধারণা থাকতে হবে, নিজস্ব PC/Laptop থাকতে হবে, টেকনিক্যাল Background প্রযোজ্য নয়। তবে, যারা গ্রাফিক্স ডিজাইন অথবা প্রোডাক্ট মোকআপ নিয়ে কাজ করছেন তাদের জন্য কোর্সটি খুবই প্রয়োজনীয় হবে।",
     "review": 3.5,
-    "topic": "16",
-    "lession": "65",
-    "video": "63",
-    "quize": "2",
-    "fee": "599",
-    "discountFee": "2500"
+    "topic": 16,
+    "lession": 65,
+    "video": 63,
+    "quize": 2,
+    "fee": 599,
+    "discountFee": 2500
   },
   {
-    "_id": "62ed648358381fb28d06e8d7",
     "instructorSpecialty": "মাইক্রোসফ্ট অফিস পোগ্রাম",
     "instructor": "https://panel.brightskills.com/media/instructor/profile/Syed%20Noor%20/Syed-Noor-E-Alam.jpg",
     "instructorRole": "Sr. Faculty, Digital Marketing Training Creative IT Institute",
@@ -244,6 +243,7 @@
     "category": "graphic",
     "tag": "Ms word Office Basic To Advanced For Professional work word msOffice microsoft micro",
     "title": "Ms Office Basic To Advanced For Professional ",
+    "slug": "Ms Office-Basic-To-Advanced-For-Professional3",
     "subTitle": "এনিমেশন ভিজুয়ালাইজেশন",
     "courseCover": "https://panel.brightskills.com/media/course/MS%20Excel%20Beginner%20to%20Advanced/558-X-364_Course-Banner_ii-of-MS-Excel-Beginner-to-Advanced.jpg",
     "desc": "অনেকেই হয়ত KeyShot (সফটওয়্যার) নামটির সাথে পরিচিত না। 3D Rendering, Animations এবং Interactive Visuals কাজে KeyShot সফটওয়্যারটি ব্যবহার করা হয়। বিশ্বের ৫০০ এর অধিক সংখ্যক নামকরা Creative Studio এবং Design Agency এই সফটওয়্যারটি ব্যবহার করে। এছাড়াও বিভিন্ন ধরনের 3D Modelling, Interior & Exterior Design, 3D Product Design, Furniture & Home Decor কাজে এই সফটওয়্যারটি ব্যবহার করা যায়। আবার গেমিং এর ক্ষেত্রে প্রয়োজনীয় অ্যানিমেশনগুলোও KeyShot ব্যবহার করেই তৈরি করা হয়। ডিজাইন সেক্টরে এটা খুবই প্রয়োজনীয় একটি সফটওয়্যার। স্কিল অর্জন করলে লোকাল মার্কেটে Industrial Designer, Product Designer, Product Rendering Expert, 3D Designer হিসেবে কাজ করতে পারবেন। এছাড়া গ্লোবাল মার্কেটে কাজের প্রচুর সুযোগ আছে। স্কিল এবং ক্রিয়েটিভিটি থাকলে অনলাইনে ফ্রিল্যান্সিং করে ঘরে বসে ইনকাম করা সম্ভব।",
@@ -274,15 +274,14 @@
     "whoCanBuyTitle": "ডিজাইন সেক্টরে ক্যারিয়ার ডেভেলপ করতে ইচ্ছুক যেকেউ আমাদের এই কোর্সটি করতে পারবে। একাডেমিক পড়াশুনা খুব বেশি না জানলেও সমস্যা নেই। Freelancer হিসেবে ক্যারিয়ার ডেভেলপমেন্টের ক্ষেত্রেও কোর্সটি হেল্পফুল হবে। নিজের স্কিল ডেভেলপমেন্টের অংশ হিসেবেও কোর্সটি করতে পারেন।",
     "requirementDesc": "এই কোর্সটি করতে কম্পিউটার সম্পর্কে বেসিক ধারণা থাকতে হবে, নিজস্ব PC/Laptop থাকতে হবে, টেকনিক্যাল Background প্রযোজ্য নয়। তবে, যারা গ্রাফিক্স ডিজাইন অথবা প্রোডাক্ট মোকআপ নিয়ে কাজ করছেন তাদের জন্য কোর্সটি খুবই প্রয়োজনীয় হবে।",
     "review": 3.5,
-    "topic": "16",
-    "lession": "65",
-    "video": "63",
-    "quize": "2",
-    "fee": "599",
-    "discountFee": "2500"
+    "topic": 16,
+    "lession": 65,
+    "video": 63,
+    "quize": 2,
+    "fee": 599,
+    "discountFee": 2500
   },
   {
-    "_id": "62ed64a758381fb28d074508",
     "instructorSpecialty": "মাইক্রোসফ্ট অফিস পোগ্রাম",
     "instructor": "https://panel.brightskills.com/media/instructor/profile/Syed%20Noor%20/Syed-Noor-E-Alam.jpg",
     "instructorRole": "Sr. Faculty, Digital Marketing Training Creative IT Institute",
@@ -291,6 +290,7 @@
     "category": "digitalMarketing",
     "tag": "Ms word Office Basic To Advanced For Professional work word msOffice microsoft micro",
     "title": "Ms Office Basic To Advanced For Professional ",
+    "slug": "Ms Office-Basic-To-Advanced-For-Professional2",
     "subTitle": "এনিমেশন ভিজুয়ালাইজেশন",
     "courseCover": "https://panel.brightskills.com/media/course/MS%20Excel%20Beginner%20to%20Advanced/558-X-364_Course-Banner_ii-of-MS-Excel-Beginner-to-Advanced.jpg",
     "desc": "অনেকেই হয়ত KeyShot (সফটওয়্যার) নামটির সাথে পরিচিত না। 3D Rendering, Animations এবং Interactive Visuals কাজে KeyShot সফটওয়্যারটি ব্যবহার করা হয়। বিশ্বের ৫০০ এর অধিক সংখ্যক নামকরা Creative Studio এবং Design Agency এই সফটওয়্যারটি ব্যবহার করে। এছাড়াও বিভিন্ন ধরনের 3D Modelling, Interior & Exterior Design, 3D Product Design, Furniture & Home Decor কাজে এই সফটওয়্যারটি ব্যবহার করা যায়। আবার গেমিং এর ক্ষেত্রে প্রয়োজনীয় অ্যানিমেশনগুলোও KeyShot ব্যবহার করেই তৈরি করা হয়। ডিজাইন সেক্টরে এটা খুবই প্রয়োজনীয় একটি সফটওয়্যার। স্কিল অর্জন করলে লোকাল মার্কেটে Industrial Designer, Product Designer, Product Rendering Expert, 3D Designer হিসেবে কাজ করতে পারবেন। এছাড়া গ্লোবাল মার্কেটে কাজের প্রচুর সুযোগ আছে। স্কিল এবং ক্রিয়েটিভিটি থাকলে অনলাইনে ফ্রিল্যান্সিং করে ঘরে বসে ইনকাম করা সম্ভব।",
@@ -321,15 +321,14 @@
     "whoCanBuyTitle": "ডিজাইন সেক্টরে ক্যারিয়ার ডেভেলপ করতে ইচ্ছুক যেকেউ আমাদের এই কোর্সটি করতে পারবে। একাডেমিক পড়াশুনা খুব বেশি না জানলেও সমস্যা নেই। Freelancer হিসেবে ক্যারিয়ার ডেভেলপমেন্টের ক্ষেত্রেও কোর্সটি হেল্পফুল হবে। নিজের স্কিল ডেভেলপমেন্টের অংশ হিসেবেও কোর্সটি করতে পারেন।",
     "requirementDesc": "এই কোর্সটি করতে কম্পিউটার সম্পর্কে বেসিক ধারণা থাকতে হবে, নিজস্ব PC/Laptop থাকতে হবে, টেকনিক্যাল Background প্রযোজ্য নয়। তবে, যারা গ্রাফিক্স ডিজাইন অথবা প্রোডাক্ট মোকআপ নিয়ে কাজ করছেন তাদের জন্য কোর্সটি খুবই প্রয়োজনীয় হবে।",
     "review": 3.5,
-    "topic": "16",
-    "lession": "65",
-    "video": "63",
-    "quize": "2",
-    "fee": "599",
-    "discountFee": "2500"
+    "topic": 16,
+    "lession": 65,
+    "video": 63,
+    "quize": 2,
+    "fee": 599,
+    "discountFee": 2500
   },
   {
-    "_id": "62ed64ba58381fb28d077024",
     "instructorSpecialty": "মাইক্রোসফ্ট অফিস পোগ্রাম",
     "instructor": "https://panel.brightskills.com/media/instructor/profile/Syed%20Noor%20/Syed-Noor-E-Alam.jpg",
     "instructorRole": "Sr. Faculty, Digital Marketing Training Creative IT Institute",
@@ -338,6 +337,7 @@
     "category": "digitalSkills",
     "tag": "Ms word Office Basic To Advanced For Professional work word msOffice microsoft micro",
     "title": "Ms Office Basic To Advanced For Professional ",
+    "slug": "Ms Office-Basic-To-Advanced-For-Professional1",
     "subTitle": "এনিমেশন ভিজুয়ালাইজেশন",
     "courseCover": "https://panel.brightskills.com/media/course/MS%20Excel%20Beginner%20to%20Advanced/558-X-364_Course-Banner_ii-of-MS-Excel-Beginner-to-Advanced.jpg",
     "desc": "অনেকেই হয়ত KeyShot (সফটওয়্যার) নামটির সাথে পরিচিত না। 3D Rendering, Animations এবং Interactive Visuals কাজে KeyShot সফটওয়্যারটি ব্যবহার করা হয়। বিশ্বের ৫০০ এর অধিক সংখ্যক নামকরা Creative Studio এবং Design Agency এই সফটওয়্যারটি ব্যবহার করে। এছাড়াও বিভিন্ন ধরনের 3D Modelling, Interior & Exterior Design, 3D Product Design, Furniture & Home Decor কাজে এই সফটওয়্যারটি ব্যবহার করা যায়। আবার গেমিং এর ক্ষেত্রে প্রয়োজনীয় অ্যানিমেশনগুলোও KeyShot ব্যবহার করেই তৈরি করা হয়। ডিজাইন সেক্টরে এটা খুবই প্রয়োজনীয় একটি সফটওয়্যার। স্কিল অর্জন করলে লোকাল মার্কেটে Industrial Designer, Product Designer, Product Rendering Expert, 3D Designer হিসেবে কাজ করতে পারবেন। এছাড়া গ্লোবাল মার্কেটে কাজের প্রচুর সুযোগ আছে। স্কিল এবং ক্রিয়েটিভিটি থাকলে অনলাইনে ফ্রিল্যান্সিং করে ঘরে বসে ইনকাম করা সম্ভব।",
@@ -368,11 +368,11 @@
     "whoCanBuyTitle": "ডিজাইন সেক্টরে ক্যারিয়ার ডেভেলপ করতে ইচ্ছুক যেকেউ আমাদের এই কোর্সটি করতে পারবে। একাডেমিক পড়াশুনা খুব বেশি না জানলেও সমস্যা নেই। Freelancer হিসেবে ক্যারিয়ার ডেভেলপমেন্টের ক্ষেত্রেও কোর্সটি হেল্পফুল হবে। নিজের স্কিল ডেভেলপমেন্টের অংশ হিসেবেও কোর্সটি করতে পারেন।",
     "requirementDesc": "এই কোর্সটি করতে কম্পিউটার সম্পর্কে বেসিক ধারণা থাকতে হবে, নিজস্ব PC/Laptop থাকতে হবে, টেকনিক্যাল Background প্রযোজ্য নয়। তবে, যারা গ্রাফিক্স ডিজাইন অথবা প্রোডাক্ট মোকআপ নিয়ে কাজ করছেন তাদের জন্য কোর্সটি খুবই প্রয়োজনীয় হবে।",
     "review": 3.5,
-    "topic": "16",
-    "lession": "65",
-    "video": "63",
-    "quize": "2",
-    "fee": "599",
-    "discountFee": "2500"
+    "topic": 16,
+    "lession": 65,
+    "video": 63,
+    "quize": 2,
+    "fee": 599,
+    "discountFee": 2500
   }
 ]
