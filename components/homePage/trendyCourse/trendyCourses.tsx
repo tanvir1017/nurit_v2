@@ -9,7 +9,7 @@ const fetcher = (url: RequestInfo | URL) =>
 
 const TrendyCourses = () => {
   const [buttonFilterText, setButtonFilterText] = useState("msOffice");
-  const { data, error, isLoading } = useSWR("/course.json", fetcher);
+  const { data, error, isLoading } = useSWR("/api/course", fetcher);
 
   return (
     <section className="container font-HSRegular  my-40">
@@ -52,7 +52,7 @@ const TrendyCourses = () => {
           {!isLoading &&
             !error &&
             data &&
-            data
+            data?.returnCourse
               ?.filter(
                 (el: { category: string }) => el.category === buttonFilterText
               )
