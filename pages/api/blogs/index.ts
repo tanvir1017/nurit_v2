@@ -1,8 +1,6 @@
 import {
   deleteASingleBlog,
-  getASingleBlogBasedOnSlug,
-  getAllBlogsExistOnDB,
-  postABlogToDb,
+  postABlogToDb
 } from "@/lib/dbOperatons/blogs.prisma";
 import { DB_OPERATION_METHOD } from "@/util/types/types";
 import { hasCookie } from "cookies-next";
@@ -21,37 +19,37 @@ const BlogApiEndPoint = async (
 ) => {
   try {
     switch (req.method) {
-      case DB_OPERATION_METHOD.GET: {
-        if (req.query.slug) {
-          const { slug } = req.query;
-          const singleBlog = await getASingleBlogBasedOnSlug(slug as string);
-          if (!singleBlog) {
-            return res.status(404).send({
-              success: false,
-              message: `No content available on your query slug: ${slug} 😟`,
-              returnBlogData: {},
-            });
-          }
-          return res.status(200).send({
-            success: true,
-            message: "Blogs found based on your slug 🚀",
-            returnBlogData: singleBlog,
-          });
-        } else {
-          const blogs = await getAllBlogsExistOnDB();
-          if (!blogs) {
-            return res.status(500).send({
-              success: false,
-              message: "internal server error",
-            });
-          }
-          return res.status(200).send({
-            success: true,
-            message: "All blog data found successfully 🚀",
-            returnBlogData: blogs,
-          });
-        }
-      }
+      // case DB_OPERATION_METHOD.GET: {
+      //   if (req.query.slug) {
+      //     const { slug } = req.query;
+      //     const singleBlog = await getASingleBlogBasedOnSlug(slug as string);
+      //     if (!singleBlog) {
+      //       return res.status(404).send({
+      //         success: false,
+      //         message: `No content available on your query slug: ${slug} 😟`,
+      //         returnBlogData: {},
+      //       });
+      //     }
+      //     return res.status(200).send({
+      //       success: true,
+      //       message: "Blogs found based on your slug 🚀",
+      //       returnBlogData: singleBlog,
+      //     });
+      //   } else {
+      //     const blogs = await getAllBlogsExistOnDB();
+      //     if (!blogs) {
+      //       return res.status(500).send({
+      //         success: false,
+      //         message: "internal server error",
+      //       });
+      //     }
+      //     return res.status(200).send({
+      //       success: true,
+      //       message: "All blog data found successfully 🚀",
+      //       returnBlogData: blogs,
+      //     });
+      //   }
+      // }
 
       case DB_OPERATION_METHOD.POST: {
         if (!req.body) {
