@@ -150,9 +150,10 @@ const CourseDetails = () => {
                         return (
                           <div
                             key={i}
-                            className=" border p-3 rounded-lg hover:bg-slate-600 details-card-icons"
+                            className=" border p-3 rounded-lg hover:bg-slate-600 details-card-icons relative h-28"
                           >
-                            <div className="hover:-translate-y-10 hover:rotate-12 transition-transform duration-200 w-full">
+                            <div className="hover:-translate-y-10 hover:rotate-12 transition-transform duration-200 w-full ">
+                              {/* <div className="hover:-translate-y-10 hover:rotate-12 transition-transform duration-200 w-full absolute border h-24 "> */}
                               <MinimalBlurImage
                                 imageSrc={_.pic}
                                 alt="Topics"
