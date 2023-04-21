@@ -12,7 +12,7 @@ const Course = ({ el }: any) => {
         content="all course page. You can find every course in this page that we are providing"
         // key="skill course, course, ms office, office 364"
       />
-      <Link href={`/course/${el._id}`}>
+      <Link href={`/course/${el.slug}`}>
         <div className="h-[28rem] overflow-hidden card-shadow transition">
           <BlurImage
             imageSrc={el.courseCover}
@@ -20,11 +20,11 @@ const Course = ({ el }: any) => {
             width={500}
             height={100}
             customHeight="13.6875rem"
-            bg="bg-slate-200"
+            bg="bg-slate-300"
           />
           <div
             id="course_body"
-            className="dark:bg-[var(--black-primary-brand-color)]  px-5 py-8 space-y-4 dark:text-white overflow-auto"
+            className="dark:bg-[var(--black-primary-brand-color)]   px-5 py-8 space-y-4 dark:text-white overflow-auto"
           >
             <p className="text-xl text-[var(--red-primary-brand-color)]">
               {el.subTitle}

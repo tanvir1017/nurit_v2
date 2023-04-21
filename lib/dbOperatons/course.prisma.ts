@@ -17,16 +17,13 @@ export const getAllCourseFromDB = async () => {
     throw e;
   }
 };
-export const getSpecificCourseViaSlug = async (id: string) => {
-  console.log(id);
+export const getSpecificCourseViaSlug = async (slug: string) => {
   try {
-    const itCourse = await prisma.iTCOURSE.findUnique({
-      where: {
-        id: id,
-      },
+    const itCourse = await prisma.iTCOURSE.findFirst({
+      where: { slug },
     });
     return itCourse;
   } catch (e) {
-    return e;
+    console.log(e);
   }
 };

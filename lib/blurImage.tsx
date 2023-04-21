@@ -66,7 +66,7 @@ export function MinimalBlurImage({
   return (
     <div
       className={`group ${isLoading && `${customStyle} `}  overflow-hidden ${
-        alt !== "Filter" && "rounded-full"
+        alt.includes("rounded") && "rounded-full"
       }`}
       style={{ height: isLoading ? customHeight : "" }}
     >

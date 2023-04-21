@@ -54,15 +54,6 @@ const OurSpecialty = () => {
                   key={i}
                   className="text-left   dark:bg-[#2025328c] bg-slate-50 shadow-md  overflow-y-hidden  p-5 w-full h-60 rounded-2xl space-x-4 flex justify-start items-center"
                 >
-                  {/* <Image
-                    src={el.icon}
-                    alt="specialty representor"
-                    width={200}
-                    height={100}
-                    className={`rounded-full mr-4 outline  ${
-                      i === 0 ? "outline-[#6F71E6]  " : "outline-[#F8580B]"
-                    }  outline-offset-4`}
-                  /> */}
                   <div
                     className={`rounded-full mr-4 outline  ${
                       i === 0 ? "outline-[#6F71E6]  " : "outline-[#F8580B]"
@@ -70,11 +61,11 @@ const OurSpecialty = () => {
                   >
                     <MinimalBlurImage
                       imageSrc={el.icon}
-                      alt="specialty representor"
+                      alt="specialty-representor rounded"
                       width={200}
                       height={100}
                       customHeight="5rem"
-                      customStyle="bg-white/15 rounded-full"
+                      customStyle="bg-slate-300"
                     />
                   </div>
 

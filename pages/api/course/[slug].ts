@@ -15,19 +15,20 @@ export default async function courseDetails(
   try {
     if (req.method === DB_OPERATION_METHOD.GET) {
       if (req.query) {
-        const { id } = req.query;
-        const details = await getSpecificCourseViaSlug(id as string);
-        console.log(details);
+        const { slug } = req.query;
+
+        const details = await getSpecificCourseViaSlug(slug as string);
+
         if (!details) {
           return res.status(404).json({
             success: false,
-            message: `Data not found at slug:  ${id}`,
+            message: `Data not found at slug:  ${slug}`,
             returnSingleCourse: {},
           });
         }
         return res.status(200).json({
           success: true,
-          message: `Data founded at slug ${id}`,
+          message: `Data founded at slug ${slug}`,
           returnSingleCourse: details,
         });
       }
