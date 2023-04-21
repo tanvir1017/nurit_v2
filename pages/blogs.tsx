@@ -1,25 +1,15 @@
 import Skeleton from "@/components/shared/skeleton";
 import Metadata from "@/util/SEO/metadata";
 import { apiUrl } from "@/util/api";
-import { GetStaticProps } from "next";
-import useSWR, { SWRConfig } from "swr";
+import useSWR from "swr";
 
 const fetcher = (url: RequestInfo | URL) =>
   fetch(url).then((res) => res.json());
 const API = `${apiUrl}/api/blogs`;
 
-export const getStaticProps: GetStaticProps = async () => {
-  const data = await fetcher(API);
-  return {
-    props: {
-      fallback: {
-        [API]: data,
-      },
-    },
-  };
-};
-const BlogsFetcherSwrConfig = () => {
-  const { data, isLoading, error } = useSWR(API);
+const Blogs = () => {
+  const { data, isLoading, error } = useSWR(API, fetcher);
+  console.log(data);
   let content = <main className="App"> </main>;
   if (!error && !data && isLoading) {
     content = (
@@ -82,10 +72,4 @@ const BlogsFetcherSwrConfig = () => {
   return content;
 };
 
-export default function Blogs({ fallback }: { fallback: any }) {
-  return (
-    <SWRConfig value={{ fallback }}>
-      <BlogsFetcherSwrConfig />
-    </SWRConfig>
-  );
-}
+export default Blogs;
