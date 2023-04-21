@@ -49,6 +49,7 @@ const BlogsFetcherSwrConfig = () => {
     const {
       returnBlogData: { blogs },
     } = data;
+
     content = (
       <main className="App">
         <Metadata
