@@ -30,13 +30,6 @@ export default async function index(
           returnCourse: course,
         });
       }
-
-      default:
-        res.status(400).json({
-          success: false,
-          message: `Bad Request`,
-          returnCourse: {},
-        });
     }
   } catch (e) {
     return res.status(500).json({

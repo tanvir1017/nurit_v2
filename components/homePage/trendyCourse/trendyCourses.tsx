@@ -2,7 +2,7 @@ import Skeleton from "@/components/shared/skeleton";
 import { trendyCoursesFilterButton } from "@/util/localDb";
 import { useState } from "react";
 import useSWR from "swr";
-import Course from "./course";
+import Course from "../../../pages/courses/course";
 
 const fetcher = (url: RequestInfo | URL) =>
   fetch(url).then((res) => res.json());

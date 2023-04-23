@@ -1,13 +1,13 @@
 import ErrorMessage from "@/components/error";
-import Course from "@/components/homePage/trendyCourse/course";
 import Skeleton from "@/components/shared/skeleton";
-import useSWR from "swr";
+import Course from "@/pages/courses/course";
+import swr from "swr";
 
 const fetcher = (url: RequestInfo | URL) =>
   fetch(url).then((res) => res.json());
 
 const Courses = () => {
-  const { data, error, isLoading } = useSWR("/api/course", fetcher);
+  const { data, error, isLoading } = swr("/api/course", fetcher);
   return (
     <section className="courses">
       <div
@@ -17,7 +17,9 @@ const Courses = () => {
         {!isLoading &&
           !error &&
           data.success &&
-          data?.returnCourse.map((el: any) => <Course key={el._id} el={el} />)}
+          data?.returnCourse.map((el: any, i: number) => (
+            <Course key={i} el={el} />
+          ))}
         {!isLoading && !data && error && <ErrorMessage />}
         {!data &&
           !error &&

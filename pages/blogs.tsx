@@ -1,14 +1,14 @@
 import Skeleton from "@/components/shared/skeleton";
 import Metadata from "@/util/SEO/metadata";
 import { apiUrl } from "@/util/api";
-import useSWR from "swr";
+import swr from "swr";
 
 const fetcher = (url: RequestInfo | URL) =>
   fetch(url).then((res) => res.json());
 const API = `${apiUrl}/api/blogs`;
 
 const Blogs = () => {
-  const { data, isLoading, error } = useSWR(API, fetcher);
+  const { data, isLoading, error } = swr(API, fetcher);
   console.log(data);
   let content = <main className="App"> </main>;
   if (!error && !data && isLoading) {
