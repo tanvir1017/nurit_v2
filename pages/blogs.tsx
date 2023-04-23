@@ -9,6 +9,7 @@ const API = `${apiUrl}/api/blogs`;
 
 const Blogs = () => {
   const { data, isLoading, error } = swr(API, fetcher);
+  console.log(error);
   console.log(data);
   let content = <main className="App"> </main>;
   if (!error && !data && isLoading) {

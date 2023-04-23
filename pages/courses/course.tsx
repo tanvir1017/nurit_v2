@@ -12,8 +12,8 @@ const Course = ({ el }: any) => {
         content="all course page. You can find every course in this page that we are providing"
         // key="skill course, course, ms office, office 364"
       />
-      <Link href={`/course/${el.slug}`}>
-        <div className="h-[28rem] overflow-hidden card-shadow transition">
+      <div className="h-[28rem] overflow-hidden card-shadow transition">
+        <Link href={`/course/${el.slug}`}>
           <BlurImage
             imageSrc={el.courseCover}
             alt={el.title}
@@ -22,30 +22,32 @@ const Course = ({ el }: any) => {
             customHeight="13.6875rem"
             bg="bg-slate-300"
           />
-          <div
-            id="course_body"
-            className="dark:bg-[var(--black-primary-brand-color)]   px-5 py-8 space-y-4 dark:text-white overflow-auto"
-          >
-            <p className="text-xl text-[var(--red-primary-brand-color)]">
-              {el.subTitle}
-            </p>
+        </Link>
+        <div
+          id="course_body"
+          className="dark:bg-[var(--black-primary-brand-color)]   px-5 py-8 space-y-4 dark:text-white overflow-auto"
+        >
+          <p className="text-xl text-[var(--red-primary-brand-color)]">
+            {el.subTitle}
+          </p>
+          <Link href={`/course/${el.slug}`}>
             <p className="text-2xl font-HSSemiBold">{el.title}</p>
-            <div className="flex justify-between items-center">
-              <strong className="flex items-center">
-                {[...Array(Math.ceil(el?.review)).keys()].map((el, i) => {
-                  return <BsStarFill key={i} className="text-amber-500" />;
-                })}
-              </strong>
-              <div className="flex items-center space-x-8 text-lg">
-                <p className="text-red-500 line-through italic font-HSSemiBold ">
-                  {el.discountFee} টাকা
-                </p>
-                <p>{el.fee} টাকা</p>
-              </div>
+          </Link>
+          <div className="flex justify-between items-center">
+            <strong className="flex items-center">
+              {[...Array(Math.ceil(el?.review)).keys()].map((el, i) => {
+                return <BsStarFill key={i} className="text-amber-500" />;
+              })}
+            </strong>
+            <div className="flex items-center space-x-8 text-lg">
+              <p className="text-red-500 line-through italic font-HSSemiBold ">
+                {el.discountFee} টাকা
+              </p>
+              <p>{el.fee} টাকা</p>
             </div>
           </div>
         </div>
-      </Link>
+      </div>
     </>
   );
 };

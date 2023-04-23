@@ -4,7 +4,7 @@ import {
 } from "@/components/shared/skeleton";
 import Metadata from "@/util/SEO/metadata";
 import { DashBoardAuthorTableType } from "@/util/types/types";
-import useSWR from "swr";
+import swr from "swr";
 import Layout from "../layout";
 import AuthorTable from "./authorTable";
 
@@ -13,7 +13,8 @@ const fetcher = (url: RequestInfo | URL) =>
 const API = "/api/auth";
 
 const UsersFetcher = () => {
-  const { data, error, isLoading } = useSWR(API, fetcher);
+  const { data, error, isLoading } = swr(API, fetcher);
+  console.log(error);
   let content = null;
   if (!data && !isLoading && error) {
     content = (

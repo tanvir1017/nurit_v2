@@ -8,6 +8,7 @@ const fetcher = (url: RequestInfo | URL) =>
 
 const Courses = () => {
   const { data, error, isLoading } = swr("/api/course", fetcher);
+  console.log(error);
   return (
     <section className="courses">
       <div
