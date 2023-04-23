@@ -1,6 +1,6 @@
 import ErrorMessage from "@/components/error";
+import Course from "@/components/homePage/trendyCourse/course";
 import Skeleton from "@/components/shared/skeleton";
-import Course from "@/pages/courses/course";
 import swr from "swr";
 
 const fetcher = (url: RequestInfo | URL) =>

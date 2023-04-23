@@ -1,8 +1,8 @@
+import Course from "@/components/homePage/trendyCourse/course";
 import Skeleton from "@/components/shared/skeleton";
 import { trendyCoursesFilterButton } from "@/util/localDb";
 import { useState } from "react";
 import useSWR from "swr";
-import Course from "../../../pages/courses/course";
 
 const fetcher = (url: RequestInfo | URL) =>
   fetch(url).then((res) => res.json());
@@ -56,7 +56,7 @@ const TrendyCourses = () => {
               ?.filter(
                 (el: { category: string }) => el.category === buttonFilterText
               )
-              ?.map((el: any) => <Course key={el._id} el={el} />)}
+              ?.map((el: any) => <Course key={el.id} el={el} />)}
           {!data &&
             !error &&
             isLoading &&
