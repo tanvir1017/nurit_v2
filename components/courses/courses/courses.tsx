@@ -3,8 +3,16 @@ import Course from "@/components/homePage/trendyCourse/course";
 import Skeleton from "@/components/shared/skeleton";
 import swr from "swr";
 
-const fetcher = (url: RequestInfo | URL) =>
-  fetch(url).then((res) => res.json());
+const fetcher = async (url: RequestInfo | URL) => {
+  try {
+    const res = await fetch(url);
+    console.log(res);
+    const result = await res.json();
+    return result;
+  } catch (e) {
+    console.log(e);
+  }
+};
 
 const Courses = () => {
   const { data, error, isLoading } = swr("/api/course", fetcher);

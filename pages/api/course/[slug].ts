@@ -20,7 +20,7 @@ export default async function CourseDetails(
       if (!details) {
         return res.status(404).json({
           success: false,
-          message: `Data not found at slug:  ${slug}`,
+          message: `Data not found at slug: ${slug}`,
           returnSingleCourse: {},
         });
       }

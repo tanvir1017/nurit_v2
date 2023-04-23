@@ -5,13 +5,17 @@ import { useRouter } from "next/router";
 import swr from "swr";
 
 const fetcher = (url: RequestInfo | URL) =>
-  fetch(url).then((res) => res.json());
+  fetch(url).then((res) => {
+    console.log(res.json());
+    return res.json();
+  });
 
 const CourseDetails = () => {
   const router = useRouter();
   const { slug } = router.query;
 
   const { data, error, isLoading } = swr(`/api/course/${slug}`, fetcher);
+
   let content = null;
   if (!isLoading && !data && error) {
     content = <ErrorMessage />;
