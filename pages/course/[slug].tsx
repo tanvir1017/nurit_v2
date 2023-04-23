@@ -4,11 +4,15 @@ import { BlurImage, MinimalBlurImage } from "@/lib/blurImage";
 import { useRouter } from "next/router";
 import swr from "swr";
 
-const fetcher = (url: RequestInfo | URL) =>
-  fetch(url).then((res) => {
-    console.log(res.json());
-    return res.json();
-  });
+const fetcher = async (url: RequestInfo | URL) => {
+  try {
+    const res = await fetch(url);
+    const result = await res.json();
+    return result;
+  } catch (e: any) {
+    throw new Error(e);
+  }
+};
 
 const CourseDetails = () => {
   const router = useRouter();

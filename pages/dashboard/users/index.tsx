@@ -8,8 +8,15 @@ import swr from "swr";
 import Layout from "../layout";
 import AuthorTable from "./authorTable";
 
-const fetcher = (url: RequestInfo | URL) =>
-  fetch(url).then((res) => res.json());
+const fetcher = async (url: RequestInfo | URL) => {
+  try {
+    const res = await fetch(url);
+    const result = await res.json();
+    return result;
+  } catch (e: any) {
+    throw new Error(e);
+  }
+};
 const API = "/api/auth";
 
 const Users = () => {

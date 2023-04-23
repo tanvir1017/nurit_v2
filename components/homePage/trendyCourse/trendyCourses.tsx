@@ -4,9 +4,15 @@ import { trendyCoursesFilterButton } from "@/util/localDb";
 import { useState } from "react";
 import swr from "swr";
 
-const fetcher = (url: RequestInfo | URL) =>
-  fetch(url).then((res) => res.json());
-
+const fetcher = async (url: RequestInfo | URL) => {
+  try {
+    const res = await fetch(url);
+    const result = await res.json();
+    return result;
+  } catch (e: any) {
+    throw new Error(e);
+  }
+};
 const TrendyCourses = () => {
   const [buttonFilterText, setButtonFilterText] = useState("msOffice");
   const { data, error, isLoading } = swr("/api/course", fetcher);

@@ -3,12 +3,19 @@ import Metadata from "@/util/SEO/metadata";
 import { apiUrl } from "@/util/api";
 import swr from "swr";
 
-const fetcher = (url: RequestInfo | URL) =>
-  fetch(url).then((res) => res.json());
+const fetcher = async (url: RequestInfo | URL) => {
+  try {
+    const res = await fetch(url);
+    const result = await res.json();
+    return result;
+  } catch (e: any) {
+    throw new Error(e);
+  }
+};
 const API = `${apiUrl}/api/blogs`;
 
 const Blogs = () => {
-  const { data, isLoading, error } = swr(API, fetcher);
+  const { data, isLoading, error } = swr("/api/blogs", fetcher);
   console.log(error);
   console.log(data);
   let content = null;
