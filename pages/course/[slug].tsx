@@ -2,7 +2,7 @@ import ErrorMessage from "@/components/error";
 import Skeleton from "@/components/shared/skeleton";
 import { BlurImage, MinimalBlurImage } from "@/lib/blurImage";
 import { useRouter } from "next/router";
-import useSWR from "swr";
+import swr from "swr";
 
 const fetcher = (url: RequestInfo | URL) =>
   fetch(url).then((res) => res.json());
@@ -11,12 +11,12 @@ const CourseDetails = () => {
   const router = useRouter();
   const { slug } = router.query;
 
-  const { data, error, isLoading } = useSWR(`/api/course/${slug}`, fetcher);
+  const { data, error, isLoading } = swr(`/api/course/${slug}`, fetcher);
   let content = null;
   if (!isLoading && !data && error) {
     content = <ErrorMessage />;
   } else if (!data && !error && isLoading) {
-    content = [...Array(8).keys()].map((_, i: number) => <Skeleton key={i} />);
+    content = [...Array(1).keys()].map((_, i: number) => <Skeleton key={i} />);
   } else if (!isLoading && !error && data.success) {
     const { returnSingleCourse } = data;
     const {

@@ -11,29 +11,22 @@ const Blogs = () => {
   const { data, isLoading, error } = swr(API, fetcher);
   console.log(error);
   console.log(data);
-  let content = <main className="App"> </main>;
+  let content = null;
   if (!error && !data && isLoading) {
     content = (
-      <main className="App">
-        <div
-          id="card"
-          className="grid grid-cols-4 gap-5 place-items-center mt-14"
-        >
-          {[...Array(8).keys()].map((_, i) => (
-            <Skeleton key={i} />
-          ))}
-        </div>
-      </main>
+      <>
+        {[...Array(8).keys()].map((_, i) => (
+          <Skeleton key={i} />
+        ))}
+      </>
     );
   }
 
   if (!data && !isLoading && error) {
     content = (
-      <main className="App">
-        <p className="text-[var(--red-primary-brand-color)] font-HSSemiBold text-2xl">
-          Something went wrong! Try again after some time
-        </p>
-      </main>
+      <p className="text-[var(--red-primary-brand-color)] font-HSSemiBold text-2xl">
+        Something went wrong! Try again after some time
+      </p>
     );
   }
   if (!isLoading && !error && data) {
@@ -42,35 +35,35 @@ const Blogs = () => {
     } = data;
 
     content = (
-      <main className="App">
-        <Metadata
-          title="NurIT-Blogs"
-          name="blog page"
-          content="NurIT blogs"
-          // key="skill course, course, ms office, office 364"
-        />
-        <main className="App">
-          <section className="container">
-            <div>
-              <h1 className="text-green-500">
-                {" "}
-                total blogs are available: {blogs.length}
-              </h1>
-              {blogs.map((item: any) => {
-                return (
-                  <div key={item?.id}>
-                    <h1>{item.title}</h1>
-                  </div>
-                );
-              })}
+      <div>
+        <h1 className="text-green-500">
+          {" "}
+          total blogs are available: {blogs.length}
+        </h1>
+        {blogs.map((item: any) => {
+          return (
+            <div key={item?.id}>
+              <h1>{item.title}</h1>
             </div>
-          </section>
-        </main>
-      </main>
+          );
+        })}
+      </div>
     );
   }
 
-  return content;
+  return (
+    <>
+      <Metadata
+        title="NurIT-Blogs"
+        name="blog page"
+        content="NurIT blogs"
+        // key="skill course, course, ms office, office 364"
+      />
+      <main className="App">
+        <section className="container">{content}</section>
+      </main>
+    </>
+  );
 };
 
 export default Blogs;

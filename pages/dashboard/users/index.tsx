@@ -12,7 +12,7 @@ const fetcher = (url: RequestInfo | URL) =>
   fetch(url).then((res) => res.json());
 const API = "/api/auth";
 
-const UsersFetcher = () => {
+const Users = () => {
   const { data, error, isLoading } = swr(API, fetcher);
   console.log(error);
   let content = null;
@@ -76,4 +76,4 @@ const UsersFetcher = () => {
   );
 };
 
-export default UsersFetcher;
+export default Users;

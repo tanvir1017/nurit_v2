@@ -2,14 +2,14 @@ import Course from "@/components/homePage/trendyCourse/course";
 import Skeleton from "@/components/shared/skeleton";
 import { trendyCoursesFilterButton } from "@/util/localDb";
 import { useState } from "react";
-import useSWR from "swr";
+import swr from "swr";
 
 const fetcher = (url: RequestInfo | URL) =>
   fetch(url).then((res) => res.json());
 
 const TrendyCourses = () => {
   const [buttonFilterText, setButtonFilterText] = useState("msOffice");
-  const { data, error, isLoading } = useSWR("/api/course", fetcher);
+  const { data, error, isLoading } = swr("/api/course", fetcher);
 
   return (
     <section className="container font-HSRegular  my-40">

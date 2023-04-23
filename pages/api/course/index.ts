@@ -8,7 +8,7 @@ type Data = {
   returnCourse?: {} | [] | null;
 };
 
-export default async function index(
+export default async function Course(
   req: NextApiRequest,
   res: NextApiResponse<Data>
 ) {
