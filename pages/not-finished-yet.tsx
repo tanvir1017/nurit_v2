@@ -3,7 +3,7 @@ import { motion as m } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 
-function NotFinishedYet() {
+function notFinishedYet() {
   return (
     <>
       <Metadata
@@ -44,4 +44,4 @@ function NotFinishedYet() {
   );
 }
 
-export default NotFinishedYet;
+export default notFinishedYet;

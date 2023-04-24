@@ -1,4 +1,4 @@
-import ProcessingButton from "@/util/buttons/proccessingButtong";
+import SubmitButton from "@/util/buttons/submitButton";
 import { updatedAtDateFormatter } from "@/util/dateFormatter";
 import { DashBoardAuthorTableType } from "@/util/types/types";
 import { Dialog, Transition } from "@headlessui/react";
@@ -184,7 +184,7 @@ export default function AuthorDialog({
                       />{" "}
                     </div>
                     <div className="mt-5">
-                      <ProcessingButton buttonText="Update" loading={loading} />
+                      <SubmitButton buttonText="Update" loading={loading} />
                     </div>
                   </form>
                 </Dialog.Panel>

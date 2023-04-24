@@ -1,21 +1,15 @@
-import Course from "@/components/homePage/trendyCourse/course";
 import Skeleton from "@/components/shared/skeleton";
 import { trendyCoursesFilterButton } from "@/util/localDb";
-import * as React from "react";
-import swr from "swr";
+import { useState } from "react";
+import useSWR from "swr";
+import Course from "./course";
 
-const fetcher = async (url: RequestInfo | URL) => {
-  try {
-    const res = await fetch(url);
-    const result = await res.json();
-    return result;
-  } catch (e: any) {
-    throw new Error(e);
-  }
-};
+const fetcher = (url: RequestInfo | URL) =>
+  fetch(url).then((res) => res.json());
+
 const TrendyCourses = () => {
-  const [buttonFilterText, setButtonFilterText] = React.useState("msOffice");
-  const { data, error, isLoading } = swr("/api/course", fetcher);
+  const [buttonFilterText, setButtonFilterText] = useState("msOffice");
+  const { data, error, isLoading } = useSWR("/course.json", fetcher);
 
   return (
     <section className="container font-HSRegular  my-40">
@@ -58,12 +52,11 @@ const TrendyCourses = () => {
           {!isLoading &&
             !error &&
             data &&
-            data?.returnCourse
+            data
               ?.filter(
                 (el: { category: string }) => el.category === buttonFilterText
               )
-              ?.map((el: any) => <Course key={el.id} el={el} />)}
-
+              ?.map((el: any) => <Course key={el._id} el={el} />)}
           {!data &&
             !error &&
             isLoading &&
