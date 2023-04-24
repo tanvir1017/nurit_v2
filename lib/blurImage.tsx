@@ -25,7 +25,7 @@ export function BlurImage({
   return (
     <div
       className={`${
-        isLoading ? `w-full ${bg}  blur-sm` : "w-0"
+        isLoading ? `w-full ${bg} blur-sm` : "w-0"
       }  overflow-hidden  `}
       style={{ height: isLoading ? customHeight : "" }}
     >

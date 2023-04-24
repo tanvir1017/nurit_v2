@@ -7,8 +7,6 @@ type Data = {
   returnBlogData?: {} | [];
 };
 
-type slugTypeData = string;
-
 const singleBlog = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
   try {
     if (req.query) {
