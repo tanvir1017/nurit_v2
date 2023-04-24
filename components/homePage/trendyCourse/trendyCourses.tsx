@@ -16,7 +16,6 @@ const fetcher = async (url: RequestInfo | URL) => {
 const TrendyCourses = () => {
   const [buttonFilterText, setButtonFilterText] = React.useState("msOffice");
   const { data, error, isLoading } = swr("/api/course", fetcher);
-  console.log(data);
 
   return (
     <section className="container font-HSRegular  my-40">
@@ -59,17 +58,12 @@ const TrendyCourses = () => {
           {!isLoading &&
             !error &&
             data &&
-            data?.returnCourse?.length < 0 &&
             data?.returnCourse
               ?.filter(
                 (el: { category: string }) => el.category === buttonFilterText
               )
               ?.map((el: any) => <Course key={el.id} el={el} />)}
-          {!isLoading && !error && data && data?.returnCourse?.length >= 0 && (
-            <>
-              <p>No course available right now</p>
-            </>
-          )}
+
           {!data &&
             !error &&
             isLoading &&
