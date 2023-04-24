@@ -1,5 +1,4 @@
 import {
-  deleteASingleBlog,
   getAllBlogsExistOnDB,
   postABlogToDb,
 } from "@/lib/dbOperatons/blogs.prisma";
@@ -21,23 +20,6 @@ const BlogApiEndPoint = async (
   try {
     switch (req.method) {
       case DB_OPERATION_METHOD.GET: {
-        // if (req.query.slug) {
-        //   const { slug } = req.query;
-        //   const singleBlog = await getASingleBlogBasedOnSlug(slug as string);
-        //   if (!singleBlog) {
-        //     return res.status(404).send({
-        //       success: false,
-        //       message: `No content available on your query slug: ${slug} 😟`,
-        //       returnBlogData: {},
-        //     });
-        //   }
-        //   return res.status(200).send({
-        //     success: true,
-        //     message: "Blogs found based on your slug 🚀",
-        //     returnBlogData: singleBlog,
-        //   });
-        // }
-
         const blogs = await getAllBlogsExistOnDB();
         if (!blogs) {
           return res.status(500).send({
@@ -105,31 +87,6 @@ const BlogApiEndPoint = async (
           }
         }
       }
-
-      case DB_OPERATION_METHOD.DELETE: {
-        if (req.query) {
-          const { id } = req.query;
-          const deleteSingleBlog = await deleteASingleBlog(
-            id as string | undefined
-          );
-          if (!deleteSingleBlog) {
-            return res.status(500).send({
-              success: false,
-              message: `Server or client error to delete this single blog with this id : ${id}`,
-            });
-          }
-          return res.status(200).send({
-            success: true,
-            message: `Blog were contain this id: ${id}, is now deleted successfully`,
-            returnBlogData: deleteSingleBlog,
-          });
-        }
-      }
-      default:
-        return res.status(404).send({
-          success: false,
-          message: "data not found",
-        });
     }
   } catch (error) {
     return res.status(500).send({
