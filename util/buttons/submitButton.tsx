@@ -23,7 +23,7 @@ const SubmitButton = ({
       className=" bg-[var(--red-primary-brand-color)] border-none rounded-md  text-white px-8 py-2 flex justify-between items-center"
     >
       {loading && <Image src="/loader.svg" alt="" width={20} height={40} />}
-      {loading ? "loading..." : buttonText}
+      {loading ? "waiting..." : buttonText}
     </m.button>
   );
 };
