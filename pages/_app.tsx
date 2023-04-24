@@ -50,6 +50,7 @@ export default function App({ Component, pageProps, router }: AppProps) {
             )}
           <Toaster position="bottom-center" reverseOrder={true} />
           <Component {...pageProps} />
+
           {!pathname.includes("/auth") &&
             !pathname.includes("/dashboard") &&
             !pathname.includes("/404") &&
