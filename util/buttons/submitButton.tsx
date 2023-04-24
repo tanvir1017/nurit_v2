@@ -14,19 +14,17 @@ const SubmitButton = ({
     visible: { opacity: 1, y: 0, transition: { duration: 0.8 } },
   };
   return (
-    <>
-      <m.button
-        variants={childVariants}
-        disabled={loading}
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.9 }}
-        type="submit"
-        className=" bg-[var(--red-primary-brand-color)] border-none rounded-md  text-white px-8 py-2 flex justify-between items-center"
-      >
-        {loading && <Image src="/loader.svg" alt="" width={20} height={40} />}
-        {loading ? "loading..." : buttonText}
-      </m.button>
-    </>
+    <m.button
+      variants={childVariants}
+      disabled={loading}
+      whileHover={{ scale: 1.1 }}
+      whileTap={{ scale: 0.9 }}
+      type="submit"
+      className=" bg-[var(--red-primary-brand-color)] border-none rounded-md  text-white px-8 py-2 flex justify-between items-center"
+    >
+      {loading && <Image src="/loader.svg" alt="" width={20} height={40} />}
+      {loading ? "waiting..." : buttonText}
+    </m.button>
   );
 };
 
