@@ -7,7 +7,7 @@ import {
 import ImageUpload from "@/components/shared/upload/imageUpload";
 import useShare from "@/lib/context/useShare";
 import Metadata from "@/util/SEO/metadata";
-import SubmitButton from "@/util/buttons/submitButton";
+import ProcessingButton from "@/util/buttons/proccessingButtong";
 import { motion as m, useReducedMotion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
@@ -313,7 +313,7 @@ const SignIn = () => {
                   />
                 </div>
                 <div className="flex justify-between items-center relative">
-                  <SubmitButton loading={loading} buttonText="সাইন-ইন" />
+                  <ProcessingButton loading={loading} buttonText="সাইন-ইন" />
                 </div>
                 <div className="md:hidden block">
                   <span className="font-HSSemiBold">

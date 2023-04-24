@@ -151,18 +151,18 @@ function sendEmail(email: string, jwtEmail: string, res: any) {
   
 
   <body>
-    <div class="wrapper">
-      <div class="brand-item">
+    <div className="wrapper">
+      <div className="brand-item">
         <img
-          class="brand-logo"
+          className="brand-logo"
           src="https://res.cloudinary.com/djbcnjkin/image/upload/v1680281219/nurit-institute_v2/brand-thins/trlmdlhsnvqtkmmzjc7v.png"
           alt="brand-logo NurIT-institute.com"
         />
         <div>
           <p><span style="color: #ff2c45">নুর-আইটি</span> ইনস্টিটিউট</p>
-          <div class="social">
+          <div className="social">
             FOLLOW US
-            <div class="social-icon">
+            <div className="social-icon">
               <img
                 src="https://img.icons8.com/fluency/48/null/facebook-new.png"
               />
@@ -174,10 +174,10 @@ function sendEmail(email: string, jwtEmail: string, res: any) {
           </div>
         </div>
       </div>
-      <p class="after-logo-text">Hi there!</p>
+      <p className="after-logo-text">Hi there!</p>
 
-      <div class="container">
-        <div class="container-item">
+      <div className="container">
+        <div className="container-item">
           <h1>Verify it's you</h1>
           <p>
             You're almost there. Just click below to complete
@@ -185,12 +185,12 @@ function sendEmail(email: string, jwtEmail: string, res: any) {
             your Registration process
           </p>
           
-            <button class="verify-btn">
+            <button className="verify-btn">
               <a style="text-decoration: none; color: white;"  href=${send_emailDestination}/auth/signing?token=${email}> verify email
               </a>
               </button>
         </div>
-        <div class="verify-img">
+        <div className="verify-img">
           <img
           
           src="https://res.cloudinary.com/djbcnjkin/image/upload/v1680281898/nurit-institute_v2/brand-thins/kkgsvxcphxgfz7b7v2hc.avif"

@@ -1,8 +1,8 @@
 import LightModeBrand from "@/components/shared/brand";
 import Metadata from "@/util/SEO/metadata";
-import SubmitButton from "@/util/buttons/submitButton";
 
 import Modal from "@/components/shared/headlessui/dialog";
+import ProcessingButton from "@/util/buttons/proccessingButtong";
 import { responseType } from "@/util/types/types";
 import { motion as m, useReducedMotion } from "framer-motion";
 import Image from "next/image";
@@ -160,7 +160,7 @@ const VerifyYourEmail = () => {
                   </p>
                 </label>
                 <div className="flex justify-between items-center relative">
-                  <SubmitButton buttonText="রেজিষ্টার লিংক পাঠান" />
+                  <ProcessingButton buttonText="রেজিষ্টার লিংক পাঠান" />
                 </div>
                 <div className="md:hidden block">
                   <span className="font-HSSemiBold">

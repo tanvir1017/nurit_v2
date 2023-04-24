@@ -6,7 +6,7 @@ import {
 } from "@/components/shared/inputLabel/inputLabel";
 import useShare from "@/lib/context/useShare";
 import Metadata from "@/util/SEO/metadata";
-import SubmitButton from "@/util/buttons/submitButton";
+import ProcessingButton from "@/util/buttons/proccessingButtong";
 import { responseType } from "@/util/types/types";
 import { motion as m, useReducedMotion } from "framer-motion";
 import Image from "next/image";
@@ -211,7 +211,7 @@ const Login = () => {
                 />
 
                 <div className="flex justify-between items-center relative">
-                  <SubmitButton loading={loading} buttonText="লগইন" />
+                  <ProcessingButton loading={loading} buttonText="লগইন" />
 
                   <Link
                     href="404"

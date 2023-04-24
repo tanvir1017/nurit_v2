@@ -9,13 +9,13 @@ const fetcher = async (url: RequestInfo | URL) => {
     const result = await res.json();
     return result;
   } catch (e: any) {
-    throw new Error(e);
+    throw new Error("error is", e);
   }
 };
 
 const Courses = () => {
   const { data, error, isLoading } = swr("/api/course", fetcher);
-  console.log(error);
+  console.log(data);
   if (isLoading) {
     return (
       <>
@@ -32,15 +32,22 @@ const Courses = () => {
       </>
     );
   }
+
   return (
     <section className="courses">
       <div
         id="card"
         className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4  gap-5 place-items-center mt-14"
       >
-        {data?.returnCourse.map((el: any, i: number) => (
-          <Course key={i} el={el} />
-        ))}
+        {data?.returnCourse &&
+          data?.returnCourse?.map((el: any, i: number) => (
+            <Course key={i} el={el} />
+          ))}
+        {data?.returnCourse?.length === 0 && (
+          <>
+            <p>No course available right now</p>
+          </>
+        )}
       </div>
     </section>
   );

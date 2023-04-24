@@ -4,6 +4,7 @@ import Link from "next/link";
 import { BsStarFill } from "react-icons/bs";
 
 const Course = ({ el }: any) => {
+  console.log(el);
   return (
     <>
       <Metadata
@@ -36,7 +37,7 @@ const Course = ({ el }: any) => {
           <div className="flex justify-between items-center">
             <strong className="flex items-center">
               {[...Array(Math.ceil(el?.review)).keys()].map((el, i) => {
-                return <BsStarFill key={i} className="text-amber-500" />;
+                return <BsStarFill key={i} />;
               })}
             </strong>
             <div className="flex items-center space-x-8 text-lg">
