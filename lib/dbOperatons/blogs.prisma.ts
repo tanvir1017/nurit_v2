@@ -2,6 +2,7 @@ import prisma from "@/prisma/prisma/db.connector";
 import {
   A__SingleModelFunctionType,
   BlogBodyDataType,
+  GetASingleDataFunctionType,
   GetAllBlogsFunctionType,
   PostABlogToDB,
 } from "@/util/types/types";
@@ -38,16 +39,16 @@ export const getAllBlogsExistOnDB: GetAllBlogsFunctionType = async () => {
   const blogs = await prisma.blog.findMany();
   return { blogs, totalBlogs };
 };
-// export const getASingleBlogBasedOnSlug: GetASingleDataFunctionType = async (
-//   slug
-// ) => {
-//   const blog = await prisma.blog.findUnique({
-//     where: {
-//       slug,
-//     },
-//   });
-//   return blog;
-// };
+export const getASingleBlogBasedOnSlug: GetASingleDataFunctionType = async (
+  slug
+) => {
+  const blog = await prisma.blog.findUnique({
+    where: {
+      slug,
+    },
+  });
+  return blog;
+};
 
 export const deleteASingleBlog: A__SingleModelFunctionType = async (id) => {
   const blog = await prisma.blog.delete({
