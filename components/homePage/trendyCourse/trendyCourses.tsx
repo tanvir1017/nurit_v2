@@ -1,11 +1,9 @@
 import Skeleton from "@/components/shared/skeleton";
+import { fetcher } from "@/lib/fetcher";
 import { trendyCoursesFilterButton } from "@/util/localDb";
 import { useState } from "react";
 import useSWR from "swr";
 import Course from "./course";
-
-const fetcher = (url: RequestInfo | URL) =>
-  fetch(url).then((res) => res.json());
 
 const TrendyCourses = () => {
   const [buttonFilterText, setButtonFilterText] = useState("msOffice");

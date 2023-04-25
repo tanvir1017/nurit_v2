@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import useSWR from "swr";
-const fetcher = (url: string) => fetch(url).then((res) => res.json());
+import { fetcher } from "../fetcher";
+
 const useSharedContext = () => {
   const [routerPath, setRouterPath] = useState<string>("/");
   const { data, error, isLoading, mutate } = useSWR(

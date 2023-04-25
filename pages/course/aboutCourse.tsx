@@ -9,9 +9,11 @@ type AboutCourseProps = {
   peoplePerHourImg: String;
   freeLanceImg: String;
   fiverrImg: String;
+  upWorkImg: String;
 };
 
 const AboutCourse = ({
+  upWorkImg,
   desc,
   certificateDesc,
   certificateTitle,
@@ -25,7 +27,9 @@ const AboutCourse = ({
     <>
       <div className="ABOUT-COURSE">
         <div className="COURSE-INTRO">
-          <p className="font-HSSemiBold text-3xl text-center">কোর্স সর্ম্পকে</p>
+          <p className="font-HSSemiBold text-3xl text-center lg:mt-[6rem]">
+            কোর্স সর্ম্পকে
+          </p>
           <div className="border-t-2 mb-5"></div>
         </div>
         <p>{desc}</p>
@@ -76,7 +80,7 @@ const AboutCourse = ({
               </div>
               <div className="col-start-3 transform scale-75 rotate-6 translate-x-2 translate-y-15">
                 <MinimalBlurImage
-                  imageSrc={peoplePerHourImg as string}
+                  imageSrc={upWorkImg as string}
                   alt=""
                   customHeight="5rem"
                   customStyle="bg-slate-300"
@@ -159,6 +163,15 @@ const AboutCourse = ({
                 />
                 <MinimalBlurImage
                   imageSrc={freeLanceImg as string}
+                  alt=""
+                  customHeight="5rem"
+                  customStyle="bg-slate-300"
+                  height={100}
+                  width={150}
+                  customClass="bg-slate-100 rounded-lg"
+                />
+                <MinimalBlurImage
+                  imageSrc={upWorkImg as string}
                   alt=""
                   customHeight="5rem"
                   customStyle="bg-slate-300"

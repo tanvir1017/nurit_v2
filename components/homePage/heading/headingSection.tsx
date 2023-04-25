@@ -1,5 +1,6 @@
 import { Blur } from "@/components/shared/blur";
 import { BlurImage } from "@/lib/blurImage";
+
 import { motion as m } from "framer-motion";
 import Link from "next/link";
 import { useState } from "react";

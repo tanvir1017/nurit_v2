@@ -16,6 +16,10 @@ const nextConfig = {
         source: "/dashboard",
         destination: environmentDestination,
       },
+      {
+        source: "/",
+        destination: environmentDestination,
+      },
     ];
   },
   images: {

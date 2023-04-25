@@ -1,13 +1,11 @@
 import ErrorMessage from "@/components/error";
 import Skeleton from "@/components/shared/skeleton";
 import { MinimalBlurImage } from "@/lib/blurImage";
+import { fetcher } from "@/lib/fetcher";
 import { useRouter } from "next/router";
 import useSWR from "swr";
 import AboutCourse from "./aboutCourse";
 import Card from "./card";
-
-const fetcher = (url: RequestInfo | URL) =>
-  fetch(url).then((res) => res.json());
 
 const CourseDetails = () => {
   const router = useRouter();
@@ -40,23 +38,14 @@ const CourseDetails = () => {
       techingList8,
       careersTitle,
       careerDesc,
-      marketPlaceTitle,
       upWorkImg,
       certificateDesc,
       certificateTitle,
-
       design99Img,
       toptalImg,
       peoplePerHourImg,
       freeLanceImg,
       fiverrImg,
-      resourceTitle,
-      videoIcon,
-      pdfIcon,
-      bookIcon,
-      techingSoftwareTitle,
-      techingSoftwareDesc,
-      requirement,
       requirementDesc,
       instructor,
       topic,
@@ -118,7 +107,7 @@ const CourseDetails = () => {
               </div>
             </div>
           </div>
-          <div className="relative">
+          <div>
             <Card
               courseCover={courseCover}
               title={title}
@@ -149,6 +138,7 @@ const CourseDetails = () => {
           peoplePerHourImg={peoplePerHourImg}
           freeLanceImg={freeLanceImg}
           fiverrImg={fiverrImg}
+          upWorkImg={upWorkImg}
         />
       </>
     );

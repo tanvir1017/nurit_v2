@@ -2,14 +2,13 @@ import {
   AuthorTableSkeleton,
   UserSkeleton,
 } from "@/components/shared/skeleton";
+import { fetcher } from "@/lib/fetcher";
 import Metadata from "@/util/SEO/metadata";
 import { DashBoardAuthorTableType } from "@/util/types/types";
 import useSWR from "swr";
 import Layout from "../layout";
 import AuthorTable from "./authorTable";
 
-const fetcher = (url: RequestInfo | URL) =>
-  fetch(url).then((res) => res.json());
 const API = "/api/auth";
 
 const UsersFetcher = () => {
@@ -22,7 +21,7 @@ const UsersFetcher = () => {
       </p>
     );
   }
-  if (!error && data && isLoading) {
+  if (!error && !data && isLoading) {
     content = (
       <section className="container">
         <AuthorTableSkeleton>
@@ -63,15 +62,17 @@ const UsersFetcher = () => {
   }
 
   return (
-    <Layout>
+    <>
       <Metadata
         title="Dashboard | Manage users"
         name="Dashboard panel for admin and specific Member"
         content="all course page. You can find every course in this page that we are providing"
         // key="skill course, course, ms office, office 364"
       />
-      <main className="App">{content} </main>
-    </Layout>
+      <Layout>
+        <main className="App">{content} </main>
+      </Layout>
+    </>
   );
 };
 

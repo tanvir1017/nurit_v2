@@ -42,7 +42,7 @@ const Card = ({
 }: CardProps) => {
   return (
     <div className="COURSE-DETAILS-CARD flex items-center h-screen  w-full">
-      <div className=" sticky top-10">
+      <div className="">
         <BlurImage
           imageSrc={courseCover as string}
           alt={title as string}
