@@ -3,6 +3,7 @@ import Skeleton from "@/components/shared/skeleton";
 import { MinimalBlurImage } from "@/lib/blurImage";
 import { useRouter } from "next/router";
 import useSWR from "swr";
+import AboutCourse from "./aboutCourse";
 import Card from "./card";
 
 const fetcher = (url: RequestInfo | URL) =>
@@ -43,7 +44,7 @@ const CourseDetails = () => {
       upWorkImg,
       certificateDesc,
       certificateTitle,
-      certificateImg,
+
       design99Img,
       toptalImg,
       peoplePerHourImg,
@@ -55,13 +56,9 @@ const CourseDetails = () => {
       bookIcon,
       techingSoftwareTitle,
       techingSoftwareDesc,
-      whoCanBuy,
-      whoCanBuyTitle,
       requirement,
       requirementDesc,
-      // review,
       instructor,
-      // registerNow,
       topic,
       lession,
       video,
@@ -107,32 +104,52 @@ const CourseDetails = () => {
                   </div>
                 </div>
               </div>
+
+              <div className="REQUIREMENT">
+                <div className="COURSE-INTRO">
+                  <p className="font-HSSemiBold text-3xl">কোর্স রিকুয়ারমেন্ট</p>
+                  <div className="border-t-2 mb-5"></div>
+                </div>
+                <p>{requirementDesc}</p>
+              </div>
+              <div className="CAREERS-TITLE mt-10">
+                <p className="font-HSSemiBold text-3xl">{careersTitle}</p>
+                <p className="mt-5">{careerDesc}</p>
+              </div>
             </div>
           </div>
-          <div>
-            <div className="relative">
-              <Card
-                courseCover={courseCover}
-                title={title}
-                topic={topic}
-                lession={lession}
-                video={video}
-                quize={quize}
-                techingListTitle={techingListTitle}
-                techingList1={techingList1}
-                techingList2={techingList2}
-                techingList3={techingList3}
-                techingList4={techingList4}
-                techingList5={techingList5}
-                techingList6={techingList6}
-                techingList7={techingList7}
-                techingList8={techingList8}
-                fee={fee}
-                discountFee={discountFee}
-              />
-            </div>
+          <div className="relative">
+            <Card
+              courseCover={courseCover}
+              title={title}
+              topic={topic}
+              lession={lession}
+              video={video}
+              quize={quize}
+              techingListTitle={techingListTitle}
+              techingList1={techingList1}
+              techingList2={techingList2}
+              techingList3={techingList3}
+              techingList4={techingList4}
+              techingList5={techingList5}
+              techingList6={techingList6}
+              techingList7={techingList7}
+              techingList8={techingList8}
+              fee={fee}
+              discountFee={discountFee}
+            />
           </div>
         </div>
+        <AboutCourse
+          desc={desc}
+          certificateDesc={certificateDesc}
+          certificateTitle={certificateTitle}
+          design99Img={design99Img}
+          toptalImg={toptalImg}
+          peoplePerHourImg={peoplePerHourImg}
+          freeLanceImg={freeLanceImg}
+          fiverrImg={fiverrImg}
+        />
       </>
     );
   }

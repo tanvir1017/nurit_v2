@@ -12,6 +12,7 @@ export function BlurImage({
   width,
   customHeight,
   bg,
+  customClass,
 }: {
   imageSrc: string;
   alt: string;
@@ -19,6 +20,7 @@ export function BlurImage({
   width: number;
   customHeight: string;
   bg: string;
+  customClass?: string;
 }) {
   const [isLoading, setLoading] = useState(true);
 
@@ -26,7 +28,7 @@ export function BlurImage({
     <div
       className={`${
         isLoading ? `w-full ${bg} blur-sm` : "w-0"
-      }  overflow-hidden  `}
+      }  overflow-hidden ${customClass} `}
       style={{ height: isLoading ? customHeight : "" }}
     >
       <Image
@@ -53,6 +55,7 @@ export function MinimalBlurImage({
   customHeight,
   customStyle,
   alt,
+  customClass,
 }: {
   imageSrc: string;
   height: number;
@@ -60,12 +63,15 @@ export function MinimalBlurImage({
   customHeight: string;
   customStyle: string;
   alt: string;
+  customClass?: string;
 }) {
   const [isLoading, setLoading] = useState(true);
 
   return (
     <div
-      className={`group ${isLoading && `${customStyle} `}  overflow-hidden ${
+      className={`group ${
+        isLoading && `${customStyle} `
+      } ${customClass}  overflow-hidden ${
         alt.includes("rounded") && "rounded-full"
       }`}
       style={{ height: isLoading ? customHeight : "" }}
