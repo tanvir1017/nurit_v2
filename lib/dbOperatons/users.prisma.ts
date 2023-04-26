@@ -10,6 +10,9 @@ import prisma from "../../prisma/prisma/db.connector";
 export const getASingleUser: A__SingleModelFunctionType = async (id) => {
   const singleUser = await prisma.user.findUnique({
     where: { id },
+    include: {
+      postedBlogs: true,
+    },
   });
   return singleUser;
 };

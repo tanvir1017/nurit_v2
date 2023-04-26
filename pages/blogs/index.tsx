@@ -2,8 +2,10 @@ import ErrorMessage from "@/components/error";
 import Skeleton from "@/components/shared/skeleton";
 import { fetcher } from "@/lib/fetcher";
 import useSWR from "swr";
+import Blog from "./blog";
 const Index = () => {
   const { data, error, isLoading } = useSWR("/api/blogs", fetcher);
+  console.log(data);
   let content = null;
   if (!isLoading && !data && error) {
     content = (
@@ -28,7 +30,7 @@ const Index = () => {
           !isLoading &&
           data &&
           data.returnBlogData.blogs.map((_: any, i: number) => (
-            <>{_.sub_title}</>
+            <Blog key={i} blog={_} />
           ))}
       </>
     );

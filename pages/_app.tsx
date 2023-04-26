@@ -35,7 +35,7 @@ export default function App({ Component, pageProps, router }: AppProps) {
       <ThemeProvider
         enableSystem={true}
         attribute="class"
-        // forcedTheme={(Component?.theme as string) || null}
+        // forcedTheme={Component?.theme || undefined}
       >
         <ToastContainer transition={Bounce} hideProgressBar />
         <NextNProgress color="#ff2c45" />

@@ -45,6 +45,7 @@
   },
   "devDependencies": {
     "@tailwindcss/aspect-ratio": "^0.4.2",
+    "@tailwindcss/typography": "^0.5.9",
     "@types/js-cookie": "^3.0.3",
     "@types/nodemailer": "^6.4.7",
     "@types/react-lazy-load-image-component": "^1.5.2",
