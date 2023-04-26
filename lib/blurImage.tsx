@@ -1,6 +1,5 @@
 import Image from "next/image";
 import { useState } from "react";
-
 function cn(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
 }
@@ -23,12 +22,14 @@ export function BlurImage({
   customClass?: string;
 }) {
   const [isLoading, setLoading] = useState(true);
-
+  const handleCompleteLoad = () => {
+    setLoading(false);
+  };
   return (
     <div
-      className={`${
-        isLoading ? `w-full ${bg} blur-sm` : "w-0"
-      }  overflow-hidden ${customClass} `}
+      className={`group ${
+        isLoading ? `w-full ${bg} blur-sm ` : "w-0"
+      }  overflow-hidden ${customClass}  `}
       style={{ height: isLoading ? customHeight : "" }}
     >
       <Image
@@ -42,7 +43,7 @@ export function BlurImage({
             ? "scale-110 blur-2xl grayscale"
             : "scale-100 blur-0 grayscale-0"
         )}
-        onLoadingComplete={() => setLoading(false)}
+        onLoadingComplete={handleCompleteLoad}
       />
     </div>
   );

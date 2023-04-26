@@ -10,6 +10,7 @@ import {
 export const largeNavigationData: largeNavigationDataType = [
   { routeName: "সবগুলো কোর্স দেখ", path: "/courses" },
   { routeName: "ব্লগ", path: "/blogs" },
+  // { routeName: "গ্যালারি", path: "/gellary" },
   { routeName: "সেমিনারস", path: "/not-finished-yet" },
 ];
 
