@@ -1,18 +1,59 @@
 import { BlurImage } from "@/lib/blurImage";
+import { useEffect, useState } from "react";
 
 const BlogsHeading = () => {
+  const [blurHeight, setBlurHeight] = useState<string>("24.375rem");
+  const [smallThumbHeight, setSmallThumbHeight] = useState<string>("14.375rem");
+  useEffect(() => {
+    const findHeight = window.screen.height;
+
+    switch (true) {
+      case findHeight >= 320 && findHeight <= 480:
+        // COMMENT : set the custom height for mobile devices
+        setBlurHeight("12.375rem");
+        setSmallThumbHeight("7.375rem");
+        console.log("mobile devices");
+        break;
+
+      case findHeight >= 481 && findHeight <= 768:
+        // COMMENT : set the custom height for iPads, Tablets
+        setBlurHeight("24.375rem");
+        setSmallThumbHeight("14.375rem");
+        console.log("tablet devices");
+        break;
+
+      case findHeight >= 769 && findHeight <= 1024:
+        // COMMENT : set the custom height for Small screens, laptops
+        setBlurHeight("24.375rem");
+        setSmallThumbHeight("14.375rem");
+        console.log("small screens and laptops devices");
+        break;
+
+      case findHeight >= 1025 && findHeight <= 1200:
+        // COMMENT : set the custom height for Desktops, large screens
+        setBlurHeight("27rem");
+        setSmallThumbHeight("16rem");
+        console.log("desktop and  large screens");
+        break;
+
+      default:
+        // COMMENT : set the custom height for Extra large screens, TV
+        setBlurHeight("30rem");
+        setSmallThumbHeight("20rem");
+    }
+  }, []);
   return (
     <>
-      <div className="grid lg:grid-cols-2 sm:grid-cols-2 grid-cols-1  gap-4">
-        <div className="">
+      <div className="grid lg:grid-cols-2 sm:grid-cols-2 grid-cols-1 gap-4">
+        <div>
           <div>
             <BlurImage
               alt="Robotics cover picture"
               bg="bg-slate-300"
               height={100}
               imageSrc="/blogs/Robotics1.jpg"
-              width={700}
-              customHeight="24.375rem"
+              width={1000}
+              customHeight={blurHeight}
             />
           </div>
 
@@ -23,7 +64,7 @@ const BlogsHeading = () => {
               height={100}
               imageSrc="/blogs/blog-writting.webp"
               width={400}
-              customHeight="14.375rem"
+              customHeight={smallThumbHeight}
             />
             <BlurImage
               alt="JBL headphone cover picture"
@@ -31,7 +72,7 @@ const BlogsHeading = () => {
               height={100}
               imageSrc="/blogs/horizentalImg4_.png"
               width={400}
-              customHeight="14.375rem"
+              customHeight={smallThumbHeight}
             />
           </div>
         </div>
@@ -41,8 +82,8 @@ const BlogsHeading = () => {
             bg="bg-slate-300"
             height={100}
             imageSrc="/blogs/e-learning.jpg"
-            width={700}
-            customHeight="24.375rem"
+            width={1000}
+            customHeight={blurHeight}
           />
           <div className="grid grid-cols-2 gap-2 mt-3">
             <BlurImage
@@ -51,7 +92,7 @@ const BlogsHeading = () => {
               height={100}
               imageSrc="/blogs/programming.png"
               width={400}
-              customHeight="14.375rem"
+              customHeight={smallThumbHeight}
             />
             <BlurImage
               alt="A lot of gadget picture wallpaper"
@@ -59,7 +100,7 @@ const BlogsHeading = () => {
               height={100}
               imageSrc="/blogs/gadget.webp"
               width={400}
-              customHeight="14.375rem"
+              customHeight={smallThumbHeight}
             />
           </div>
         </div>
