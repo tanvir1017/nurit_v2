@@ -2,10 +2,10 @@ import LightModeBrand from "@/components/shared/brand";
 import Metadata from "@/util/SEO/metadata";
 
 import Modal from "@/components/shared/headlessui/dialog";
+import { BlurImage } from "@/lib/blurImage";
 import Submit from "@/util/buttons/submit";
 import { responseType } from "@/util/types/types";
 import { motion as m, useReducedMotion } from "framer-motion";
-import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { BiUserCircle } from "react-icons/bi";
@@ -14,6 +14,7 @@ import useSWR from "swr";
 
 const VerifyYourEmail = () => {
   const { mutate } = useSWR("/api/auth/login");
+  const [loading, setLoading] = useState(false);
   const [verifyEmail, setVerifyEmail] = useState("");
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [response, setResponse] = useState<responseType>({
@@ -38,6 +39,7 @@ const VerifyYourEmail = () => {
 
   const handlePreventLoading = async (e: any) => {
     e.preventDefault();
+    setLoading(true);
     await mutate(async () => {
       const res = await fetch("/api/auth/verify-email", {
         method: "POST",
@@ -48,6 +50,7 @@ const VerifyYourEmail = () => {
       });
       const data = await res.json();
       if (!data.success && res.status === 409) {
+        setLoading(false);
         openModal({
           title: "Email Not Sent!",
           description: data.message,
@@ -56,7 +59,8 @@ const VerifyYourEmail = () => {
           buttonText: "Got it, Redirect me to the login page",
           buttonLink: "/auth/login",
         });
-      } else if (res.status !== 409 && !res.ok) {
+      } else if (!res.ok) {
+        setLoading(false);
         openModal({
           title: "Something went wrong",
           description: "Try again later !",
@@ -65,6 +69,7 @@ const VerifyYourEmail = () => {
           buttonText: "Got it, Thanks!",
         });
       } else if (res.status === 200) {
+        setLoading(false);
         openModal({
           title: "Email sent",
           description: data.message,
@@ -108,10 +113,12 @@ const VerifyYourEmail = () => {
           </div>
           <div className="md:flex justify-around items-center mt-12">
             <div className="login_image">
-              <Image
+              <BlurImage
+                bg="bg-slate-300"
+                customHeight="23.5.rem"
                 width={450}
                 height={100}
-                src="/images/verify-email.webp"
+                imageSrc="/images/verify-email.webp"
                 alt="Login preview image"
               />
             </div>
@@ -153,6 +160,7 @@ const VerifyYourEmail = () => {
                     type="email"
                     title="verifying your email"
                     name="email"
+                    required
                   />
 
                   <p className="absolute -bottom-[10px] invisible peer-invalid:visible peer-invalid:translate-y-1 duration-300  text-[var(--red-primary-brand-color)] text-sm ">
@@ -160,7 +168,7 @@ const VerifyYourEmail = () => {
                   </p>
                 </label>
                 <div className="flex justify-between items-center relative">
-                  <Submit buttonText="রেজিষ্টার লিংক পাঠান" />
+                  <Submit buttonText="রেজিষ্টার লিংক পাঠান" loading={loading} />
                 </div>
                 <div className="md:hidden block">
                   <span className="font-HSSemiBold">

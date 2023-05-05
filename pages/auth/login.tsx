@@ -4,12 +4,12 @@ import {
   PasswordInputLabel,
   TextInputLabel,
 } from "@/components/shared/inputLabel/inputLabel";
+import { BlurImage } from "@/lib/blurImage";
 import useShare from "@/lib/context/useShare";
 import Metadata from "@/util/SEO/metadata";
 import Submit from "@/util/buttons/submit";
 import { responseType } from "@/util/types/types";
 import { motion as m, useReducedMotion } from "framer-motion";
-import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useRef, useState } from "react";
@@ -161,10 +161,12 @@ const Login = () => {
 
           <div className="md:flex justify-around items-center mt-12">
             <div className="login_image">
-              <Image
+              <BlurImage
+                bg="bg-slate-300"
+                customHeight="19.75rem"
                 width={450}
                 height={100}
-                src="/images/login.png"
+                imageSrc="/images/login.png"
                 alt="Login preview image"
               />
             </div>
