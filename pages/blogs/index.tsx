@@ -2,13 +2,15 @@ import ErrorMessage from "@/components/error";
 import Skeleton from "@/components/shared/skeleton";
 import { fetcher } from "@/lib/fetcher";
 import useSWR from "swr";
-import Blog from "./blog";
-import BlogsHeading from "./blogsheading";
-import DigitalSkills from "./digitalskills";
-import Elearning from "./e-learning";
-import GadgetWorld from "./gadgetworld";
-import LatestBlogs from "./latestblogs";
-import MobileVersionBlogHeading from "./mobileblogsheading";
+import Blog from "./blogssection/blog";
+import BlogsHeading from "./blogssection/blogsheading";
+import BlogsSocial from "./blogssection/blogssocial";
+import DigitalSkills from "./blogssection/digitalskills";
+import Elearning from "./blogssection/e-learning";
+import GadgetWorld from "./blogssection/gadgetworld";
+import LatestBlogs from "./blogssection/latestblogs";
+import MobileVersionBlogHeading from "./blogssection/mobileblogsheading";
+
 const Index = () => {
   const { data, error, isLoading } = useSWR("/api/blogs", fetcher);
   let content = null;
@@ -22,7 +24,7 @@ const Index = () => {
   if (!data && !error && isLoading) {
     content = (
       <>
-        {[...Array(4).keys()].map((_, i) => (
+        {[...Array(1).keys()].map((_, i) => (
           <Skeleton key={i} />
         ))}
       </>
@@ -37,11 +39,17 @@ const Index = () => {
           data.returnBlogData.blogs.map((_: any, i: number) => (
             <Blog key={i} blog={_} />
           ))}
-
-        <Elearning />
-        <DigitalSkills />
-        <GadgetWorld />
-        <LatestBlogs />
+        <div className="grid grid-cols-4 gap-5">
+          <div className="col-span-3">
+            <Elearning />
+            <DigitalSkills />
+            <GadgetWorld />
+            <LatestBlogs />
+          </div>
+          <div>
+            <BlogsSocial />
+          </div>
+        </div>
       </>
     );
   }

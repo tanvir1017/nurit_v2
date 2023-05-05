@@ -56,6 +56,8 @@ export default async function verifyEmail(
 function sendEmail(email: string, jwtEmail: string, res: any) {
   let Transport = nodemailer.createTransport({
     service: "Gmail",
+    port: 465,
+    host: "smtp.gmail.com",
     auth: {
       user: EMAIL_ADDRESS, // put NurIT email
       pass: PASSWORD_, // put email pass
