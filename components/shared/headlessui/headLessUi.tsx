@@ -62,7 +62,7 @@ export function Dropdown(props: TokenDataType) {
             {" "}
             <div className="text-center my-2">
               <div
-                className={`cursor-pointer bg-gradient-to-r from-indigo-500 to-red-500  rounded-full relative  w-24 h-24 m-auto p-0.5`}
+                className={`cursor-pointer bg-gradient-to-r from-indigo-500 to-red-500 rounded-full relative  w-24 h-24 m-auto p-0.5`}
               >
                 <div className="bg-white p-0.5 rounded-full h-full w-full">
                   <Image
@@ -80,7 +80,9 @@ export function Dropdown(props: TokenDataType) {
                   />
                 </div>
               </div>
-              <p className="text-lg font-medium mt-2">Tanvir</p>
+              <p className="text-lg font-medium mt-2">
+                {tokenData?.first__name}
+              </p>
               <Link
                 href="/not-finished-yet"
                 className="px-4 py-2 bg-[var(--red-primary-brand-color)] shadow-red-500/30 shadow-xl text-white inline-block text-sm rounded-full mt-2 mb-4"
