@@ -1,4 +1,3 @@
-import LightModeBrand from "@/components/shared/brand";
 import { dashboardMenuItems } from "@/util/localDb/navLink";
 import classNames from "classnames";
 import { motion as m } from "framer-motion";
@@ -78,9 +77,9 @@ const Sidebar = () => {
             })}
           >
             {!state.toggleCollapse && (
-              <div>
-                <LightModeBrand />
-              </div>
+              <h1 className="text-2xl font-HSBold text-[var(--red-primary-brand-color)]">
+                ড্যাশবোর্ড
+              </h1>
             )}
           </span>
 

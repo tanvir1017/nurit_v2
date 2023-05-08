@@ -7,15 +7,15 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 
 import { ShareContextType } from "@/util/types/types";
+import { SignedIn, UserButton, useAuth } from "@clerk/nextjs";
 import LightModeBrand from "../brand";
 import { Dropdown } from "../headlessui/headLessUi";
-
 const Navigation = () => {
   const [mounted, setMounted] = useState(false);
   const [toggle, setToggle] = useState(true);
   const [tokenData, setTokenData] = useState<any | null>(null);
   const [delay, setDelay] = useState<boolean>(false);
-
+  const { userId } = useAuth();
   const { resolvedTheme, setTheme } = useTheme();
   const { allContext } = useShare() as ShareContextType;
   const { data, error, isLoading, mutate } = allContext;
@@ -114,25 +114,35 @@ const Navigation = () => {
                 </m.div>
               </Link>
             )}
-            {!tokenData && delay && (
-              <Link href="/auth/login">
-                <m.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{
-                    duration: 1,
-                  }}
-                >
-                  <m.li
-                    className={`bg-[var(--red-primary-brand-color)] text-white p-2 rounded-md `}
-                    variants={childVariants}
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.9 }}
-                  >
-                    লগইন/সাইন-আপ
-                  </m.li>
-                </m.div>
-              </Link>
+            {!userId ? (
+              <>
+                {!tokenData && delay && (
+                  <Link href="/auth/login">
+                    <m.div
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{
+                        duration: 1,
+                      }}
+                    >
+                      <m.li
+                        className={`bg-[var(--red-primary-brand-color)] text-white p-2 rounded-md `}
+                        variants={childVariants}
+                        whileHover={{ scale: 1.1 }}
+                        whileTap={{ scale: 0.9 }}
+                      >
+                        লগইন/সাইন-আপ
+                      </m.li>
+                    </m.div>
+                  </Link>
+                )}
+              </>
+            ) : (
+              <>
+                <SignedIn>
+                  <UserButton />
+                </SignedIn>
+              </>
             )}
 
             <m.div

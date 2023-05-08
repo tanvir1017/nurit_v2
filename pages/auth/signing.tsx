@@ -334,9 +334,11 @@ const SignIn = () => {
               </form>
 
               <div className="one_click_login_or_signing mt-11 flex justify-start items-center space-x-2">
-                <p className="mr-5 underline italic">
-                  <Link href="/login">এক ক্লিকে লগইন/সাইন-ইন</Link>
-                </p>
+                <div className="flex items-center justify-between">
+                  <p className="mr-5 underline italic">
+                    <Link href="/auth/login">ম্যানুয়ালি লগইন/সাইন-ইন</Link>
+                  </p>
+                </div>
               </div>
             </div>
           </div>

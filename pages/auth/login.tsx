@@ -15,8 +15,6 @@ import { useRouter } from "next/router";
 import { useRef, useState } from "react";
 import { BiUserCircle } from "react-icons/bi";
 import { BsFillInfoCircleFill } from "react-icons/bs";
-import { FaFacebook, FaTwitter } from "react-icons/fa";
-import { FcGoogle } from "react-icons/fc";
 import { MdOutlinePassword } from "react-icons/md";
 import { TbAlertTriangleFilled } from "react-icons/tb";
 import { TiInfoOutline } from "react-icons/ti";
@@ -241,37 +239,18 @@ const Login = () => {
                 </div>
               </form>
 
-              <div className="one_click_login_or_signing mt-11 flex justify-start items-center space-x-2">
-                <p className="mr-5">এক ক্লিকে লগইন/সাইন-ইন</p>
-                <div className="space-x-3 ">
-                  <m.button
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.9 }}
-                    type="button"
-                    title="google login"
-                    className="border-green-600 dark:bg-slate-200  border p-2 rounded-full"
-                  >
-                    <FcGoogle className="text-2xl" />
-                  </m.button>
-                  <m.button
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.9 }}
-                    type="button"
-                    title="google login"
-                    className="border-sky-500  border p-2 rounded-full dark:bg-slate-200 "
-                  >
-                    <FaFacebook className="text-2xl text-sky-500" />
-                  </m.button>
-                  <m.button
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.9 }}
-                    type="button"
-                    title="google login"
-                    className="border-sky-500  border p-2 rounded-full dark:bg-slate-200 "
-                  >
-                    <FaTwitter className="text-2xl text-sky-500" />
-                  </m.button>
-                </div>
+              <div className="one_click_login_or_signing mt-11">
+                <Link href="/sign-in" className="mb-4 block">
+                  <p className="bg-[var(--red-primary-brand-color)] px-5 py-2 rounded-md text-center">
+                    অ্যথপ্রোভাইডারের মাধ্যমে লগইন করুন
+                  </p>
+                </Link>
+                <Link href="/sign-up">
+                  <p className="border-[var(--red-primary-brand-color)]  border-2 px-5 py-2 rounded-md text-center">
+                    {" "}
+                    অ্যথপ্রোভাইডারের মাধ্যমে এ্যকাউন্ট খুলন
+                  </p>
+                </Link>
               </div>
             </div>
           </div>
