@@ -1,4 +1,3 @@
-import { authMiddleware } from "@clerk/nextjs";
 import { NextRequest, NextResponse } from "next/server";
 
 import { verify } from "./util/jwt";
@@ -6,7 +5,6 @@ import { verify } from "./util/jwt";
 const secret = process.env.ACCESS_TOKEN || "secret";
 
 export default async function middleware(req: NextRequest) {
-  authMiddleware();
   const jwt = req.cookies.get("u-auth");
   const jwtValue = jwt?.value;
   const { pathname } = req.nextUrl;

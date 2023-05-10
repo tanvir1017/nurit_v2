@@ -9,7 +9,6 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@clerk/nextjs": "^4.17.1",
     "@headlessui/react": "^1.7.13",
     "@prisma/client": "^4.11.0",
     "@types/jsonwebtoken": "^9.0.1",

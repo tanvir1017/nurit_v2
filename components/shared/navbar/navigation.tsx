@@ -1,13 +1,11 @@
 import useShare from "@/lib/context/useShare";
 import { largeNavigationData } from "@/util/localDb/navLink";
+import { ShareContextType } from "@/util/types/types";
 import { motion as m, useReducedMotion } from "framer-motion";
 import { useTheme } from "next-themes";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-
-import { ShareContextType } from "@/util/types/types";
-import { SignedIn, UserButton, useAuth } from "@clerk/nextjs";
 import LightModeBrand from "../brand";
 import { Dropdown } from "../headlessui/headLessUi";
 const Navigation = () => {
@@ -15,7 +13,6 @@ const Navigation = () => {
   const [toggle, setToggle] = useState(true);
   const [tokenData, setTokenData] = useState<any | null>(null);
   const [delay, setDelay] = useState<boolean>(false);
-  const { userId } = useAuth();
   const { resolvedTheme, setTheme } = useTheme();
   const { allContext } = useShare() as ShareContextType;
   const { data, error, isLoading, mutate } = allContext;
@@ -26,7 +23,6 @@ const Navigation = () => {
     visible: { opacity: 1, y: 0, transition: { duration: 0.8 } },
   };
 
-  // useEffect only runs on the client, so now we can safely show the UI
   useEffect(() => {
     setMounted(true);
     setTimeout(() => {
@@ -114,36 +110,29 @@ const Navigation = () => {
                 </m.div>
               </Link>
             )}
-            {!userId ? (
-              <>
-                {!tokenData && delay && (
-                  <Link href="/auth/login">
-                    <m.div
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      transition={{
-                        duration: 1,
-                      }}
+
+            <>
+              {!tokenData && delay && (
+                <Link href="/auth/login">
+                  <m.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{
+                      duration: 1,
+                    }}
+                  >
+                    <m.li
+                      className={`bg-[var(--red-primary-brand-color)] text-white p-2 rounded-md `}
+                      variants={childVariants}
+                      whileHover={{ scale: 1.1 }}
+                      whileTap={{ scale: 0.9 }}
                     >
-                      <m.li
-                        className={`bg-[var(--red-primary-brand-color)] text-white p-2 rounded-md `}
-                        variants={childVariants}
-                        whileHover={{ scale: 1.1 }}
-                        whileTap={{ scale: 0.9 }}
-                      >
-                        লগইন/সাইন-আপ
-                      </m.li>
-                    </m.div>
-                  </Link>
-                )}
-              </>
-            ) : (
-              <>
-                <SignedIn>
-                  <UserButton />
-                </SignedIn>
-              </>
-            )}
+                      লগইন/সাইন-আপ
+                    </m.li>
+                  </m.div>
+                </Link>
+              )}
+            </>
 
             <m.div
               initial={{ opacity: 0 }}

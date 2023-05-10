@@ -3,7 +3,6 @@ import MobileNav from "@/components/shared/navbar/mobileNav";
 import Navigation from "@/components/shared/navbar/navigation";
 import ContextProvider from "@/lib/context/contextProvider";
 import "@/styles/globals.css";
-import { ClerkProvider } from "@clerk/nextjs";
 import { Analytics } from "@vercel/analytics/react";
 import { ThemeProvider } from "next-themes";
 import type { AppProps } from "next/app";
@@ -56,30 +55,27 @@ export default function App({ Component, pageProps, router }: AppProps) {
   const isNavigationShowForPage = notAllowNav.includes(pathname);
   const isFooterShowForPage = notAllowFooter.includes(pathname);
   return (
-    <ClerkProvider {...pageProps}>
-      <ContextProvider>
-        <ThemeProvider
-          enableSystem={true}
-          attribute="class"
-          // forcedTheme={Component?.theme || undefined}
-        >
-          <ToastContainer transition={Bounce} hideProgressBar />
-          <NextNProgress color="#ff2c45" />
-          <div style={{ opacity: 1 }}>
-            {!isNavigationShowForPage && (
-              <>
-                <Navigation />
-                <MobileNav />
-              </>
-            )}
-            <Toaster position="bottom-center" reverseOrder={true} />
-            <Component {...pageProps} />
-
-            <Analytics />
-            {!isFooterShowForPage && <Footer />}
-          </div>
-        </ThemeProvider>
-      </ContextProvider>
-    </ClerkProvider>
+    <ContextProvider>
+      <ThemeProvider
+        enableSystem={true}
+        attribute="class"
+        // forcedTheme={Component?.theme || undefined}
+      >
+        <ToastContainer transition={Bounce} hideProgressBar />
+        <NextNProgress color="#ff2c45" />
+        <div style={{ opacity: 1 }}>
+          {!isNavigationShowForPage && (
+            <>
+              <Navigation />
+              <MobileNav />
+            </>
+          )}
+          <Toaster position="bottom-center" reverseOrder={true} />
+          <Component {...pageProps} />
+          <Analytics />
+          {!isFooterShowForPage && <Footer />}
+        </div>
+      </ThemeProvider>
+    </ContextProvider>
   );
 }
