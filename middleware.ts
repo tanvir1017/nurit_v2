@@ -10,7 +10,6 @@ export default async function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
 
   // Comment: => ignore to load the public folder path
-  // Comment: => ignore to load the public folder path
   const PUBLIC_FILE = /\.(.*)$/;
   if (PUBLIC_FILE.test(pathname)) return NextResponse.next();
 

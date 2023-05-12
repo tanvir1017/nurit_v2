@@ -44,7 +44,7 @@ export default async function login(
           setCookie("u-auth", setUserToCookieByJWT, {
             req,
             res,
-            maxAge: 604800,
+            maxAge: 86400,
             secure: process.env.NODE_ENV !== "development",
             httpOnly: true,
             sameSite: true,

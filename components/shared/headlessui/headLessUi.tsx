@@ -3,6 +3,7 @@ import { motion as m } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { Dispatch, Fragment } from "react";
+import { BsPencilSquare } from "react-icons/bs";
 import { CiSettings } from "react-icons/ci";
 import { IoIosLogOut } from "react-icons/io";
 
@@ -24,6 +25,7 @@ interface TokenDataType {
 
 export function Dropdown(props: TokenDataType) {
   const { tokenData, setTokenData, mutate } = props;
+  console.log(tokenData);
   const Logout = async () => {
     await fetch("/api/auth/logout", { method: "DELETE" })
       .then((res) => res.json())
@@ -91,6 +93,21 @@ export function Dropdown(props: TokenDataType) {
               </Link>
             </div>
           </>
+          {tokenData?.role === "ADMIN" && (
+            <div className="py-1 ">
+              <Menu.Item>
+                {() => (
+                  <Link
+                    href="/dashboard/posts"
+                    className="py-3 px-4  w-full flex items-center space-x-2 hover:scale-105 transition duration-75"
+                  >
+                    <BsPencilSquare className="text-[18px]" />
+                    <span className="text-sm">Write a blog</span>
+                  </Link>
+                )}
+              </Menu.Item>
+            </div>
+          )}
           <div className="py-1 ">
             <Menu.Item>
               {() => (
