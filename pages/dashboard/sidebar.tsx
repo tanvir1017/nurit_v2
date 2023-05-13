@@ -78,7 +78,7 @@ const Sidebar = () => {
           >
             {!state.toggleCollapse && (
               <h1 className="text-2xl font-HSBold text-[var(--red-primary-brand-color)]">
-                ড্যাশবোর্ড
+                <Link href="/"> ড্যাশবোর্ড</Link>
               </h1>
             )}
           </span>

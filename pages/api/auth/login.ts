@@ -22,7 +22,7 @@ export default async function login(
           returnData: {},
         });
       } else {
-        const { id, password } = loginWithExistingEmail;
+        const { email__id, password, role } = loginWithExistingEmail;
         const verifyPassword = jwt.verify(
           password as string,
           process.env.ACCESS_TOKEN as string
@@ -36,16 +36,19 @@ export default async function login(
           });
         } else {
           const setUserToCookieByJWT = jwt.sign(
-            { id: id },
+            {
+              email__id,
+              role: role,
+            },
             process.env.ACCESS_TOKEN as string
           );
           setCookie("u-auth", setUserToCookieByJWT, {
             req,
             res,
-            maxAge: 86400,
+            maxAge: 604800,
             secure: process.env.NODE_ENV !== "development",
             httpOnly: true,
-            sameSite: true,
+            sameSite: "lax",
             path: "/",
           });
           res.status(200).json({

@@ -80,12 +80,7 @@ const userCrud = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
           }
           const setUserToCookieByJWT = jwt.sign(
             {
-              first__name,
-              last__name,
               email__id,
-              photo__URL,
-              gender,
-              phone__numb,
               role: "STUDENT",
             },
             process.env.ACCESS_TOKEN as string

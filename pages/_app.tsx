@@ -33,10 +33,12 @@ export default function App({ Component, pageProps, router }: AppProps) {
     "/auth/login",
     "/auth/verify-your-email",
     "/auth/signing",
+    "/dashboard/home",
+    "/dashboard/posts",
+    "/dashboard/users",
+    "/dashboard/courses",
     "/_error",
     "/401",
-    "/sign-in/[[...index]]",
-    "/sign-up/[[...index]]",
   ];
   const notAllowFooter = [
     "/auth/login",
@@ -48,8 +50,6 @@ export default function App({ Component, pageProps, router }: AppProps) {
     "/dashboard/courses",
     "/_error",
     "/401",
-    "/sign-in/[[...index]]",
-    "/sign-up/[[...index]]",
   ];
   // added clerk public key
   const isNavigationShowForPage = notAllowNav.includes(pathname);

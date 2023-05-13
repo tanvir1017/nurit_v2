@@ -58,7 +58,7 @@ const TrendyCourses = () => {
             id="card"
             className="grid lg:grid-cols-4 md:grid-cols-2  gap-5 place-items-center mt-14"
           >
-            {data.returnCourse
+            {data?.returnCourse
               ?.filter(
                 (el: { category: string }) => el.category === buttonFilterText
               )

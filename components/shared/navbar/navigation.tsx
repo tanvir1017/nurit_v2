@@ -71,15 +71,9 @@ const Navigation = () => {
             })}
 
             <>
-              {!tokenData && delay && (
+              {!tokenData && (
                 <Link href="/auth/login">
-                  <m.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{
-                      duration: 1,
-                    }}
-                  >
+                  <div>
                     <m.li
                       className={`bg-[var(--red-primary-brand-color)] text-white p-2 rounded-md `}
                       variants={childVariants}
@@ -88,26 +82,20 @@ const Navigation = () => {
                     >
                       লগইন/সাইন-আপ
                     </m.li>
-                  </m.div>
+                  </div>
                 </Link>
               )}
             </>
 
-            <m.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{
-                duration: 1,
-              }}
-            >
-              {tokenData && delay && (
+            <div>
+              {tokenData && (
                 <Dropdown
                   tokenData={tokenData}
                   setTokenData={setTokenData}
                   mutate={mutate}
                 />
               )}
-            </m.div>
+            </div>
             {mounted && (
               <m.li
                 className="cursor-pointer border rounded-full  bg-gray-800 relative overflow-hidden mr-4 my-2 w-14 h-6"
