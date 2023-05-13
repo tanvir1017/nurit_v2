@@ -22,9 +22,7 @@ export default async function login(
           returnData: {},
         });
       } else {
-        const { password, phone__numb, email__id, gender, ...rest } =
-          loginWithExistingEmail;
-
+        const { id, password } = loginWithExistingEmail;
         const verifyPassword = jwt.verify(
           password as string,
           process.env.ACCESS_TOKEN as string
@@ -38,7 +36,7 @@ export default async function login(
           });
         } else {
           const setUserToCookieByJWT = jwt.sign(
-            rest,
+            { id: id },
             process.env.ACCESS_TOKEN as string
           );
           setCookie("u-auth", setUserToCookieByJWT, {

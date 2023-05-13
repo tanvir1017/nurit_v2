@@ -69,47 +69,6 @@ const Navigation = () => {
                 </Link>
               );
             })}
-            {tokenData && delay && tokenData?.role !== "STUDENT" && (
-              <Link href="/dashboard/home">
-                <m.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{
-                    duration: 1,
-                  }}
-                >
-                  <m.li
-                    className={`hover:bg-[var(--red-primary-brand-color)] hover:text-white p-2 rounded-md`}
-                    variants={childVariants}
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.9 }}
-                  >
-                    ড্যাশবোর্ড
-                  </m.li>
-                </m.div>
-              </Link>
-            )}
-
-            {tokenData && delay && tokenData?.role !== "ADMIN" && (
-              <Link href="/my-class">
-                <m.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{
-                    duration: 1,
-                  }}
-                >
-                  <m.li
-                    className={`hover:bg-[var(--red-primary-brand-color)] hover:text-white p-2 rounded-md`}
-                    variants={childVariants}
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.9 }}
-                  >
-                    মাই ক্লাস
-                  </m.li>
-                </m.div>
-              </Link>
-            )}
 
             <>
               {!tokenData && delay && (
