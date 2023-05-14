@@ -1,4 +1,5 @@
 import useShare from "@/lib/context/useShare";
+import { fetcher } from "@/lib/fetcher";
 import { largeNavigationData } from "@/util/localDb/navLink";
 import { ShareContextType } from "@/util/types/types";
 import { motion as m, useReducedMotion } from "framer-motion";
@@ -8,7 +9,9 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { AiOutlineMenuUnfold } from "react-icons/ai";
 import { RxCross1 } from "react-icons/rx";
+import useSWR from "swr";
 import LightModeBrand from "../brand";
+import { Dropdown } from "../headlessui/headLessUi";
 
 const MobileNav = () => {
   const [navToggle, showNavToggle] = useState(false);
@@ -19,6 +22,14 @@ const MobileNav = () => {
   const { resolvedTheme, setTheme } = useTheme();
   const { allContext } = useShare() as ShareContextType;
   const { data, error, isLoading, mutate } = allContext;
+  const {
+    data: loggedData,
+    isLoading: isLoggedUserLoading,
+    error: isLoggedUserHasError,
+  } = useSWR(
+    `/api/auth/user-at?email=${data?.verifiedToken?.email__id}`,
+    fetcher
+  );
 
   const shouldReduceMotion = useReducedMotion();
   const childVariants = {
@@ -63,13 +74,16 @@ const MobileNav = () => {
           <div className="relative h-20  flex items-center justify-between">
             <LightModeBrand />
             <div className="TOGGLE_ICON flex items-center">
-              {/* {tokenData && delay && (
+              {tokenData && (
                 <Dropdown
                   tokenData={tokenData}
                   setTokenData={setTokenData}
                   mutate={mutate}
+                  loggedData={loggedData}
+                  isLoggedUserLoading={isLoggedUserLoading}
+                  isLoggedUserHasError={isLoggedUserHasError}
                 />
-              )} */}
+              )}
               {mounted && (
                 <m.li
                   className="cursor-pointer  ring-1 ring-[var(--red-primary-brand-color)] rounded-full bg-gray-800 relative mx-4 md:w-14 md:h-6  w-12 h-4"

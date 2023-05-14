@@ -111,7 +111,7 @@ export function Dropdown(props: TokenDataType) {
           leaveFrom="transform opacity-100 scale-100"
           leaveTo="transform opacity-0 scale-95"
         >
-          <Menu.Items className="origin-top-right absolute right-0 mt-2 w-80 rounded-3xl shadow-lg bg-slate-100 dark:bg-[#050a15] border-2  dark:border-[#121b2e] border-slate-200  px-2  z-50">
+          <Menu.Items className="origin-top-right absolute md:-right-16 -right-24 lg:right-0 mt-2 w-80 rounded-3xl shadow-lg bg-slate-100 dark:bg-[#050a15] border-2  dark:border-[#121b2e] border-slate-200  px-2  z-50">
             <div className="bg-slate-200 dark:bg-[#121b2e] rounded-3xl pb-2">
               <div className="my-2 px-2 pb-3 pt-4">
                 <div className="flex items-start">
@@ -218,11 +218,11 @@ export function Dropdown(props: TokenDataType) {
                 <Menu.Item>
                   {() => (
                     <Link
-                      href="/not-finished-yet"
+                      href="/profile"
                       className="py-3 px-4  w-full flex items-center space-x-2 "
                     >
                       <CiSettings className="text-[20px]" />
-                      <span className="text-sm">Settings</span>
+                      <span className="text-sm">Manage account</span>
                     </Link>
                   )}
                 </Menu.Item>
