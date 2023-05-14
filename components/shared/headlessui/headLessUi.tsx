@@ -33,7 +33,7 @@ interface returnDataType {
 export function Dropdown(props: TokenDataType) {
   const { tokenData, setTokenData, mutate } = props;
   const { data, isLoading, error } = useSWR(
-    `api/auth/user-at?email=${tokenData?.email__id}`,
+    `api/auth/user-at?email=${tokenData.email__id}`,
     fetcher
   );
   // COMMENT : => Conditionally destructure the value that getting from api return data
@@ -73,7 +73,6 @@ export function Dropdown(props: TokenDataType) {
     );
   }
   if (!error && !isLoading && data) {
-    console.log(data);
     const { returnData }: returnDataType = data;
     const { email__id, last__name, first__name, photo__URL, role } = returnData;
     content = (
