@@ -1,4 +1,5 @@
 import useShare from "@/lib/context/useShare";
+import { fetcher } from "@/lib/fetcher";
 import { largeNavigationData } from "@/util/localDb/navLink";
 import { ShareContextType } from "@/util/types/types";
 import { motion as m, useReducedMotion } from "framer-motion";
@@ -6,16 +7,24 @@ import { useTheme } from "next-themes";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import useSWR from "swr";
 import LightModeBrand from "../brand";
 import { Dropdown } from "../headlessui/headLessUi";
 const Navigation = () => {
   const [mounted, setMounted] = useState(false);
   const [toggle, setToggle] = useState(true);
   const [tokenData, setTokenData] = useState<any | null>(null);
-  const [delay, setDelay] = useState<boolean>(false);
   const { resolvedTheme, setTheme } = useTheme();
   const { allContext } = useShare() as ShareContextType;
   const { data, error, isLoading, mutate } = allContext;
+  const {
+    data: loggedData,
+    isLoading: isLoggedUserLoading,
+    error: isLoggedUserHasError,
+  } = useSWR(
+    `/api/auth/user-at?email=${data?.verifiedToken?.email__id}`,
+    fetcher
+  );
 
   const shouldReduceMotion = useReducedMotion();
   const childVariants = {
@@ -25,9 +34,6 @@ const Navigation = () => {
 
   useEffect(() => {
     setMounted(true);
-    setTimeout(() => {
-      setDelay(true);
-    }, 2000);
     if (!isLoading && !error) {
       setTokenData(data?.verifiedToken as any);
     } else {
@@ -38,6 +44,8 @@ const Navigation = () => {
   if (!mounted) {
     return null;
   }
+
+  // COMMENT : => Theme controlling toggle switch
   const handleThemeControl = () => {
     if (toggle) {
       setToggle(!toggle);
@@ -93,6 +101,9 @@ const Navigation = () => {
                   tokenData={tokenData}
                   setTokenData={setTokenData}
                   mutate={mutate}
+                  loggedData={loggedData}
+                  isLoggedUserLoading={isLoggedUserLoading}
+                  isLoggedUserHasError={isLoggedUserHasError}
                 />
               )}
             </div>

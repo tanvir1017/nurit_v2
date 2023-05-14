@@ -1,5 +1,4 @@
 import ErrorMessage from "@/components/error";
-import { fetcher } from "@/lib/fetcher";
 import { Menu, Transition } from "@headlessui/react";
 import { motion as m } from "framer-motion";
 import Image from "next/image";
@@ -9,7 +8,6 @@ import { BsPencilSquare } from "react-icons/bs";
 import { CiSettings } from "react-icons/ci";
 import { IoIosLogOut } from "react-icons/io";
 import { MdDashboardCustomize } from "react-icons/md";
-import useSWR from "swr";
 
 interface TokenDataType {
   tokenData: {
@@ -18,27 +16,40 @@ interface TokenDataType {
   };
   setTokenData: Dispatch<any>;
   mutate: (value: null) => {};
-}
-
-interface returnDataType {
-  returnData: {
-    email__id: string;
-    first__name: string;
-    last__name: string;
-    photo__URL: string;
-    role: string;
+  loggedData: {
+    success: boolean;
+    message: string;
+    returnData: {
+      createdAt: string;
+      email__id: string;
+      first__name: string;
+      gender: string;
+      id: string;
+      last__name: string;
+      password: string;
+      phone__numb: number;
+      photo__URL: string;
+      role: string;
+      updatedAt: string;
+    };
   };
+  isLoggedUserLoading: boolean | undefined;
+  isLoggedUserHasError: boolean | undefined;
 }
 
 export function Dropdown(props: TokenDataType) {
-  const { tokenData, setTokenData, mutate } = props;
-  const { data, isLoading, error } = useSWR(
-    `api/auth/user-at?email=${tokenData.email__id}`,
-    fetcher
-  );
+  const {
+    tokenData,
+    setTokenData,
+    mutate,
+    loggedData,
+    isLoggedUserHasError,
+    isLoggedUserLoading,
+  } = props;
+  console.log("Data founded", tokenData, loggedData);
   // COMMENT : => Conditionally destructure the value that getting from api return data
   let content = null;
-  if (!error && !data && isLoading) {
+  if (!isLoggedUserHasError && !loggedData && isLoggedUserLoading) {
     content = (
       <Menu as="div" className="relative inline-block text-left">
         <Transition
@@ -55,7 +66,7 @@ export function Dropdown(props: TokenDataType) {
       </Menu>
     );
   }
-  if (error && !data && !isLoading) {
+  if (isLoggedUserHasError && !loggedData && !isLoggedUserLoading) {
     content = (
       <Menu as="div" className="relative inline-block text-left">
         <Transition
@@ -72,8 +83,8 @@ export function Dropdown(props: TokenDataType) {
       </Menu>
     );
   }
-  if (!error && !isLoading && data) {
-    const { returnData }: returnDataType = data;
+  if (!isLoggedUserHasError && !isLoggedUserLoading && loggedData) {
+    const { returnData } = loggedData;
     const { email__id, last__name, first__name, photo__URL, role } = returnData;
     content = (
       <Menu as="div" className="relative inline-block text-left">
@@ -83,7 +94,7 @@ export function Dropdown(props: TokenDataType) {
           >
             <Image
               className={`absolute -top-2 rounded-full p-0.5`}
-              src={!isLoading ? photo__URL : "/images/blur_user.png"}
+              src={!isLoggedUserLoading ? photo__URL : "/images/blur_user.png"}
               alt={`${first__name} ${last__name} avatar`}
               title={`${first__name} ${last__name} avatar`}
               fill
@@ -110,7 +121,11 @@ export function Dropdown(props: TokenDataType) {
                     <div className="bg-white dark:bg-[#050a15] p-0.5 rounded-full relative w-16 h-16">
                       <Image
                         className={`absolute -top-2 p-1  rounded-full`}
-                        src={!isLoading ? photo__URL : "/images/blur_user.png"}
+                        src={
+                          !isLoggedUserLoading
+                            ? photo__URL
+                            : "/images/blur_user.png"
+                        }
                         alt={`${first__name} ${last__name} avatar`}
                         title={`${first__name} ${last__name} avatar`}
                         layout="fill"
