@@ -54,6 +54,7 @@ export default function App({ Component, pageProps, router }: AppProps) {
   // added clerk public key
   const isNavigationShowForPage = notAllowNav.includes(pathname);
   const isFooterShowForPage = notAllowFooter.includes(pathname);
+
   return (
     <ContextProvider>
       <ThemeProvider

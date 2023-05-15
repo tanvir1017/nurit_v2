@@ -1,9 +1,7 @@
-const Profile = () => {
-  return (
-    <main className="App">
-      <section className="container">My profile</section>
-    </main>
-  );
+import ProfileLayout from "./layout";
+
+const Index = () => {
+  return <ProfileLayout>Hello profile</ProfileLayout>;
 };
 
-export default Profile;
+export default Index;
