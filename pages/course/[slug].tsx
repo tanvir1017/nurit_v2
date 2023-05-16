@@ -75,7 +75,7 @@ const CourseDetails = () => {
     content = (
       <>
         <Metadata title={`Course - ${title}`} content={desc} name="" />
-        <main className="App font-HSRegular">
+        <main className="App font-HSRegular mt-10">
           <section className="container">
             <div className="COURSE-DETAILS-CONTAINER grid lg:grid-cols-2 grid-cols-1 gap-5 my-10">
               <div className="COURSE-DETAILS">

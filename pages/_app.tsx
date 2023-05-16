@@ -50,6 +50,9 @@ export default function App({ Component, pageProps, router }: AppProps) {
     "/dashboard/courses",
     "/_error",
     "/401",
+    "/profile/password",
+    "/profile/account",
+    "/profile",
   ];
   // added clerk public key
   const isNavigationShowForPage = notAllowNav.includes(pathname);

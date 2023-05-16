@@ -9,3 +9,8 @@ export interface DashboardMenuItem {
   link: string;
   icon: ReactElement;
 }
+export interface ProfileEditSidebarNavType {
+  id: number;
+  link: string;
+  item: string;
+}

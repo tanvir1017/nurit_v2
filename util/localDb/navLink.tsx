@@ -4,6 +4,7 @@ import { MdSpaceDashboard } from "react-icons/md";
 import { VscPreview } from "react-icons/vsc";
 import {
   DashboardMenuItem,
+  ProfileEditSidebarNavType,
   largeNavigationDataType,
 } from "../types/clientType";
 
@@ -35,5 +36,23 @@ export const dashboardMenuItems: DashboardMenuItem[] = [
     label: "Manage Courses",
     link: "/dashboard/courses",
     icon: <BsPersonVideo3 />,
+  },
+];
+
+export const profileEditSidebarNav: ProfileEditSidebarNavType[] = [
+  {
+    id: 0,
+    link: "/profile",
+    item: "প্রোফাইল",
+  },
+  {
+    id: 1,
+    link: "/profile/account",
+    item: "অ্যাকাউন্ট",
+  },
+  {
+    id: 2,
+    link: "/profile/password",
+    item: "পাসওয়ার্ড",
   },
 ];
