@@ -46,7 +46,6 @@ export function Dropdown(props: TokenDataType) {
     isLoggedUserHasError,
     isLoggedUserLoading,
   } = props;
-  console.log("Data founded", tokenData, loggedData);
   // COMMENT : => Conditionally destructure the value that getting from api return data
   let content = null;
   if (!isLoggedUserHasError && !loggedData && isLoggedUserLoading) {

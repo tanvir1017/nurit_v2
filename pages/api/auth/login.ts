@@ -22,7 +22,7 @@ export default async function login(
           returnData: {},
         });
       } else {
-        const { email__id, password, role } = loginWithExistingEmail;
+        const { email__id, password, role, id } = loginWithExistingEmail;
         const verifyPassword = jwt.verify(
           password as string,
           process.env.ACCESS_TOKEN as string
@@ -37,8 +37,9 @@ export default async function login(
         } else {
           const setUserToCookieByJWT = jwt.sign(
             {
+              id,
               email__id,
-              role: role,
+              role,
             },
             process.env.ACCESS_TOKEN as string
           );

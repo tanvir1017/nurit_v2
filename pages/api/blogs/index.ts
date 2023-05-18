@@ -75,6 +75,7 @@ const BlogApiEndPoint = async (
               thumbnail,
               authorId,
             } = req.body;
+            console.log("hello", req.body);
 
             const states = readingTime(html);
             const readTime = states.text;
@@ -133,6 +134,7 @@ const BlogApiEndPoint = async (
         });
     }
   } catch (error) {
+    console.log(error);
     return res.status(500).send({
       success: false,
       message: `Server  error found`,

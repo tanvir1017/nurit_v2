@@ -5,7 +5,11 @@ import {
   registerAUser,
   updateUserFromDb,
 } from "@/lib/dbOperatons/users.prisma";
-import { DB_OPERATION_METHOD, Data } from "@/util/types/types";
+import {
+  DB_OPERATION_METHOD,
+  Data,
+  registerBodyDataType,
+} from "@/util/types/types";
 import { setCookie } from "cookies-next";
 import jwt from "jsonwebtoken";
 import type { NextApiRequest, NextApiResponse } from "next";
@@ -78,11 +82,10 @@ const userCrud = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
               returnData: {},
             });
           }
+          const { id } = registerUserToDB as registerBodyDataType;
+          console.log("hello", id);
           const setUserToCookieByJWT = jwt.sign(
-            {
-              email__id,
-              role: "STUDENT",
-            },
+            { id, email__id, role: "STUDENT" },
             process.env.ACCESS_TOKEN as string
           );
           setCookie("u-auth", setUserToCookieByJWT, {

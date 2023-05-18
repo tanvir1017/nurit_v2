@@ -17,7 +17,7 @@ export enum USER__ROLE {
 /////////////////////////////
 /// KEY VALUE WISE TYPE ////
 ///////////////////////////
-export type registerBodyDataType = {
+export interface registerBodyDataType {
   id?: string;
   first__name: string;
   last__name: string;
@@ -27,7 +27,7 @@ export type registerBodyDataType = {
   gender: string;
   phone__numb: number;
   role?: string;
-};
+}
 
 export interface LoginWithExistingEmailType {
   id: string;
