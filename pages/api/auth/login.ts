@@ -1,5 +1,5 @@
 import { loginRegisterUser } from "@/lib/dbOperatons/users.prisma";
-import { Data, LoginWithExistingEmailType } from "@/util/types/types";
+import { Data, bodyDataType } from "@/util/types/types";
 import { setCookie } from "cookies-next";
 import jwt from "jsonwebtoken";
 import { NextApiRequest, NextApiResponse } from "next";
@@ -12,8 +12,9 @@ export default async function login(
     if (req.method === "POST") {
       const { email: email_address, password: clientPass } = req.body;
 
-      const loginWithExistingEmail: LoginWithExistingEmailType =
-        await loginRegisterUser(email_address as string);
+      const loginWithExistingEmail: bodyDataType = await loginRegisterUser(
+        email_address as string
+      );
 
       if (!loginWithExistingEmail) {
         return res.status(404).json({

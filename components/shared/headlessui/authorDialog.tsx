@@ -5,7 +5,7 @@ import { Dialog, Transition } from "@headlessui/react";
 import { useTheme } from "next-themes";
 import { Fragment, useState } from "react";
 import toast from "react-hot-toast";
-import useSwr from "swr";
+import useSWR from "swr";
 export default function AuthorDialog({
   isOpen,
   setIsOpen,
@@ -15,7 +15,7 @@ export default function AuthorDialog({
   isOpen: any;
   user: DashBoardAuthorTableType;
 }) {
-  const { mutate } = useSwr("/api/auth");
+  const { mutate } = useSWR("/api/auth");
   const [loading, setLoading] = useState<boolean>(false);
   const [first__name, setFirstName] = useState<string>(user?.first__name);
   const [last__name, setLastName] = useState<string>(user?.last__name);

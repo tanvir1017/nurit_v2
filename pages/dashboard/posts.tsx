@@ -17,11 +17,11 @@ import { BsFillPostcardFill, BsInfoCircle } from "react-icons/bs";
 import { TbAlertTriangleFilled } from "react-icons/tb";
 import { TiInfoOutline } from "react-icons/ti";
 import { toast } from "react-toastify";
-import useSwr from "swr";
+import useSWR from "swr";
 import Layout from "./layout";
 
 const Posts = () => {
-  const { mutate } = useSwr("/api/blogs");
+  const { mutate } = useSWR("/api/blogs");
   const [inputValue, setInputValue] = React.useState("");
   const [loading, setLoading] = React.useState(false);
   const [value, setValue] = React.useState([]);

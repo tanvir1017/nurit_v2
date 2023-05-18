@@ -17,7 +17,7 @@ export enum USER__ROLE {
 /////////////////////////////
 /// KEY VALUE WISE TYPE ////
 ///////////////////////////
-export interface registerBodyDataType {
+export interface bodyDataType {
   id?: string;
   first__name: string;
   last__name: string;
@@ -27,18 +27,8 @@ export interface registerBodyDataType {
   gender: string;
   phone__numb: number;
   role?: string;
-}
-
-export interface LoginWithExistingEmailType {
-  id: string;
-  first__name: string;
-  last__name: string;
-  email__id: string;
-  password: string;
-  photo__URL: string;
-  phone__numb: number;
-  gender: string;
-  role: string;
+  createdAt?: string;
+  updatedAt?: string;
 }
 
 export interface responseType {
@@ -50,18 +40,15 @@ export interface responseType {
   buttonLink?: string;
 }
 
-type CookieData = {
-  id: string | null;
-  first__name: string | null;
-  last__name: string | null;
-  photo__URL: string | null;
-  role: string | null;
-  iat: number | null;
-};
 export interface ShareContextType {
   allContext: {
     data: {
-      verifiedToken: string | CookieData | any;
+      verifiedToken: {
+        email__id: string | null;
+        iat: number | null;
+        id: string | null;
+        role: string | null;
+      };
     };
     error: string;
     isLoading: boolean;
@@ -128,7 +115,7 @@ export type LoginUserModelFunctionType = (
 
 export type GetAllUserFunctionType = () => Promise<{} | null>;
 export type registerAUserFunctionType = (
-  bodyData: registerBodyDataType
+  bodyData: bodyDataType
 ) => Promise<{} | null>;
 
 // COMMENT => blogs section function type

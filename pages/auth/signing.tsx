@@ -8,6 +8,7 @@ import ImageUpload from "@/components/shared/upload/imageUpload";
 import useShare from "@/lib/context/useShare";
 import Metadata from "@/util/SEO/metadata";
 import Submit from "@/util/buttons/submit";
+import { ShareContextType } from "@/util/types/types";
 import { motion as m, useReducedMotion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
@@ -24,14 +25,13 @@ import { TbAlertTriangleFilled } from "react-icons/tb";
 import { TiInfoOutline } from "react-icons/ti";
 import { Bounce, ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { ShareContextType } from "./login";
+// import { ShareContextType } from "./login";
 
 const SignIn = () => {
   const [seePassword, shoPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [pictureURL, setPictureURL] = useState<string>("/images/user.png");
   const [gender, setGender] = useState<string>("");
-  // const [em, setEm] = useState<string>("");
   const { allContext } = useShare() as ShareContextType;
   const { mutate } = allContext;
 

@@ -11,6 +11,7 @@ export interface DashboardMenuItem {
 }
 export interface ProfileEditSidebarNavType {
   id: number;
+  icon: ReactElement;
   link: string;
   item: string;
 }

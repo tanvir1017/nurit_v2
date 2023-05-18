@@ -5,11 +5,7 @@ import {
   registerAUser,
   updateUserFromDb,
 } from "@/lib/dbOperatons/users.prisma";
-import {
-  DB_OPERATION_METHOD,
-  Data,
-  registerBodyDataType,
-} from "@/util/types/types";
+import { DB_OPERATION_METHOD, Data, bodyDataType } from "@/util/types/types";
 import { setCookie } from "cookies-next";
 import jwt from "jsonwebtoken";
 import type { NextApiRequest, NextApiResponse } from "next";
@@ -82,7 +78,7 @@ const userCrud = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
               returnData: {},
             });
           }
-          const { id } = registerUserToDB as registerBodyDataType;
+          const { id } = registerUserToDB as bodyDataType;
           console.log("hello", id);
           const setUserToCookieByJWT = jwt.sign(
             { id, email__id, role: "STUDENT" },
@@ -113,6 +109,7 @@ const userCrud = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
         }
 
         const { id, ...rest } = req.body;
+        console.log(req.body);
         const updateUser = await updateUserFromDb(id as string, rest);
         if (!updateUser) {
           return res.status(500).json({

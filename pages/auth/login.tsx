@@ -8,7 +8,7 @@ import { BlurImage } from "@/lib/blurImage";
 import useShare from "@/lib/context/useShare";
 import Metadata from "@/util/SEO/metadata";
 import Submit from "@/util/buttons/submit";
-import { responseType } from "@/util/types/types";
+import { ShareContextType, responseType } from "@/util/types/types";
 import { motion as m, useReducedMotion } from "framer-motion";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -21,17 +21,6 @@ import { TiInfoOutline } from "react-icons/ti";
 import { Bounce, ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import useSWR from "swr";
-export interface ShareContextType {
-  allContext: {
-    data: {
-      verifiedToken: string;
-    };
-    error: string;
-    isLoading: boolean;
-    mutate: () => {};
-    routerPath: string;
-  };
-}
 
 const Login = () => {
   const [seePassword, shoPassword] = useState(false);
@@ -48,7 +37,7 @@ const Login = () => {
   });
   const { mutate } = useSWR("/api/auth/login");
 
-  const { allContext } = useShare() as unknown as ShareContextType;
+  const { allContext } = useShare() as ShareContextType;
   const { mutate: revalidate, routerPath } = allContext;
 
   const email__Ref = useRef<HTMLInputElement>(null);

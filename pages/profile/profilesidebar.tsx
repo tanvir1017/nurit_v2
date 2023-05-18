@@ -10,15 +10,22 @@ const ProfileSidebar = () => {
       <ul className="">
         {profileEditSidebarNav.map((_, i) => (
           <>
-            <Link href={_.link} className="pt-4 block">
+            <Link key={i} href={_.link} className="pt-4 block">
               <li
-                key={i}
-                className={` dark:bg-[#111010] bg-white dark:shadow-none shadow-md p-2 rounded-lg  border-transparent border-2  hover:border-purple-500  ${
+                className={`flex items-center dark:bg-[#111010] bg-white dark:shadow-none shadow-md p-2 rounded-lg  border-transparent border-2  hover:border-purple-500  ${
                   _.link === pathname &&
-                  "bg-gradient-to-r from-indigo-500 to-purple-500 text-white"
+                  "bg-gradient-to-r from-pink-500 to-purple-500 text-white "
                 }`}
               >
-                {_.item}
+                <span className="mr-3 block">{_.icon}</span>
+                <span
+                  className={`${
+                    _.link !== pathname &&
+                    "text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-pink-600 font-HSSemiBold"
+                  }`}
+                >
+                  {_.item}
+                </span>
               </li>
             </Link>
           </>
