@@ -8,6 +8,7 @@ import { BsSearch } from "react-icons/bs";
 
 const HeadingSection = () => {
   const [buttonText, setButtonText] = useState("");
+
   return (
     <>
       <section className="-mt-16 font-HSRegular border-general relative  w-full overflow-hidden overflow-x-clip  bg-slate-50 bg-gradient-to-t from-slate-50 to-slate-100 dark:bg-[var(--black-primary-brand-color)] dark:bg-none lg:h-screen ">
@@ -35,6 +36,7 @@ const HeadingSection = () => {
                     placeholder="তোমার কাঙ্খিত কোর্সটি খোজ"
                     type="text"
                     title="search your wanted course"
+                    value={buttonText}
                     name="course"
                     onChange={(e) => setButtonText(e.target.value)}
                   />
