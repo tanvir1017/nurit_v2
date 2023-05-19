@@ -19,7 +19,9 @@ export const getASingleUser: A__SingleModelFunctionType = async (id) => {
 };
 export const getASingleUserBasedOnUserName = async (username: string) => {
   const singleUser = await prisma.user.findUnique({
-    where: { user__name: username },
+    where: {
+      user__name: username,
+    },
     include: {
       postedBlogs: true,
     },
@@ -51,6 +53,7 @@ export const registerAUser: registerAUserFunctionType = async ({
   phone__numb,
 }: bodyDataType) => {
   const user = await prisma.user.create({
+    // May be fixed the issue. I think
     data: {
       first__name,
       user__name: generateRandomId(`${first__name}${last__name}`),
