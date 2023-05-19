@@ -51,6 +51,7 @@ const userCrud = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
           const {
             first__name,
             last__name,
+            user__name,
             email__id,
             password,
             photo__URL,
@@ -66,6 +67,7 @@ const userCrud = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
             first__name,
             last__name,
             email__id,
+            user__name,
             password: hashedPass,
             photo__URL,
             gender,
@@ -75,11 +77,10 @@ const userCrud = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
             return res.status(422).json({
               success: false,
               message: `User creation failed`,
-              returnData: {},
+              returnData: { action: `User creation failed` },
             });
           }
           const { id } = registerUserToDB as bodyDataType;
-          console.log("hello", id);
           const setUserToCookieByJWT = jwt.sign(
             { id, email__id, role: "STUDENT" },
             process.env.ACCESS_TOKEN as string
@@ -96,7 +97,7 @@ const userCrud = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
           return res.status(201).json({
             success: true,
             message: `User registered success`,
-            returnData: registerUserToDB,
+            returnData: { action: `User registered success` },
           });
         }
       }
@@ -105,6 +106,7 @@ const userCrud = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
           return res.status(400).json({
             success: false,
             message: "Bad request",
+            returnData: { action: "Bad request" },
           });
         }
 
@@ -115,13 +117,17 @@ const userCrud = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
           return res.status(500).json({
             success: false,
             message: `Something went wrong when try to update user info `,
-            returnData: {},
+            returnData: {
+              action: `Something went wrong when try to update user info `,
+            },
           });
         } else {
           return res.status(200).json({
             success: true,
             message: `user updated successful with this user id ${id}`,
-            returnData: updateUser,
+            returnData: {
+              action: `user updated successful`,
+            },
           });
         }
       }
@@ -148,14 +154,14 @@ const userCrud = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
         return res.status(500).json({
           success: false,
           message: `internal server error`,
-          returnData: {},
+          returnData: { action: `internal server error` },
         });
     }
   } catch (error) {
     return res.status(406).json({
       success: false,
-      message: `error found ${error}`,
-      returnData: null,
+      message: `error found `,
+      returnData: { action: error },
     });
   }
 };

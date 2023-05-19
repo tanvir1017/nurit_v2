@@ -6,7 +6,6 @@ import {
   registerAUserFunctionType,
 } from "@/util/types/types";
 import prisma from "../../prisma/prisma/db.connector";
-import { generateRandomId } from "../generateRandomNumber";
 
 export const getASingleUser: A__SingleModelFunctionType = async (id) => {
   const singleUser = await prisma.user.findUnique({
@@ -45,6 +44,7 @@ export const getAllUser: GetAllUserFunctionType = async () => {
 
 export const registerAUser: registerAUserFunctionType = async ({
   first__name,
+  user__name,
   last__name,
   email__id,
   password,
@@ -53,10 +53,9 @@ export const registerAUser: registerAUserFunctionType = async ({
   phone__numb,
 }: bodyDataType) => {
   const user = await prisma.user.create({
-    // May be fixed the issue. I think
     data: {
       first__name,
-      user__name: generateRandomId(`${first__name}${last__name}`),
+      user__name,
       last__name,
       email__id,
       password,

@@ -18,10 +18,12 @@ export default async function middleware(req: NextRequest) {
       req.nextUrl.pathname = "/";
       return NextResponse.redirect(req.nextUrl);
     }
-  } else if (
-    pathname.startsWith("/dashboard") ||
-    pathname.startsWith("/profile")
-  ) {
+  } else if (pathname.startsWith("/profile")) {
+    if (!jwt) {
+      req.nextUrl.pathname = "/auth/login";
+      return NextResponse.redirect(req.nextUrl);
+    }
+  } else if (pathname.startsWith("/dashboard")) {
     if (jwt === undefined) {
       req.nextUrl.pathname = "/auth/login";
       return NextResponse.redirect(req.nextUrl);

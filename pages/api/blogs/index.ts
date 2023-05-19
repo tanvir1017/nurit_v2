@@ -75,7 +75,6 @@ const BlogApiEndPoint = async (
               thumbnail,
               authorId,
             } = req.body;
-            console.log("hello", req.body);
 
             const states = readingTime(html);
             const readTime = states.text;

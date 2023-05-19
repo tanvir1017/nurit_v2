@@ -6,6 +6,7 @@ import {
 } from "@/components/shared/inputLabel/inputLabel";
 import ImageUpload from "@/components/shared/upload/imageUpload";
 import useShare from "@/lib/context/useShare";
+import { generateRandomId } from "@/lib/generateRandomNumber";
 import Metadata from "@/util/SEO/metadata";
 import Submit from "@/util/buttons/submit";
 import { ShareContextType } from "@/util/types/types";
@@ -14,6 +15,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useRef, useState } from "react";
+import { toast } from "react-hot-toast";
 import {
   BsEnvelopeCheckFill,
   BsFillInfoCircleFill,
@@ -21,10 +23,6 @@ import {
 } from "react-icons/bs";
 import { CgRename } from "react-icons/cg";
 import { MdOutlinePassword } from "react-icons/md";
-import { TbAlertTriangleFilled } from "react-icons/tb";
-import { TiInfoOutline } from "react-icons/ti";
-import { Bounce, ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 // import { ShareContextType } from "./login";
 
 const SignIn = () => {
@@ -68,15 +66,10 @@ const SignIn = () => {
     const password = password__Ref?.current?.value;
     const c_password = c_Password__Ref?.current?.value;
     const phone__number = phone__Ref?.current?.value;
+    const user__name = generateRandomId(`${first__name}${last__name}`);
     if (password !== c_password) {
-      return (async () => {
-        toast.error("Password mismatch", {
-          icon: (
-            <TiInfoOutline className="text-[var(--red-primary-brand-color)]" />
-          ),
-          position: toast.POSITION.TOP_CENTER,
-        });
-      })();
+      setLoading(false);
+      toast.error("password didn't match to each other");
     } else if (
       !first__name ||
       !password ||
@@ -84,17 +77,12 @@ const SignIn = () => {
       gender.length <= 3
     ) {
       setLoading(false);
-      return (async () => {
-        toast.error(
-          "Required field can't be empty, please full fill all required information",
-          {
-            position: toast.POSITION.TOP_CENTER,
-          }
-        );
-      })();
+      toast.error(
+        "Required field can't be empty, please full fill all required information"
+      );
     } else {
       try {
-        await fetch("/api/auth", {
+        const result = await fetch("/api/auth", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -102,48 +90,28 @@ const SignIn = () => {
           body: JSON.stringify({
             first__name: first__name,
             last__name: last__name,
+            user__name: user__name,
             email__id: token,
             password: password,
             photo__URL: pictureURL,
             gender: gender,
             phone__numb: Number(phone__number),
           }),
-        }).then((res) => {
-          if (res.status === 406) {
-            setLoading(false);
-            toast.error("Email id already registered or something went wrong", {
-              icon: (
-                <TiInfoOutline className="text-[var(--red-primary-brand-color)]" />
-              ),
-              position: toast.POSITION.TOP_CENTER,
-            });
-          } else if (res.status === 201) {
-            setLoading(false);
-            toast.success("Registration successful", {
-              icon: <TbAlertTriangleFilled className="text-green-400" />,
-              position: toast.POSITION.TOP_CENTER,
-            });
-            mutate();
-            router.push("/");
-          } else {
-            setLoading(false);
-            toast.error("Something went wrong 👎", {
-              icon: (
-                <TiInfoOutline className="text-[var(--red-primary-brand-color)]" />
-              ),
-              position: toast.POSITION.TOP_CENTER,
-            });
-          }
         });
+        const res = await result.json();
+        if (!res.success) {
+          setLoading(false);
+          toast.error(res.message);
+        } else {
+          setLoading(false);
+          toast.success(res.message);
+          mutate();
+          router.push("/");
+        }
       } catch (error) {
         if (error) {
           setLoading(false);
-          toast.error("Something went wrong", {
-            icon: (
-              <TiInfoOutline className="text-[var(--red-primary-brand-color)]" />
-            ),
-            position: toast.POSITION.TOP_CENTER,
-          });
+          toast.error("Something went wrong");
         }
       }
     }
@@ -157,8 +125,8 @@ const SignIn = () => {
         content="all course page. You can find every course in this page that we are providing"
         // key="skill course, course, ms office, office 364"
       />
-      <ToastContainer transition={Bounce} hideProgressBar />
       <div className="font-HSRegular md:large_container  px-7 py-5">
+        {/* <Toaster position="top-center" reverseOrder={false} /> */}
         <div className="md:px-12">
           <div className="flex justify-between items-center">
             <LightModeBrand />
