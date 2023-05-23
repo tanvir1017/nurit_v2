@@ -23,7 +23,7 @@ model User{
   email__id   String @unique
   password    String
   photo__URL  String
-  phone__numb Int?
+  phone__numb Int
   gender      String
   role        USER__ROLE @default(STUDENT)
   postedBlogs Blog[]
