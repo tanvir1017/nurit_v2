@@ -51,7 +51,7 @@ const userCrud = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
           const {
             first__name,
             last__name,
-            user__name,
+            username,
             email__id,
             password,
             photo__URL,
@@ -67,7 +67,7 @@ const userCrud = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
             first__name,
             last__name,
             email__id,
-            user__name,
+            username,
             password: hashedPass,
             photo__URL,
             gender,

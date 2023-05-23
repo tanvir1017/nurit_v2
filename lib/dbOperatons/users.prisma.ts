@@ -16,7 +16,7 @@ export const getASingleUser: A__SingleModelFunctionType = async (id) => {
 // export const getASingleUserBasedOnUserName = async (username: string) => {
 //   const singleUser = await prisma.user.findUnique({
 //     where: {
-//       user__name: username,
+//       username: username,
 //     },
 //     include: {
 //       postedBlogs: true,
@@ -42,7 +42,7 @@ export const getAllUser: GetAllUserFunctionType = async () => {
 export const registerAUser: registerAUserFunctionType = async ({
   first__name,
   last__name,
-  user__name,
+  username,
   email__id,
   password,
   photo__URL,
@@ -53,7 +53,7 @@ export const registerAUser: registerAUserFunctionType = async ({
     data: {
       first__name,
       last__name,
-      user__name,
+      username,
       email__id,
       password,
       photo__URL,

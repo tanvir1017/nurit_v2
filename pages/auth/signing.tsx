@@ -66,7 +66,7 @@ const SignIn = () => {
     const password = password__Ref?.current?.value;
     const c_password = c_Password__Ref?.current?.value;
     const phone__number = phone__Ref?.current?.value;
-    const user__name = generateRandomId(`${first__name}${last__name}`);
+    const username = generateRandomId(`${first__name}${last__name}`);
     if (password !== c_password) {
       setLoading(false);
       toast.error("password didn't match to each other");
@@ -90,7 +90,7 @@ const SignIn = () => {
           body: JSON.stringify({
             first__name,
             last__name,
-            user__name,
+            username,
             email__id: token,
             password,
             photo__URL: pictureURL,

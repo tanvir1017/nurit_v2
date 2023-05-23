@@ -21,7 +21,7 @@ export interface bodyDataType {
   id: string;
   first__name: string;
   last__name: string;
-  user__name: string;
+  username: string;
   email__id: string;
   password: string;
   photo__URL: string;
