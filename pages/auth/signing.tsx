@@ -88,13 +88,13 @@ const SignIn = () => {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            first__name: first__name,
-            last__name: last__name,
-            user__name: user__name,
+            first__name,
+            last__name,
+            user__name,
             email__id: token,
-            password: password,
+            password,
             photo__URL: pictureURL,
-            gender: gender,
+            gender,
             phone__numb: Number(phone__number),
           }),
         });

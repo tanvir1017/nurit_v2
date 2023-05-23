@@ -26,26 +26,26 @@ model User{
   phone__numb Int
   gender      String
   role        USER__ROLE @default(STUDENT)
-  postedBlogs Blog[]
+  // postedBlogs Blog[]
 }
 
 
-model Blog{
-  id            String @id @default(auto()) @map("_id") @db.ObjectId
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
-  title         String
-  slug          String @unique
-  sub_title     String
-  readTime      String 
-  tags          String[]
-  html          String
-  cover         String
-  thumbnail     String
-  views         Int @default(0)
-  creator User  @relation(fields: [authorId], references: [id])
-  authorId      String  @db.ObjectId
-}
+// model Blog{
+//   id            String @id @default(auto()) @map("_id") @db.ObjectId
+//   createdAt     DateTime @default(now())
+//   updatedAt     DateTime @updatedAt
+//   title         String
+//   slug          String @unique
+//   sub_title     String
+//   readTime      String 
+//   tags          String[]
+//   html          String
+//   cover         String
+//   thumbnail     String
+//   views         Int @default(0)
+//   creator User  @relation(fields: [authorId], references: [id])
+//   authorId      String  @db.ObjectId
+// }
 
 // model Courses {
 //   id              String @id @default(auto()) @map("_id") @db.ObjectId

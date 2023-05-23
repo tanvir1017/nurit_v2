@@ -27,7 +27,7 @@ export interface bodyDataType {
   photo__URL: string;
   gender: string;
   phone__numb: number;
-  role?: string;
+  role: string;
   createdAt?: string;
   updatedAt?: string;
 }
