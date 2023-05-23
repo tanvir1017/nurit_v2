@@ -38,7 +38,7 @@ export const getAllUser: GetAllUserFunctionType = async () => {
   const users = await prisma.users.findMany({});
   return { users, totalUser };
 };
-
+// change user to users but not fixed the error here
 export const registerAUser: registerAUserFunctionType = async ({
   first__name,
   last__name,
