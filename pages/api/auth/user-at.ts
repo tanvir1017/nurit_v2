@@ -5,6 +5,7 @@ const userAtThisEmail = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.query.email) {
     const { email } = req.query;
     const getAUserInfo = await loginRegisterUser(email as string);
+
     if (!getAUserInfo) {
       return res.status(404).json({
         success: false,

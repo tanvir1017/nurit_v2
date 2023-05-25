@@ -10,8 +10,16 @@ import { useEffect, useState } from "react";
 import useSWR from "swr";
 import LightModeBrand from "../brand";
 import { Dropdown } from "../headlessui/headLessUi";
+let tabs = [
+  { id: "world", label: "World" },
+  { id: "ny", label: "N.Y." },
+  { id: "business", label: "Business" },
+  { id: "arts", label: "Arts" },
+  { id: "science", label: "Science" },
+];
 const Navigation = () => {
   const [mounted, setMounted] = useState(false);
+  const [activeTab, setActiveTab] = useState(largeNavigationData[0].id);
   const [toggle, setToggle] = useState(true);
   const [tokenData, setTokenData] = useState<any | null>(null);
   const { resolvedTheme, setTheme } = useTheme();
@@ -60,42 +68,40 @@ const Navigation = () => {
       <div className="container">
         <div className="relative h-20  flex items-center justify-between">
           <LightModeBrand />
-          <m.ul className="flex items-center  space-x-4 ">
-            {largeNavigationData.map((nav, index) => {
-              const { path, routeName } = nav;
-
-              return (
-                <Link href={path as string} key={index}>
-                  <m.li
-                    className={`hover:bg-[var(--red-primary-brand-color)] hover:text-white p-2 rounded-md`}
-                    variants={childVariants}
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.9 }}
+          <ul className="flex items-center  space-x-4 ">
+            {largeNavigationData
+              .filter((tab) =>
+                !tokenData ? tab : tab.id !== largeNavigationData.length - 1
+              )
+              .map((tab) => (
+                <Link href={tab.path as string} key={tab.id}>
+                  <li
+                    onClick={() => setActiveTab(tab.id)}
+                    className={`${
+                      activeTab === tab.id ? "" : "hover:text-white/60"
+                    } relative rounded-full px-3 py-1.5 text-sm font-medium text-white outline-sky-400 transition focus-visible:outline-2 cursor-pointer`}
+                    style={{
+                      WebkitTapHighlightColor: "transparent",
+                    }}
                   >
-                    {routeName}
-                  </m.li>
-                </Link>
-              );
-            })}
+                    {activeTab === tab.id && (
+                      <m.span
+                        layoutId="bubble"
+                        className="absolute inset-0 z-10 bg-[var(--red-primary-brand-color)] text-white mix-blend-plus-lighter"
+                        style={{ borderRadius: 9999 }}
+                        transition={{
+                          type: "spring",
+                          bounce: 0.2,
+                          duration: 0.6,
+                        }}
+                      />
+                    )}
 
+                    {tab.routeName}
+                  </li>
+                </Link>
+              ))}
             <>
-              {!tokenData && (
-                <Link href="/auth/login">
-                  <div>
-                    <m.li
-                      className={`bg-[var(--red-primary-brand-color)] text-white p-2 rounded-md `}
-                      variants={childVariants}
-                      whileHover={{ scale: 1.1 }}
-                      whileTap={{ scale: 0.9 }}
-                    >
-                      লগইন/সাইন-আপ
-                    </m.li>
-                  </div>
-                </Link>
-              )}
-            </>
-
-            <div>
               {tokenData && (
                 <Dropdown
                   tokenData={tokenData}
@@ -106,7 +112,7 @@ const Navigation = () => {
                   isLoggedUserHasError={isLoggedUserHasError}
                 />
               )}
-            </div>
+            </>
             {mounted && (
               <m.li
                 className="cursor-pointer border rounded-full  bg-gray-800 relative overflow-hidden mr-4 my-2 w-14 h-6"
@@ -129,7 +135,7 @@ const Navigation = () => {
                 />
               </m.li>
             )}
-          </m.ul>
+          </ul>
         </div>
       </div>
     </nav>

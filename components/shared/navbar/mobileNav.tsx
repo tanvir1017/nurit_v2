@@ -148,22 +148,6 @@ const MobileNav = () => {
                   </Link>
                 );
               })}
-              {/* {tokenData && delay && tokenData?.role !== "STUDENT" && (
-                <Link
-                  href="/dashboard/home"
-                  className="p-3 dark:hover:bg-[#212a4057] hover:bg-[#fff]  backdrop:blur-md rounded-lg w-full dark:text-white text-[#0a1020] font-HSMedium text-[18px]"
-                >
-                  <m.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{
-                      duration: 1,
-                    }}
-                  >
-                    <m.li variants={childVariants}>ড্যাশবোর্ড</m.li>
-                  </m.div>
-                </Link>
-              )} */}
 
               {tokenData && delay && tokenData?.role !== "ADMIN" && (
                 <Link href="/my-class">

@@ -17,7 +17,6 @@ const Index = () => {
   if (!isLoading && !data && error) {
     content = (
       <>
-        {/* he */}
         <ErrorMessage />
       </>
     );
@@ -25,7 +24,7 @@ const Index = () => {
   if (!data && !error && isLoading) {
     content = (
       <>
-        {[...Array(1).keys()].map((_, i) => (
+        {[...Array(1).keys()].map((item, i) => (
           <Skeleton key={i} />
         ))}
       </>
@@ -36,9 +35,8 @@ const Index = () => {
       <>
         {!error &&
           !isLoading &&
-          data &&
-          data.returnBlogData.blogs.map((_: any, i: number) => (
-            <Blog key={i} blog={_} />
+          data?.returnBlogData?.blogs.map((item: any, i: number) => (
+            <Blog key={i} blog={item} />
           ))}
         <div className="grid grid-cols-4 gap-5">
           <div className="col-span-3">

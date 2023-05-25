@@ -1,5 +1,5 @@
 import {
-  findAUserBasedOnId,
+  getASingleUser,
   updateUserPasswordFromDb,
 } from "@/lib/dbOperatons/users.prisma";
 import { DB_OPERATION_METHOD, bodyDataType } from "@/util/types/types";
@@ -12,7 +12,7 @@ export default async function updatePassword(
 ) {
   if (req.method === DB_OPERATION_METHOD.PUT) {
     const { id, password: prevPass, password_new } = req.body;
-    const checkUserPrev_Password = await findAUserBasedOnId(id);
+    const checkUserPrev_Password = await getASingleUser(id);
 
     const { password } = checkUserPrev_Password as bodyDataType;
     const verifyPassword = jwt.verify(

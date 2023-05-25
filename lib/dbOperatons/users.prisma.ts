@@ -65,15 +65,6 @@ export const registerAUser: registerAUserFunctionType = async ({
   return user;
 };
 
-export const findAUserBasedOnId: A__SingleModelFunctionType = async (id) => {
-  const user = await prisma.users.findUnique({
-    where: {
-      id,
-    },
-  });
-  return user;
-};
-
 export const updateUserFromDb = async (id: string, updatedData: any) => {
   const user = await prisma.users.update({
     where: {

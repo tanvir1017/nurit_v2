@@ -1,5 +1,6 @@
 import { ReactElement } from "react";
 export type largeNavigationDataType = {
+  id: number;
   routeName?: string;
   path?: string;
 }[];
