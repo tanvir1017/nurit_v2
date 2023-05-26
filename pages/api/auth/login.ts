@@ -56,6 +56,7 @@ export default async function login(
           res.status(200).json({
             success: true,
             message: `User login successfully`,
+            returnData: { action: `User logged in` },
           });
         }
       }

@@ -13,17 +13,14 @@ export const getASingleUser: A__SingleModelFunctionType = async (id) => {
   });
   return singleUser;
 };
-// export const getASingleUserBasedOnUserName = async (username: string) => {
-//   const singleUser = await prisma.users.findUnique({
-//     where: {
-//       username: username,
-//     },
-//     include: {
-//       postedBlogs: true,
-//     },
-//   });
-//   return singleUser;
-// };
+export const getASingleUserBasedOnUserName = async (username: string) => {
+  const singleUser = await prisma.user.findUnique({
+    where: {
+      username: username,
+    },
+  });
+  return singleUser;
+};
 export const loginRegisterUser: LoginUserModelFunctionType = async (
   email_address
 ) => {

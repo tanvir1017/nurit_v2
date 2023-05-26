@@ -107,6 +107,7 @@ export interface DashBoardAuthorTableType {
 /////////////////////////////
 ////// FUNCTION TYPE ///////
 ///////////////////////////
+
 export type A__SingleModelFunctionType = (
   id?: string | undefined
 ) => Promise<{} | null>;

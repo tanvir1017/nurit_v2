@@ -13,27 +13,13 @@ enum USER__ROLE {
   STUDENT
   MEMBER
 }
-// model Users{
-//   id          String @id @default(auto()) @map("_id") @db.ObjectId
-//   createdAt   DateTime @default(now())
-//   updatedAt   DateTime @updatedAt
-//   first__name String
-//   last__name  String
-//   username  String @unique
-//   email__id   String @unique
-//   password    String
-//   photo__URL  String
-//   phone__numb Int
-//   gender      String
-//   role        USER__ROLE @default(STUDENT)
-// }
 model User{
   id          String @id @default(auto()) @map("_id") @db.ObjectId
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
   first__name String
   last__name  String
-  username  String @unique
+  username    String @unique
   email__id   String @unique
   password    String
   photo__URL  String

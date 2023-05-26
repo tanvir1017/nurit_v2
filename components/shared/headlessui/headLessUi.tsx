@@ -6,6 +6,7 @@ import Link from "next/link";
 import { Dispatch, Fragment } from "react";
 import { BsPencilSquare } from "react-icons/bs";
 import { CiSettings } from "react-icons/ci";
+import { FiAirplay } from "react-icons/fi";
 import { IoIosLogOut } from "react-icons/io";
 import { MdDashboardCustomize } from "react-icons/md";
 
@@ -205,7 +206,7 @@ export function Dropdown(props: TokenDataType) {
                           href="/my-class"
                           className="py-3 px-4  w-full flex items-center space-x-2"
                         >
-                          <MdDashboardCustomize className="text-[18px]" />
+                          <FiAirplay className="text-[18px]" />
                           <span className="text-sm">My Class</span>
                         </Link>
                       )}
