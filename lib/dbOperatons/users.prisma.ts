@@ -8,7 +8,7 @@ import {
 import prisma from "../../prisma/prisma/db.connector";
 
 export const getASingleUser: A__SingleModelFunctionType = async (id) => {
-  const singleUser = await prisma.users.findUnique({
+  const singleUser = await prisma.user.findUnique({
     where: { id },
   });
   return singleUser;
@@ -27,15 +27,15 @@ export const getASingleUser: A__SingleModelFunctionType = async (id) => {
 export const loginRegisterUser: LoginUserModelFunctionType = async (
   email_address
 ) => {
-  const singleUser = await prisma.users.findUnique({
+  const singleUser = await prisma.user.findUnique({
     where: { email__id: email_address },
   });
   return singleUser;
 };
 
 export const getAllUser: GetAllUserFunctionType = async () => {
-  const totalUser = await prisma.users.count();
-  const users = await prisma.users.findMany({});
+  const totalUser = await prisma.user.count();
+  const users = await prisma.user.findMany({});
   return { users, totalUser };
 };
 // change user to users but not fixed the error here
@@ -59,14 +59,14 @@ export const registerAUser: registerAUserFunctionType = async ({
     gender,
     phone__numb,
   };
-  const user = await prisma.users.create({
+  const user = await prisma.user.create({
     data: data,
   });
   return user;
 };
 
 export const updateUserFromDb = async (id: string, updatedData: any) => {
-  const user = await prisma.users.update({
+  const user = await prisma.user.update({
     where: {
       id: id,
     },
@@ -78,7 +78,7 @@ export const updateUserPasswordFromDb = async (
   id: string,
   password: string
 ) => {
-  const user = await prisma.users.update({
+  const user = await prisma.user.update({
     where: {
       id: id,
     },
@@ -88,7 +88,7 @@ export const updateUserPasswordFromDb = async (
 };
 
 export const deleteAUserFromDb: A__SingleModelFunctionType = async (id) => {
-  const user = await prisma.users.delete({
+  const user = await prisma.user.delete({
     where: {
       id,
     },

@@ -1,30 +1,54 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import useShare from "@/lib/context/useShare";
 import { fetcher } from "@/lib/fetcher";
 import { largeNavigationData } from "@/util/localDb/navLink";
+import { largeNavigationDataType } from "@/util/types/clientType";
 import { ShareContextType } from "@/util/types/types";
-import { motion as m, useReducedMotion } from "framer-motion";
+import { motion as m } from "framer-motion";
 import { useTheme } from "next-themes";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import useSWR from "swr";
 import LightModeBrand from "../brand";
 import { Dropdown } from "../headlessui/headLessUi";
-let tabs = [
-  { id: "world", label: "World" },
-  { id: "ny", label: "N.Y." },
-  { id: "business", label: "Business" },
-  { id: "arts", label: "Arts" },
-  { id: "science", label: "Science" },
-];
+interface TokenDataType {
+  id: string;
+  email__id: string;
+  role: string;
+  iat: number;
+}
+
 const Navigation = () => {
   const [mounted, setMounted] = useState(false);
-  const [activeTab, setActiveTab] = useState(largeNavigationData[0].id);
+  const { pathname } = useRouter();
   const [toggle, setToggle] = useState(true);
   const [tokenData, setTokenData] = useState<any | null>(null);
+
+  // prevent the unconditional function call and reduce re-renders
+  const filterTheNavigation = useCallback(
+    (nav: largeNavigationDataType, tokenData: TokenDataType) => {
+      return nav.filter((tab) =>
+        !tokenData ? tab : tab.id !== nav.length - 1
+      );
+    },
+    []
+  );
+  // Memoized the value of which function return
+  const filterNav = useMemo(
+    () => filterTheNavigation(largeNavigationData, tokenData),
+    [tokenData]
+  );
+
+  // Dark 🌜 & light ☀️ variant
   const { resolvedTheme, setTheme } = useTheme();
+
+  // extract value from  context api
   const { allContext } = useShare() as ShareContextType;
   const { data, error, isLoading, mutate } = allContext;
+
+  // Calling the api and extract data from the api
   const {
     data: loggedData,
     isLoading: isLoggedUserLoading,
@@ -34,12 +58,7 @@ const Navigation = () => {
     fetcher
   );
 
-  const shouldReduceMotion = useReducedMotion();
-  const childVariants = {
-    initial: { opacity: 0, y: shouldReduceMotion ? 0 : 25 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.8 } },
-  };
-
+  // Set some sort of value to the state after the page would render
   useEffect(() => {
     setMounted(true);
     if (!isLoading && !error) {
@@ -49,11 +68,12 @@ const Navigation = () => {
     }
   }, [data?.verifiedToken, error, isLoading]);
 
+  // If  page not mounted then return null
   if (!mounted) {
     return null;
   }
 
-  // COMMENT : => Theme controlling toggle switch
+  //  Theme controlling toggle switch
   const handleThemeControl = () => {
     if (toggle) {
       setToggle(!toggle);
@@ -68,39 +88,36 @@ const Navigation = () => {
       <div className="container">
         <div className="relative h-20  flex items-center justify-between">
           <LightModeBrand />
-          <ul className="flex items-center  space-x-4 ">
-            {largeNavigationData
-              .filter((tab) =>
-                !tokenData ? tab : tab.id !== largeNavigationData.length - 1
-              )
-              .map((tab) => (
-                <Link href={tab.path as string} key={tab.id}>
-                  <li
-                    onClick={() => setActiveTab(tab.id)}
-                    className={`${
-                      activeTab === tab.id ? "" : "hover:text-white/60"
-                    } relative rounded-full px-3 py-1.5 text-sm font-medium text-white outline-sky-400 transition focus-visible:outline-2 cursor-pointer`}
-                    style={{
-                      WebkitTapHighlightColor: "transparent",
-                    }}
-                  >
-                    {activeTab === tab.id && (
-                      <m.span
-                        layoutId="bubble"
-                        className="absolute inset-0 z-10 bg-[var(--red-primary-brand-color)] text-white mix-blend-plus-lighter"
-                        style={{ borderRadius: 9999 }}
-                        transition={{
-                          type: "spring",
-                          bounce: 0.2,
-                          duration: 0.6,
-                        }}
-                      />
-                    )}
+          <ul className="flex items-center space-x-4">
+            {filterNav.map((tab) => (
+              <Link href={tab.path as string} key={tab.id}>
+                <li
+                  className={`${
+                    pathname.includes(tab.path as string)
+                      ? ""
+                      : "dark:hover:text-white/60 hover:text-gray-700"
+                  } relative rounded-full px-3 py-1.5  text-sm font-medium dark:text-white outline-sky-400 transition focus-visible:outline-2 cursor-pointer`}
+                  style={{
+                    WebkitTapHighlightColor: "transparent",
+                  }}
+                >
+                  {pathname.includes(tab.path as string) && (
+                    <m.span
+                      layoutId="bubble"
+                      className="absolute inset-0 z-10 bg-[var(--red-primary-brand-color)] mix-blend-plus-lighter"
+                      style={{ borderRadius: 9999 }}
+                      transition={{
+                        type: "spring",
+                        bounce: 0.2,
+                        duration: 0.6,
+                      }}
+                    />
+                  )}
 
-                    {tab.routeName}
-                  </li>
-                </Link>
-              ))}
+                  {tab.routeName}
+                </li>
+              </Link>
+            ))}
             <>
               {tokenData && (
                 <Dropdown
