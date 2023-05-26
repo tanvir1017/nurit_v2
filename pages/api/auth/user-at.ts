@@ -1,4 +1,4 @@
-import { loginRegisterUser } from "@/lib/dbOperatons/users.prisma";
+import { loginRegisterUser } from "@/lib/dbOperators/users.prisma";
 import { NextApiRequest, NextApiResponse } from "next";
 
 const userAtThisEmail = async (req: NextApiRequest, res: NextApiResponse) => {

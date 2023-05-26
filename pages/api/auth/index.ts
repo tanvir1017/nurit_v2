@@ -4,7 +4,7 @@ import {
   getAllUser,
   registerAUser,
   updateUserFromDb,
-} from "@/lib/dbOperatons/users.prisma";
+} from "@/lib/dbOperators/users.prisma";
 import { DB_OPERATION_METHOD, Data, bodyDataType } from "@/util/types/types";
 import { setCookie } from "cookies-next";
 import jwt from "jsonwebtoken";
@@ -62,6 +62,7 @@ const userCrud = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
             password,
             process.env.ACCESS_TOKEN as string
           );
+          console.log("requested body", req.body);
 
           const registerUserToDB = await registerAUser({
             first__name,
@@ -73,6 +74,8 @@ const userCrud = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
             gender,
             phone__numb,
           });
+
+          console.log("Registry user", registerAUser);
           if (!registerUserToDB) {
             return res.status(422).json({
               success: false,
@@ -85,7 +88,8 @@ const userCrud = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
             { id, email__id, role: "STUDENT" },
             process.env.ACCESS_TOKEN as string
           );
-          setCookie("u-auth", setUserToCookieByJWT, {
+          console.log("Cookie", setUserToCookieByJWT);
+          setCookie("__client_auth", setUserToCookieByJWT, {
             req,
             res,
             maxAge: 604800,
@@ -111,7 +115,6 @@ const userCrud = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
         }
 
         const { id, ...rest } = req.body;
-        console.log(req.body);
         const updateUser = await updateUserFromDb(id as string, rest);
         if (!updateUser) {
           return res.status(500).json({
@@ -153,7 +156,7 @@ const userCrud = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
       default:
         return res.status(500).json({
           success: false,
-          message: `internal server error`,
+          message: `internal server error. The message came from the [DEFAULT 🥲] switch case method`,
           returnData: { action: `internal server error` },
         });
     }

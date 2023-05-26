@@ -1,4 +1,4 @@
-import { getASingleBlogBasedOnSlug } from "@/lib/dbOperatons/blogs.prisma";
+import { getASingleBlogBasedOnSlug } from "@/lib/dbOperators/blogs.prisma";
 import { NextApiRequest, NextApiResponse } from "next";
 
 type Data = {

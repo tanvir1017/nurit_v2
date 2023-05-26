@@ -3,7 +3,7 @@ import {
   getASingleBlogBasedOnSlug,
   getAllBlogsExistOnDB,
   postABlogToDb,
-} from "@/lib/dbOperatons/blogs.prisma";
+} from "@/lib/dbOperators/blogs.prisma";
 import { DB_OPERATION_METHOD } from "@/util/types/types";
 import { hasCookie } from "cookies-next";
 import type { NextApiRequest, NextApiResponse } from "next";
@@ -61,7 +61,7 @@ const BlogApiEndPoint = async (
             returnBlogData: {},
           });
         } else {
-          const checkHasCookie = hasCookie("u-auth", { req, res });
+          const checkHasCookie = hasCookie("__client_auth", { req, res });
           if (!checkHasCookie) {
             res.redirect("/auth/login");
           } else {

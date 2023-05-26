@@ -1,4 +1,4 @@
-import { getSpecificCourseViaSlug } from "@/lib/dbOperatons/course.prisma";
+import { getSpecificCourseViaSlug } from "@/lib/dbOperators/course.prisma";
 import { DB_OPERATION_METHOD } from "@/util/types/types";
 import { NextApiRequest, NextApiResponse } from "next";
 

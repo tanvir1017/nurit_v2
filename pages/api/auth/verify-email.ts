@@ -1,4 +1,4 @@
-import { loginRegisterUser } from "@/lib/dbOperatons/users.prisma";
+import { loginRegisterUser } from "@/lib/dbOperators/users.prisma";
 import jwt from "jsonwebtoken";
 import { NextApiRequest, NextApiResponse } from "next";
 import nodemailer from "nodemailer";

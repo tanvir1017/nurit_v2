@@ -1,7 +1,7 @@
 import {
-  getASingleUser,
-  updateUserPasswordFromDb,
-} from "@/lib/dbOperatons/users.prisma";
+    getASingleUser,
+    updateUserPasswordFromDb,
+} from "@/lib/dbOperators/users.prisma";
 import { DB_OPERATION_METHOD, bodyDataType } from "@/util/types/types";
 import jwt from "jsonwebtoken";
 import { NextApiRequest, NextApiResponse } from "next";

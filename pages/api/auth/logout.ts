@@ -2,11 +2,11 @@ import { deleteCookie, hasCookie } from "cookies-next";
 import { NextApiRequest, NextApiResponse } from "next";
 const logout = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "DELETE") {
-    const has = hasCookie("u-auth", { req, res });
+    const has = hasCookie("__client_auth", { req, res });
     if (!has) {
       res.status(200).json({ token: "NOT FOUND" });
     } else {
-      const deleteCookieFromBrowser = deleteCookie("u-auth", {
+      const deleteCookieFromBrowser = deleteCookie("__client_auth", {
         req,
         res,
       });

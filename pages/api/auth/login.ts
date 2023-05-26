@@ -1,4 +1,4 @@
-import { loginRegisterUser } from "@/lib/dbOperatons/users.prisma";
+import { loginRegisterUser } from "@/lib/dbOperators/users.prisma";
 import { Data, bodyDataType } from "@/util/types/types";
 import { setCookie } from "cookies-next";
 import jwt from "jsonwebtoken";
@@ -44,7 +44,7 @@ export default async function login(
             },
             process.env.ACCESS_TOKEN as string
           );
-          setCookie("u-auth", setUserToCookieByJWT, {
+          setCookie("__client_auth", setUserToCookieByJWT, {
             req,
             res,
             maxAge: 604800,

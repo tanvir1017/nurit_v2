@@ -5,7 +5,7 @@ import { verify } from "./util/jwt";
 const secret = process.env.ACCESS_TOKEN || "secret";
 
 export default async function middleware(req: NextRequest) {
-  const jwt = req.cookies.get("u-auth");
+  const jwt = req.cookies.get("__client_auth");
   const jwtValue = jwt?.value;
   const { pathname } = req.nextUrl;
 
