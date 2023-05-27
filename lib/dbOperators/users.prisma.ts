@@ -16,7 +16,7 @@ export const getASingleUser: A__SingleModelFunctionType = async (id) => {
 export const getASingleUserBasedOnUserName = async (username: string) => {
   const singleUser = await prisma.user.findUnique({
     where: {
-      username: username,
+      username,
     },
   });
   return singleUser;

@@ -13,13 +13,10 @@ import { motion as m, useReducedMotion } from "framer-motion";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useRef, useState } from "react";
+import { toast } from "react-hot-toast";
 import { BiUserCircle } from "react-icons/bi";
 import { BsFillInfoCircleFill } from "react-icons/bs";
 import { MdOutlinePassword } from "react-icons/md";
-import { TbAlertTriangleFilled } from "react-icons/tb";
-import { TiInfoOutline } from "react-icons/ti";
-import { Bounce, ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import useSWR from "swr";
 
 const Login = () => {
@@ -74,12 +71,7 @@ const Login = () => {
     const password = password__Ref.current?.value;
 
     if (!email || !password) {
-      toast.error("Required filed can't be empty", {
-        icon: (
-          <TiInfoOutline className="text-[var(--red-primary-brand-color)]" />
-        ),
-        position: toast.POSITION.TOP_CENTER,
-      });
+      toast.error("Required filed can't be empty");
       setLoading(false);
     } else {
       await mutate(async () => {
@@ -104,10 +96,7 @@ const Login = () => {
         } else {
           setLoading(false);
 
-          toast.success(data.message, {
-            icon: <TbAlertTriangleFilled className="text-green-400 text-3xl" />,
-            position: toast.POSITION.TOP_CENTER,
-          });
+          toast.success(data.message);
           revalidate();
           router.replace(routerPath);
         }
@@ -124,30 +113,29 @@ const Login = () => {
         content="all course page. You can find every course in this page that we are providing"
         // key="skill course, course, ms office, office 364"
       />
-      <ToastContainer transition={Bounce} hideProgressBar />
-      <Modal isOpen={isOpen} setIsOpen={setIsOpen} response={response} />
-      <div className="font-HSRegular md:large_container px-7 py-5">
-        <div className="md:px-12">
-          <div className="flex justify-between md:items-center">
-            <LightModeBrand />
-            <div className="md:block hidden">
-              <span className="font-HSSemiBold">আমার কোন অ্যাকাউন্ট নাই !</span>{" "}
-              <Link href="/auth/verify-your-email">
-                <m.button
-                  variants={childVariants}
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.9 }}
-                  type="button"
-                  className="ml-5 bg-transparent border-[var(--red-primary-brand-color)] border  rounded-3xl text-[var(--red-primary-brand-color)] px-4 py-1"
-                >
-                  এ্যকাউন্ট খুলন
-                </m.button>
-              </Link>
-            </div>
-          </div>
 
+      <Modal isOpen={isOpen} setIsOpen={setIsOpen} response={response} />
+      <div className="font-HSRegular md:large_container  px-7 py-5">
+        <div className="flex justify-between md:items-center">
+          <LightModeBrand />
+          <div className="md:block hidden">
+            <span className="font-HSSemiBold">আমার কোন অ্যাকাউন্ট নাই !</span>{" "}
+            <Link href="/auth/verify-your-email">
+              <m.button
+                variants={childVariants}
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+                type="button"
+                className="ml-5 bg-transparent border-[var(--red-primary-brand-color)] border  rounded-3xl text-[var(--red-primary-brand-color)] px-4 py-1"
+              >
+                এ্যকাউন্ট খুলন
+              </m.button>
+            </Link>
+          </div>
+        </div>
+        <div className="md:max-w-7xl mx-auto">
           <div className="md:flex justify-around items-center mt-12">
-            <div className="login_image">
+            <div className="">
               <BlurImage
                 bg="bg-slate-300"
                 customHeight="19.75rem"
@@ -227,20 +215,6 @@ const Login = () => {
                   </Link>
                 </div>
               </form>
-
-              <div className="one_click_login_or_signing mt-11">
-                <Link href="/sign-in" className="mb-4 block">
-                  <p className="bg-[var(--red-primary-brand-color)] px-5 py-2 rounded-md text-center">
-                    অ্যথপ্রোভাইডারের মাধ্যমে লগইন করুন
-                  </p>
-                </Link>
-                <Link href="/sign-up">
-                  <p className="border-[var(--red-primary-brand-color)]  border-2 px-5 py-2 rounded-md text-center">
-                    {" "}
-                    অ্যথপ্রোভাইডারের মাধ্যমে এ্যকাউন্ট খুলন
-                  </p>
-                </Link>
-              </div>
             </div>
           </div>
         </div>

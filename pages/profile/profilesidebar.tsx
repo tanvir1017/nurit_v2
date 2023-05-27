@@ -12,7 +12,7 @@ const ProfileSidebar = () => {
           <Link key={i} href={_.link} className="pt-4 block">
             <li
               className={`flex items-center dark:bg-[#111010] bg-white dark:shadow-none shadow-md p-2 rounded-lg  border-transparent border-2  hover:border-purple-500  ${
-                _.link === pathname &&
+                pathname === _.link &&
                 "bg-gradient-to-r from-pink-500 to-purple-500 text-white "
               }`}
             >

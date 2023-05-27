@@ -164,7 +164,7 @@ const VerifyYourEmail = () => {
                   />
 
                   <p className="absolute -bottom-[10px] invisible peer-invalid:visible peer-invalid:translate-y-1 duration-300  text-[var(--red-primary-brand-color)] text-sm ">
-                    দয়া করে একটি বৈধ ইমেইল ঠিকানা প্রদান কর ।
+                    একটি বৈধ ইমেইল ঠিকানা প্রদান কর ।{" "}
                   </p>
                 </label>
                 <div className="flex justify-between items-center relative">

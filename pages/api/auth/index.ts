@@ -48,6 +48,7 @@ const userCrud = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
 
       case DB_OPERATION_METHOD.POST: {
         if (req.body) {
+          console.log(req.body);
           const {
             first__name,
             last__name,
@@ -62,7 +63,6 @@ const userCrud = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
             password,
             process.env.ACCESS_TOKEN as string
           );
-          console.log("requested body", req.body);
 
           const registerUserToDB = await registerAUser({
             first__name,
@@ -75,7 +75,7 @@ const userCrud = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
             phone__numb,
           });
 
-          console.log("Registry user", registerAUser);
+          console.log(registerUserToDB);
           if (!registerUserToDB) {
             return res.status(422).json({
               success: false,
@@ -88,7 +88,6 @@ const userCrud = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
             { id, email__id, role: "STUDENT" },
             process.env.ACCESS_TOKEN as string
           );
-          console.log("Cookie", setUserToCookieByJWT);
           setCookie("__client_auth", setUserToCookieByJWT, {
             req,
             res,

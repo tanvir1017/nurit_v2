@@ -23,7 +23,6 @@ import {
 } from "react-icons/bs";
 import { CgRename } from "react-icons/cg";
 import { MdOutlinePassword } from "react-icons/md";
-// import { ShareContextType } from "./login";
 
 const SignIn = () => {
   const [seePassword, shoPassword] = useState(false);
@@ -82,6 +81,16 @@ const SignIn = () => {
       );
     } else {
       try {
+        console.log({
+          first__name,
+          last__name,
+          username,
+          email__id: token,
+          password,
+          photo__URL: pictureURL,
+          gender,
+          phone__numb: Number(phone__number),
+        });
         const result = await fetch("/api/auth", {
           method: "POST",
           headers: {
@@ -109,10 +118,8 @@ const SignIn = () => {
           router.push("/");
         }
       } catch (error) {
-        if (error) {
-          setLoading(false);
-          toast.error("Something went wrong");
-        }
+        setLoading(false);
+        toast.error("Something went wrong");
       }
     }
   };
@@ -125,33 +132,31 @@ const SignIn = () => {
         content="all course page. You can find every course in this page that we are providing"
         // key="skill course, course, ms office, office 364"
       />
-      <div className="font-HSRegular md:large_container  px-7 py-5">
-        {/* <Toaster position="top-center" reverseOrder={false} /> */}
-        <div className="md:px-12">
-          <div className="flex justify-between items-center">
-            <LightModeBrand />
-            <div className="md:block hidden">
-              <span className="font-HSSemiBold">
-                ইতিমধ্যে একটি এ্যকাউন্ট আছে ?
-              </span>{" "}
-              <Link href="/auth/login">
-                <m.button
-                  variants={childVariants}
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.9 }}
-                  type="button"
-                  className="ml-5 bg-transparent border-[var(--red-primary-brand-color)] border  rounded-3xl text-[var(--red-primary-brand-color)] px-4 py-1"
-                >
-                  লগইন
-                </m.button>
-              </Link>
-            </div>
+      <div className="font-HSRegular md:large_container ">
+        <div className="flex justify-between items-center">
+          <LightModeBrand />
+          <div className="md:block hidden">
+            <span className="font-HSSemiBold">
+              ইতিমধ্যে একটি এ্যকাউন্ট আছে ?
+            </span>{" "}
+            <Link href="/auth/login">
+              <m.button
+                variants={childVariants}
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+                type="button"
+                className="ml-5 bg-transparent border-[var(--red-primary-brand-color)] border  rounded-3xl text-[var(--red-primary-brand-color)] px-4 py-1"
+              >
+                লগইন
+              </m.button>
+            </Link>
           </div>
-
-          <div className="md:flex justify-around items-center mt-12">
-            <div className="login_image md:block hidden">
+        </div>
+        <div className="md:max-w-7xl mx-auto">
+          <div className="md:flex justify-around items-center mt-20">
+            <div className=" md:block hidden">
               <Image
-                width={550}
+                width={450}
                 height={100}
                 src="/images/login.png"
                 alt="Login preview image"

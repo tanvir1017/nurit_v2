@@ -3,6 +3,7 @@ import { Menu, Transition } from "@headlessui/react";
 import { motion as m } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { Dispatch, Fragment } from "react";
 import { BsPencilSquare } from "react-icons/bs";
 import { CiSettings } from "react-icons/ci";
@@ -24,6 +25,7 @@ interface TokenDataType {
       createdAt: string;
       email__id: string;
       first__name: string;
+      username: string;
       gender: string;
       id: string;
       last__name: string;
@@ -39,6 +41,7 @@ interface TokenDataType {
 }
 
 export function Dropdown(props: TokenDataType) {
+  const router = useRouter()
   const {
     tokenData,
     setTokenData,
@@ -85,7 +88,8 @@ export function Dropdown(props: TokenDataType) {
   }
   if (!isLoggedUserHasError && !isLoggedUserLoading && loggedData) {
     const { returnData } = loggedData;
-    const { email__id, last__name, first__name, photo__URL, role } = returnData;
+    const { email__id, last__name, first__name, photo__URL, role, username } =
+      returnData;
     content = (
       <Menu as="div" className="relative inline-block text-left">
         <m.div animate className="transition-all duration-300 ">
@@ -140,12 +144,19 @@ export function Dropdown(props: TokenDataType) {
                     <p className="dark:text-gray-300 text-gray-500 text-[14px]">
                       {email__id}
                     </p>
-                    <Link
-                      href="/not-finished-yet"
-                      className="px-4 py-2  bg-[var(--red-primary-brand-color)] hover:shadow-red-600/30 hover:shadow-md w-full text-center text-white inline-block text-sm rounded-full mt-6 mb-4"
-                    >
-                      View Profile
-                    </Link>
+                    <Menu.Item>
+                      {() => (
+                        <Link
+                          href={`/profile`}
+                          className="px-4 py-2 flex items-center bg-[var(--red-primary-brand-color)]  hover:shadow-red-600/30 hover:shadow-md w-full text-center text-white text-sm rounded-full mt-6 mb-4"
+                        >
+                          <span>
+                            <CiSettings className="text-[20px] mr-2 -ml-1" />
+                          </span>
+                          View & Edit Profile
+                        </Link>
+                      )}
+                    </Menu.Item>
                   </div>
                 </div>
               </div>
@@ -214,19 +225,6 @@ export function Dropdown(props: TokenDataType) {
                   </div>
                 </>
               )}
-              <div className="py-1 hover:bg-slate-100 dark:hover:bg-[#050a15] rounded-b-lg">
-                <Menu.Item>
-                  {() => (
-                    <Link
-                      href="/profile"
-                      className="py-3 px-4  w-full flex items-center space-x-2 "
-                    >
-                      <CiSettings className="text-[20px]" />
-                      <span className="text-sm">Manage account</span>
-                    </Link>
-                  )}
-                </Menu.Item>
-              </div>
             </div>
             <div className="py-3 cursor-pointer" onClick={() => Logout()}>
               <Menu.Item>
@@ -249,6 +247,7 @@ export function Dropdown(props: TokenDataType) {
       .then((_) => {
         setTokenData(null);
         mutate(null);
+        router.replace("/auth/login");
       });
   };
   return content;
