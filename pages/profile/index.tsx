@@ -1,5 +1,6 @@
 import ErrorMessage from "@/components/error";
 import { fetcher } from "@/lib/fetcher";
+import { bodyDataType } from "@/util/types/types";
 import Image from "next/image";
 import Link from "next/link";
 import { AiTwotoneStar } from "react-icons/ai";
@@ -9,6 +10,7 @@ import { RiShieldUserLine } from "react-icons/ri";
 import useSWR from "swr";
 import CourseCertificateCard from "./components/coursecertificatecard";
 import OverallProfile from "./components/overallprofile";
+import ProfileSkeleton from "./components/profileskeleton";
 import ProfileLayout from "./layout";
 
 const Index = () => {
@@ -16,7 +18,7 @@ const Index = () => {
 
   let content = null;
   if (!data && !error && isLoading) {
-    content = <p>Loading...</p>;
+    content = <ProfileSkeleton />;
   } else if (!data && !isLoading && error) {
     content = <ErrorMessage />;
   } else {
@@ -29,12 +31,10 @@ const Index = () => {
       last__name,
       username,
       email__id,
-      password,
       photo__URL,
       phone__numb,
-      gender,
       role,
-    } = data.returnData;
+    } = data.returnData as bodyDataType;
 
     let UserBasedRole;
     switch (role) {
@@ -94,10 +94,10 @@ const Index = () => {
           </div>
           <div id="TOTAL-INFO" className="grid grid-cols-4 gap-3 mt-14">
             <OverallProfile
-              createdAt={createdAt}
-              updatedAt={updatedAt}
-              email__id={email__id}
-              id={id}
+              createdAt={createdAt as string}
+              updatedAt={updatedAt as string}
+              email__id={email__id as string}
+              id={id as string}
               phone__numb={phone__numb}
             />
           </div>

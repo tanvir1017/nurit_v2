@@ -25,7 +25,6 @@ const userAtThisEmailAndUsername = async (
       returnData: getAUserInfo,
     });
   } else if (req.query.username) {
-    console.log(req.query.username);
     const { username } = req.query;
     const getAUserInfo = await getASingleUserBasedOnUserName(
       username as string

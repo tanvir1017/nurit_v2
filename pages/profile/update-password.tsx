@@ -1,9 +1,9 @@
 import { StateFullPasswordInputLabel } from "@/components/shared/inputLabel/stateFullInput";
 import useShare from "@/lib/context/useShare";
-import Submit from "@/util/buttons/submit";
 import { ShareContextType } from "@/util/types/types";
 import { useState } from "react";
 import { toast } from "react-hot-toast";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { MdOutlinePassword } from "react-icons/md";
 import useSWR from "swr";
 import ProfileLayout from "./layout";
@@ -137,7 +137,17 @@ const Password = () => {
             }
           />
 
-          <Submit loading={loading} buttonText="আপডেট করুন" />
+          <button
+            type="submit"
+            className="mt-10 py-1 px-6 bg-gradient-to-r from-pink-500 to-purple-500 text-white rounded-full flex items-center relative"
+          >
+            {loading && (
+              <span className="absolute left-3">
+                <AiOutlineLoading3Quarters className="text-[18px] animate-spin" />
+              </span>
+            )}
+            <span className="ml-3">{loading ? "আপডেটিং..." : "আপডেট কর"}</span>
+          </button>
         </form>
       </section>
     </ProfileLayout>

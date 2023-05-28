@@ -1,12 +1,10 @@
 import Image from "next/legacy/image";
 import { useState } from "react";
 import { AiOutlineCloudUpload } from "react-icons/ai";
-import { TbAlertTriangleFilled } from "react-icons/tb";
-import { TiInfoOutline } from "react-icons/ti";
-import { Bounce, ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const ImageUpload = ({ pictureURL, setPictureURL }: any) => {
+const ImageUpload = ({ pictureURL, setPictureURL, photo__URL }: any) => {
   const [loading, setLoading] = useState(false);
 
   const uploadImage = async (e: any) => {
@@ -27,40 +25,20 @@ const ImageUpload = ({ pictureURL, setPictureURL }: any) => {
       if (result.url) {
         setPictureURL(result.url);
         setLoading(false);
-        (async () => {
-          toast.success("Picture upload successful", {
-            icon: <TbAlertTriangleFilled className="text-green-400" />,
-            position: toast.POSITION.BOTTOM_CENTER,
-          });
-        })();
+        toast.success("Picture upload successful");
       } else {
         setLoading(false);
-        (async () => {
-          toast.error("Something went wrong", {
-            icon: (
-              <TiInfoOutline className="text-[var(--red-primary-brand-color)]" />
-            ),
-            position: toast.POSITION.BOTTOM_CENTER,
-          });
-        })();
+        toast.error("Something went wrong");
       }
     } catch (error) {
       if (error) {
-        (async () => {
-          toast.error("Internal server error while uploading picture", {
-            icon: (
-              <TiInfoOutline className="text-[var(--red-primary-brand-color)]" />
-            ),
-            position: toast.POSITION.BOTTOM_CENTER,
-          });
-        })();
         setLoading(false);
+        toast.error("Internal server error while uploading picture");
       }
     }
   };
   return (
     <>
-      <ToastContainer transition={Bounce} hideProgressBar />
       <div className="w-[145px] h-[144px] border-2 rounded-full m-auto relative overflow-hidden">
         {loading ? (
           <Image
@@ -74,7 +52,7 @@ const ImageUpload = ({ pictureURL, setPictureURL }: any) => {
         ) : (
           <Image
             className="absolute"
-            src={pictureURL}
+            src={!pictureURL ? photo__URL : pictureURL}
             alt="user-avatar"
             layout="fill"
             objectFit="cover"

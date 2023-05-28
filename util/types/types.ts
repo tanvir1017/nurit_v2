@@ -17,7 +17,7 @@ export enum USER__ROLE {
 /////////////////////////////
 /// KEY VALUE WISE TYPE ////
 ///////////////////////////
-export interface bodyDataType {
+export type bodyDataType = {
   id?: string;
   first__name: string;
   last__name: string;
@@ -30,7 +30,7 @@ export interface bodyDataType {
   role?: string;
   createdAt?: string;
   updatedAt?: string;
-}
+};
 
 export interface responseType {
   title: string;

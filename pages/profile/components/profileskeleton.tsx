@@ -1,5 +1,5 @@
 const ProfileSkeleton = () => {
-  return <div>profileskeleton</div>;
+  return <p>loading....</p>;
 };
 
 export default ProfileSkeleton;

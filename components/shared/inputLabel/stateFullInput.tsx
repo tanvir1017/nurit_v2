@@ -1,19 +1,18 @@
-import { LegacyRef } from "react";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 
 type TextInputLabelPropsType = {
-  value?: string;
-  disabled?: boolean;
-  field_ref?: LegacyRef<HTMLInputElement> | undefined;
-  labelTex?: string | number;
+  value: string;
+  disabled: boolean;
+  inputValue: string | number;
+  labelTex: string | number;
   requiredType?: boolean;
-  iconComponent?: React.ReactNode;
-  placeholderText?: string;
-  type?: string;
-  title?: string;
-  nameText?: string;
+  iconComponent: React.ReactNode;
+  placeholderText: string;
+  type: string;
+  title: string;
+  nameText: string;
   top?: number;
-  eventFunc?: () => void;
+  handleOnChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
 type PasswordInputLabelPropsType = {
@@ -94,12 +93,13 @@ export const StateFullPasswordInputLabel = ({
   );
 };
 
-export const TextInputLabel = ({
+export const StateFullTextInputLabel = ({
   disabled,
-  field_ref,
   labelTex,
+  inputValue,
   requiredType,
   iconComponent,
+  handleOnChange,
   placeholderText,
   type,
   title,
@@ -108,9 +108,7 @@ export const TextInputLabel = ({
   top = 5,
 }: TextInputLabelPropsType) => {
   return (
-    <label
-      className={`relative block space-y-2 ${type === "email" && " pb-3"} `}
-    >
+    <label className={`relative block space-y-2 ${type === "email" && "pb-3"}`}>
       <span
         className={`${
           labelTex === "Wrong credential" &&
@@ -132,11 +130,11 @@ export const TextInputLabel = ({
       </span>
       <input
         disabled={disabled}
-        defaultValue={value}
-        ref={field_ref}
+        defaultValue={inputValue}
+        onChange={handleOnChange}
         className={`${
           nameText === "Add tags" && "hidden"
-        } placeholder:italic placeholder:text-slate-400 block dark:bg-[#232229]   bg-slate-50  w-full border border-gray-500  rounded-md py-3 pl-9 pr-3 shadow-sm focus:outline-none ${
+        } placeholder:italic placeholder:text-slate-400 block dark:bg-[#232229] bg-slate-50  w-full border border-gray-500  rounded-md py-3 pl-9 pr-3 shadow-sm focus:outline-none ${
           type !== "email" &&
           "focus:border-[var(--red-primary-brand-color)]  focus:ring-[var(--red-primary-brand-color)]"
         } focus:ring-1 sm:text-sm ${disabled && "cursor-no-drop"}  ${
@@ -151,7 +149,7 @@ export const TextInputLabel = ({
       />
       {type === "email" && (
         <p className="absolute -bottom-[10px] invisible peer-invalid:visible peer-invalid:translate-y-1 duration-300  text-[var(--red-primary-brand-color)] text-sm ">
-          একটি বৈধ ইমেইল ঠিকানা প্রদান কর ।{" "}
+          একটি বৈধ ইমেইল ঠিকানা প্রদান কর ।
         </p>
       )}
     </label>

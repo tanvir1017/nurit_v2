@@ -20,7 +20,7 @@ const OverallProfile = ({
 }: OverAllProfilePropsType) => {
   return (
     <div className="border rounded-lg  col-span-4 dark:border-gray-800">
-      <div className="p-5 bg-[#0e0f1c] rounded-lg">
+      <div className="p-5 dark:bg-[#0e0f1c] bg-gray-200 rounded-t-lg">
         <h3>Overall Information</h3>
         <p className="text-sm font-HSLight">
           All of the information are safe and secure
