@@ -58,7 +58,7 @@ const Index = () => {
     }
     content = (
       <section>
-        <div className="flex items-start justify-between mb-5">
+        <div className="flex items-start justify-between mb-5 md:px-0 px-3">
           <h1 className="text-2xl font-HSLight">প্রোফাইল</h1>
           <Link href={`/profile/${username}`}>
             <button className="py-1 px-6 bg-gradient-to-r from-pink-500 to-purple-500 text-white rounded-full flex items-center">
@@ -68,9 +68,12 @@ const Index = () => {
           </Link>
         </div>
         <div>
-          <div id="PROFILE" className="flex items-start ">
+          <div
+            id="PROFILE"
+            className="md:flex items-center md:items-start md:justify-center "
+          >
             <div
-              className={`bg-gradient-to-r from-emerald-400 to-cyan-500  p-0.5 rounded-full  overflow-hidden relative  md:w-20 md:h-20 w-12 h-12`}
+              className={`bg-gradient-to-r from-emerald-400 to-cyan-500 mx-auto  p-0.5 rounded-full  overflow-hidden relative  md:w-20 md:h-20 w-12 h-12`}
             >
               <Image
                 className={`absolute -top-2 rounded-full p-0.5`}
@@ -81,7 +84,10 @@ const Index = () => {
                 objectFit="cover"
               />
             </div>
-            <div className=" ml-6" id="PROFILE-INFO">
+            <div
+              className="ml-6 md:text-start text-center md:mt-0 mt-5"
+              id="PROFILE-INFO"
+            >
               <p className="font-HSSemiBold dark:text-gray-400">
                 {first__name} {last__name}
               </p>
@@ -92,7 +98,10 @@ const Index = () => {
               </p>
             </div>
           </div>
-          <div id="TOTAL-INFO" className="grid grid-cols-4 gap-3 mt-14">
+          <div
+            id="TOTAL-INFO"
+            className="grid grid-cols-4 md:gap-3 gap-1 mt-14"
+          >
             <OverallProfile
               createdAt={createdAt as string}
               updatedAt={updatedAt as string}
@@ -101,11 +110,11 @@ const Index = () => {
               phone__numb={phone__numb}
             />
           </div>
-          <div className="grid grid-cols-2 gap-3 mt-10">
-            <div className="col-span-1">
+          <div className="grid md:grid-cols-2 gap-3 mt-10">
+            <div className="">
               <CourseCertificateCard />
             </div>
-            <div className="col-span-1">
+            <div className="">
               <CourseCertificateCard />
             </div>
           </div>

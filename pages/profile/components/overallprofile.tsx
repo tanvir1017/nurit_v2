@@ -19,7 +19,7 @@ const OverallProfile = ({
   id,
 }: OverAllProfilePropsType) => {
   return (
-    <div className="border rounded-lg  col-span-4 dark:border-gray-800">
+    <div className="border rounded-lg col-span-4  dark:border-gray-800">
       <div className="p-5 dark:bg-[#0e0f1c] bg-gray-200 rounded-t-lg">
         <h3>Overall Information</h3>
         <p className="text-sm font-HSLight">
@@ -28,7 +28,7 @@ const OverallProfile = ({
       </div>
       <hr className="dark:border-gray-800" />
 
-      <div className="p-5 grid grid-cols-2 gap-10">
+      <div className="p-5 grid md:grid-cols-2 grid-cols-1 gap-10">
         <div>
           <div className="mb-5">
             <p className="font-HSLight dark:text-gray-400">Joined on</p>
