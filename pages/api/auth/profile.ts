@@ -65,6 +65,7 @@ const profile = async (
       });
     }
   } catch (err) {
+    console.log(err);
     // If we would get some trouble the try catch error simply grave the error and return from catch block
     return res.status(500).json({
       success: false,

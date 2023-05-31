@@ -161,6 +161,7 @@ const userCrud = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
         });
     }
   } catch (error) {
+    console.log(error);
     return res.status(406).json({
       success: false,
       message: `error found `,

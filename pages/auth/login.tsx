@@ -95,7 +95,6 @@ const Login = () => {
           });
         } else {
           setLoading(false);
-
           toast.success(data.message);
           revalidate();
           router.replace(routerPath);
