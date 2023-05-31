@@ -62,8 +62,8 @@ const TrendyCourses = () => {
               ?.filter(
                 (el: { category: string }) => el.category === buttonFilterText
               )
-              ?.map((el: any) => (
-                <Course key={el._id} el={el} />
+              ?.map((el: any, i: number) => (
+                <Course key={i} el={el} />
               ))}
           </div>
         </div>

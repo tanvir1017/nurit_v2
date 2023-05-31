@@ -69,7 +69,7 @@ const UserName = () => {
           <form onSubmit={handleOnSubmit}>
             <div
               id="TOTAL-INFO"
-              className="grid grid-cols-2 gap-3 mt-14 place-items-center "
+              className="grid md:grid-cols-2 gap-3 mt-14 place-items-center "
             >
               <div className="w-full space-y-5">
                 <StateFullTextInputLabel
@@ -154,9 +154,7 @@ const UserName = () => {
                   <p className="text-sm mb-2">Gender select</p>
                   <select className="select select-bordered placeholder:italic placeholder:text-slate-400 block dark:bg-[#232229] bg-slate-50  w-full border border-gray-500  rounded-md py-2 pl-9 pr-3 shadow-sm focus:outline-none">
                     {["male", "female", "others"].map((item, index) => (
-                      <option key={index} disabled={gender === item}>
-                        {item}
-                      </option>
+                      <option key={index}>{item}</option>
                     ))}
                   </select>
                 </div>
@@ -164,7 +162,7 @@ const UserName = () => {
             </div>
             <button
               type="submit"
-              className="mt-10 py-1 px-6 bg-gradient-to-r from-pink-500 to-purple-500 text-white rounded-full flex items-center relative"
+              className="mt-10 mb-5 py-1 px-6 bg-gradient-to-r from-pink-500 to-purple-500 text-white rounded-full flex items-center relative"
               onClick={() => setLoading((prev) => !prev)}
             >
               {loading && (

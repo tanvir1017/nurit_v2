@@ -68,12 +68,9 @@ const Index = () => {
           </Link>
         </div>
         <div>
-          <div
-            id="PROFILE"
-            className="md:flex items-center md:items-start md:justify-center "
-          >
+          <div id="PROFILE" className="md:flex items-center md:items-start">
             <div
-              className={`bg-gradient-to-r from-emerald-400 to-cyan-500 mx-auto  p-0.5 rounded-full  overflow-hidden relative  md:w-20 md:h-20 w-12 h-12`}
+              className={`bg-gradient-to-r from-emerald-400 to-cyan-500 md:mx-0 mx-auto  p-0.5 rounded-full  overflow-hidden relative  md:w-20 md:h-20 w-12 h-12`}
             >
               <Image
                 className={`absolute -top-2 rounded-full p-0.5`}

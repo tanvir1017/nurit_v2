@@ -10,6 +10,7 @@ export default async function login(
 ) {
   try {
     if (req.method === "POST") {
+      console.log(req.method);
       const { email: email_address, password: clientPass } = req.body;
 
       const loginWithExistingEmail: bodyDataType = await loginRegisterUser(

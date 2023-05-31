@@ -64,7 +64,7 @@ const Login = () => {
   }
 
   // COMMENT => Api request to logged a user and form prevent handling
-  const handlePreventLoading = async (e: any) => {
+  const handlePreventLoading = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     const email = email__Ref.current?.value;

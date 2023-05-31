@@ -47,6 +47,7 @@ const userCrud = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
       }
 
       case DB_OPERATION_METHOD.POST: {
+        console.log("From signing", req.method);
         if (req.body) {
           console.log(req.body);
           const {
@@ -75,7 +76,7 @@ const userCrud = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
             phone__numb,
           });
 
-          console.log(registerUserToDB);
+          console.log("registerUserToDB", registerUserToDB);
           if (!registerUserToDB) {
             return res.status(422).json({
               success: false,

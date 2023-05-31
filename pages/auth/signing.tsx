@@ -23,8 +23,9 @@ import {
 } from "react-icons/bs";
 import { CgRename } from "react-icons/cg";
 import { MdOutlinePassword } from "react-icons/md";
-
+import useSWR from "swr";
 const SignIn = () => {
+  const { mutate: revalidate } = useSWR("/api/auth");
   const [seePassword, shoPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [pictureURL, setPictureURL] = useState<string>("/images/user.png");
@@ -57,7 +58,7 @@ const SignIn = () => {
     }
   };
 
-  const handlePreventLoading = async (e: any) => {
+  const handlePreventLoading = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     const first__name = first__nameRef?.current?.value;
@@ -81,42 +82,35 @@ const SignIn = () => {
       );
     } else {
       try {
-        console.log({
-          first__name,
-          last__name,
-          username,
-          email__id: token,
-          password,
-          photo__URL: pictureURL,
-          gender,
-          phone__numb: Number(phone__number),
+        await revalidate(async () => {
+          setLoading(true);
+          const result = await fetch("/api/auth", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              first__name,
+              last__name,
+              username,
+              email__id: token,
+              password,
+              photo__URL: pictureURL,
+              gender,
+              phone__numb: Number(phone__number),
+            }),
+          });
+          const res = await result.json();
+          if (!res.success) {
+            setLoading(false);
+            toast.error(res.message);
+          } else {
+            setLoading(false);
+            toast.success(res.message);
+            mutate();
+            router.push("/");
+          }
         });
-        const result = await fetch("/api/auth", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            first__name,
-            last__name,
-            username,
-            email__id: token,
-            password,
-            photo__URL: pictureURL,
-            gender,
-            phone__numb: Number(phone__number),
-          }),
-        });
-        const res = await result.json();
-        if (!res.success) {
-          setLoading(false);
-          toast.error(res.message);
-        } else {
-          setLoading(false);
-          toast.success(res.message);
-          mutate();
-          router.push("/");
-        }
       } catch (error) {
         setLoading(false);
         toast.error("Something went wrong");
