@@ -8,6 +8,8 @@ import useSWR from "swr";
 import AboutCourse from "./aboutCourse";
 import Card from "./card";
 
+// this repo is fixed
+
 const CourseDetails = () => {
   const router = useRouter();
   const { slug } = router.query;
