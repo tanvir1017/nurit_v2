@@ -28,7 +28,6 @@ const Password = () => {
   const handleOnUserInfoUpdate = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    console.log(newPassword, confirmPassword, password);
     if (newPassword !== confirmPassword) {
       setLoading(false);
       toast.error(

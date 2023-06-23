@@ -12,28 +12,27 @@ const BlogsHeading = () => {
         // COMMENT : set the custom height for mobile devices
         setBlurHeight("12.375rem");
         setSmallThumbHeight("7.375rem");
-        console.log("mobile devices");
         break;
 
       case findHeight >= 481 && findHeight <= 768:
         // COMMENT : set the custom height for iPads, Tablets
         setBlurHeight("24.375rem");
         setSmallThumbHeight("14.375rem");
-        console.log("tablet devices");
+
         break;
 
       case findHeight >= 769 && findHeight <= 1024:
         // COMMENT : set the custom height for Small screens, laptops
         setBlurHeight("24.375rem");
         setSmallThumbHeight("14.375rem");
-        console.log("small screens and laptops devices");
+
         break;
 
       case findHeight >= 1025 && findHeight <= 1200:
         // COMMENT : set the custom height for Desktops, large screens
         setBlurHeight("27rem");
         setSmallThumbHeight("16rem");
-        console.log("desktop and  large screens");
+
         break;
 
       default:
