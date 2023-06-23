@@ -3,7 +3,7 @@ import MobileNav from "@/components/shared/navbar/mobileNav";
 import Navigation from "@/components/shared/navbar/navigation";
 import ContextProvider from "@/lib/context/contextProvider";
 import "@/styles/globals.css";
-import { Analytics } from "@vercel/analytics/react";
+// import { Analytics } from "@vercel/analytics/react";
 import { ThemeProvider } from "next-themes";
 import type { AppProps } from "next/app";
 import NextNProgress from "nextjs-progressbar";
@@ -76,7 +76,7 @@ export default function App({ Component, pageProps, router }: AppProps) {
           )}
           <Toaster position="bottom-center" reverseOrder={true} />
           <Component {...pageProps} />
-          <Analytics />
+          {/* <Analytics /> */}
           {!isFooterShowForPage && <Footer />}
         </div>
       </ThemeProvider>
