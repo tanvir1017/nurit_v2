@@ -1,6 +1,6 @@
 import { motion as m, useReducedMotion } from "framer-motion";
 import Image from "next/image";
-// submit button wil use for form submit 
+// submit button wil use for form submit
 const SubmitButton = ({
   buttonText,
   loading,
