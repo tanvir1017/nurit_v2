@@ -1,10 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
+
 import { verify } from "./util/jwt";
 
 const secret = process.env.ACCESS_TOKEN || "secret";
 
 export default async function middleware(req: NextRequest) {
-  const jwt = req.cookies.get("u-auth");
+  const jwt = req.cookies.get("__client_auth");
   const jwtValue = jwt?.value;
   const { pathname } = req.nextUrl;
 
@@ -15,6 +16,11 @@ export default async function middleware(req: NextRequest) {
   if (pathname.startsWith("/auth")) {
     if (jwt) {
       req.nextUrl.pathname = "/";
+      return NextResponse.redirect(req.nextUrl);
+    }
+  } else if (pathname.startsWith("/profile")) {
+    if (!jwt) {
+      req.nextUrl.pathname = "/auth/login";
       return NextResponse.redirect(req.nextUrl);
     }
   } else if (pathname.startsWith("/dashboard")) {
@@ -38,3 +44,7 @@ export default async function middleware(req: NextRequest) {
 
   return NextResponse.next();
 }
+
+export const config = {
+  matcher: ["/((?!.*\\..*|_next).*)", "/"],
+};

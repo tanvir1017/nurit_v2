@@ -4,8 +4,8 @@ import {
   getAllUser,
   registerAUser,
   updateUserFromDb,
-} from "@/lib/dbOperatons/users.prisma";
-import { DB_OPERATION_METHOD, Data } from "@/util/types/types";
+} from "@/lib/dbOperators/users.prisma";
+import { DB_OPERATION_METHOD, Data, bodyDataType } from "@/util/types/types";
 import { setCookie } from "cookies-next";
 import jwt from "jsonwebtoken";
 import type { NextApiRequest, NextApiResponse } from "next";
@@ -47,10 +47,13 @@ const userCrud = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
       }
 
       case DB_OPERATION_METHOD.POST: {
+        console.log("From signing", req.method);
         if (req.body) {
+          console.log(req.body);
           const {
             first__name,
             last__name,
+            username,
             email__id,
             password,
             photo__URL,
@@ -66,31 +69,27 @@ const userCrud = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
             first__name,
             last__name,
             email__id,
+            username,
             password: hashedPass,
             photo__URL,
             gender,
             phone__numb,
           });
+
+          console.log("registerUserToDB", registerUserToDB);
           if (!registerUserToDB) {
             return res.status(422).json({
               success: false,
               message: `User creation failed`,
-              returnData: {},
+              returnData: { action: `User creation failed` },
             });
           }
+          const { id } = registerUserToDB as bodyDataType;
           const setUserToCookieByJWT = jwt.sign(
-            {
-              first__name,
-              last__name,
-              email__id,
-              photo__URL,
-              gender,
-              phone__numb,
-              role: "STUDENT",
-            },
+            { id, email__id, role: "STUDENT" },
             process.env.ACCESS_TOKEN as string
           );
-          setCookie("u-auth", setUserToCookieByJWT, {
+          setCookie("__client_auth", setUserToCookieByJWT, {
             req,
             res,
             maxAge: 604800,
@@ -102,7 +101,7 @@ const userCrud = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
           return res.status(201).json({
             success: true,
             message: `User registered success`,
-            returnData: registerUserToDB,
+            returnData: { action: `User registered success` },
           });
         }
       }
@@ -111,6 +110,7 @@ const userCrud = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
           return res.status(400).json({
             success: false,
             message: "Bad request",
+            returnData: { action: "Bad request" },
           });
         }
 
@@ -120,13 +120,17 @@ const userCrud = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
           return res.status(500).json({
             success: false,
             message: `Something went wrong when try to update user info `,
-            returnData: {},
+            returnData: {
+              action: `Something went wrong when try to update user info `,
+            },
           });
         } else {
           return res.status(200).json({
             success: true,
             message: `user updated successful with this user id ${id}`,
-            returnData: updateUser,
+            returnData: {
+              action: `user updated successful`,
+            },
           });
         }
       }
@@ -152,15 +156,16 @@ const userCrud = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
       default:
         return res.status(500).json({
           success: false,
-          message: `internal server error`,
-          returnData: {},
+          message: `internal server error. The message came from the [DEFAULT 🥲] switch case method`,
+          returnData: { action: `internal server error` },
         });
     }
   } catch (error) {
+    console.log(error);
     return res.status(406).json({
       success: false,
-      message: `error found ${error}`,
-      returnData: null,
+      message: `error found `,
+      returnData: { action: error },
     });
   }
 };

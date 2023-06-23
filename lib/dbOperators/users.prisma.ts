@@ -2,14 +2,22 @@ import {
   A__SingleModelFunctionType,
   GetAllUserFunctionType,
   LoginUserModelFunctionType,
+  bodyDataType,
   registerAUserFunctionType,
-  registerBodyDataType,
 } from "@/util/types/types";
 import prisma from "../../prisma/prisma/db.connector";
 
 export const getASingleUser: A__SingleModelFunctionType = async (id) => {
   const singleUser = await prisma.user.findUnique({
     where: { id },
+  });
+  return singleUser;
+};
+export const getASingleUserBasedOnUserName = async (username: string) => {
+  const singleUser = await prisma.user.findUnique({
+    where: {
+      username,
+    },
   });
   return singleUser;
 };
@@ -27,26 +35,29 @@ export const getAllUser: GetAllUserFunctionType = async () => {
   const users = await prisma.user.findMany({});
   return { users, totalUser };
 };
-
+// change user to users but not fixed the error here
 export const registerAUser: registerAUserFunctionType = async ({
   first__name,
   last__name,
+  username,
   email__id,
   password,
   photo__URL,
   gender,
   phone__numb,
-}: registerBodyDataType) => {
+}: bodyDataType) => {
+  const data = {
+    first__name,
+    last__name,
+    username,
+    email__id,
+    password,
+    photo__URL,
+    gender,
+    phone__numb,
+  };
   const user = await prisma.user.create({
-    data: {
-      first__name,
-      last__name,
-      email__id,
-      password,
-      photo__URL,
-      gender,
-      phone__numb,
-    },
+    data: data,
   });
   return user;
 };
@@ -57,6 +68,18 @@ export const updateUserFromDb = async (id: string, updatedData: any) => {
       id: id,
     },
     data: { ...updatedData },
+  });
+  return user;
+};
+export const updateUserPasswordFromDb = async (
+  id: string,
+  password: string
+) => {
+  const user = await prisma.user.update({
+    where: {
+      id: id,
+    },
+    data: { password },
   });
   return user;
 };

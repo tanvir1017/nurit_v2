@@ -16,15 +16,16 @@ const nextConfig = {
         source: "/dashboard",
         destination: environmentDestination,
       },
+      {
+        source: "/",
+        destination: environmentDestination,
+      },
     ];
   },
   images: {
     domains: ["res.cloudinary.com", "i.ibb.co", "panel.brightskills.com"],
   },
   reactStrictMode: true,
-  env: {
-    BASE_URL: process.env.NEXT_PUBLIC_ACCESS_TOKEN,
-  },
 };
 
 module.exports = nextConfig;

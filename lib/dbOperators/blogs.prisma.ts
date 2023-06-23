@@ -37,6 +37,7 @@ export const postABlogToDb: PostABlogToDB = async ({
 export const getAllBlogsExistOnDB: GetAllBlogsFunctionType = async () => {
   const totalBlogs = await prisma.blog.count();
   const blogs = await prisma.blog.findMany();
+  console.log(blogs);
   return { blogs, totalBlogs };
 };
 export const getASingleBlogBasedOnSlug: GetASingleDataFunctionType = async (

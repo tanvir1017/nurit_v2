@@ -3,6 +3,7 @@ import MobileNav from "@/components/shared/navbar/mobileNav";
 import Navigation from "@/components/shared/navbar/navigation";
 import ContextProvider from "@/lib/context/contextProvider";
 import "@/styles/globals.css";
+// import { Analytics } from "@vercel/analytics/react";
 import { ThemeProvider } from "next-themes";
 import type { AppProps } from "next/app";
 import NextNProgress from "nextjs-progressbar";
@@ -28,32 +29,55 @@ export default function App({ Component, pageProps, router }: AppProps) {
     }
   }
   useEffect(() => storePathValues, [router.asPath]);
+  const notAllowNav = [
+    "/auth/login",
+    "/auth/verify-your-email",
+    "/auth/signing",
+    "/dashboard/home",
+    "/dashboard/posts",
+    "/dashboard/users",
+    "/dashboard/courses",
+    "/_error",
+    "/401",
+  ];
+  const notAllowFooter = [
+    "/auth/login",
+    "/auth/verify-your-email",
+    "/auth/signing",
+    "/dashboard/home",
+    "/dashboard/posts",
+    "/dashboard/users",
+    "/dashboard/courses",
+    "/_error",
+    "/401",
+    "/profile/password",
+    "/profile/account",
+    "/profile",
+  ];
+  // added clerk public key
+  const isNavigationShowForPage = notAllowNav.includes(pathname);
+  const isFooterShowForPage = notAllowFooter.includes(pathname);
 
   return (
     <ContextProvider>
       <ThemeProvider
         enableSystem={true}
         attribute="class"
-        // forcedTheme={(Component?.theme as string) || null}
+        // forcedTheme={Component?.theme || undefined}
       >
         <ToastContainer transition={Bounce} hideProgressBar />
         <NextNProgress color="#ff2c45" />
         <div style={{ opacity: 1 }}>
-          {!pathname.includes("/auth") &&
-            !pathname.includes("/dashboard") &&
-            !pathname.includes("/404") &&
-            !pathname.includes("/401") && (
-              <>
-                <Navigation />
-                <MobileNav />
-              </>
-            )}
+          {!isNavigationShowForPage && (
+            <>
+              <Navigation />
+              <MobileNav />
+            </>
+          )}
           <Toaster position="bottom-center" reverseOrder={true} />
           <Component {...pageProps} />
-          {!pathname.includes("/auth") &&
-            !pathname.includes("/dashboard") &&
-            !pathname.includes("/404") &&
-            !pathname.includes("/401") && <Footer />}
+          {/* <Analytics /> */}
+          {!isFooterShowForPage && <Footer />}
         </div>
       </ThemeProvider>
     </ContextProvider>

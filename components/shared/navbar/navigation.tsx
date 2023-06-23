@@ -1,37 +1,66 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import useShare from "@/lib/context/useShare";
+import { fetcher } from "@/lib/fetcher";
 import { largeNavigationData } from "@/util/localDb/navLink";
-import { motion as m, useReducedMotion } from "framer-motion";
+import { largeNavigationDataType } from "@/util/types/clientType";
+import { ShareContextType } from "@/util/types/types";
+import { motion as m } from "framer-motion";
 import { useTheme } from "next-themes";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
-
-import { ShareContextType } from "@/util/types/types";
+import { useRouter } from "next/router";
+import { useCallback, useEffect, useMemo, useState } from "react";
+import useSWR from "swr";
 import LightModeBrand from "../brand";
 import { Dropdown } from "../headlessui/headLessUi";
+interface TokenDataType {
+  id: string;
+  email__id: string;
+  role: string;
+  iat: number;
+}
 
 const Navigation = () => {
   const [mounted, setMounted] = useState(false);
+  const { pathname } = useRouter();
   const [toggle, setToggle] = useState(true);
   const [tokenData, setTokenData] = useState<any | null>(null);
-  const [delay, setDelay] = useState<boolean>(false);
 
+  // prevent the unconditional function call and reduce re-renders
+  const filterTheNavigation = useCallback(
+    (nav: largeNavigationDataType, tokenData: TokenDataType) => {
+      return nav.filter((tab) =>
+        !tokenData ? tab : tab.id !== nav.length - 1
+      );
+    },
+    []
+  );
+  // Memoized the value of which function return
+  const filterNav = useMemo(
+    () => filterTheNavigation(largeNavigationData, tokenData),
+    [tokenData]
+  );
+
+  // Dark 🌜 & light ☀️ variant
   const { resolvedTheme, setTheme } = useTheme();
+
+  // extract value from  context api
   const { allContext } = useShare() as ShareContextType;
   const { data, error, isLoading, mutate } = allContext;
 
-  const shouldReduceMotion = useReducedMotion();
-  const childVariants = {
-    initial: { opacity: 0, y: shouldReduceMotion ? 0 : 25 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.8 } },
-  };
+  // Calling the api and extract data from the api
+  const {
+    data: loggedData,
+    isLoading: isLoggedUserLoading,
+    error: isLoggedUserHasError,
+  } = useSWR(
+    `/api/auth/user-at?email=${data?.verifiedToken?.email__id}`,
+    fetcher
+  );
 
-  // useEffect only runs on the client, so now we can safely show the UI
+  // Set some sort of value to the state after the page would render
   useEffect(() => {
     setMounted(true);
-    setTimeout(() => {
-      setDelay(true);
-    }, 2000);
     if (!isLoading && !error) {
       setTokenData(data?.verifiedToken as any);
     } else {
@@ -39,9 +68,12 @@ const Navigation = () => {
     }
   }, [data?.verifiedToken, error, isLoading]);
 
+  // If  page not mounted then return null
   if (!mounted) {
     return null;
   }
+
+  //  Theme controlling toggle switch
   const handleThemeControl = () => {
     if (toggle) {
       setToggle(!toggle);
@@ -56,100 +88,48 @@ const Navigation = () => {
       <div className="container">
         <div className="relative h-20  flex items-center justify-between">
           <LightModeBrand />
-          <m.ul className="flex items-center  space-x-4 ">
-            {largeNavigationData.map((nav, index) => {
-              const { path, routeName } = nav;
-
-              return (
-                <Link href={path as string} key={index}>
-                  <m.li
-                    className={`hover:bg-[var(--red-primary-brand-color)] hover:text-white p-2 rounded-md`}
-                    variants={childVariants}
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.9 }}
-                  >
-                    {routeName}
-                  </m.li>
-                </Link>
-              );
-            })}
-            {tokenData && delay && tokenData?.role !== "STUDENT" && (
-              <Link href="/dashboard/home">
-                <m.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{
-                    duration: 1,
+          <ul className="flex items-center space-x-4">
+            {filterNav.map((tab) => (
+              <Link href={tab.path as string} key={tab.id}>
+                <li
+                  className={`${
+                    pathname.includes(tab.path as string)
+                      ? ""
+                      : "dark:hover:text-white/60 hover:text-gray-700"
+                  } relative rounded-full px-3 py-1.5  text-sm font-medium dark:text-white outline-sky-400 transition focus-visible:outline-2 cursor-pointer`}
+                  style={{
+                    WebkitTapHighlightColor: "transparent",
                   }}
                 >
-                  <m.li
-                    className={`hover:bg-[var(--red-primary-brand-color)] hover:text-white p-2 rounded-md`}
-                    variants={childVariants}
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.9 }}
-                  >
-                    ড্যাশবোর্ড
-                  </m.li>
-                </m.div>
-              </Link>
-            )}
+                  {pathname.includes(tab.path as string) && (
+                    <m.span
+                      layoutId="bubble"
+                      className="absolute inset-0 z-10 bg-[var(--red-primary-brand-color)] mix-blend-plus-lighter"
+                      style={{ borderRadius: 9999 }}
+                      transition={{
+                        type: "spring",
+                        bounce: 0.2,
+                        duration: 0.6,
+                      }}
+                    />
+                  )}
 
-            {tokenData && delay && tokenData?.role !== "ADMIN" && (
-              <Link href="/my-class">
-                <m.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{
-                    duration: 1,
-                  }}
-                >
-                  <m.li
-                    className={`hover:bg-[var(--red-primary-brand-color)] hover:text-white p-2 rounded-md`}
-                    variants={childVariants}
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.9 }}
-                  >
-                    মাই ক্লাস
-                  </m.li>
-                </m.div>
+                  {tab.routeName}
+                </li>
               </Link>
-            )}
-            {!tokenData && delay && (
-              <Link href="/auth/login">
-                <m.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{
-                    duration: 1,
-                  }}
-                >
-                  <m.li
-                    className={`bg-[var(--red-primary-brand-color)] text-white p-2 rounded-md `}
-                    variants={childVariants}
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.9 }}
-                  >
-                    লগইন/সাইন-আপ
-                  </m.li>
-                </m.div>
-              </Link>
-            )}
-
-            <m.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{
-                duration: 1,
-              }}
-            >
-              {tokenData && delay && (
+            ))}
+            <>
+              {tokenData && (
                 <Dropdown
                   tokenData={tokenData}
                   setTokenData={setTokenData}
                   mutate={mutate}
+                  loggedData={loggedData}
+                  isLoggedUserLoading={isLoggedUserLoading}
+                  isLoggedUserHasError={isLoggedUserHasError}
                 />
               )}
-            </m.div>
+            </>
             {mounted && (
               <m.li
                 className="cursor-pointer border rounded-full  bg-gray-800 relative overflow-hidden mr-4 my-2 w-14 h-6"
@@ -172,7 +152,7 @@ const Navigation = () => {
                 />
               </m.li>
             )}
-          </m.ul>
+          </ul>
         </div>
       </div>
     </nav>

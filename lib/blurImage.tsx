@@ -1,6 +1,5 @@
 import Image from "next/image";
 import { useState } from "react";
-
 function cn(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
 }
@@ -12,6 +11,7 @@ export function BlurImage({
   width,
   customHeight,
   bg,
+  customClass,
 }: {
   imageSrc: string;
   alt: string;
@@ -19,14 +19,17 @@ export function BlurImage({
   width: number;
   customHeight: string;
   bg: string;
+  customClass?: string;
 }) {
   const [isLoading, setLoading] = useState(true);
-
+  const handleCompleteLoad = () => {
+    setLoading(false);
+  };
   return (
     <div
-      className={`${
-        isLoading ? `w-full ${bg}  blur-sm` : "w-0"
-      }  overflow-hidden  `}
+      className={`group ${
+        isLoading ? `w-full ${bg} blur-sm ` : "w-0"
+      }  overflow-hidden ${customClass}  `}
       style={{ height: isLoading ? customHeight : "" }}
     >
       <Image
@@ -40,7 +43,7 @@ export function BlurImage({
             ? "scale-110 blur-2xl grayscale"
             : "scale-100 blur-0 grayscale-0"
         )}
-        onLoadingComplete={() => setLoading(false)}
+        onLoadingComplete={handleCompleteLoad}
       />
     </div>
   );
@@ -53,6 +56,7 @@ export function MinimalBlurImage({
   customHeight,
   customStyle,
   alt,
+  customClass,
 }: {
   imageSrc: string;
   height: number;
@@ -60,12 +64,15 @@ export function MinimalBlurImage({
   customHeight: string;
   customStyle: string;
   alt: string;
+  customClass?: string;
 }) {
   const [isLoading, setLoading] = useState(true);
 
   return (
     <div
-      className={`group ${isLoading && `${customStyle} `}  overflow-hidden ${
+      className={`group ${
+        isLoading && `${customStyle} `
+      } ${customClass}  overflow-hidden ${
         alt.includes("rounded") && "rounded-full"
       }`}
       style={{ height: isLoading ? customHeight : "" }}

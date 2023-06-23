@@ -8,7 +8,7 @@ import PostCoverUpload from "@/components/shared/upload/postCoverUpload";
 import PostImageUpload from "@/components/shared/upload/postImageUpload";
 import useShare from "@/lib/context/useShare";
 import Metadata from "@/util/SEO/metadata";
-import SubmitButton from "@/util/buttons/submitButton";
+import Submit from "@/util/buttons/submit";
 import { ShareContextType } from "@/util/types/types";
 import { useRouter } from "next/router";
 import * as React from "react";
@@ -17,11 +17,11 @@ import { BsFillPostcardFill, BsInfoCircle } from "react-icons/bs";
 import { TbAlertTriangleFilled } from "react-icons/tb";
 import { TiInfoOutline } from "react-icons/ti";
 import { toast } from "react-toastify";
-import useSwr from "swr";
+import useSWR from "swr";
 import Layout from "./layout";
 
 const Posts = () => {
-  const { mutate } = useSwr("/api/blogs");
+  const { mutate } = useSWR("/api/blogs");
   const [inputValue, setInputValue] = React.useState("");
   const [loading, setLoading] = React.useState(false);
   const [value, setValue] = React.useState([]);
@@ -183,7 +183,7 @@ const Posts = () => {
             />
           </div>
           <div className="mt-5">
-            <SubmitButton loading={loading} buttonText="Post" />
+            <Submit loading={loading} buttonText="Post" />
           </div>
         </form>
       </Layout>

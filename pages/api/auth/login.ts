@@ -1,5 +1,5 @@
-import { loginRegisterUser } from "@/lib/dbOperatons/users.prisma";
-import { Data, LoginWithExistingEmailType } from "@/util/types/types";
+import { loginRegisterUser } from "@/lib/dbOperators/users.prisma";
+import { Data, bodyDataType } from "@/util/types/types";
 import { setCookie } from "cookies-next";
 import jwt from "jsonwebtoken";
 import { NextApiRequest, NextApiResponse } from "next";
@@ -10,10 +10,12 @@ export default async function login(
 ) {
   try {
     if (req.method === "POST") {
+      console.log(req.method);
       const { email: email_address, password: clientPass } = req.body;
 
-      const loginWithExistingEmail: LoginWithExistingEmailType =
-        await loginRegisterUser(email_address as string);
+      const loginWithExistingEmail: bodyDataType = await loginRegisterUser(
+        email_address as string
+      );
 
       if (!loginWithExistingEmail) {
         return res.status(404).json({
@@ -22,9 +24,7 @@ export default async function login(
           returnData: {},
         });
       } else {
-        const { password, phone__numb, email__id, gender, ...rest } =
-          loginWithExistingEmail;
-
+        const { email__id, password, role, id } = loginWithExistingEmail;
         const verifyPassword = jwt.verify(
           password as string,
           process.env.ACCESS_TOKEN as string
@@ -38,21 +38,26 @@ export default async function login(
           });
         } else {
           const setUserToCookieByJWT = jwt.sign(
-            rest,
+            {
+              id,
+              email__id,
+              role,
+            },
             process.env.ACCESS_TOKEN as string
           );
-          setCookie("u-auth", setUserToCookieByJWT, {
+          setCookie("__client_auth", setUserToCookieByJWT, {
             req,
             res,
             maxAge: 604800,
             secure: process.env.NODE_ENV !== "development",
             httpOnly: true,
-            sameSite: true,
+            sameSite: "lax",
             path: "/",
           });
           res.status(200).json({
             success: true,
             message: `User login successfully`,
+            returnData: { action: `User logged in` },
           });
         }
       }
@@ -63,6 +68,7 @@ export default async function login(
       });
     }
   } catch (error) {
+    console.log(error);
     return res.status(500).json({
       success: false,
       message: `Something went wrong ${error}`,

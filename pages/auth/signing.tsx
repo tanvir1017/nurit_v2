@@ -6,13 +6,16 @@ import {
 } from "@/components/shared/inputLabel/inputLabel";
 import ImageUpload from "@/components/shared/upload/imageUpload";
 import useShare from "@/lib/context/useShare";
+import { generateRandomId } from "@/lib/generateRandomNumber";
 import Metadata from "@/util/SEO/metadata";
-import SubmitButton from "@/util/buttons/submitButton";
+import Submit from "@/util/buttons/submit";
+import { ShareContextType } from "@/util/types/types";
 import { motion as m, useReducedMotion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useRef, useState } from "react";
+import { toast } from "react-hot-toast";
 import {
   BsEnvelopeCheckFill,
   BsFillInfoCircleFill,
@@ -20,18 +23,13 @@ import {
 } from "react-icons/bs";
 import { CgRename } from "react-icons/cg";
 import { MdOutlinePassword } from "react-icons/md";
-import { TbAlertTriangleFilled } from "react-icons/tb";
-import { TiInfoOutline } from "react-icons/ti";
-import { Bounce, ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import { ShareContextType } from "./login";
-
+import useSWR from "swr";
 const SignIn = () => {
+  const { mutate: revalidate } = useSWR("/api/auth");
   const [seePassword, shoPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [pictureURL, setPictureURL] = useState<string>("/images/user.png");
   const [gender, setGender] = useState<string>("");
-  // const [em, setEm] = useState<string>("");
   const { allContext } = useShare() as ShareContextType;
   const { mutate } = allContext;
 
@@ -60,7 +58,7 @@ const SignIn = () => {
     }
   };
 
-  const handlePreventLoading = async (e: any) => {
+  const handlePreventLoading = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     const first__name = first__nameRef?.current?.value;
@@ -68,15 +66,10 @@ const SignIn = () => {
     const password = password__Ref?.current?.value;
     const c_password = c_Password__Ref?.current?.value;
     const phone__number = phone__Ref?.current?.value;
+    const username = generateRandomId(`${first__name}${last__name}`);
     if (password !== c_password) {
-      return (async () => {
-        toast.error("Password mismatch", {
-          icon: (
-            <TiInfoOutline className="text-[var(--red-primary-brand-color)]" />
-          ),
-          position: toast.POSITION.TOP_CENTER,
-        });
-      })();
+      setLoading(false);
+      toast.error("password didn't match to each other");
     } else if (
       !first__name ||
       !password ||
@@ -84,67 +77,43 @@ const SignIn = () => {
       gender.length <= 3
     ) {
       setLoading(false);
-      return (async () => {
-        toast.error(
-          "Required field can't be empty, please full fill all required information",
-          {
-            position: toast.POSITION.TOP_CENTER,
-          }
-        );
-      })();
+      toast.error(
+        "Required field can't be empty, please full fill all required information"
+      );
     } else {
       try {
-        await fetch("/api/auth", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            first__name: first__name,
-            last__name: last__name,
-            email__id: token,
-            password: password,
-            photo__URL: pictureURL,
-            gender: gender,
-            phone__numb: Number(phone__number),
-          }),
-        }).then((res) => {
-          if (res.status === 406) {
+        await revalidate(async () => {
+          setLoading(true);
+          const result = await fetch("/api/auth", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              first__name,
+              last__name,
+              username,
+              email__id: token,
+              password,
+              photo__URL: pictureURL,
+              gender,
+              phone__numb: Number(phone__number),
+            }),
+          });
+          const res = await result.json();
+          if (!res.success) {
             setLoading(false);
-            toast.error("Email id already registered or something went wrong", {
-              icon: (
-                <TiInfoOutline className="text-[var(--red-primary-brand-color)]" />
-              ),
-              position: toast.POSITION.TOP_CENTER,
-            });
-          } else if (res.status === 201) {
-            setLoading(false);
-            toast.success("Registration successful", {
-              icon: <TbAlertTriangleFilled className="text-green-400" />,
-              position: toast.POSITION.TOP_CENTER,
-            });
-            mutate();
-            router.push("/");
+            toast.error(res.message);
           } else {
             setLoading(false);
-            toast.error("Something went wrong 👎", {
-              icon: (
-                <TiInfoOutline className="text-[var(--red-primary-brand-color)]" />
-              ),
-              position: toast.POSITION.TOP_CENTER,
-            });
+            toast.success(res.message);
+            mutate();
+            router.push("/");
           }
         });
       } catch (error) {
-        if (error) {
-          setLoading(false);
-          toast.error("Something went wrong", {
-            icon: (
-              <TiInfoOutline className="text-[var(--red-primary-brand-color)]" />
-            ),
-            position: toast.POSITION.TOP_CENTER,
-          });
-        }
+        setLoading(false);
+        toast.error("Something went wrong");
       }
     }
   };
@@ -157,33 +126,31 @@ const SignIn = () => {
         content="all course page. You can find every course in this page that we are providing"
         // key="skill course, course, ms office, office 364"
       />
-      <ToastContainer transition={Bounce} hideProgressBar />
-      <div className="font-HSRegular md:large_container  px-7 py-5">
-        <div className="md:px-12">
-          <div className="flex justify-between items-center">
-            <LightModeBrand />
-            <div className="md:block hidden">
-              <span className="font-HSSemiBold">
-                ইতিমধ্যে একটি এ্যকাউন্ট আছে ?
-              </span>{" "}
-              <Link href="/auth/login">
-                <m.button
-                  variants={childVariants}
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.9 }}
-                  type="button"
-                  className="ml-5 bg-transparent border-[var(--red-primary-brand-color)] border  rounded-3xl text-[var(--red-primary-brand-color)] px-4 py-1"
-                >
-                  লগইন
-                </m.button>
-              </Link>
-            </div>
+      <div className="font-HSRegular md:large_container ">
+        <div className="flex justify-between items-center">
+          <LightModeBrand />
+          <div className="md:block hidden">
+            <span className="font-HSSemiBold">
+              ইতিমধ্যে একটি এ্যকাউন্ট আছে ?
+            </span>{" "}
+            <Link href="/auth/login">
+              <m.button
+                variants={childVariants}
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+                type="button"
+                className="ml-5 bg-transparent border-[var(--red-primary-brand-color)] border  rounded-3xl text-[var(--red-primary-brand-color)] px-4 py-1"
+              >
+                লগইন
+              </m.button>
+            </Link>
           </div>
-
-          <div className="md:flex justify-around items-center mt-12">
-            <div className="login_image md:block hidden">
+        </div>
+        <div className="md:max-w-7xl mx-auto">
+          <div className="md:flex justify-around items-center mt-20">
+            <div className=" md:block hidden">
               <Image
-                width={550}
+                width={450}
                 height={100}
                 src="/images/login.png"
                 alt="Login preview image"
@@ -241,7 +208,6 @@ const SignIn = () => {
                     />
                   }
                 />
-
                 <PasswordInputLabel
                   field_ref={password__Ref}
                   labelTex="পাসওয়ার্ড"
@@ -313,7 +279,7 @@ const SignIn = () => {
                   />
                 </div>
                 <div className="flex justify-between items-center relative">
-                  <SubmitButton loading={loading} buttonText="সাইন-ইন" />
+                  <Submit loading={loading} buttonText="সাইন-ইন" />
                 </div>
                 <div className="md:hidden block">
                   <span className="font-HSSemiBold">
@@ -334,9 +300,11 @@ const SignIn = () => {
               </form>
 
               <div className="one_click_login_or_signing mt-11 flex justify-start items-center space-x-2">
-                <p className="mr-5 underline italic">
-                  <Link href="/login">এক ক্লিকে লগইন/সাইন-ইন</Link>
-                </p>
+                <div className="flex items-center justify-between">
+                  <p className="mr-5 underline italic">
+                    <Link href="/auth/login">ম্যানুয়ালি লগইন/সাইন-ইন</Link>
+                  </p>
+                </div>
               </div>
             </div>
           </div>

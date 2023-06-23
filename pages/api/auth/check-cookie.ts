@@ -3,9 +3,9 @@ import jwt from "jsonwebtoken";
 import { NextApiRequest, NextApiResponse } from "next";
 const login = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
-    const has = hasCookie("u-auth", { req, res });
+    const has = hasCookie("__client_auth", { req, res });
     if (has) {
-      const getCookieFromBrowser = getCookie("u-auth", {
+      const getCookieFromBrowser = getCookie("__client_auth", {
         req,
         res,
       });
@@ -19,6 +19,7 @@ const login = async (req: NextApiRequest, res: NextApiResponse) => {
       res.status(200).json(null);
     }
   } catch (err) {
+    console.log(err);
     res.status(500).json(err);
   }
 };

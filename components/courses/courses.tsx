@@ -1,10 +1,8 @@
 import ErrorMessage from "@/components/error";
 import Course from "@/components/homePage/trendyCourse/course";
 import Skeleton from "@/components/shared/skeleton";
+import { fetcher } from "@/lib/fetcher";
 import useSWR from "swr";
-
-const fetcher = (url: RequestInfo | URL) =>
-  fetch(url).then((res) => res.json());
 
 const Courses = () => {
   const { data, error, isLoading } = useSWR("/api/course", fetcher);

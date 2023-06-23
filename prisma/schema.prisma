@@ -19,13 +19,15 @@ model User{
   updatedAt   DateTime @updatedAt
   first__name String
   last__name  String
+  username    String @unique
   email__id   String @unique
   password    String
   photo__URL  String
-  phone__numb Int?
+  phone__numb Int
   gender      String
   role        USER__ROLE @default(STUDENT)
   postedBlogs Blog[]
+
 }
 
 
@@ -46,62 +48,62 @@ model Blog{
   authorId      String  @db.ObjectId
 }
 
-model Courses {
-  id              String @id @default(auto()) @map("_id") @db.ObjectId
-  title           String
-  slug            String 
-  category        String
-  subtitle        String?
-  tags            String[]
-  courseCover     String
-  desc            String
-  marketPlace     String[]
-  quize           String[]
-  review          Int
-  topic           Int
-  lession         Int
-  video           Int
-  fee             Int
-  disCountFee     Int
-  rating          Int
-  instructorId    String @db.ObjectId
-  instructor      Instructors @relation(fields: [instructorId], references: [id])    
-  module          Module[]
+// model Courses {
+//   id              String @id @default(auto()) @map("_id") @db.ObjectId
+//   title           String
+//   slug            String 
+//   category        String
+//   subtitle        String
+//   tags            String[]
+//   courseCover     String
+//   desc            String
+//   marketPlace     String[]
+//   quize           String[]
+//   review          Int
+//   topic           Int
+//   lession         Int
+//   video           Int
+//   fee             Int
+//   disCountFee     Int
+//   rating          Int
+//   instructorId    String @db.ObjectId
+//   instructor      Instructors @relation(fields: [instructorId], references: [id])    
+//   module          Module[]
 
-}
-model Module{
-  id            String @id @default(auto()) @map("_id") @db.ObjectId
-  title         String
-  slug          String
-  videos        String
-  course Courses @relation(fields: [courseID], references: [id])         
-  courseID        String @db.ObjectId
-  quize          Quize[]
+// }
+// model Module{
+//   id            String @id @default(auto()) @map("_id") @db.ObjectId
+//   title         String
+//   slug          String
+//   videos        String
+//   course Courses @relation(fields: [courseID], references: [id])         
+//   courseID        String @db.ObjectId
+//   quize          Quize[]
   
-}
-model Instructors{
-  id                          String @id @default(auto()) @map("_id") @db.ObjectId
-  name                        String
-  username                    String  @unique
-  email                       String
-  phone                       String
-  instructorphotoURL          String
-  instructorspecialty         String
-  instructorintroduction      String
-  instructorlevel             String
-  instructorEducationStatus   String[]
-  isVerified                  Boolean
-  rating                      Int
-  courses                     Courses[]
-}
+// }
+// model Instructors{
+//   id                          String @id @default(auto()) @map("_id") @db.ObjectId
+//   name                        String
+//   username                    String  @unique
+//   email                       String
+//   phone                       String
+//   instructorphotoURL          String
+//   instructorspecialty         String
+//   instructorintroduction      String
+//   instructorlevel             String
+//   instructorEducationStatus   String[]
+//   isVerified                  Boolean
+//   rating                      Int
+//   courses                     Courses[]
+// }
 
-model Quize{
-  id                String @id @default(auto()) @map("_id") @db.ObjectId
-  question          String 
-  answer            String[]
-  moduleID          String @db.ObjectId 
-  module  Module @relation(fields: [moduleID], references: [id])
-}
+// model Quize{
+//   id                String @id @default(auto()) @map("_id") @db.ObjectId
+//   question          String 
+//   answer            String[]
+//   moduleID          String @db.ObjectId 
+//   module  Module @relation(fields: [moduleID], references: [id])
+// }
 
 model ITCOURSE{
     id          String @id @default(auto()) @map("_id") @db.ObjectId

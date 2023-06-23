@@ -1,4 +1,5 @@
 import useShare from "@/lib/context/useShare";
+import { fetcher } from "@/lib/fetcher";
 import { largeNavigationData } from "@/util/localDb/navLink";
 import { ShareContextType } from "@/util/types/types";
 import { motion as m, useReducedMotion } from "framer-motion";
@@ -8,6 +9,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { AiOutlineMenuUnfold } from "react-icons/ai";
 import { RxCross1 } from "react-icons/rx";
+import useSWR from "swr";
 import LightModeBrand from "../brand";
 import { Dropdown } from "../headlessui/headLessUi";
 
@@ -20,6 +22,14 @@ const MobileNav = () => {
   const { resolvedTheme, setTheme } = useTheme();
   const { allContext } = useShare() as ShareContextType;
   const { data, error, isLoading, mutate } = allContext;
+  const {
+    data: loggedData,
+    isLoading: isLoggedUserLoading,
+    error: isLoggedUserHasError,
+  } = useSWR(
+    `/api/auth/user-at?email=${data?.verifiedToken?.email__id}`,
+    fetcher
+  );
 
   const shouldReduceMotion = useReducedMotion();
   const childVariants = {
@@ -64,11 +74,14 @@ const MobileNav = () => {
           <div className="relative h-20  flex items-center justify-between">
             <LightModeBrand />
             <div className="TOGGLE_ICON flex items-center">
-              {tokenData && delay && (
+              {tokenData && (
                 <Dropdown
                   tokenData={tokenData}
                   setTokenData={setTokenData}
                   mutate={mutate}
+                  loggedData={loggedData}
+                  isLoggedUserLoading={isLoggedUserLoading}
+                  isLoggedUserHasError={isLoggedUserHasError}
                 />
               )}
               {mounted && (
@@ -135,22 +148,6 @@ const MobileNav = () => {
                   </Link>
                 );
               })}
-              {/* {tokenData && delay && tokenData?.role !== "STUDENT" && (
-                <Link
-                  href="/dashboard/home"
-                  className="p-3 dark:hover:bg-[#212a4057] hover:bg-[#fff]  backdrop:blur-md rounded-lg w-full dark:text-white text-[#0a1020] font-HSMedium text-[18px]"
-                >
-                  <m.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{
-                      duration: 1,
-                    }}
-                  >
-                    <m.li variants={childVariants}>ড্যাশবোর্ড</m.li>
-                  </m.div>
-                </Link>
-              )} */}
 
               {tokenData && delay && tokenData?.role !== "ADMIN" && (
                 <Link href="/my-class">

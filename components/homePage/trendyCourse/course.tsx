@@ -12,7 +12,7 @@ const Course = ({ el }: any) => {
         content="all course page. You can find every course in this page that we are providing"
         // key="skill course, course, ms office, office 364"
       />
-      <Link href={`/course/${el.slug}`}>
+      <Link href={`/courses/${el.slug}`}>
         <div className="h-[28rem] overflow-hidden card-shadow transition">
           <BlurImage
             imageSrc={el.courseCover}
