@@ -1,6 +1,5 @@
----
-title: "Welcome to NurIt-Institute"
----
+
+
 
 # NurIt-Institute
 
@@ -36,7 +35,7 @@ We welcome contributions from our community of educators, students, and professi
 
 ## Get Started
 
-Ready to embark on your digital skills journey with NurIt-Institute? Visit our [website](https://www.nurit-institute.com) to explore our courses and get started on your learning path today!
+Ready to embark on your digital skills journey with NurIt-Institute? Visit our [website]([https://nuritinstitute.vercel.app/]) to explore our courses and get started on your learning path today!
 
 We believe that digital skills are essential in today's world, and we are committed to providing the knowledge and resources you need to thrive in the digital landscape. Join the NurIt-Institute community and start building your future today!
 
